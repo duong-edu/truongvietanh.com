@@ -99,7 +99,8 @@ export default defineConfig({
         if (page.includes('/mam-non-go-vap/hoc-phi')) return false;
         // /ketnoi (đích của 35 QR lớp) và /ketnoi-mam-non (3 kênh mầm non) là trang
         // tiện ích quét QR, noindex — không vào sitemap
-        if (/\/ketnoi(-mam-non)?\/?$/.test(page)) return false;
+        // /theo-doi (mời theo dõi Facebook + YouTube) cùng loại trang tiện ích
+        if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
         if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh)\/?$/.test(page)) return false;
