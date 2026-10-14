@@ -1044,12 +1044,18 @@ async function handleLeadSubmission(request, env) {
 }
 
 function isGetResponseFunnel(source) {
-  return /^(mam-non-trai-nghiem|school-tour)(-|$)/.test(String(source || ''));
+  return /^(mam-non-trai-nghiem|school-tour|lm01-quiz-lop-1)(-|$)/.test(String(source || ''));
 }
+
+// Lead magnet LM01 "Con đã sẵn sàng vào lớp 1 chưa?" (/quiz-vao-lop-1): đi Pancake + GetResponse,
+// KHÔNG qua GHL (xem isGetResponseFunnel). Vào list "Trường Việt Anh - All".
+// Tag do trình duyệt gửi lên → CHỈ nhận đúng whitelist này, tránh khách tự gắn tag kích hoạt automation.
+const LM01_SOURCE = 'lm01-quiz-lop-1';
+const LM01_TAG_OK = /^(LM01_Quiz_Lop1|TS_2026|LM01_Tier_(Nong|Am|Lanh)|LM01_Yeu_(NeNep|GiaoTiep|HocTap|CamXuc))$/;
 
 // GetResponse (tài khoản BKpyQ) — list/field/tag tạo 27/09/2026. CỐ Ý KHÔNG gắn tag cấp học có sẵn
 // (Mam_Non, Tieu_Hoc, THCS...) vì các automation "Email 0 – Phân loại độ tuổi" đang bắt những tag đó.
-const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi' };
+const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi', all: 'P6RCh' }; // all = "Trường Việt Anh - All"
 const GR_FIELDS = {
   ten_hoc_sinh: 'njZtaT', co_so: 'njZt82', hotline_co_so: 'njZtWM', ngay_hen: 'njZtKY',
   khung_gio: 'njZtoC', hinh_thuc: 'njZtr8', lop: 'njZtQe', nhom_dinh_tuyen: 'njZtMi',
@@ -1091,15 +1097,17 @@ async function addToGetResponse(raw, data, env) {
   const key = env.GETRESPONSE_API_KEY;
   if (!key) return { skipped: true, reason: 'no_key' };
   const isMn = String(data.source).startsWith('mam-non-trai-nghiem');
+  const isLm01 = String(data.source) === LM01_SOURCE;
   const hocThu = raw.visit_type === 'hoc-thu';
   const d = String(raw.preferred_date || '');
   const values = {
-    ten_hoc_sinh: data.childName || data.fullName,
+    // LM01: form chỉ có tên PHỤ HUYNH → không ghi vào ô "tên học sinh".
+    ten_hoc_sinh: isLm01 ? '' : (data.childName || data.fullName),
     co_so: raw.campus_label,
     hotline_co_so: raw.campus_hotline,
     ngay_hen: /^\d{4}-\d{2}-\d{2}$/.test(d) ? d.split('-').reverse().join('/') : d,
     khung_gio: raw.preferred_slot,
-    hinh_thuc: isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
+    hinh_thuc: isLm01 ? '' : isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
     lop: isMn ? raw.program : String(raw.grade || '').replace(/^lop-(\d+)$/, 'Lớp $1'),
     nhom_dinh_tuyen: isMn ? 'MN' : raw.routing_group,
     phone: data.phone ? '+84' + data.phone.slice(1) : '',
@@ -1110,15 +1118,24 @@ async function addToGetResponse(raw, data, env) {
   const customFieldValues = Object.entries(values)
     .filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '')
     .map(([k, v]) => ({ customFieldId: GR_FIELDS[k], value: [String(v).slice(0, 255)] }));
-  const tags = isMn ? [GR_TAGS.hocThuMamNon]
+  const tags = isLm01 ? []
+    : isMn ? [GR_TAGS.hocThuMamNon]
     : [GR_TAGS.schoolTour, ...(hocThu ? [GR_TAGS.hocThuK12] : []), ...(raw.boarding ? [GR_TAGS.noiTru] : [])];
-  const listId = isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
+  const listId = isLm01 ? GR_LISTS.all : isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
 
   const gr = (method, path, body) => fetch('https://api.getresponse.com/v3' + path, {
     method,
     headers: { 'X-Auth-Token': 'api-key ' + key, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined,
   });
+
+  if (isLm01) {
+    // Tag theo tên (whitelist) → tự tạo nếu chưa có. KHÔNG gắn tag cấp học có sẵn (xem ghi chú đầu khối).
+    for (const name of [...new Set(data.tags || [])].filter((t) => LM01_TAG_OK.test(t))) {
+      const id = await ensureGrTag(gr, name).catch(() => null);
+      if (id) tags.push(id);
+    }
+  }
 
   if (raw.src === 'bdkl') {
     tags.push(GR_TAGS.banDoKhonLon);
@@ -1129,6 +1146,7 @@ async function addToGetResponse(raw, data, env) {
 
   const res = await gr('POST', '/contacts', {
     email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
+    ...(isLm01 && data.fullName ? { name: data.fullName } : {}),
     customFieldValues, tags: tags.map((tagId) => ({ tagId })),
   });
   if (res.status === 202) return { status: 202, list: listId };

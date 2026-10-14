@@ -103,7 +103,7 @@ export default defineConfig({
         if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
-        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh)\/?$/.test(page)) return false;
+        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1)\/?$/.test(page)) return false;
         // Bài blog văn mẫu (noindex) không đưa vào sitemap
         const blogSlug = page.match(/\/blog\/([^/]+)\/?$/);
         if (blogSlug && NOINDEX_BLOG.has(blogSlug[1])) return false;
