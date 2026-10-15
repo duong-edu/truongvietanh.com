@@ -1,0 +1,33 @@
+---
+// quiz-tieng-anh-lop-1-12 — quiz lead magnet "Lộ trình phát triển tiếng Anh lớp 1–12"
+// Form → /api/lead (funnel_code: quiz-tieng-anh-1-12). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/lo-trinh-tieng-anh-lop-1-12.pdf
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tiếng Anh Của Con Đang Mạnh Ở Kỹ Năng Nào? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút để xem con vững nghe, nói, đọc hay viết, kèm bản đồ lộ trình tiếng Anh từ lớp 1 đến lớp 12." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<div class="lm-app">
+  <div class="lm-top"><div class="lg"><img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="34" height="34" /></div><div><b>Trường Việt Anh</b><small>Lộ trình tiếng Anh lớp 1–12</small></div></div>
+  <div class="lm-prog"><i id="lm-pb"></i></div>
+  <div class="lm-body" id="lm-root"></div>
+</div>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Tiếng Anh của con đang mạnh ở kỹ năng nào?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để xem con đang vững ở nghe, nói, đọc hay viết, và nên đặt mục tiêu gì tiếp theo. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Đây là \\u003cb>cách theo dõi theo kỹ năng\\u003c/b>, không chỉ theo điểm số. Kết quả do phụ huynh quan sát nên chỉ mang tính tham khảo.\",\"scoreLabel\":\"điều con đã làm được\",\"groups\":[\"Nghe\",\"Nói\",\"Đọc\",\"Viết\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng giai đoạn trong lộ trình.\",\"o\":[[\"2019\",\"2019–2020 (lớp 1–2)\"],[\"2015\",\"2015–2018 (lớp 3–6)\"],[\"2011\",\"2011–2014 (lớp 7–10)\"],[\"2009\",\"2009–2010 (lớp 11–12)\"],[\"2022\",\"2022 trở về sau\"]],\"redirect\":{\"2022\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của lộ trình này\",\"d\":\"Lộ trình này dành cho học sinh từ lớp 1 đến lớp 12. Với con còn nhỏ, mình có bộ kiểm tra thích nghi và sẵn sàng vào lớp 1 phù hợp hơn.\"}}},{\"id\":\"worry\",\"t\":\"Bạn lo nhất điều gì về tiếng Anh của con?\",\"o\":[[\"A\",\"Con ngại nói, ít dám giao tiếp\"],[\"B\",\"Điểm tốt nhưng chưa dùng được thực tế\"],[\"C\",\"Con mất gốc hoặc tụt so với các bạn\"],[\"D\",\"Chưa biết đặt mục tiêu và chứng chỉ thế nào\"]]},{\"id\":\"where\",\"t\":\"Hiện con học tiếng Anh chủ yếu ở đâu?\",\"o\":[[\"A\",\"Chỉ ở trường\"],[\"B\",\"Ở trường và thêm trung tâm/gia sư\"],[\"C\",\"Tự học, ứng dụng, xem phim\"],[\"D\",\"Chưa bắt đầu\"]]},{\"id\":\"s4\",\"t\":\"Nghe và nói: con làm được gì?\",\"h\":\"Chọn tất cả điều con làm được ở mức phù hợp độ tuổi. Có thể không chọn gì.\",\"multi\":[[\"Nghe hiểu hướng dẫn và nội dung quen thuộc bằng tiếng Anh\",0],[\"Nghe hiểu một đoạn hội thoại hoặc bài nghe ngắn\",0],[\"Không ngại nghe tiếng Anh (phim, bài hát, video)\",0],[\"Tự nói được vài câu ngắn về bản thân\",1],[\"Dám nói tiếng Anh với người khác dù còn sai\",1],[\"Trình bày được một ý kiến đơn giản\",1]]},{\"id\":\"s5\",\"t\":\"Đọc và viết: con làm được gì?\",\"h\":\"Chọn tất cả điều con làm được ở mức phù hợp độ tuổi.\",\"multi\":[[\"Đọc được văn bản đơn giản phù hợp lứa tuổi\",2],[\"Hiểu ý chính sau khi đọc\",2],[\"Đọc tiếng Anh ngoài sách giáo khoa\",2],[\"Viết được câu hoàn chỉnh\",3],[\"Viết được đoạn ngắn có mở và kết\",3],[\"Tự phát hiện và sửa một số lỗi cơ bản khi viết\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi chương trình khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở nơi hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn ưu tiên điều gì nhất cho việc học tiếng Anh của con?\",\"o\":[[\"A\",\"Chi phí hợp lý\"],[\"B\",\"Nền tảng vững, theo kịp chương trình\"],[\"C\",\"Giao tiếp tự tin\"],[\"D\",\"Chứng chỉ hoặc mục tiêu dài hạn\"]]}],\"worryPref\":{\"A\":1,\"B\":1,\"C\":2,\"D\":3},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con có nền khá cân bằng\",\"desc\":\"Con đang làm được ở nhiều kỹ năng. Kỹ năng nên chú ý thêm là {g}. Việc nên làm lúc này là đặt một mục tiêu nhỏ cho 2 tuần tới thay vì học thêm nhiều.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con có nền, còn kỹ năng cần bù\",\"desc\":\"Con đã có một phần nền tảng, còn {g} cần được chú ý. Đặt mục tiêu theo năng lực hiện tại và lịch ôn thực tế sẽ hiệu quả hơn là học dồn.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu từ kỹ năng nền\",\"desc\":\"Con mới ở giai đoạn đầu, và điều đó không có nghĩa là con yếu. Hãy bắt đầu với {g}, tạo thói quen nghe và đọc mỗi ngày một chút trước khi tăng độ khó.\"}],\"nextStep\":\"chọn một hành động nhỏ cho kỹ năng {g} trong 2 tuần tới.\",\"rewardText\":\"bản đồ lộ trình tiếng Anh lớp 1–12 (tiểu học, THCS, THPT), cách theo dõi 4 kỹ năng và bảng tự đánh giá để đặt mục tiêu 2 tuần.\",\"ctaText\":\"Muốn tìm hiểu chương trình tiếng Anh và lộ trình học phù hợp với cấp lớp của con?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Lộ trình phát triển tiếng Anh lớp 1–12\",\"formId\":\"lm-tieng-anh-1-12\",\"funnel\":\"quiz-tieng-anh-1-12\",\"pdf\":\"/downloads/lo-trinh-tieng-anh-lop-1-12.pdf\",\"tags\":[\"lm-tieng-anh-1-12\"],\"levelByYob\":{\"2009\":\"thpt\",\"2011\":\"thcs\",\"2015\":\"tieu-hoc\",\"2019\":\"tieu-hoc\"}}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

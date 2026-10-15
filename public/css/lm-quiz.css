@@ -1,0 +1,43 @@
+/* Quiz lead magnet (public/js/lm-quiz.js). Màu thương hiệu: Navy #26275D · Vàng #F9DD0E */
+:root{--navy:#26275D;--gold:#F9DD0E;--soft:#EEEEF6;--goldsoft:#FFFBD6;--mute:#5b5c80;--ink:#1d1d3a;--line:#d4d5e8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Inter','Segoe UI',Arial,sans-serif;background:var(--soft);color:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:16px}
+.lm-app{width:100%;max-width:480px;background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(38,39,93,.15);overflow:hidden;display:flex;flex-direction:column;align-self:flex-start}
+.lm-top{background:var(--navy);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.lm-top .lg{background:#fff;border-radius:50%;width:46px;height:46px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px var(--gold);flex-shrink:0}
+.lm-top .lg img{width:34px;height:34px;object-fit:contain}
+.lm-top b{color:#fff;font-size:15px;line-height:1.2;font-family:'Montserrat','Inter',sans-serif;font-weight:800;display:block}
+.lm-top small{color:var(--gold);display:block;font-size:12px;font-weight:600}
+.lm-prog{height:6px;background:#dcdcec}.lm-prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.lm-body{padding:22px 20px 26px;flex:1}
+h1{font-family:'Montserrat','Inter',sans-serif;font-size:23px;line-height:1.25;margin:0 0 10px;color:var(--navy);font-weight:900}
+h2{font-family:'Montserrat','Inter',sans-serif;font-size:19px;line-height:1.3;margin:0 0 6px;color:var(--navy);font-weight:800}
+.hint{color:var(--mute);font-size:13.5px;margin:0 0 16px}
+p{line-height:1.55;margin:0 0 12px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 14px;margin:0 0 10px;font-size:15.5px;color:var(--ink);cursor:pointer;font-family:inherit}
+.opt:hover{border-color:var(--navy)}
+.opt:focus-visible,.btn:focus-visible,.back:focus-visible,a.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opt.sel{border-color:var(--navy);background:var(--goldsoft);font-weight:600}
+.opt.multi:before{content:"";display:inline-block;width:16px;height:16px;border:2px solid var(--navy);border-radius:4px;margin-right:10px;vertical-align:-3px}
+.opt.multi.sel:before{background:var(--navy);box-shadow:inset 0 0 0 2px #fff}
+.btn{display:block;width:100%;background:var(--navy);color:#fff;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;text-align:center;text-decoration:none}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.back{background:none;border:0;color:var(--mute);font-size:13.5px;cursor:pointer;margin-top:10px;font-family:inherit}
+.tag{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.score{display:flex;align-items:baseline;gap:8px;margin:6px 0 10px}.score b{font-size:46px;color:var(--navy);line-height:1;font-family:'Montserrat','Inter',sans-serif}.score span{color:var(--mute)}
+.bars{margin:10px 0 14px}.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:6px}.bar em{flex:0 0 96px;font-style:normal}.bar div{flex:1;height:10px;background:#e6e6f1;border-radius:6px;overflow:hidden}.bar div i{display:block;height:100%;background:var(--navy)}.bar.weak div i{background:#e0b800}.bar span{flex:0 0 28px;text-align:right;color:var(--mute)}
+.card{background:var(--soft);border-left:5px solid var(--navy);border-radius:8px;padding:11px 13px;font-size:14.5px;margin:12px 0}
+.card.gold{background:var(--goldsoft);border-left-color:var(--gold)}
+label{display:block;font-size:13.5px;font-weight:600;margin:0 0 4px;color:var(--navy)}
+input[type=text],input[type=tel],input[type=email]{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;font-size:16px;margin-bottom:12px;font-family:inherit}
+input:focus{outline:none;border-color:var(--navy)}
+input.err{border-color:#b3261e}
+.consent{display:flex;gap:8px;font-size:12.5px;color:var(--mute);margin:2px 0 10px;line-height:1.45;font-weight:400}
+.consent input{margin-top:3px;flex-shrink:0}
+.consent a{color:var(--navy)}
+.err-msg{color:#b3261e;font-size:13px;margin:-6px 0 10px;display:none}
+.err-msg.on{display:block}
+.note{font-size:11.5px;color:var(--mute);margin-top:14px;line-height:1.45}
+@media (prefers-reduced-motion:reduce){.lm-prog i{transition:none}}

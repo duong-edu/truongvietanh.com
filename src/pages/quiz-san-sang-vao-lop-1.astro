@@ -1,0 +1,33 @@
+---
+// quiz-san-sang-vao-lop-1 — quiz lead magnet "Bộ kiểm tra 12 dấu hiệu sẵn sàng vào lớp 1"
+// Form → /api/lead (funnel_code: quiz-vao-lop-1). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/vao-lop-1-12-dau-hieu-san-sang.pdf
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Con Đã Sẵn Sàng Vào Lớp 1 Chưa? Kiểm Tra 12 Dấu Hiệu | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút: biết con vững nhóm nào (nề nếp, giao tiếp, học tập, cảm xúc) và nhận kế hoạch làm quen 4 tuần trước ngày nhập học." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<div class="lm-app">
+  <div class="lm-top"><div class="lg"><img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="34" height="34" /></div><div><b>Trường Việt Anh</b><small>Bộ kiểm tra sẵn sàng vào lớp 1</small></div></div>
+  <div class="lm-prog"><i id="lm-pb"></i></div>
+  <div class="lm-body" id="lm-root"></div>
+</div>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con đã sẵn sàng vào lớp 1 chưa?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết con đang vững ở nhóm nào và cần tập thêm nhóm nào. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Kiểm tra dựa trên \\u003cb>12 dấu hiệu\\u003c/b> chia đều 4 nhóm: nề nếp, giao tiếp, học tập, cảm xúc, không chỉ đọc, viết, làm toán.\",\"scoreLabel\":\"dấu hiệu sẵn sàng\",\"groups\":[\"Nề nếp\",\"Giao tiếp\",\"Học tập\",\"Cảm xúc\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2021\",\"2021 (vào lớp 1 năm 2027)\"],[\"2022\",\"2022\"],[\"2020\",\"2020 hoặc sớm hơn\"],[\"2023\",\"2023 trở về sau\"]],\"redirect\":{\"2020\":{\"t\":\"Con bạn có thể đã vào tiểu học\",\"d\":\"Bộ kiểm tra này dành cho trẻ chuẩn bị vào lớp 1. Nếu con sắp chuyển cấp hoặc chuyển trường, bạn có thể liên hệ nhà trường để được tư vấn phù hợp.\"},\"2023\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi vào lớp 1\",\"d\":\"Bộ này dành cho trẻ sắp vào lớp 1. Với trẻ mầm non, mời bạn xem checklist mầm non của nhà trường.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn lo nhất khi con vào lớp 1?\",\"o\":[[\"A\",\"Con không theo kịp bạn về chữ và số\"],[\"B\",\"Con khó thích nghi, ngại đến lớp\"],[\"C\",\"Con chưa tự lập (đồ dùng, vệ sinh, ăn trưa)\"],[\"D\",\"Con chưa biết quản lý thời gian, bài tập\"]]},{\"id\":\"prep\",\"t\":\"Bạn đã làm gì để chuẩn bị cho con?\",\"o\":[[\"A\",\"Chưa bắt đầu\"],[\"B\",\"Cho con tập đọc, viết, làm toán trước\"],[\"C\",\"Cho con làm quen nếp sinh hoạt, tự lập\"],[\"D\",\"Đã tham quan hoặc tìm hiểu một vài trường\"]]},{\"id\":\"s4\",\"t\":\"Nề nếp & giao tiếp: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Tự cất đồ chơi/đồ dùng của mình\",0],[\"Tự đi vệ sinh và rửa tay\",0],[\"Làm theo hướng dẫn 2–3 bước liên tiếp\",0],[\"Biết nhờ người lớn giúp khi cần\",1],[\"Diễn đạt nhu cầu bằng lời (“con khát”, “con đau”)\",1],[\"Chờ đến lượt khi chơi hoặc nói\",1]]},{\"id\":\"s5\",\"t\":\"Học tập & cảm xúc: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Nhận ra một số chữ cái/con số quen thuộc\",2],[\"Ngồi nghe một câu chuyện ngắn đến hết\",2],[\"Cầm bút, tô, vẽ, cắt dán khá thoải mái\",2],[\"Gọi tên được cảm xúc (vui, buồn, giận, lo)\",3],[\"Chấp nhận thay đổi nhỏ trong lịch ngày\",3],[\"Xa cha mẹ vài giờ mà vẫn ổn\",3]]},{\"id\":\"when\",\"t\":\"Dự kiến con bắt đầu lớp 1 khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Tháng 8/2027\"],[\"C\",\"Năm 2028 hoặc muộn hơn\"],[\"D\",\"Chưa xác định\"]]},{\"id\":\"prio\",\"t\":\"Bạn ưu tiên điều gì nhất ở trường tiểu học?\",\"o\":[[\"A\",\"Học phí & tổng chi phí rõ ràng\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":2,\"B\":3,\"C\":0,\"D\":0},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con đã khá vững\",\"desc\":\"Con bạn đang có nền tảng tốt. Điều nên làm là \\u003cb>giữ nhịp, không dồn thêm bài vở\\u003c/b>. Chỉ cần củng cố nhóm {g} và giữ giấc ngủ, nếp sinh hoạt ổn định. Việc đáng làm nhất lúc này là cho con làm quen môi trường lớp 1 thật.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con gần sẵn sàng\",\"desc\":\"Con bạn đã có nhiều nền tảng, còn vài điểm cần tập: nhóm {g}. Chọn \\u003cb>3 kỹ năng\\u003c/b> tập cùng con mỗi tuần, ưu tiên nhóm này trước. 4 tuần tập đều là đủ để thấy tiến bộ rõ.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Con cần đồng hành thêm\",\"desc\":\"\\u003cb>Điều này hoàn toàn bình thường\\u003c/b>, nhiều trẻ cần thêm thời gian và không có nghĩa là con “chậm”. Hãy bắt đầu từ nhóm {g}, mỗi lần một kỹ năng nhỏ, qua các hoạt động hằng ngày.\"}],\"nextStep\":\"chọn 3 kỹ năng ở nhóm {g} để cùng con luyện trong tuần này.\",\"rewardText\":\"checklist 12 dấu hiệu bản in, kế hoạch làm quen 4 tuần và 10 câu hỏi khi tham quan trường.\",\"ctaText\":\"Muốn xem tận mắt môi trường lớp 1 và cách nhà trường hỗ trợ học sinh đầu cấp?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Bộ kiểm tra 12 dấu hiệu sẵn sàng vào lớp 1\",\"formId\":\"lm-vao-lop-1\",\"funnel\":\"quiz-vao-lop-1\",\"pdf\":\"/downloads/vao-lop-1-12-dau-hieu-san-sang.pdf\",\"tags\":[\"lm-vao-lop-1\"],\"level\":\"tieu-hoc\",\"grade\":\"lop-1\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

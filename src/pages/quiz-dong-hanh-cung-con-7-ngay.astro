@@ -1,0 +1,33 @@
+---
+// quiz-dong-hanh-cung-con-7-ngay — quiz lead magnet "Bộ công cụ đồng hành cùng con trong 7 ngày"
+// Form → /api/lead (funnel_code: quiz-dong-hanh-7-ngay). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/bo-cong-cu-dong-hanh-7-ngay.pdf
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bạn Đã Quan Sát Con Mình Được Bao Nhiêu? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút để biết bạn đã nắm gì về thói quen học, sự tự lập, cảm xúc và hứng thú của con, kèm bảng quan sát 7 ngày." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<div class="lm-app">
+  <div class="lm-top"><div class="lg"><img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="34" height="34" /></div><div><b>Trường Việt Anh</b><small>Đồng hành cùng con trong 7 ngày</small></div></div>
+  <div class="lm-prog"><i id="lm-pb"></i></div>
+  <div class="lm-body" id="lm-root"></div>
+</div>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Bạn đã quan sát con mình được bao nhiêu?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết bạn đã nắm gì về thói quen học, sự tự lập, cảm xúc và hứng thú của con, và nên bắt đầu quan sát từ đâu. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Đây là \\u003cb>bộ quan sát\\u003c/b>, không phải bài kiểm tra con. Mục đích là ghi nhận khách quan, không phán xét.\",\"scoreLabel\":\"điều bạn đã nắm về con\",\"groups\":[\"Thói quen học\",\"Tự lập\",\"Cảm xúc\",\"Hứng thú\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2016\",\"2016–2020 (tiểu học)\"],[\"2012\",\"2012–2015 (THCS)\"],[\"2009\",\"2009–2011 (THPT)\"],[\"2022\",\"2022 trở về sau (mầm non)\"]],\"redirect\":{\"2022\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của bộ này\",\"d\":\"Bộ quan sát này dành cho học sinh từ tiểu học đến THPT. Nếu con đang ở mầm non, mình có bộ kiểm tra thích nghi mầm non phù hợp hơn.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Bạn muốn hiểu con hơn ở điều gì nhất?\",\"o\":[[\"A\",\"Con học như thế nào, vì sao dễ nản\"],[\"B\",\"Con đã tự lập đến đâu\"],[\"C\",\"Con đang cảm thấy gì, lo điều gì\"],[\"D\",\"Con thực sự thích và giỏi điều gì\"]]},{\"id\":\"style\",\"t\":\"Khi con gặp khó, bạn thường làm gì?\",\"o\":[[\"A\",\"Nhắc hoặc giải giúp con\"],[\"B\",\"Chờ con tự xử lý\"],[\"C\",\"Hỏi con cần mình hỗ trợ gì\"],[\"D\",\"Chưa có cách nhất quán\"]]},{\"id\":\"s4\",\"t\":\"Thói quen học và tự lập: bạn đã quan sát được gì?\",\"h\":\"Chọn tất cả điều bạn đã biết rõ về con. Có thể không chọn gì.\",\"multi\":[[\"Cách con bắt đầu việc học mỗi ngày\",0],[\"Cách con xử lý khi gặp bài khó\",0],[\"Khoảng thời gian con tập trung liên tục\",0],[\"Con có tự chuẩn bị đồ dùng, cặp sách không\",1],[\"Con có tự nhớ bài tập và lịch học không\",1],[\"Những việc cá nhân, việc nhà con tự làm được\",1]]},{\"id\":\"s5\",\"t\":\"Cảm xúc và hứng thú: bạn đã quan sát được gì?\",\"h\":\"Chọn tất cả điều bạn đã biết rõ về con.\",\"multi\":[[\"Cách con nói khi cần giúp đỡ\",2],[\"Điều khiến con lo lắng hoặc căng thẳng\",2],[\"Cách con phản ứng khi mắc lỗi\",2],[\"Hoạt động khiến con hứng thú nhất\",3],[\"Thời điểm trong ngày con có nhiều năng lượng\",3],[\"Cách con nghỉ ngơi và vận động\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":0,\"B\":1,\"C\":2,\"D\":3},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Bạn quan sát con khá tốt\",\"desc\":\"Bạn đã nắm nhiều điều về con. Phần còn lại là nhóm {g}. 7 ngày quan sát có hệ thống sẽ giúp bạn biến những điều đã biết thành một thay đổi nhỏ cụ thể.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Còn vài vùng chưa thấy\",\"desc\":\"Bạn đã biết một phần về con, còn nhóm {g} chưa rõ. Điều này rất thường gặp, vì ta thường chỉ nhìn thấy điểm số và bài tập. 7 ngày ghi nhận sẽ giúp bạn thấy phần còn thiếu.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu quan sát từ nhỏ\",\"desc\":\"Bạn chưa kịp quan sát nhiều, và đó là bình thường vì cuộc sống bận rộn. Hãy bắt đầu với nhóm {g}, mỗi ngày chỉ ghi lại một điều, không đánh giá hay sửa ngay.\"}],\"nextStep\":\"ngày mai hãy quan sát nhóm {g}, ghi lại tình huống cụ thể và không phán xét con.\",\"rewardText\":\"bảng quan sát 7 ngày (in được) kèm hướng dẫn: mỗi ngày một việc nhỏ, và cách cùng con chọn một thay đổi ở ngày thứ 7.\",\"ctaText\":\"Muốn trao đổi về việc học của con hoặc tìm hiểu môi trường học phù hợp?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Bộ công cụ đồng hành cùng con trong 7 ngày\",\"formId\":\"lm-dong-hanh-7-ngay\",\"funnel\":\"quiz-dong-hanh-7-ngay\",\"pdf\":\"/downloads/bo-cong-cu-dong-hanh-7-ngay.pdf\",\"tags\":[\"lm-dong-hanh-7-ngay\"],\"levelByYob\":{\"2009\":\"thpt\",\"2012\":\"thcs\",\"2016\":\"tieu-hoc\"}}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

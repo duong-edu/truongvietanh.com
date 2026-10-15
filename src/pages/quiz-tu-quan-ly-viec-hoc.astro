@@ -1,0 +1,33 @@
+---
+// quiz-tu-quan-ly-viec-hoc — quiz lead magnet "Planner 7 ngày tự quản lý việc học"
+// Form → /api/lead (funnel_code: quiz-planner-7-ngay). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/planner-7-ngay-tu-quan-ly-viec-hoc.pdf
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Con Bạn Tự Quản Lý Việc Học Đến Đâu? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút về lập kế hoạch, chia nhỏ bài, giữ tập trung và nhìn lại, kèm planner 7 ngày in A4 cho học sinh lớp 3–12." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<div class="lm-app">
+  <div class="lm-top"><div class="lg"><img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="34" height="34" /></div><div><b>Trường Việt Anh</b><small>Planner 7 ngày tự quản lý việc học</small></div></div>
+  <div class="lm-prog"><i id="lm-pb"></i></div>
+  <div class="lm-body" id="lm-root"></div>
+</div>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con bạn tự quản lý việc học đến đâu?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết con đã làm được gì trong việc lập kế hoạch, chia nhỏ bài, giữ tập trung và nhìn lại. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Đây là cách \\u003cb>quan sát\\u003c/b>, không phải bài kiểm tra. Có thể để con cùng trả lời nếu con đã đủ lớn.\",\"scoreLabel\":\"kỹ năng con đã làm được\",\"groups\":[\"Lập kế hoạch\",\"Bắt đầu\",\"Tập trung\",\"Nhìn lại\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng mẫu planner theo cấp lớp.\",\"o\":[[\"2018\",\"2016–2018 (lớp 3–5)\"],[\"2014\",\"2012–2015 (lớp 6–9)\"],[\"2010\",\"2009–2011 (lớp 10–12)\"],[\"2019\",\"2019 trở về sau\"]],\"redirect\":{\"2019\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của planner này\",\"d\":\"Planner này dành cho học sinh từ lớp 3 trở lên. Với con nhỏ hơn, mình có bộ kiểm tra sẵn sàng vào lớp 1 phù hợp hơn.\"}}},{\"id\":\"worry\",\"t\":\"Con bạn đang gặp vấn đề gì nhiều nhất?\",\"o\":[[\"A\",\"Hay quên bài, quên đồ dùng\"],[\"B\",\"Dồn việc sát hạn mới làm\"],[\"C\",\"Không biết bắt đầu từ đâu\"],[\"D\",\"Dễ xao nhãng khi học\"]]},{\"id\":\"cur\",\"t\":\"Hiện con quản lý việc học như thế nào?\",\"o\":[[\"A\",\"Cha mẹ nhắc gần như mọi việc\"],[\"B\",\"Con có ghi nhưng ít khi làm theo\"],[\"C\",\"Có lịch nhưng không đều\"],[\"D\",\"Chưa có cách nào cụ thể\"]]},{\"id\":\"s4\",\"t\":\"Lập kế hoạch và bắt đầu: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Ghi lịch học, bài tập và ngày kiểm tra\",0],[\"Chọn 3 việc quan trọng nhất mỗi ngày\",0],[\"Biết việc nào cần làm trước, việc nào để sau\",0],[\"Chia bài lớn thành các bước ngắn\",1],[\"Bắt đầu học mà không cần nhắc\",1],[\"Ước lượng khoảng thời gian cần cho mỗi việc\",1]]},{\"id\":\"s5\",\"t\":\"Tập trung và nhìn lại: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Học theo phiên ngắn rồi nghỉ hợp lý\",2],[\"Cất điện thoại hoặc thứ gây xao nhãng khi học\",2],[\"Giữ một góc học cố định, gọn gàng\",2],[\"Cuối ngày đánh dấu việc đã hoàn thành\",3],[\"Cuối tuần xem lại điều hiệu quả và chưa hiệu quả\",3],[\"Tự điều chỉnh cách làm cho tuần sau\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":0,\"B\":0,\"C\":1,\"D\":2},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con đã có nền quản lý tốt\",\"desc\":\"Con đã làm được nhiều bước quan trọng. Chỉ cần củng cố nhóm {g} là kế hoạch sẽ vận hành đều hơn. Dùng planner để giữ nhịp và để con tự nhìn thấy tiến bộ của mình.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con có nền, cần đều đặn hơn\",\"desc\":\"Con đã biết một phần cách tự quản lý, còn nhóm {g} chưa vững. Đây là giai đoạn rất thường gặp, và một mẫu kế hoạch đơn giản dùng trong 1 tuần là cách thử nhẹ nhàng nhất.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu bằng bước nhỏ\",\"desc\":\"Con mới bắt đầu tự quản lý việc học, và điều đó hoàn toàn bình thường. Đừng thay đổi tất cả cùng lúc. Hãy chỉ bắt đầu với nhóm {g}, mỗi ngày một việc nhỏ.\"}],\"nextStep\":\"tuần này chỉ tập trung vào nhóm {g}, cùng con chọn một việc nhỏ làm mỗi ngày.\",\"rewardText\":\"planner 7 ngày (in A4): lịch tuần, mỗi ngày 3 việc quan trọng, ghi điều còn vướng và trang nhìn lại cuối tuần.\",\"ctaText\":\"Muốn tìm hiểu cách học sinh được rèn tính chủ động và kỹ năng quản lý việc học tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Planner 7 ngày tự quản lý việc học\",\"formId\":\"lm-planner-7-ngay\",\"funnel\":\"quiz-planner-7-ngay\",\"pdf\":\"/downloads/planner-7-ngay-tu-quan-ly-viec-hoc.pdf\",\"tags\":[\"lm-planner-7-ngay\"],\"levelByYob\":{\"2010\":\"thpt\",\"2014\":\"thcs\",\"2018\":\"tieu-hoc\"}}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>
