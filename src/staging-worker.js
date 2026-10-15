@@ -1016,7 +1016,7 @@ async function handleLeadSubmission(request, env) {
       else if (!skipGhl && data.email && (data.source || '').match(/^(mam-non|tieu-hoc|thcs|thpt|ngay-mo-cua|dat-lich-tham-quan|brand-story|future-ready-challenge)/)) {
         promises.push(sendLandingConfirmEmail(data, env, contactId, ghlApiKey).catch((e) => { console.error('landing confirm email fail', e); }));
       }
-      if ((skipGhl || isLmGrFunnel(data.source)) && data.email) {
+      if (data.email) { // mọi form có email → GetResponse (lead không email thì bỏ qua)
         promises.push(addToGetResponse(rawData, data, env)
           .then((r) => { results.getresponse = r; })
           .catch((e) => { results.getresponse = { error: e.message }; }));
@@ -1076,7 +1076,7 @@ function lmGrTagNames(source, clientTags) {
 
 // GetResponse (tài khoản BKpyQ) — list/field/tag tạo 27/09/2026. CỐ Ý KHÔNG gắn tag cấp học có sẵn
 // (Mam_Non, Tieu_Hoc, THCS...) vì các automation "Email 0 – Phân loại độ tuổi" đang bắt những tag đó.
-const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi', leadMagnet: 'PLchW' }; // leadMagnet = "Danh bạ nhận lead magnet 2026-2027"
+const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi', leadMagnet: 'PLchW', all: 'P6RCh' }; // leadMagnet = "Danh bạ nhận lead magnet 2026-2027"
 const GR_FIELDS = {
   ten_hoc_sinh: 'njZtaT', co_so: 'njZt82', hotline_co_so: 'njZtWM', ngay_hen: 'njZtKY',
   khung_gio: 'njZtoC', hinh_thuc: 'njZtr8', lop: 'njZtQe', nhom_dinh_tuyen: 'njZtMi',
@@ -1119,16 +1119,19 @@ async function addToGetResponse(raw, data, env) {
   if (!key) return { skipped: true, reason: 'no_key' };
   const isMn = String(data.source).startsWith('mam-non-trai-nghiem');
   const isLm = isLmGrFunnel(data.source);
+  // Mọi form còn lại trên web (squeeze, trại hè, tuyển sinh, đặt lịch...) → list "Trường Việt Anh - All"
+  const isGeneric = !isMn && !isLm && !isGetResponseFunnel(data.source);
+  const isSite = isLm || isGeneric; // form chỉ có tên phụ huynh, không có trường lịch hẹn
   const hocThu = raw.visit_type === 'hoc-thu';
   const d = String(raw.preferred_date || '');
   const values = {
     // Lead magnet: form chỉ có tên PHỤ HUYNH → không ghi vào ô "tên học sinh".
-    ten_hoc_sinh: isLm ? '' : (data.childName || data.fullName),
+    ten_hoc_sinh: isSite ? '' : (data.childName || data.fullName),
     co_so: raw.campus_label,
     hotline_co_so: raw.campus_hotline,
     ngay_hen: /^\d{4}-\d{2}-\d{2}$/.test(d) ? d.split('-').reverse().join('/') : d,
     khung_gio: raw.preferred_slot,
-    hinh_thuc: isLm ? '' : isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
+    hinh_thuc: isSite ? '' : isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
     lop: isMn ? raw.program : String(raw.grade || '').replace(/^lop-(\d+)$/, 'Lớp $1'),
     nhom_dinh_tuyen: isMn ? 'MN' : raw.routing_group,
     phone: data.phone ? '+84' + data.phone.slice(1) : '',
@@ -1139,10 +1142,10 @@ async function addToGetResponse(raw, data, env) {
   const customFieldValues = Object.entries(values)
     .filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '')
     .map(([k, v]) => ({ customFieldId: GR_FIELDS[k], value: [String(v).slice(0, 255)] }));
-  const tags = isLm ? []
+  const tags = isSite ? []
     : isMn ? [GR_TAGS.hocThuMamNon]
     : [GR_TAGS.schoolTour, ...(hocThu ? [GR_TAGS.hocThuK12] : []), ...(raw.boarding ? [GR_TAGS.noiTru] : [])];
-  const listId = isLm ? GR_LISTS.leadMagnet : isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
+  const listId = isLm ? GR_LISTS.leadMagnet : isGeneric ? GR_LISTS.all : isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
 
   const gr = (method, path, body) => fetch('https://api.getresponse.com/v3' + path, {
     method,
@@ -1158,6 +1161,15 @@ async function addToGetResponse(raw, data, env) {
     }
   }
 
+  if (isGeneric) {
+    // Tag theo mã funnel (tự tạo nếu chưa có) để sau này lọc theo nguồn; chỉ ký tự an toàn.
+    const slug = String(data.source || 'khac').replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40) || 'khac';
+    for (const name of ['TS_2026', 'Web_' + slug]) {
+      const id = await ensureGrTag(gr, name).catch(() => null);
+      if (id) tags.push(id);
+    }
+  }
+
   if (raw.src === 'bdkl') {
     tags.push(GR_TAGS.banDoKhonLon);
     const ageTag = bdklAgeTagName(raw);
@@ -1167,7 +1179,7 @@ async function addToGetResponse(raw, data, env) {
 
   const res = await gr('POST', '/contacts', {
     email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
-    ...(isLm && data.fullName ? { name: data.fullName } : {}),
+    ...(isSite && data.fullName ? { name: data.fullName } : {}),
     customFieldValues, tags: tags.map((tagId) => ({ tagId })),
   });
   if (res.status === 202) return { status: 202, list: listId };
