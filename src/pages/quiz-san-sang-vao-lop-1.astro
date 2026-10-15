@@ -1,33 +1,401 @@
 ---
-// quiz-san-sang-vao-lop-1 — quiz lead magnet "Bộ kiểm tra 12 dấu hiệu sẵn sàng vào lớp 1"
-// Form → /api/lead (funnel_code: quiz-vao-lop-1). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
-// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/vao-lop-1-12-dau-hieu-san-sang.pdf
-// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+// /quiz-san-sang-vao-lop-1 — Lead magnet LM01 "Con đã sẵn sàng vào lớp 1 chưa?" (quiz 7 câu → form 3 trường → PDF)
+// Audience : phụ huynh có con sinh 2021 (vào lớp 1 năm 2027)
+// Pipeline : POST /api/lead (worker) → Pancake CRM (lead) + GetResponse (list "Trường Việt Anh - All").
+//            KHÔNG qua GHL. Worker nhận ra funnel nhờ source = FUNNEL (xem LM01_SOURCE trong staging-worker.js).
+// noindex  : trang gate nội dung, giống mọi squeeze khác của site.
+import FaqAccordion from '../components/FaqAccordion.astro';
+import '../styles/global.css';
+
+const FUNNEL = 'lm01-quiz-lop-1';
+const PDF_URL = '/tai-lieu/LM01_12-dau-hieu-san-sang-vao-lop-1.pdf';
+const HOTLINE = '0916 961 409';
+const HOTLINE_TEL = 'tel:0916961409';
+const ZALO_OA = 'https://zalo.me/1678310120468101523';
+
+const faqs = [
+  { id: 'faq-do-tuoi', q: 'Bộ kiểm tra dành cho trẻ bao nhiêu tuổi?', a: 'Dành cho trẻ sắp vào lớp 1 (sinh năm 2021 cho năm học 2027). Nếu con ở độ tuổi khác, bộ kiểm tra sẽ gợi ý bạn liên hệ nhà trường để được tư vấn nội dung phù hợp hơn.' },
+  { id: 'faq-danh-gia', q: 'Kết quả có phải là đánh giá chuyên môn không?', a: 'Không. Đây là công cụ tham khảo dành cho gia đình để biết nên củng cố điều gì trước khi con vào lớp 1.' },
+  { id: 'faq-du-lieu', q: 'Thông tin của tôi được dùng như thế nào?', a: 'Chỉ để gửi tài liệu và liên hệ tư vấn về việc học của con khi bạn đồng ý. Bạn có thể dừng nhận thông tin bất cứ lúc nào.' },
+  { id: 'faq-thoi-gian', q: 'Làm bộ kiểm tra mất bao lâu?', a: 'Khoảng 2 phút với 7 câu hỏi.' },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const title = 'Con đã sẵn sàng vào lớp 1 chưa? Kiểm tra miễn phí 2 phút | Trường Việt Anh';
+const desc = 'Trả lời 7 câu hỏi nhanh để biết con vững ở nhóm nào (nề nếp, giao tiếp, học tập, cảm xúc) và cần tập thêm gì trước khi vào lớp 1. Nhận kết quả ngay, kèm checklist và kế hoạch làm quen 4 tuần.';
 ---
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Con Đã Sẵn Sàng Vào Lớp 1 Chưa? Kiểm Tra 12 Dấu Hiệu | Trường Việt Anh</title>
-<meta name="description" content="7 câu hỏi trong 2 phút: biết con vững nhóm nào (nề nếp, giao tiếp, học tập, cảm xúc) và nhận kế hoạch làm quen 4 tuần trước ngày nhập học." />
+<title>{title}</title>
+<meta name="description" content={desc} />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/lm-quiz.css" />
+<!-- Google Tag Manager (container chính GTM-TMPPWX29) -->
+<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMPPWX29');</script>
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
 </head>
-<body>
-<div class="lm-app">
-  <div class="lm-top"><div class="lg"><img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="34" height="34" /></div><div><b>Trường Việt Anh</b><small>Bộ kiểm tra sẵn sàng vào lớp 1</small></div></div>
-  <div class="lm-prog"><i id="lm-pb"></i></div>
-  <div class="lm-body" id="lm-root"></div>
+<body class="lm01-body">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMPPWX29" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="lm01">
+  <header class="lm01-site">
+    <div class="lm01-wrap lm01-bar">
+      <img src="/logo-crest-80.webp" alt="Trường Việt Anh" width="44" height="44" />
+      <b class="notranslate" translate="no">Trường Việt Anh</b>
+    </div>
+  </header>
+
+  <main>
+    <section class="lm01-hero">
+      <div class="lm01-wrap lm01-hero-grid">
+        <div>
+          <span class="lm01-tag">2 phút · miễn phí</span>
+          <h1>Con đã sẵn sàng vào lớp 1 chưa?</h1>
+          <p class="lm01-lead">Trả lời <b>7 câu hỏi nhanh</b> để biết con đang vững ở nhóm nào và cần tập thêm điều gì. Bạn nhận kết quả ngay sau câu cuối.</p>
+          <a class="lm01-cta" href="#quiz">Làm bộ kiểm tra ngay</a>
+          <p class="lm01-fine">Không cần đăng ký để xem kết quả. Chỉ để lại thông tin nếu muốn nhận bản đầy đủ.</p>
+        </div>
+        <ul class="lm01-gets">
+          <li><b>Kết quả theo 4 nhóm</b><span>Nề nếp, giao tiếp, học tập, cảm xúc, không chỉ đọc, viết, làm toán.</span></li>
+          <li><b>Checklist 12 dấu hiệu (bản in)</b><span>Để cùng con theo dõi tại nhà.</span></li>
+          <li><b>Kế hoạch làm quen 4 tuần</b><span>Mỗi lần một kỹ năng nhỏ, qua hoạt động hằng ngày.</span></li>
+          <li><b>10 câu hỏi khi tham quan trường</b><span>Giúp bạn chọn trường tự tin hơn.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="quiz" class="lm01-quiz-sec">
+      <div class="lm01-wrap">
+        <div class="lm01-app">
+          <div class="lm01-top">
+            <div class="lm01-lg"><img src="/logo-crest-80.webp" alt="" width="38" height="38" /></div>
+            <div><b>Trường Việt Anh</b><small>Bộ kiểm tra sẵn sàng vào lớp 1</small></div>
+          </div>
+          <div class="lm01-prog"><i id="lm01-pb"></i></div>
+          <div class="lm01-body" id="lm01-root"><noscript>Vui lòng bật JavaScript để làm bộ kiểm tra.</noscript></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lm01-why">
+      <div class="lm01-wrap">
+        <h2>12 dấu hiệu, chia đều 4 nhóm</h2>
+        <div class="lm01-cards4">
+          <div><b>Nề nếp</b><span>Tự cất đồ, tự vệ sinh, làm theo hướng dẫn nhiều bước.</span></div>
+          <div><b>Giao tiếp</b><span>Biết nhờ giúp, diễn đạt nhu cầu, chờ đến lượt.</span></div>
+          <div><b>Học tập</b><span>Làm quen chữ số, ngồi nghe, cầm bút thoải mái.</span></div>
+          <div><b>Cảm xúc</b><span>Gọi tên cảm xúc, chấp nhận thay đổi, xa cha mẹ vài giờ.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lm01-faq">
+      <div class="lm01-wrap">
+        <h2>Câu hỏi thường gặp</h2>
+        <FaqAccordion faqs={faqs} />
+      </div>
+    </section>
+  </main>
+
+  <footer class="lm01-foot">
+    <div class="lm01-wrap">
+      <p>© Trường Việt Anh. Kết quả bộ kiểm tra chỉ mang tính tham khảo cho gia đình.</p>
+      <p><a href="/chinh-sach-bao-mat">Chính sách bảo mật dữ liệu</a></p>
+    </div>
+  </footer>
 </div>
-<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con đã sẵn sàng vào lớp 1 chưa?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết con đang vững ở nhóm nào và cần tập thêm nhóm nào. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Kiểm tra dựa trên \\u003cb>12 dấu hiệu\\u003c/b> chia đều 4 nhóm: nề nếp, giao tiếp, học tập, cảm xúc, không chỉ đọc, viết, làm toán.\",\"scoreLabel\":\"dấu hiệu sẵn sàng\",\"groups\":[\"Nề nếp\",\"Giao tiếp\",\"Học tập\",\"Cảm xúc\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2021\",\"2021 (vào lớp 1 năm 2027)\"],[\"2022\",\"2022\"],[\"2020\",\"2020 hoặc sớm hơn\"],[\"2023\",\"2023 trở về sau\"]],\"redirect\":{\"2020\":{\"t\":\"Con bạn có thể đã vào tiểu học\",\"d\":\"Bộ kiểm tra này dành cho trẻ chuẩn bị vào lớp 1. Nếu con sắp chuyển cấp hoặc chuyển trường, bạn có thể liên hệ nhà trường để được tư vấn phù hợp.\"},\"2023\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi vào lớp 1\",\"d\":\"Bộ này dành cho trẻ sắp vào lớp 1. Với trẻ mầm non, mời bạn xem checklist mầm non của nhà trường.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn lo nhất khi con vào lớp 1?\",\"o\":[[\"A\",\"Con không theo kịp bạn về chữ và số\"],[\"B\",\"Con khó thích nghi, ngại đến lớp\"],[\"C\",\"Con chưa tự lập (đồ dùng, vệ sinh, ăn trưa)\"],[\"D\",\"Con chưa biết quản lý thời gian, bài tập\"]]},{\"id\":\"prep\",\"t\":\"Bạn đã làm gì để chuẩn bị cho con?\",\"o\":[[\"A\",\"Chưa bắt đầu\"],[\"B\",\"Cho con tập đọc, viết, làm toán trước\"],[\"C\",\"Cho con làm quen nếp sinh hoạt, tự lập\"],[\"D\",\"Đã tham quan hoặc tìm hiểu một vài trường\"]]},{\"id\":\"s4\",\"t\":\"Nề nếp & giao tiếp: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Tự cất đồ chơi/đồ dùng của mình\",0],[\"Tự đi vệ sinh và rửa tay\",0],[\"Làm theo hướng dẫn 2–3 bước liên tiếp\",0],[\"Biết nhờ người lớn giúp khi cần\",1],[\"Diễn đạt nhu cầu bằng lời (“con khát”, “con đau”)\",1],[\"Chờ đến lượt khi chơi hoặc nói\",1]]},{\"id\":\"s5\",\"t\":\"Học tập & cảm xúc: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Nhận ra một số chữ cái/con số quen thuộc\",2],[\"Ngồi nghe một câu chuyện ngắn đến hết\",2],[\"Cầm bút, tô, vẽ, cắt dán khá thoải mái\",2],[\"Gọi tên được cảm xúc (vui, buồn, giận, lo)\",3],[\"Chấp nhận thay đổi nhỏ trong lịch ngày\",3],[\"Xa cha mẹ vài giờ mà vẫn ổn\",3]]},{\"id\":\"when\",\"t\":\"Dự kiến con bắt đầu lớp 1 khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Tháng 8/2027\"],[\"C\",\"Năm 2028 hoặc muộn hơn\"],[\"D\",\"Chưa xác định\"]]},{\"id\":\"prio\",\"t\":\"Bạn ưu tiên điều gì nhất ở trường tiểu học?\",\"o\":[[\"A\",\"Học phí & tổng chi phí rõ ràng\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":2,\"B\":3,\"C\":0,\"D\":0},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con đã khá vững\",\"desc\":\"Con bạn đang có nền tảng tốt. Điều nên làm là \\u003cb>giữ nhịp, không dồn thêm bài vở\\u003c/b>. Chỉ cần củng cố nhóm {g} và giữ giấc ngủ, nếp sinh hoạt ổn định. Việc đáng làm nhất lúc này là cho con làm quen môi trường lớp 1 thật.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con gần sẵn sàng\",\"desc\":\"Con bạn đã có nhiều nền tảng, còn vài điểm cần tập: nhóm {g}. Chọn \\u003cb>3 kỹ năng\\u003c/b> tập cùng con mỗi tuần, ưu tiên nhóm này trước. 4 tuần tập đều là đủ để thấy tiến bộ rõ.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Con cần đồng hành thêm\",\"desc\":\"\\u003cb>Điều này hoàn toàn bình thường\\u003c/b>, nhiều trẻ cần thêm thời gian và không có nghĩa là con “chậm”. Hãy bắt đầu từ nhóm {g}, mỗi lần một kỹ năng nhỏ, qua các hoạt động hằng ngày.\"}],\"nextStep\":\"chọn 3 kỹ năng ở nhóm {g} để cùng con luyện trong tuần này.\",\"rewardText\":\"checklist 12 dấu hiệu bản in, kế hoạch làm quen 4 tuần và 10 câu hỏi khi tham quan trường.\",\"ctaText\":\"Muốn xem tận mắt môi trường lớp 1 và cách nhà trường hỗ trợ học sinh đầu cấp?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Bộ kiểm tra 12 dấu hiệu sẵn sàng vào lớp 1\",\"formId\":\"lm-vao-lop-1\",\"funnel\":\"quiz-vao-lop-1\",\"pdf\":\"/downloads/vao-lop-1-12-dau-hieu-san-sang.pdf\",\"tags\":[\"lm-vao-lop-1\"],\"level\":\"tieu-hoc\",\"grade\":\"lop-1\"}"} />
+
 <script src="/js/va-utm.js" is:inline></script>
-<script src="/js/lm-quiz.js" is:inline></script>
+<script is:inline define:vars={{ FUNNEL, PDF_URL, HOTLINE, HOTLINE_TEL, ZALO_OA }}>
+(function () {
+  'use strict';
+
+  var API = '/api/lead';
+  var FORM_ID = 'lm01-quiz-lop-1-form';
+
+  /* ===== DỮ LIỆU QUIZ ===== */
+  var GROUPS = ['Nề nếp', 'Giao tiếp', 'Học tập', 'Cảm xúc'];
+  var GROUP_TAG = ['NeNep', 'GiaoTiep', 'HocTap', 'CamXuc'];
+  var SIGNS4 = [
+    ['Tự cất đồ chơi/đồ dùng của mình', 0], ['Tự đi vệ sinh và rửa tay', 0], ['Làm theo hướng dẫn 2–3 bước liên tiếp', 0],
+    ['Biết nhờ người lớn giúp khi cần', 1], ['Diễn đạt nhu cầu bằng lời (“con khát”, “con đau”)', 1], ['Chờ đến lượt khi chơi hoặc nói', 1]
+  ];
+  var SIGNS5 = [
+    ['Nhận ra một số chữ cái/con số quen thuộc', 2], ['Ngồi nghe một câu chuyện ngắn đến hết', 2], ['Cầm bút, tô, vẽ, cắt dán khá thoải mái', 2],
+    ['Gọi tên được cảm xúc (vui, buồn, giận, lo)', 3], ['Chấp nhận thay đổi nhỏ trong lịch ngày', 3], ['Xa cha mẹ vài giờ mà vẫn ổn', 3]
+  ];
+  var Q = [
+    { id: 'yob', t: 'Con bạn sinh năm nào?', h: 'Để mình chọn đúng nội dung theo độ tuổi.', o: [['2021', '2021 (vào lớp 1 năm 2027)'], ['2022', '2022'], ['2020', '2020 hoặc sớm hơn'], ['2023', '2023 trở về sau']] },
+    { id: 'worry', t: 'Điều bạn lo nhất khi con vào lớp 1?', o: [['A', 'Con không theo kịp bạn về chữ và số'], ['B', 'Con khó thích nghi, ngại đến lớp'], ['C', 'Con chưa tự lập (đồ dùng, vệ sinh, ăn trưa)'], ['D', 'Con chưa biết quản lý thời gian, bài tập']] },
+    { id: 'prep', t: 'Bạn đã làm gì để chuẩn bị cho con?', o: [['A', 'Chưa bắt đầu'], ['B', 'Cho con tập đọc, viết, làm toán trước'], ['C', 'Cho con làm quen nếp sinh hoạt, tự lập'], ['D', 'Đã tham quan hoặc tìm hiểu một vài trường']] },
+    { id: 's4', t: 'Nề nếp & giao tiếp: con làm được gì?', h: 'Chọn tất cả điều con đã làm được. Có thể không chọn gì.', multi: SIGNS4 },
+    { id: 's5', t: 'Học tập & cảm xúc: con làm được gì?', h: 'Chọn tất cả điều con đã làm được.', multi: SIGNS5 },
+    { id: 'when', t: 'Dự kiến con bắt đầu lớp 1 khi nào?', o: [['A', 'Trong 3 tháng tới'], ['B', 'Tháng 8/2027'], ['C', 'Năm 2028 hoặc muộn hơn'], ['D', 'Chưa xác định']] },
+    { id: 'prio', t: 'Bạn ưu tiên điều gì nhất ở trường tiểu học?', o: [['A', 'Học phí & tổng chi phí rõ ràng'], ['B', 'Học thuật, nền tảng vững'], ['C', 'Tiếng Anh'], ['D', 'Kỹ năng sống & phát triển toàn diện']] }
+  ];
+  var WORRY = { A: 'con theo kịp bạn về chữ và số', B: 'con thích nghi với môi trường mới', C: 'sự tự lập của con', D: 'việc quản lý thời gian và bài tập' };
+  var BRANCH = {
+    A: { tag: 'Con đã khá vững', desc: function (g) { return 'Con bạn đang có nền tảng tốt. Điều nên làm là <b>giữ nhịp, không dồn thêm bài vở</b>. Chỉ cần củng cố nhóm <b>' + g + '</b> và giữ giấc ngủ, nếp sinh hoạt ổn định. Việc đáng làm nhất lúc này là cho con làm quen môi trường lớp 1 thật.'; } },
+    B: { tag: 'Con gần sẵn sàng', desc: function (g) { return 'Con bạn đã có nhiều nền tảng, còn vài điểm cần tập: nhóm <b>' + g + '</b>. Chọn <b>3 kỹ năng</b> tập cùng con mỗi tuần, ưu tiên nhóm này trước. 4 tuần tập đều là đủ để thấy tiến bộ rõ.'; } },
+    C: { tag: 'Con cần đồng hành thêm', desc: function (g) { return '<b>Điều này hoàn toàn bình thường</b>, nhiều trẻ cần thêm thời gian và không có nghĩa là con “chậm”. Hãy bắt đầu từ nhóm <b>' + g + '</b>, mỗi lần một kỹ năng nhỏ, qua các hoạt động hằng ngày.'; } }
+  };
+  var OPENER = {
+    A: function (n, x, g, w) { return 'Chào chị/anh ' + n + ', em vừa thấy kết quả bộ kiểm tra của bé: ' + x + '/12 dấu hiệu, khá vững ạ. Chị/anh lo nhất ' + w + ', em gửi nhanh thông tin phần này nhé. Chị/anh có muốn em xếp lịch cho bé đến xem lớp 1 thật không ạ?'; },
+    B: function (n, x, g, w) { return 'Chào chị/anh ' + n + ', em thấy bé đạt ' + x + '/12, đang cần tập thêm nhóm ' + g + ' đúng không ạ? Chị/anh nói lo nhất ' + w + '. Em gửi vài cách tập tại nhà trong 2 tuần đầu, và nếu tiện chị/anh ghé trường xem cách thầy cô hỗ trợ bé đầu cấp nhé?'; },
+    C: function (n, x, g, w) { return 'Chào chị/anh ' + n + ', em đọc kết quả của bé rồi ạ, và em muốn nói ngay là mức này rất bình thường ở độ tuổi này. Nhiều bé cần đồng hành thêm nhóm ' + g + '. Chị/anh đang lo nhất ' + w + ', em xin phép chia sẻ cách trường hỗ trợ học sinh đầu cấp và lộ trình 4 tuần nhé?'; }
+  };
+
+  /* ===== TRẠNG THÁI ===== */
+  var root = document.getElementById('lm01-root');
+  var pb = document.getElementById('lm01-pb');
+  var step = 0, ans = {}, res = null;
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function show(html, keepScroll) {
+    root.innerHTML = html;
+    if (!keepScroll) document.getElementById('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function gtm(evt, extra) {
+    var p = { event: evt, form_id: FORM_ID, funnel_code: FUNNEL };
+    if (extra) for (var k in extra) p[k] = extra[k];
+    (window.dataLayer = window.dataLayer || []).push(p);
+  }
+
+  /* ===== CHẤM ĐIỂM ===== */
+  function compute() {
+    var picked = [].concat((ans.s4 || []).map(function (i) { return SIGNS4[i]; }), (ans.s5 || []).map(function (i) { return SIGNS5[i]; }));
+    var cnt = [0, 0, 0, 0];
+    picked.forEach(function (s) { cnt[s[1]]++; });
+    var total = picked.length;
+    var pref = { A: 2, B: 3, C: 0, D: 0 }[ans.worry];
+    var min = Math.min.apply(null, cnt);
+    var weak = cnt.indexOf(min);
+    if (cnt[pref] === min) weak = pref;
+    var br = total >= 9 ? 'A' : total >= 5 ? 'B' : 'C';
+    var tier = { A: 'nóng', B: 'ấm', C: 'lạnh', D: 'lạnh' }[ans.when];
+    var sla = { 'nóng': '< 5 phút', 'ấm': '< 30 phút', 'lạnh': 'Nuôi dưỡng, không gọi' }[tier];
+    return { total: total, cnt: cnt, weak: weak, br: br, tier: tier, sla: sla };
+  }
+
+  /* ===== MÀN HÌNH ===== */
+  function start() {
+    step = 0; ans = {}; res = null; pb.style.width = '0';
+    show('<span class="lm01-tag">2 phút · miễn phí</span>' +
+      '<h2 class="lm01-h1">Con đã sẵn sàng vào lớp 1 chưa?</h2>' +
+      '<p>Trả lời 7 câu hỏi nhanh để biết con đang vững ở nhóm nào và cần tập thêm nhóm nào. <b>Bạn nhận kết quả ngay</b> sau câu cuối.</p>' +
+      '<div class="lm01-card">Kiểm tra dựa trên <b>12 dấu hiệu</b> chia đều 4 nhóm: nề nếp, giao tiếp, học tập, cảm xúc, không chỉ đọc, viết, làm toán.</div>' +
+      '<button type="button" class="lm01-btn" data-act="begin">Bắt đầu</button>' +
+      '<p class="lm01-note">Kết quả chỉ mang tính tham khảo cho gia đình, không phải đánh giá chuyên môn.</p>', true);
+  }
+
+  function render() {
+    var q = Q[step];
+    pb.style.width = (step / 7 * 100) + '%';
+    var h = '<h2>' + q.t + '</h2>' + (q.h ? '<p class="lm01-hint">' + q.h + '</p>' : '<p class="lm01-hint">Câu ' + (step + 1) + '/7</p>');
+    if (q.multi) {
+      var cur = ans[q.id] || [];
+      q.multi.forEach(function (s, i) { h += '<button type="button" class="lm01-opt multi ' + (cur.indexOf(i) > -1 ? 'sel' : '') + '" data-act="tog" data-i="' + i + '">' + s[0] + '</button>'; });
+      h += '<button type="button" class="lm01-btn" data-act="next">' + (step === 6 ? 'Xem kết quả' : 'Tiếp tục') + '</button>';
+    } else {
+      q.o.forEach(function (o) { h += '<button type="button" class="lm01-opt ' + (ans[q.id] === o[0] ? 'sel' : '') + '" data-act="pick" data-v="' + o[0] + '">' + o[1] + '</button>'; });
+    }
+    if (step > 0) h += '<button type="button" class="lm01-back" data-act="back">← Quay lại</button>';
+    show(h);
+  }
+
+  function redirect(v) {
+    pb.style.width = '0';
+    var t = v === '2020' ? 'Con bạn có thể đã vào tiểu học' : 'Con bạn còn nhỏ hơn độ tuổi vào lớp 1';
+    var d = v === '2020'
+      ? 'Bộ kiểm tra này dành cho trẻ chuẩn bị vào lớp 1. Nếu con sắp chuyển cấp hoặc chuyển trường, bạn có thể liên hệ nhà trường để được tư vấn phù hợp hơn.'
+      : 'Bộ này dành cho trẻ sắp vào lớp 1. Nếu con đang ở mầm non, bạn có thể liên hệ nhà trường để được tư vấn nội dung phù hợp hơn.';
+    show('<h2>' + t + '</h2><p>' + d + '</p>' +
+      '<a class="lm01-btn lm01-linkbtn" href="' + HOTLINE_TEL + '">Gọi hotline ' + HOTLINE + '</a>' +
+      '<a class="lm01-btn gold lm01-linkbtn" href="' + ZALO_OA + '" target="_blank" rel="noopener">Nhắn Zalo OA của trường</a>' +
+      '<button type="button" class="lm01-back" data-act="start">Làm lại</button>');
+  }
+
+  function result() {
+    res = compute();
+    var r = res;
+    pb.style.width = '100%';
+    var b = BRANCH[r.br];
+    var bars = GROUPS.map(function (g, i) { return '<div class="lm01-bar-row ' + (i === r.weak ? 'weak' : '') + '"><em>' + g + '</em><div><i style="width:' + (r.cnt[i] / 3 * 100) + '%"></i></div><span>' + r.cnt[i] + '/3</span></div>'; }).join('');
+    show('<span class="lm01-tag">' + b.tag + '</span>' +
+      '<div class="lm01-score"><b>' + r.total + '</b><span>/ 12 dấu hiệu</span></div>' +
+      '<div class="lm01-bars">' + bars + '</div>' +
+      '<p>' + b.desc(GROUPS[r.weak].toLowerCase()) + '</p>' +
+      '<div class="lm01-card gold"><b>Bước tiếp theo:</b> chọn 3 kỹ năng ở nhóm <b>' + GROUPS[r.weak].toLowerCase() + '</b> để cùng con luyện trong tuần này.</div>' +
+      '<div class="lm01-card"><b>Nhận bản đầy đủ miễn phí:</b> checklist 12 dấu hiệu bản in, kế hoạch làm quen 4 tuần và 10 câu hỏi khi tham quan trường.</div>' +
+      '<button type="button" class="lm01-btn gold" data-act="form">Nhận bản đầy đủ</button>' +
+      '<p class="lm01-note">Kết quả chỉ mang tính tham khảo, không phải đánh giá chuyên môn.</p>');
+    gtm('quiz_complete', { quiz_score: r.total });
+  }
+
+  function form() {
+    show('<h2>Gửi bản đầy đủ cho bạn</h2><p class="lm01-hint">Chỉ 3 thông tin. Mình sẽ gửi tài liệu ngay sau đó.</p>' +
+      '<label for="lm01-fn">Tên phụ huynh</label><input type="text" id="lm01-fn" autocomplete="name" placeholder="Nguyễn Văn A" maxlength="80">' +
+      '<label for="lm01-fp">Số điện thoại</label><input type="tel" id="lm01-fp" autocomplete="tel" placeholder="09xx xxx xxx" maxlength="20">' +
+      '<label for="lm01-fe">Email</label><input type="email" id="lm01-fe" autocomplete="email" placeholder="ten@email.com" maxlength="120">' +
+      '<input type="text" id="lm01-fw" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">' +
+      '<div class="lm01-err" id="lm01-er" role="alert"></div>' +
+      '<label class="lm01-consent"><input type="checkbox" id="lm01-fc"><span>Tôi đồng ý để Trường Việt Anh dùng thông tin này để gửi tài liệu và liên hệ tư vấn về việc học của con. Tôi có thể dừng nhận thông tin bất cứ lúc nào. <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a></span></label>' +
+      '<button type="button" class="lm01-btn" id="lm01-fs" data-act="submit">Nhận tài liệu</button>');
+    gtm('lead_step1');
+  }
+
+  function buildNote(r, name) {
+    var lines = [
+      'LEAD QUIZ LỚP 1 · Điểm ' + r.total + '/12 · Nhóm cần tập: ' + GROUPS[r.weak],
+      'Tầng: ' + r.tier + ' (SLA: ' + r.sla + ')',
+      'Năm sinh con: ' + ans.yob + ' · Lo nhất: ' + ans.worry + ' · Đã chuẩn bị: ' + ans.prep + ' · Bắt đầu lớp 1: ' + ans.when + ' · Ưu tiên: ' + ans.prio,
+      'Gợi ý mở lời: ' + OPENER[r.br](name, r.total, GROUPS[r.weak].toLowerCase(), WORRY[ans.worry])
+    ];
+    return lines.join('\n').slice(0, 1500);
+  }
+
+  function submitLead() {
+    var val = function (id) { return document.getElementById(id); };
+    var n = val('lm01-fn').value.trim().replace(/[<>]/g, ' ');
+    var p = val('lm01-fp').value.replace(/[\s.\-]/g, '');
+    if (/^\+?84/.test(p)) p = '0' + p.replace(/^\+?84/, '');
+    var e = val('lm01-fe').value.trim();
+    var er = val('lm01-er'), btn = val('lm01-fs');
+    var m = '';
+    if (n.length < 2) m = 'Vui lòng nhập tên.';
+    else if (!/^(03|05|07|08|09)\d{8}$/.test(p)) m = 'Số điện thoại chưa đúng (ví dụ 0912345678).';
+    else if (!/^\S+@\S+\.\S+$/.test(e)) m = 'Email chưa đúng.';
+    else if (!val('lm01-fc').checked) m = 'Vui lòng đồng ý để nhận tài liệu.';
+    if (m) { er.textContent = m; er.style.display = 'block'; return; }
+    if (val('lm01-fw').value) { thanks(n); return; } /* bẫy bot: giả vờ thành công, không gửi */
+
+    btn.disabled = true; btn.textContent = 'Đang gửi...'; er.style.display = 'none';
+    var r = res || compute();
+    var tierTag = { 'nóng': 'LM01_Tier_Nong', 'ấm': 'LM01_Tier_Am', 'lạnh': 'LM01_Tier_Lanh' }[r.tier];
+    var body = {
+      fullName: n, phone: p, email: e,
+      source: FUNNEL, funnel_code: FUNNEL, form_id: FORM_ID,
+      school_level: 'tieu-hoc', grade: 'lop-1',
+      note: buildNote(r, n),
+      tags: ['LM01_Quiz_Lop1', 'TS_2026', tierTag, 'LM01_Yeu_' + GROUP_TAG[r.weak]],
+      consent: true
+    };
+    Object.assign(body, (window.__vaUTM ? window.__vaUTM() : {}));
+
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (resp) { return resp.json().catch(function () { return {}; }).then(function (d) { return { ok: resp.ok, d: d }; }); })
+      .then(function (x) {
+        if (!x.ok || x.d.success === false) throw new Error((x.d && x.d.error) || 'Có lỗi xảy ra, vui lòng thử lại.');
+        gtm('generate_lead', { quiz_score: r.total, lead_tier: r.tier });
+        thanks(n);
+      })
+      .catch(function (err) {
+        var msg = String(err && err.message || '');
+        er.textContent = /Failed|NetworkError|fetch/i.test(msg) ? 'Không kết nối được, vui lòng kiểm tra mạng và thử lại.' : (msg || 'Có lỗi xảy ra, vui lòng thử lại.');
+        er.style.display = 'block'; btn.disabled = false; btn.textContent = 'Nhận tài liệu';
+      });
+  }
+
+  function thanks(name) {
+    show('<span class="lm01-tag">Đã gửi</span><h2>Cảm ơn <span class="notranslate" translate="no">' + esc(name) + '</span>!</h2>' +
+      '<p>Tài liệu của bạn đã sẵn sàng.</p>' +
+      '<a class="lm01-btn gold lm01-linkbtn" href="' + PDF_URL + '" download>Tải bản đầy đủ (PDF)</a>' +
+      '<div class="lm01-card">Muốn xem tận mắt môi trường lớp 1 và cách nhà trường hỗ trợ học sinh đầu cấp? <b>Đặt lịch tham quan Trường Việt Anh</b> bằng cách gọi hotline <a href="' + HOTLINE_TEL + '"><b>' + HOTLINE + '</b></a> hoặc nhắn <a href="' + ZALO_OA + '" target="_blank" rel="noopener">Zalo OA của trường</a>. Chuyên viên sẽ hẹn giờ và gửi chỉ đường.</div>' +
+      '<button type="button" class="lm01-back" data-act="start">Làm lại bộ kiểm tra</button>');
+  }
+
+  root.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-act]');
+    if (!el) return;
+    var a = el.getAttribute('data-act');
+    if (a === 'begin') { step = 0; gtm('quiz_start'); render(); }
+    else if (a === 'start') start();
+    else if (a === 'pick') {
+      var v = el.getAttribute('data-v'); ans[Q[step].id] = v;
+      if (step === 0 && (v === '2020' || v === '2023')) return redirect(v);
+      if (step < 6) { step++; render(); } else result();
+    } else if (a === 'tog') {
+      var id = Q[step].id, i = Number(el.getAttribute('data-i')), cur = ans[id] || [];
+      ans[id] = cur.indexOf(i) > -1 ? cur.filter(function (x) { return x !== i; }) : cur.concat([i]);
+      render();
+    } else if (a === 'next') { if (step < 6) { step++; render(); } else result(); }
+    else if (a === 'back') { step = Math.max(0, step - 1); render(); }
+    else if (a === 'form') form();
+    else if (a === 'submit') submitLead();
+  });
+
+  start();
+})();
+</script>
+
+<style is:global>
+.lm01{--navy:#26275D;--gold:#F9DD0E;--soft:#EEEEF6;--goldsoft:#FFFBD6;--mute:#5b5c80;--ink:#1d1d3a;font-family:"Segoe UI",Arial,sans-serif;background:var(--soft);color:var(--ink);line-height:1.55;min-height:100vh}
+.lm01 *{box-sizing:border-box}
+.lm01-wrap{width:100%;max-width:1020px;margin:0 auto;padding:0 18px}
+.lm01 a{color:var(--navy)}
+.lm01-site{background:var(--navy)}
+.lm01-bar{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px}
+.lm01-bar img{background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 0 3px var(--gold);width:44px;height:44px;object-fit:contain}
+.lm01-bar b{color:#fff}
+.lm01-hero{background:linear-gradient(180deg,#fff 0,var(--soft) 100%);padding:34px 0 26px}
+.lm01-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.lm01 h1{font-size:clamp(28px,4.4vw,42px);line-height:1.15;margin:0 0 12px;color:var(--navy)}
+.lm01 h2{font-size:21px;line-height:1.3;margin:0 0 8px;color:var(--navy)}
+.lm01 h2.lm01-h1{font-size:24px}
+.lm01-lead{font-size:17.5px;margin:0 0 16px}
+.lm01-fine{font-size:12.5px;color:var(--mute);margin-top:10px}
+.lm01-cta{display:inline-block;background:var(--navy);color:#fff!important;text-decoration:none;font-weight:700;border-radius:12px;padding:14px 24px;font-size:17px;box-shadow:0 6px 0 var(--gold)}
+.lm01-gets{list-style:none;margin:0;padding:18px 20px;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(38,39,93,.12)}
+.lm01-gets li{padding:10px 0 10px 34px;position:relative;border-bottom:1px solid #ececf5}
+.lm01-gets li:last-child{border:0}
+.lm01-gets li:before{content:"✓";position:absolute;left:0;top:10px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:800;text-align:center;line-height:24px}
+.lm01-gets b{display:block;color:var(--navy)}.lm01-gets span{font-size:14px;color:var(--mute)}
+.lm01-quiz-sec{padding:26px 0 36px}
+.lm01-why,.lm01-faq{padding:30px 0}
+.lm01-why{background:#fff}
+.lm01-cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+.lm01-cards4 div{background:var(--soft);border-radius:12px;padding:14px;border-top:5px solid var(--gold)}
+.lm01-cards4 b{display:block;color:var(--navy);margin-bottom:4px}.lm01-cards4 span{font-size:14px;color:var(--mute)}
+.lm01-foot{background:var(--navy);color:#cfd0ee;padding:20px 0;font-size:13px}.lm01-foot a{color:var(--gold)}
+.lm01-app{width:100%;max-width:480px;margin:0 auto;background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(38,39,93,.15);overflow:hidden;display:flex;flex-direction:column;scroll-margin-top:12px}
+.lm01-top{background:var(--navy);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.lm01-lg{background:#fff;border-radius:50%;width:46px;height:46px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px var(--gold)}
+.lm01-lg img{width:38px;height:38px;object-fit:contain}
+.lm01-top b{color:#fff;font-size:15px;line-height:1.2}.lm01-top small{color:var(--gold);display:block;font-size:12px;font-weight:600}
+.lm01-prog{height:6px;background:#dcdcec}.lm01-prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.lm01-body{padding:22px 20px 26px;flex:1;min-height:300px}
+.lm01-hint{color:var(--mute);font-size:13.5px;margin:0 0 16px}
+.lm01-body p{line-height:1.55;margin:0 0 12px}
+.lm01-opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #d4d5e8;border-radius:12px;padding:13px 14px;margin:0 0 10px;font-size:15.5px;color:var(--ink);cursor:pointer;font-family:inherit}
+.lm01-opt:hover{border-color:var(--navy)}
+.lm01-opt.sel{border-color:var(--navy);background:var(--goldsoft);font-weight:600}
+.lm01-opt.multi:before{content:"";display:inline-block;width:16px;height:16px;border:2px solid var(--navy);border-radius:4px;margin-right:10px;vertical-align:-3px}
+.lm01-opt.multi.sel:before{background:var(--navy);box-shadow:inset 0 0 0 2px #fff}
+.lm01-btn{display:block;width:100%;background:var(--navy);color:#fff!important;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px}
+.lm01-btn:disabled{opacity:.5;cursor:not-allowed}
+.lm01-btn.gold{background:var(--gold);color:var(--navy)!important}
+.lm01-linkbtn{text-decoration:none;text-align:center}
+.lm01-back{background:none;border:0;color:var(--mute);font-size:13.5px;cursor:pointer;margin-top:10px;font-family:inherit}
+.lm01-tag{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.lm01-score{display:flex;align-items:baseline;gap:8px;margin:6px 0 10px}.lm01-score b{font-size:46px;color:var(--navy);line-height:1}.lm01-score span{color:var(--mute)}
+.lm01-bars{margin:10px 0 14px}.lm01-bar-row{display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:6px}.lm01-bar-row em{flex:0 0 78px;font-style:normal}.lm01-bar-row div{flex:1;height:10px;background:#e6e6f1;border-radius:6px;overflow:hidden}.lm01-bar-row div i{display:block;height:100%;background:var(--navy)}.lm01-bar-row.weak div i{background:#e0b800}.lm01-bar-row span{flex:0 0 28px;text-align:right;color:var(--mute)}
+.lm01-card{background:var(--soft);border-left:5px solid var(--navy);border-radius:8px;padding:11px 13px;font-size:14.5px;margin:12px 0}
+.lm01-card.gold{background:var(--goldsoft);border-left-color:var(--gold)}
+.lm01-body label{display:block;font-size:13.5px;font-weight:600;margin:0 0 4px;color:var(--navy)}
+.lm01-body input[type=text],.lm01-body input[type=tel],.lm01-body input[type=email]{width:100%;padding:12px;border:2px solid #d4d5e8;border-radius:10px;font-size:16px;margin-bottom:12px;font-family:inherit}
+.lm01-body input:focus{outline:none;border-color:var(--navy)}
+.lm01-body label.lm01-consent{display:flex;gap:8px;font-size:12.5px;font-weight:400;color:var(--mute);margin:2px 0 10px;line-height:1.45}
+.lm01-err{color:#b3261e;font-size:13px;margin:-6px 0 10px;display:none}
+.lm01-note{font-size:11.5px;color:var(--mute);margin-top:14px;line-height:1.45}
+@media(max-width:760px){.lm01-hero-grid{grid-template-columns:1fr}.lm01-cards4{grid-template-columns:1fr 1fr}.lm01-cta{display:block;text-align:center}}
+</style>
 </body>
 </html>
