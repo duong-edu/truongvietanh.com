@@ -185,7 +185,7 @@
 
   function form() {
     backBtn.hidden = true; stepLbl.textContent = '';
-    show('<h2 tabindex="-1" id="lm-h">Gửi bản đầy đủ cho bạn</h2><p class="hint">Chỉ 3 thông tin. Tài liệu hiện ngay sau khi gửi.</p>' + giftRow() +
+    show('<h2 tabindex="-1" id="lm-h">Gửi bản đầy đủ cho bạn</h2><p class="hint">Chỉ 3 thông tin. Tài liệu sẽ được gửi vào email của bạn.</p>' + giftRow() +
       '<div class="fld"><label for="lm-n">Tên phụ huynh</label><input type="text" id="lm-n" autocomplete="name" enterkeyhint="next" placeholder="Nguyễn Văn A"><div class="err-msg" id="lm-n-e"></div></div>' +
       '<div class="fld"><label for="lm-p">Số điện thoại</label><input type="tel" id="lm-p" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="09xx xxx xxx"><div class="err-msg" id="lm-p-e"></div></div>' +
       '<div class="fld"><label for="lm-e">Email</label><input type="email" id="lm-e" autocomplete="email" enterkeyhint="send" placeholder="ten@email.com"><div class="err-msg" id="lm-e-e"></div></div>' +
@@ -250,7 +250,7 @@
         if (!r.ok) throw new Error('http ' + r.status);
         gtm('lead_submitted', { quiz_branch: res.br.key, quiz_tier: res.tier });
         try { localStorage.setItem('va_form_submitted', '1'); } catch (x) {}
-        thanks(n);
+        thanks(n, e);
       })
       .catch(function () {
         sending = false; btn.disabled = false; btn.textContent = 'Nhận tài liệu';
@@ -258,13 +258,13 @@
       });
   }
 
-  function thanks(name) {
+  function thanks(name, mail) {
     sending = false; pb.style.width = '100%';
     var tel = 'tel:' + String(C.hotline).replace(/[^\d+]/g, '');
-    show('<div class="done-ic" aria-hidden="true"></div><h2 tabindex="-1" id="lm-h">Cảm ơn ' + esc(name) + '!</h2><p>Tài liệu của bạn đã sẵn sàng. Bạn có thể mở và in ngay.</p>' +
+    show('<div class="done-ic" aria-hidden="true"></div><h2 tabindex="-1" id="lm-h">Cảm ơn ' + esc(name) + '!</h2><p>Chúng tôi đã gửi tài liệu tới email <b>' + esc(mail) + '</b>. Bạn nhớ kiểm tra hộp thư đến và cả thư rác nhé.</p>' +
       giftRow() +
-      '<div class="acts"><a class="btn gold" href="' + esc(C.pdf) + '" target="_blank" rel="noopener">Mở tài liệu (PDF)</a>' +
-      '<a class="btn ghost" href="/dat-lich-tham-quan">Đặt lịch tham quan trường</a></div>' +
+      '<div class="acts"><a class="btn gold" href="/dat-lich-tham-quan">Đặt lịch tham quan trường</a></div>' +
+      '<p class="note">Chưa thấy email sau vài phút? Hãy kiểm tra thư rác hoặc gọi hotline <a href="' + tel + '">' + esc(C.hotline) + '</a> để được hỗ trợ.</p>' +
       '<div class="card" style="margin-top:16px"><p style="margin:0 0 8px">' + C.ctaText + '</p><div class="info">' +
       '<div><b>Cơ sở</b><span>' + esc(C.address) + '</span></div>' +
       '<div><b>Giờ tham quan</b><span>' + esc(C.hours) + '</span></div>' +

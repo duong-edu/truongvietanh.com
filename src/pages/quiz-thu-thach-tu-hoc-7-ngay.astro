@@ -1,0 +1,50 @@
+---
+// quiz-thu-thach-tu-hoc-7-ngay — quiz lead magnet "Thử thách 7 ngày xây dựng thói quen tự học"
+// Form → /api/lead (funnel_code: quiz-thu-thach-tu-hoc). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/thu-thach-7-ngay-tu-hoc.pdf · ảnh bìa: public/lm/
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#26275D" />
+<title>Con Đã Có Thói Quen Tự Học Chưa? Thử Thách 7 Ngày | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút về chuẩn bị, bắt đầu học, giữ tập trung và ghi nhớ, kèm thẻ thử thách 7 ngày xây dựng thói quen tự học cho học sinh lớp 3–12." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/lm/cover-thu-thach-tu-hoc.png" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<header class="lm-head"><div class="lm-head-in">
+  <a class="lm-brand" href="/" aria-label="Trường Việt Anh"><img src="/logo-vietanh-header.webp" alt="" width="81" height="40" /><span>Trường Việt Anh</span></a>
+  <a class="lm-call" href="tel:0916961409"><small>Hotline</small> 0916 961 409</a>
+</div></header>
+<main class="lm-main" id="lm-wrap" data-phase="intro">
+  <section class="lm-pitch">
+    <span class="lm-pill">2 phút · miễn phí</span>
+    <h1>Con đã có thói quen tự học chưa?</h1>
+    <p class="lm-lead">7 câu hỏi, 2 phút. Biết con đang vững khâu nào và nên bắt đầu thử thách từ đâu.</p>
+    <ul class="lm-bullets"><li>Biết con đã có thói quen nào ở 4 khâu: chuẩn bị, bắt đầu, tập trung, ghi nhớ</li><li>Thẻ thử thách 7 ngày: mỗi ngày một bước nhỏ</li><li>Gợi ý duy trì thói quen sau thử thách</li></ul>
+    <div class="lm-gift"><img src="/lm/cover-thu-thach-tu-hoc.png" alt="Bìa tài liệu Thử thách 7 ngày xây dựng thói quen tự học" width="104" height="147" /><div><b>Quà tặng: Thử thách 7 ngày xây dựng thói quen tự học</b><span>Tài liệu PDF miễn phí, gửi về email của bạn ngay sau khi làm xong quiz.</span></div></div>
+    <p class="lm-trust"><span>Miễn phí</span><span>Kết quả hiện ngay</span><span>Không cần tạo tài khoản</span></p>
+  </section>
+  <section class="lm-card" aria-label="Quiz">
+    <div class="lm-card-top"><button class="lm-back" type="button" id="lm-back" hidden>← Quay lại</button><span class="lm-step" id="lm-step" aria-live="polite"></span></div>
+    <div class="lm-prog" aria-hidden="true"><i id="lm-pb"></i></div>
+    <div class="lm-body" id="lm-root" tabindex="-1"><noscript><p>Trang này cần bật JavaScript để làm quiz. Bạn có thể gọi hotline 0916 961 409 để được hỗ trợ.</p></noscript></div>
+  </section>
+</main>
+<footer class="lm-foot">© Trường Việt Anh · <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></footer>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con đã có thói quen tự học chưa?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết con đã chuẩn bị, bắt đầu học, giữ tập trung và ghi nhớ ra sao. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Thói quen tự học được xây bằng những bước nhỏ. Bộ này giúp con thử từng bước trong 7 ngày.\",\"scoreLabel\":\"thói quen con đã có\",\"groups\":[\"Chuẩn bị\",\"Bắt đầu học\",\"Giữ tập trung\",\"Ghi nhớ\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2018\",\"2016–2018 (lớp 3–5)\"],[\"2014\",\"2012–2015 (lớp 6–9)\"],[\"2010\",\"2009–2011 (lớp 10–12)\"],[\"2019\",\"2019 trở về sau\"]],\"redirect\":{\"2019\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của bộ này\",\"d\":\"Thử thách này dành cho học sinh từ lớp 3 trở lên. Với trẻ mầm non, mời bạn xem checklist mầm non của nhà trường.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Con đang gặp khó khăn nào nhiều nhất?\",\"o\":[[\"A\",\"Khó bắt đầu học, hay trì hoãn\"],[\"B\",\"Dễ xao nhãng khi học\"],[\"C\",\"Học xong nhanh quên\"],[\"D\",\"Phụ thuộc vào việc bị nhắc\"]]},{\"id\":\"cur\",\"t\":\"Hiện con học vào lúc nào?\",\"o\":[[\"A\",\"Không có giờ cố định\"],[\"B\",\"Có giờ nhưng hay bị lỡ\"],[\"C\",\"Có giờ khá đều\"],[\"D\",\"Có giờ cố định và tự giữ\"]]},{\"id\":\"s4\",\"t\":\"Chuẩn bị và bắt đầu học: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Có một góc học cố định\",0],[\"Chuẩn bị sẵn dụng cụ trước khi học\",0],[\"Viết ra việc cần làm trước khi học\",0],[\"Bắt đầu học mà không cần nhắc\",1],[\"Biết bắt đầu từ việc dễ để lấy đà\",1],[\"Có khung giờ học khá cố định\",1]]},{\"id\":\"s5\",\"t\":\"Tập trung và ghi nhớ: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Học theo phiên ngắn rồi nghỉ\",2],[\"Cất thiết bị gây xao nhãng khi học\",2],[\"Biết điều gì làm mình mất tập trung\",2],[\"Tự giải thích lại bài bằng lời của mình\",3],[\"Tự đặt câu hỏi để kiểm tra\",3],[\"Ôn lại bài sau một ngày\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":1,\"B\":2,\"C\":3,\"D\":1},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con đã có nền tự học tốt\",\"desc\":\"Con đã có nhiều thói quen tự học. Thử thách 7 ngày sẽ giúp củng cố nhóm {g} và chọn thói quen muốn giữ lâu dài.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con đang hình thành thói quen\",\"desc\":\"Con đã có một phần nền, còn nhóm {g} cần luyện. Thử mỗi ngày một bước nhỏ trong 7 ngày để tạo nhịp học ổn định.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu bằng bước đầu tiên\",\"desc\":\"Con mới bắt đầu, và điều đó hoàn toàn bình thường. Hãy bắt đầu với nhóm {g}, mỗi ngày chỉ thử một bước nhỏ.\"}],\"nextStep\":\"bắt đầu thử thách ngày 1, ưu tiên các bước thuộc nhóm {g}.\",\"rewardText\":\"thẻ thử thách 7 ngày (in được), bảng ghi điều dễ nhất, khó nhất và cách điều chỉnh, kèm gợi ý duy trì thói quen.\",\"ctaText\":\"Muốn tìm hiểu các phương pháp học chủ động và môi trường học tập tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Thử thách 7 ngày xây dựng thói quen tự học\",\"formId\":\"lm-thu-thach-tu-hoc\",\"funnel\":\"quiz-thu-thach-tu-hoc\",\"pdf\":\"/downloads/thu-thach-7-ngay-tu-hoc.pdf\",\"tags\":[\"lm-thu-thach-tu-hoc\"],\"levelByYob\":{\"2010\":\"thpt\",\"2014\":\"thcs\",\"2018\":\"tieu-hoc\"},\"cover\":\"/lm/cover-thu-thach-tu-hoc.png\",\"bullets\":[\"Biết con đã có thói quen nào ở 4 khâu: chuẩn bị, bắt đầu, tập trung, ghi nhớ\",\"Thẻ thử thách 7 ngày: mỗi ngày một bước nhỏ\",\"Gợi ý duy trì thói quen sau thử thách\"],\"lead\":\"7 câu hỏi, 2 phút. Biết con đang vững khâu nào và nên bắt đầu thử thách từ đâu.\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

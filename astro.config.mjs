@@ -106,7 +106,7 @@ export default defineConfig({
         if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
-        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|giai-ma-tam-ly-tien-tieu-hoc|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12)\/?$/.test(page)) return false;
+        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|giai-ma-tam-ly-tien-tieu-hoc|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12|quiz-ky-nang-tu-lap|quiz-chuan-bi-chuyen-cap|quiz-doc-ket-qua-hoc-tap|quiz-hanh-trang-thpt|quiz-thu-thach-tu-hoc-7-ngay)\/?$/.test(page)) return false;
         // Bài blog văn mẫu (noindex) không đưa vào sitemap
         const blogSlug = page.match(/\/blog\/([^/]+)\/?$/);
         if (blogSlug && NOINDEX_BLOG.has(blogSlug[1])) return false;

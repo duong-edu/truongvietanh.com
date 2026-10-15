@@ -8,7 +8,7 @@ import FaqAccordion from '../components/FaqAccordion.astro';
 import '../styles/global.css';
 
 const FUNNEL = 'lm01-quiz-lop-1';
-const PDF_URL = '/tai-lieu/LM01_12-dau-hieu-san-sang-vao-lop-1.pdf';
+// PDF gửi qua email (GetResponse), không tải trực tiếp trên web. File: /tai-lieu/LM01_12-dau-hieu-san-sang-vao-lop-1.pdf
 const HOTLINE = '0916 961 409';
 const HOTLINE_TEL = 'tel:0916961409';
 const ZALO_OA = 'https://zalo.me/1678310120468101523';
@@ -114,7 +114,7 @@ const desc = 'Trả lời 7 câu hỏi nhanh để biết con vững ở nhóm n
 </div>
 
 <script src="/js/va-utm.js" is:inline></script>
-<script is:inline define:vars={{ FUNNEL, PDF_URL, HOTLINE, HOTLINE_TEL, ZALO_OA }}>
+<script is:inline define:vars={{ FUNNEL, HOTLINE, HOTLINE_TEL, ZALO_OA }}>
 (function () {
   'use strict';
 
@@ -306,8 +306,7 @@ const desc = 'Trả lời 7 câu hỏi nhanh để biết con vững ở nhóm n
 
   function thanks(name) {
     show('<span class="lm01-tag">Đã gửi</span><h2>Cảm ơn <span class="notranslate" translate="no">' + esc(name) + '</span>!</h2>' +
-      '<p>Tài liệu của bạn đã sẵn sàng.</p>' +
-      '<a class="lm01-btn gold lm01-linkbtn" href="' + PDF_URL + '" download>Tải bản đầy đủ (PDF)</a>' +
+      '<p>Chúng tôi đã gửi tài liệu tới email của bạn. Bạn nhớ kiểm tra hộp thư đến và cả thư rác nhé.</p>' +
       '<div class="lm01-card">Muốn xem tận mắt môi trường lớp 1 và cách nhà trường hỗ trợ học sinh đầu cấp? <b>Đặt lịch tham quan Trường Việt Anh</b> bằng cách gọi hotline <a href="' + HOTLINE_TEL + '"><b>' + HOTLINE + '</b></a> hoặc nhắn <a href="' + ZALO_OA + '" target="_blank" rel="noopener">Zalo OA của trường</a>. Chuyên viên sẽ hẹn giờ và gửi chỉ đường.</div>' +
       '<button type="button" class="lm01-back" data-act="start">Làm lại bộ kiểm tra</button>');
   }

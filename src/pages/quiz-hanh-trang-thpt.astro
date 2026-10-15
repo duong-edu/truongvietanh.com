@@ -1,0 +1,50 @@
+---
+// quiz-hanh-trang-thpt — quiz lead magnet "Cẩm nang chuẩn bị hành trang cho học sinh THPT"
+// Form → /api/lead (funnel_code: quiz-hanh-trang-thpt). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/cam-nang-hanh-trang-thpt.pdf · ảnh bìa: public/lm/
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#26275D" />
+<title>Hành Trang Vào THPT: Em Đã Chuẩn Bị Đến Đâu? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút cho học sinh lớp 9–12 và phụ huynh về mục tiêu, tiếng Anh, kỹ năng và định hướng, kèm cẩm nang lập kế hoạch từng học kỳ." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/lm/cover-hanh-trang-thpt.png" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<header class="lm-head"><div class="lm-head-in">
+  <a class="lm-brand" href="/" aria-label="Trường Việt Anh"><img src="/logo-vietanh-header.webp" alt="" width="81" height="40" /><span>Trường Việt Anh</span></a>
+  <a class="lm-call" href="tel:0916961409"><small>Hotline</small> 0916 961 409</a>
+</div></header>
+<main class="lm-main" id="lm-wrap" data-phase="intro">
+  <section class="lm-pitch">
+    <span class="lm-pill">2 phút · miễn phí</span>
+    <h1>Hành trang THPT: đã chuẩn bị đến đâu?</h1>
+    <p class="lm-lead">7 câu hỏi, 2 phút. Dành cho học sinh lớp 9–12 và phụ huynh.</p>
+    <ul class="lm-bullets"><li>Biết đã chuẩn bị đến đâu ở 4 nhóm: mục tiêu, tiếng Anh, kỹ năng, định hướng</li><li>Cẩm nang 5 phần để lập kế hoạch theo học kỳ</li><li>Phiếu 3 mục tiêu học kỳ và hành động trong 2 tuần tới</li></ul>
+    <div class="lm-gift"><img src="/lm/cover-hanh-trang-thpt.png" alt="Bìa tài liệu Cẩm nang chuẩn bị hành trang cho học sinh THPT" width="104" height="147" /><div><b>Quà tặng: Cẩm nang chuẩn bị hành trang cho học sinh THPT</b><span>Tài liệu PDF miễn phí, gửi về email của bạn ngay sau khi làm xong quiz.</span></div></div>
+    <p class="lm-trust"><span>Miễn phí</span><span>Kết quả hiện ngay</span><span>Không cần tạo tài khoản</span></p>
+  </section>
+  <section class="lm-card" aria-label="Quiz">
+    <div class="lm-card-top"><button class="lm-back" type="button" id="lm-back" hidden>← Quay lại</button><span class="lm-step" id="lm-step" aria-live="polite"></span></div>
+    <div class="lm-prog" aria-hidden="true"><i id="lm-pb"></i></div>
+    <div class="lm-body" id="lm-root" tabindex="-1"><noscript><p>Trang này cần bật JavaScript để làm quiz. Bạn có thể gọi hotline 0916 961 409 để được hỗ trợ.</p></noscript></div>
+  </section>
+</main>
+<footer class="lm-foot">© Trường Việt Anh · <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></footer>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Hành trang THPT: đã chuẩn bị đến đâu?\",\"introText\":\"Trả lời 7 câu hỏi nhanh về mục tiêu học tập, tiếng Anh, kỹ năng và định hướng sau phổ thông. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Học sinh THPT cần cân bằng học tập, ngoại ngữ, kỹ năng và định hướng. Bộ này giúp nhìn tổng thể để lập kế hoạch từng học kỳ.\",\"scoreLabel\":\"điều đã chuẩn bị\",\"groups\":[\"Mục tiêu học tập\",\"Tiếng Anh\",\"Kỹ năng\",\"Định hướng\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2012\",\"2012–2013 (lớp 9)\"],[\"2009\",\"2009–2011 (lớp 10–12)\"],[\"2016\",\"2014 trở về sau\"]],\"redirect\":{\"2016\":{\"t\":\"Bộ này dành cho học sinh lớp 9–12\",\"d\":\"Cẩm nang này dành cho học sinh lớp 9 đến lớp 12 và phụ huynh. Bạn có thể liên hệ nhà trường để được tư vấn theo độ tuổi của con.\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn lo nhất ở giai đoạn THPT?\",\"o\":[[\"A\",\"Áp lực điểm số và thi cử\"],[\"B\",\"Chưa biết học gì, làm gì sau THPT\"],[\"C\",\"Tiếng Anh và chứng chỉ\"],[\"D\",\"Cân bằng học tập và các hoạt động\"]]},{\"id\":\"cur\",\"t\":\"Hiện đã có kế hoạch học tập nào chưa?\",\"o\":[[\"A\",\"Chưa có kế hoạch\"],[\"B\",\"Có mục tiêu nhưng chưa có lịch\"],[\"C\",\"Có lịch nhưng hay bỏ dở\"],[\"D\",\"Có kế hoạch theo từng học kỳ\"]]},{\"id\":\"s4\",\"t\":\"Mục tiêu học tập và tiếng Anh: đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Đã viết ra 3 mục tiêu cho học kỳ này\",0],[\"Biết môn nào cần ưu tiên\",0],[\"Có lịch ôn theo tuần\",0],[\"Biết trình độ tiếng Anh hiện tại\",1],[\"Có kế hoạch rèn tiếng Anh\",1],[\"Luyện đều cả nghe, nói, đọc, viết\",1]]},{\"id\":\"s5\",\"t\":\"Kỹ năng và định hướng: đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Tự học mà không cần nhắc\",2],[\"Tự tin thuyết trình trước nhóm\",2],[\"Làm việc nhóm hiệu quả\",2],[\"Biết điều mình hứng thú\",3],[\"Biết giá trị cá nhân của mình\",3],[\"Đã tìm hiểu các lựa chọn sau THPT\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":0,\"B\":3,\"C\":1,\"D\":2},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Hành trang khá đầy đủ\",\"desc\":\"Em đã chuẩn bị nhiều khía cạnh. Hãy bổ sung nhóm {g} và xem lại kế hoạch mỗi học kỳ để điều chỉnh.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Có nền, cần bổ sung\",\"desc\":\"Em đã có một phần hành trang, còn nhóm {g} cần chú ý. Hãy đặt 3 mục tiêu cho học kỳ này và một hành động trong 2 tuần tới.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu từ một mục tiêu\",\"desc\":\"Chưa có kế hoạch là điều rất thường gặp. Hãy bắt đầu với nhóm {g}: chọn một mục tiêu, một kỹ năng muốn cải thiện và một người có thể hỏi ý kiến.\"}],\"nextStep\":\"chọn một hành động nhỏ cho nhóm {g} và làm trong 2 tuần tới.\",\"rewardText\":\"cẩm nang 5 phần (8 trang), bảng lập kế hoạch theo học kỳ và phiếu 3 mục tiêu học kỳ.\",\"ctaText\":\"Muốn tìm hiểu chương trình THPT và lộ trình phát triển năng lực học sinh tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Cẩm nang chuẩn bị hành trang cho học sinh THPT\",\"formId\":\"lm-hanh-trang-thpt\",\"funnel\":\"quiz-hanh-trang-thpt\",\"pdf\":\"/downloads/cam-nang-hanh-trang-thpt.pdf\",\"tags\":[\"lm-hanh-trang-thpt\"],\"levelByYob\":{\"2009\":\"thpt\",\"2012\":\"thpt\"},\"cover\":\"/lm/cover-hanh-trang-thpt.png\",\"bullets\":[\"Biết đã chuẩn bị đến đâu ở 4 nhóm: mục tiêu, tiếng Anh, kỹ năng, định hướng\",\"Cẩm nang 5 phần để lập kế hoạch theo học kỳ\",\"Phiếu 3 mục tiêu học kỳ và hành động trong 2 tuần tới\"],\"lead\":\"7 câu hỏi, 2 phút. Dành cho học sinh lớp 9–12 và phụ huynh.\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

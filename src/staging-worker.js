@@ -1057,6 +1057,11 @@ const LM_GR_FUNNELS = {
   'quiz-dong-hanh-7-ngay': { tag: 'LM07_Dong_Hanh_7_Ngay' },  // #7  Đồng hành 7 ngày
   'quiz-planner-7-ngay':   { tag: 'LM10_Planner_7_Ngay' },    // #10 Planner 7 ngày
   'quiz-tham-quan-truong': { tag: 'LM16_Tham_Quan_Truong' },  // #16 Tham quan trường
+  'quiz-tu-lap':           { tag: 'LM03_Tu_Lap' },            // #3  Kỹ năng tự lập
+  'quiz-chuyen-cap':       { tag: 'LM04_Chuyen_Cap' },        // #4  Chuẩn bị chuyển cấp
+  'quiz-doc-ket-qua':      { tag: 'LM08_Doc_Ket_Qua' },       // #8  Đọc kết quả học tập
+  'quiz-hanh-trang-thpt':  { tag: 'LM11_Hanh_Trang_THPT' },   // #11 Hành trang THPT
+  'quiz-thu-thach-tu-hoc': { tag: 'LM13_Thu_Thach_Tu_Hoc' },  // #13 Thử thách 7 ngày tự học
 };
 function isLmGrFunnel(source) {
   return Object.prototype.hasOwnProperty.call(LM_GR_FUNNELS, String(source || ''));
