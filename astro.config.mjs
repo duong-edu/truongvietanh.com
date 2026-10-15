@@ -19,7 +19,8 @@ export default defineConfig({
   // Astro bản sau). Static host tự resolve '/x/' về cùng file /x/index.html.
   redirects: {
     // LM01: đường dẫn cũ → đường dẫn chính thức
-    '/quiz-vao-lop-1':                       '/quiz-san-sang-vao-lop-1',
+    '/quiz-vao-lop-1':                       '/giai-ma-tam-ly-tien-tieu-hoc',
+    '/quiz-san-sang-vao-lop-1':              '/giai-ma-tam-ly-tien-tieu-hoc',
     '/squeeze/checklist-mam-non':            '/checklist-mam-non',
     '/squeeze/ebook-9-linh-vuc-mam-non':     '/ebook-9-linh-vuc-mam-non',
     '/squeeze/giai-doan-vang-ngon-ngu':      '/giai-doan-vang-ngon-ngu',
@@ -105,7 +106,7 @@ export default defineConfig({
         if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
-        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12)\/?$/.test(page)) return false;
+        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|giai-ma-tam-ly-tien-tieu-hoc|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12)\/?$/.test(page)) return false;
         // Bài blog văn mẫu (noindex) không đưa vào sitemap
         const blogSlug = page.match(/\/blog\/([^/]+)\/?$/);
         if (blogSlug && NOINDEX_BLOG.has(blogSlug[1])) return false;
