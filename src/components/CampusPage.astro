@@ -158,7 +158,7 @@ const structuredData = {
           <div class="pdr-card">
             <div class="pdr-icon">🎯</div>
             <h3>PLAN — Kiến tạo mục tiêu</h3>
-            <p>Đầu năm học, mỗi học sinh tự xác định mục tiêu phát triển trên 4 lĩnh vực: <strong>Kiến thức · Kỹ năng · Tiếng Anh · Thể chất</strong>.</p>
+            <p>Đầu năm học, mỗi học sinh tự xác định mục tiêu phát triển trên 4 lĩnh vực: <strong>Kiến thức · Kỹ năng lãnh đạo · Phẩm chất · Sức khoẻ</strong>.</p>
             <p>Mục tiêu được phân rã có hệ thống — từ năm học → học kỳ → quý → tháng, và cụ thể hóa thành <em>hành động đòn bẩy hàng tuần</em>.</p>
           </div>
           <div class="pdr-card">
@@ -177,7 +177,25 @@ const structuredData = {
       </div>
     </section>
 
-    {level !== 'mam-non' && (
+    {level === 'mam-non-tieu-hoc' && (
+      <!-- ============== III. KẾT QUẢ MẦM NON · TIỂU HỌC ==============
+           Cơ sở chỉ có Mầm non + Tiểu học: KHÔNG dùng số liệu THPT (ICDL, điểm 10 Tiếng Anh,
+           IELTS tốt nghiệp, nhận thẳng ĐH). Anh Dương chốt 15/10/2026. -->
+      <section class="content-section">
+        <div class="container narrow">
+          <div class="section-eyebrow">III. Kết quả Mầm non · Tiểu học</div>
+          <h2 class="section-title">Nền tảng vững cho cả hành trình liên cấp</h2>
+          <ul class="commitment-list">
+            <li>Lộ trình Tiếng Anh xuyên suốt với <strong>giáo viên bản ngữ</strong> — mục tiêu <strong>IELTS 4.0</strong> khi lên lớp 5</li>
+            <li><strong>16 kỹ năng thiết yếu</strong> được tích hợp vào từng tiết học, phẩm chất lãnh đạo phát triển qua <strong>Leader in Me</strong></li>
+            <li>Học sinh Tiểu học tự thuyết trình hành trình phát triển của mình trước phụ huynh <strong>5 lần mỗi năm</strong> (hệ thống PDR)</li>
+            <li>Học sinh có thể học liên cấp cùng hệ thống Việt Anh lên THCS, THPT mà không đứt đoạn chương trình</li>
+          </ul>
+        </div>
+      </section>
+    )}
+
+    {level === 'lien-cap' && (
       <!-- ============== III. CAM KẾT ĐẦU RA ============== -->
       <section class="content-section">
         <div class="container narrow">
@@ -210,7 +228,7 @@ const structuredData = {
           <div class="tier-num">2</div>
           <div class="tier-body">
             <h3>Kỹ năng thế kỷ 21</h3>
-            <p><strong>16 kỹ năng thiết yếu</strong> được tích hợp có hệ thống vào từng tiết học — không phải môn học riêng lẻ. Phẩm chất lãnh đạo phát triển qua chương trình <strong>Leader in Me</strong> của FranklinCovey (Hoa Kỳ) — lần đầu được triển khai tại TP.HCM bởi Trường Việt Anh.</p>
+            <p><strong>16 kỹ năng thiết yếu</strong> được tích hợp có hệ thống vào từng tiết học — không phải môn học riêng lẻ. Phẩm chất lãnh đạo phát triển qua chương trình <strong>Leader in Me</strong> của FranklinCovey (Hoa Kỳ) — được Trường Việt Anh triển khai tại TP.HCM.</p>
             <p>7 Thói quen lãnh đạo và 5 Giá trị cốt lõi: <em>Tôn trọng · Trách nhiệm · Tài giỏi · Chính trực · Yêu thương</em>.</p>
           </div>
         </div>
@@ -225,7 +243,7 @@ const structuredData = {
           <div class="tier-num">4</div>
           <div class="tier-body">
             <h3>Thể chất</h3>
-            <p>Học sinh thực hành 5 nguyên tắc sống khỏe: <strong>Ăn tốt · Uống tốt · Nghỉ ngơi tốt · Tập luyện · Niềm vui mỗi ngày</strong>. 100% học sinh tham gia hoạt động thể thao thường xuyên.</p>
+            <p>Học sinh thực hành 5 nguyên tắc sống khỏe: <strong>Ăn tốt · Uống tốt · Nghỉ ngơi tốt · Thể thao · Niềm vui mỗi ngày</strong>. 100% học sinh tham gia hoạt động thể thao thường xuyên.</p>
           </div>
         </div>
       </div>
