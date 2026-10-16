@@ -94,7 +94,7 @@ const campusLinks = [
 ];
 
 // Section này thiết kế cho VIDEO clip phụ huynh — chỉ dùng dữ liệu CMS khi
-// bản ghi có video_url; CMS toàn text thì giữ 6 clip mặc định bên dưới.
+// bản ghi có video_url; CMS toàn text thì giữ 5 clip mặc định bên dưới.
 const cmsVideoTestimonials = cmsTestimonials.filter((t: any) => (t.video_url || '').trim());
 const testimonials = cmsVideoTestimonials.length > 0
   ? cmsVideoTestimonials.map((t: any) => ({
@@ -107,7 +107,6 @@ const testimonials = cmsVideoTestimonials.length > 0
   : [
     { name: 'Chị Nguyễn Thị Linh', role: 'Phụ huynh mầm non – bé 2 tuổi', quote: 'Từ em bé bướng bỉnh, con đã biết tự ăn và vào nề nếp. Con thay đổi rõ rệt chỉ sau vài tháng đầu.', img: 'https://img.youtube.com/vi/Bt1yyMil3Tg/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=Bt1yyMil3Tg' },
     { name: 'Anh Trần Minh Công', role: 'Phụ huynh lớp 1 – chuyển từ mầm non Việt Anh', quote: 'Con luôn háo hức và mong chờ được đến trường mỗi ngày. Đi học vui vẻ, không áp lực.', img: 'https://img.youtube.com/vi/b9eNSFUDd98/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=b9eNSFUDd98' },
-    { name: 'Chị Lê Thị Nga', role: 'Phụ huynh lớp 3 – cơ sở Gò Vấp', quote: 'Sau 2 năm, con thay đổi rõ rệt cả về học tập và kỹ năng — đúng như thầy cô tư vấn từ đầu.', img: 'https://img.youtube.com/vi/3jwB87z-Keg/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=3jwB87z-Keg' },
     { name: 'Chị Phạm Ngọc Quỳnh', role: 'Phụ huynh lớp 7 – chuyển trường mới', quote: 'Chỉ sau hơn 1 tháng, con đã hòa nhập rất tốt với bạn bè và học tập vui vẻ mỗi ngày.', img: 'https://img.youtube.com/vi/cZ6S_3MG1Vo/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=cZ6S_3MG1Vo' },
     { name: 'Anh Lê Trung Thành', role: 'Phụ huynh THPT – lựa chọn môi trường', quote: 'Gia đình chọn trường vì môi trường giúp con phát triển toàn diện — từ kiến thức đến thái độ.', img: 'https://img.youtube.com/vi/5T8j_k5VCW4/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=5T8j_k5VCW4' },
     { name: 'Bạn Chu Anh Tài', role: 'Học sinh lớp 12 – Chủ tịch Hội học sinh', quote: 'Từ một người khép kín, em đã khám phá khả năng lãnh đạo và đảm nhận Chủ tịch Hội học sinh.', img: 'https://img.youtube.com/vi/NAYd7sM0d-8/hqdefault.jpg', videoUrl: 'https://www.youtube.com/watch?v=NAYd7sM0d-8' },
