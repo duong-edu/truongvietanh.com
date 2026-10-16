@@ -364,10 +364,10 @@ export const adsPages: AdsPage[] = [
   // ─────────────────────────────── AG 05 ───────────────────────────────
   {
     slug: 'do-tuoi',
-    adGroup: 'AG 05 — 13 tháng–6 tuổi, nhà trẻ, bán trú',
-    keywords: 'trường mầm non nhận bé 13 tháng, nhà trẻ gò vấp, giữ trẻ gò vấp, mầm non bán trú, trường cho bé 2 tuổi, lớp nhà trẻ gò vấp',
+    adGroup: 'AG 05 — 12 tháng–6 tuổi, nhà trẻ, bán trú',
+    keywords: 'trường mầm non nhận bé 12 tháng, nhà trẻ gò vấp, giữ trẻ gò vấp, mầm non bán trú, trường cho bé 2 tuổi, lớp nhà trẻ gò vấp',
     funnelCode: 'mn-govap-dotuoi',
-    // Nhóm quảng cáo nhà trẻ (13 tháng–2 tuổi) → khối "2 tuổi", không phải mặc định 3 tuổi.
+    // Nhóm quảng cáo nhà trẻ (12 tháng–2 tuổi) → khối "2 tuổi", không phải mặc định 3 tuổi.
     schoolLevel: '2-tuoi',
     title: `Nhà Trẻ & Mầm non Việt Anh Gò Vấp Nhận Bé Từ ${F.ageFrom} — Bán Trú Cả Ngày`,
     description: `Nhận bé từ ${F.ageRange} tại Gò Vấp. Lớp tổ chức đa độ tuổi và đa trình độ, bán trú cả ngày, bếp nấu tại trường, camera 24/7. Mẹ đi làm yên tâm.`,
