@@ -17,20 +17,22 @@ export interface VideoTestimonial {
 }
 
 export const videoTestimonials: VideoTestimonial[] = [
-  {
-    stt: 1,
-    audience: 'phu-huynh',
-    audienceLabel: 'Phụ huynh',
-    level: 'tieu-hoc',
-    levelLabel: 'Tiểu học',
-    theme: 'Sự lột xác / thay đổi rõ rệt của học sinh',
-    name: 'Chị Nga — phụ huynh bé Phúc, lớp 3 OIC, cơ sở Gò Vấp',
-    context: 'Phụ huynh học sinh lớp 3 — cơ sở Gò Vấp — chia sẻ sau 2 năm học tại trường',
-    shortQuote: 'Sau 2 năm, con thay đổi rõ rệt cả về học tập và kỹ năng.',
-    longQuote: 'Sau khoảng 2 năm học tại trường, gia đình nhận thấy con thay đổi rất rõ rệt. Không chỉ tiến bộ trong học tập mà con còn tự tin hơn và đạt được những kết quả mà trước đây gia đình không nghĩ tới, như việc hoàn thành các chứng chỉ từ rất sớm. Đây là sự thay đổi thật sự rõ ràng.',
-    videoId: '3jwB87z-Keg',
-    isShort: false,
-  },
+  // GỠ 15/10/2026 — tên người trong clip chưa xác nhận (Chị Nga hay chị Mai?). Up lại khi Văn xác nhận
+  // tên + có đồng ý của phụ huynh; ghi 'mẹ học sinh lớp 3', bỏ tên bé. Khối gốc:
+  // {
+  //   stt: 1,
+  //   audience: 'phu-huynh',
+  //   audienceLabel: 'Phụ huynh',
+  //   level: 'tieu-hoc',
+  //   levelLabel: 'Tiểu học',
+  //   theme: 'Sự lột xác / thay đổi rõ rệt của học sinh',
+  //   name: 'Chị Nga — phụ huynh bé Phúc, lớp 3 OIC, cơ sở Gò Vấp',
+  //   context: 'Phụ huynh học sinh lớp 3 — cơ sở Gò Vấp — chia sẻ sau 2 năm học tại trường',
+  //   shortQuote: 'Sau 2 năm, con thay đổi rõ rệt cả về học tập và kỹ năng.',
+  //   longQuote: 'Sau khoảng 2 năm học tại trường, gia đình nhận thấy con thay đổi rất rõ rệt. Không chỉ tiến bộ trong học tập mà con còn tự tin hơn và đạt được những kết quả mà trước đây gia đình không nghĩ tới, như việc hoàn thành các chứng chỉ từ rất sớm. Đây là sự thay đổi thật sự rõ ràng.',
+  //   videoId: '3jwB87z-Keg',
+  //   isShort: false,
+  // },
   {
     stt: 2,
     audience: 'phu-huynh',
