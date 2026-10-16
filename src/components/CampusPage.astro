@@ -178,19 +178,49 @@ const structuredData = {
     </section>
 
     {level === 'mam-non-tieu-hoc' && (
-      <!-- ============== III. KẾT QUẢ MẦM NON · TIỂU HỌC ==============
+      <!-- ============== III. KẾT QUẢ / CƠ SỞ VẬT CHẤT (MẦM NON · TIỂU HỌC) ==============
            Cơ sở chỉ có Mầm non + Tiểu học: KHÔNG dùng số liệu THPT (ICDL, điểm 10 Tiếng Anh,
-           IELTS tốt nghiệp, nhận thẳng ĐH). Anh Dương chốt 15/10/2026. -->
+           IELTS tốt nghiệp, nhận thẳng ĐH). Anh Dương chốt 15/10/2026.
+           Số liệu từng cơ sở lấy từ website riêng của trường (16/10/2026):
+           · Mekong Xanh (mgis.edu.vn/thanh-tich): 24 giải/3 năm học. KHÔNG dùng "95% phụ huynh đề xuất" (chưa có nguồn khảo sát).
+           · Thái Sơn (truongthaison.com): khai giảng năm đầu 2026 → CHƯA có kết quả, chỉ nêu cơ sở vật chất. -->
       <section class="content-section">
         <div class="container narrow">
-          <div class="section-eyebrow">III. Kết quả Mầm non · Tiểu học</div>
-          <h2 class="section-title">Nền tảng vững cho cả hành trình liên cấp</h2>
-          <ul class="commitment-list">
-            <li>Lộ trình Tiếng Anh xuyên suốt với <strong>giáo viên bản ngữ</strong> — mục tiêu <strong>IELTS 4.0</strong> khi lên lớp 5</li>
-            <li><strong>16 kỹ năng thiết yếu</strong> được tích hợp vào từng tiết học, phẩm chất lãnh đạo phát triển qua <strong>Leader in Me</strong></li>
-            <li>Học sinh Tiểu học tự thuyết trình hành trình phát triển của mình trước phụ huynh <strong>5 lần mỗi năm</strong> (hệ thống PDR)</li>
-            <li>Học sinh có thể học liên cấp cùng hệ thống Việt Anh lên THCS, THPT mà không đứt đoạn chương trình</li>
-          </ul>
+          {shortName === 'Mekong Xanh' ? (
+            <>
+              <div class="section-eyebrow">III. Kết quả đã ghi nhận</div>
+              <h2 class="section-title">Học sinh Mekong Xanh trên các sân chơi học thuật</h2>
+              <ul class="commitment-list">
+                <li><strong>24 giải thưởng</strong> trong 3 năm học (2023–2026), trong đó <strong>12 giải cấp Quốc gia</strong> và <strong>2 Giải Vàng Quốc gia</strong></li>
+                <li>2023–2024: <strong>11 giải thưởng</strong>, 6 giải Quốc gia — Toán quốc tế HIPPO 5 giải Quốc gia, gồm 1 Giải Vàng</li>
+                <li>2024–2025: <strong>2 Giải Nhất cấp Tỉnh</strong> Tiếng Anh IOE và thành tích Hùng biện Tiếng Anh cấp Thành phố</li>
+                <li>2025–2026: <strong>6 giải Quốc gia</strong> Toán tư duy TIMO, nổi bật 1 Giải Vàng của học sinh lớp 2, cùng nhiều giải IOE Tiếng Anh</li>
+                <li>Hơn <strong>200 học sinh</strong> Mầm non và Tiểu học đang theo học</li>
+              </ul>
+              <p><a href="https://mgis.edu.vn/thanh-tich" target="_blank" rel="noopener">Xem bảng vàng thành tích chi tiết →</a></p>
+            </>
+          ) : shortName === 'Thái Sơn' ? (
+            <>
+              <div class="section-eyebrow">III. Cơ sở vật chất &amp; chương trình</div>
+              <h2 class="section-title">Ngôi trường mới, khai giảng năm học đầu tiên 2026–2027</h2>
+              <ul class="commitment-list">
+                <li>Nằm trong Khu dân cư Thái Sơn <strong>hơn 46 ha</strong> tại Long Hậu, sức chứa gần <strong>1.000 học sinh</strong> Mầm non và Tiểu học</li>
+                <li>Khối phòng học mới cho cả 2 cấp, phòng năng khiếu (Âm nhạc, Mỹ thuật, Dance) và phòng SteamE thực hành</li>
+                <li>Sân chơi ngoài trời rộng, bếp ăn và khu bán trú đảm bảo dinh dưỡng</li>
+                <li>Học theo phương pháp Trường Việt Anh: tiếng Anh với giáo viên bản ngữ, 5 Giá trị cốt lõi, hệ thống PDR và liên cấp lên THCS, THPT không đứt đoạn</li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <div class="section-eyebrow">III. Chương trình Mầm non · Tiểu học</div>
+              <h2 class="section-title">Nền tảng vững cho cả hành trình liên cấp</h2>
+              <ul class="commitment-list">
+                <li>Lộ trình Tiếng Anh xuyên suốt với <strong>giáo viên bản ngữ</strong> — mục tiêu <strong>IELTS 4.0</strong> khi lên lớp 5</li>
+                <li><strong>16 kỹ năng thiết yếu</strong> được tích hợp vào từng tiết học, phẩm chất lãnh đạo phát triển qua <strong>Leader in Me</strong></li>
+                <li>Học sinh Tiểu học tự thuyết trình hành trình phát triển của mình trước phụ huynh <strong>5 lần mỗi năm</strong> (hệ thống PDR)</li>
+              </ul>
+            </>
+          )}
         </div>
       </section>
     )}
