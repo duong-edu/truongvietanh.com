@@ -134,6 +134,7 @@ export const mainNavLeft = [
     href: '/cap-hoc',
     children: [
       { label: 'Mầm non', href: '/mam-non' },
+      { label: 'School Ready', href: '/school-ready' },
       { label: 'Tiểu học', href: '/tieu-hoc' },
       { label: 'THCS', href: '/thcs' },
       { label: 'THPT', href: '/thpt' },
