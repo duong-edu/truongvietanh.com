@@ -1069,8 +1069,10 @@ function isLmGrFunnel(source) {
 // Tên tag GetResponse của một lead: tag funnel + TS_2026 + tầng (nóng/ấm/lạnh) + nhóm cần tập (LM01).
 // Tag do trình duyệt gửi lên CHỈ dùng để suy ra tên theo whitelist, không bao giờ dùng nguyên văn
 // → khách không tự gắn được tag kích hoạt automation (vd Check_Active, Mam_Non).
+// Thẻ đánh dấu phụ huynh đã vào chuỗi nuôi dưỡng 435 ngày. Thẻ MỚI, CỐ Ý không dùng lại 'TangSach_NuoiDuong' (chuỗi tặng sách cũ).
+const GR_NURTURE_TAG = 'Nuoi_Duong_435';
 function lmGrTagNames(source, clientTags) {
-  const out = [LM_GR_FUNNELS[source].tag, 'TS_2026'];
+  const out = [LM_GR_FUNNELS[source].tag, 'TS_2026', GR_NURTURE_TAG];
   for (const t of clientTags || []) {
     const m = /^(?:LM01_)?tier[-_](nong|am|lanh)$/i.exec(String(t));
     if (m) out.push('LM_Tier_' + m[1][0].toUpperCase() + m[1].slice(1).toLowerCase());
@@ -1146,15 +1148,17 @@ async function addToNurtureList(data, env) {
     if (listId) grNurtureListCache = listId;
   }
   if (!listId) return { skipped: true, reason: 'no_list' };
-  // Chỉ gắn trường tùy chỉnh, KHÔNG gắn tag lead magnet: automation theo tag LMxx sẽ gửi lại email quà tặng nếu tag xuất hiện ở đây.
+  // Chỉ gắn trường tùy chỉnh và thẻ nuôi dưỡng, KHÔNG gắn tag lead magnet: automation theo tag LMxx sẽ gửi lại email quà tặng nếu tag xuất hiện ở đây.
   const customFieldValues = [
     data.phone ? { customFieldId: GR_FIELDS.phone, value: ['+84' + data.phone.slice(1)] } : null,
     data.source ? { customFieldId: GR_FIELDS.origin, value: [String(data.source).slice(0, 255)] } : null,
   ].filter(Boolean);
+  const nurtureTagId = await ensureGrTag(gr, GR_NURTURE_TAG).catch(() => null);
   const res = await gr('POST', '/contacts', {
     email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
     ...(data.fullName ? { name: data.fullName } : {}),
     customFieldValues,
+    ...(nurtureTagId ? { tags: [{ tagId: nurtureTagId }] } : {}),
   });
   if (res.status === 202) return { status: 202, list: listId };
   // 409 = đã trong chuỗi (làm lead magnet thứ hai): giữ nguyên lịch, không đặt lại ngày
