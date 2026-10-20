@@ -1,0 +1,808 @@
+---
+// /school-ready — trang chương trình "School Ready – Sẵn sàng vào lớp 1".
+// Thay trang Tiền Tiểu học (/tuyen-sinh/tien-tieu-hoc, đã lưu trữ ở docs/archive/).
+// Form: POST /api/lead (worker) → Pancake v2 + Zalo alert, giống các landing khác.
+// Pancake không nhận tag qua /api/lead → năm sinh/khoá/hình thức/cơ sở/trường đang học
+// được ghép vào `note` (vào trường mo_ta_khach_hang) và nguồn đi qua funnel_code.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeaderBase from '../components/HeaderBase.astro';
+import FooterBase from '../components/FooterBase.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const ZALO_OA = 'https://zalo.me/1678310120468101523';
+
+const faqs = [
+  {
+    id: 'faq-day-doc-viet',
+    q: 'School Ready có dạy con đọc, viết, làm toán trước không?',
+    a: 'Không. Chúng tôi không dạy trước chương trình lớp 1. Con làm quen mặt chữ, nghe và phát âm, đếm và so sánh bằng đồ vật thật. Đồng thời con rèn đôi tay, sự tập trung, tâm thế và thói quen tự lập. Khi vào lớp 1, con có nền để học đọc, học viết nhẹ nhàng cùng thầy cô tiểu học.',
+  },
+  {
+    id: 'faq-cham-hon',
+    q: 'Nếu không học trước, con có bị chậm hơn các bạn không?',
+    a: 'Lớp 1 đòi hỏi con ngồi tập trung, nghe chỉ dẫn, cầm bút đúng và tự lo việc của mình. Một đứa trẻ vững những điều này sẽ theo kịp và thường học vui hơn. Đứa trẻ đã "biết bài" nhưng chưa vững những điều đó vẫn gặp khó.',
+  },
+  {
+    id: 'faq-truong-khac',
+    q: 'Con tôi đang học trường khác, có tham gia được không?',
+    a: 'Được. Khoá rút gọn thứ Bảy dành riêng cho trẻ đang học trường khác trong tuần. Con học nguyên ngày thứ Bảy tại một trong 6 cơ sở của hệ thống Trường Việt Anh.',
+  },
+  {
+    id: 'faq-hoc-phi',
+    q: 'Học phí bao nhiêu?',
+    a: 'Học phí khác nhau theo cơ sở và hình thức học (nguyên ngày, nửa ngày hay thứ Bảy). Bạn điền form để nhận học phí của cơ sở gần nhà. Trong giờ hành chính, chuyên viên tư vấn gọi lại trong vòng 25 phút. Bạn cũng có thể nhắn Zalo OA Trường Việt Anh.',
+  },
+  {
+    id: 'faq-tien-bo',
+    q: 'Làm sao tôi biết con tiến bộ?',
+    a: 'Giáo viên ghi quan sát theo công cụ COR Advantage của HighScope. Cứ mỗi 8 tuần, bạn nhận một báo cáo về 16 năng lực của con, kể bằng câu chuyện cụ thể kèm hình ảnh.',
+  },
+  {
+    id: 'faq-hinh-anh',
+    q: 'Hình ảnh và thông tin của con được dùng thế nào?',
+    a: 'Trường chỉ chụp ảnh, quay video và ghi chép về con khi bạn đã ký phiếu đồng ý, với từng mức sử dụng do bạn chọn. Ghi chép đánh giá chỉ dùng nội bộ để theo dõi sự phát triển của con.',
+  },
+];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'School Ready – Sẵn sàng vào lớp 1',
+    url: 'https://truongvietanh.com/school-ready',
+    description: 'School Ready của Trường Việt Anh chuẩn bị 16 năng lực để con vào lớp 1 tự tin, tự lập: Kiến thức, Kỹ năng, Phẩm chất, Sức khoẻ.',
+    provider: { '@type': 'Organization', name: 'Hệ thống Trường Việt Anh', url: 'https://truongvietanh.com' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://truongvietanh.com' },
+      { '@type': 'ListItem', position: 2, name: 'Chương trình', item: 'https://truongvietanh.com/chuong-trinh' },
+      { '@type': 'ListItem', position: 3, name: 'School Ready', item: 'https://truongvietanh.com/school-ready' },
+    ],
+  },
+];
+
+const domains = [
+  {
+    title: 'Kiến thức',
+    count: 4,
+    items: [
+      'Làm quen mặt chữ, nghe và phát âm chuẩn tiếng Việt, tiếng Anh (Phonics)',
+      'Đếm, so sánh, gộp và bớt bằng đồ vật thật trong phạm vi 10; hình khối, quy luật',
+      'Khám phá tự nhiên: cây, con vật, thời tiết, bốn mùa',
+      'Hiểu về bản thân, gia đình, nghề nghiệp, quê hương',
+    ],
+  },
+  {
+    title: 'Kỹ năng',
+    count: 5,
+    items: [
+      'Tập trung 15–20 phút, tự lập kế hoạch, giải quyết vấn đề',
+      'Nói câu hoàn chỉnh, nghe hiểu chỉ dẫn 2–3 bước',
+      'Hợp tác, chờ lượt, giải quyết bất đồng bằng lời nói',
+      'Tự lập: soạn cặp, mặc áo, buộc dây giày',
+      'Đôi tay khéo: cầm bút 3 ngón, cắt kéo, tô màu',
+    ],
+  },
+  {
+    title: 'Phẩm chất',
+    count: 4,
+    items: [
+      'Tâm thế hào hứng, tự tin đi học',
+      'Gọi tên và làm chủ cảm xúc',
+      'Ý thức quy tắc, kiên trì, trách nhiệm',
+      'Lễ phép, tôn trọng, yêu thương',
+    ],
+  },
+  {
+    title: 'Sức khoẻ',
+    count: 3,
+    items: [
+      'Sức bền cho một buổi học tiểu học',
+      'Vận động: bật xa 50cm, chạy 18m trong 5–7 giây, ném bắt bóng 4m',
+      'Tự vệ sinh, rửa tay, ăn uống lành mạnh, nói rõ khi mệt hay đau',
+    ],
+  },
+];
+
+const values = [
+  { name: 'Tôn trọng', line: '"Tay tốt, lời tốt"' },
+  { name: 'Trách nhiệm', line: '"Đồ của mình, mình cất; việc của mình, mình làm"' },
+  { name: 'Tài giỏi', line: '"Thử thêm lần nữa"' },
+  { name: 'Chính trực', line: '"Con nói thật"' },
+  { name: 'Yêu thương', line: '"Rủ bạn chơi cùng"' },
+];
+
+const env = [
+  { icon: '🗺️', name: 'Plan – Do – Review', text: 'Con tự chọn việc muốn làm, làm đến cùng rồi kể lại. Đây là cách HighScope rèn sự chủ động và tập trung.' },
+  { icon: '🌱', name: 'Wellbeing', text: 'Chăm sóc cơ thể, cảm xúc, tình bạn. Mỗi học kỳ có dự án như "Bánh xe cảm xúc" hay cuốn sách "Hành trang lớp 1 của em".' },
+  { icon: '🔤', name: 'Phonics và làm quen chữ', text: 'Nghe và phát âm chuẩn qua trò chơi, bài hát, khay cát, đất nặn, cùng giáo viên bản ngữ.' },
+  { icon: '🔬', name: 'STEAME', text: 'Thí nghiệm, lắp ghép, làm món ăn đơn giản. Con đặt câu hỏi "tại sao" và tự tìm câu trả lời.' },
+  { icon: '🏊', name: 'Vận động mỗi ngày', text: 'Thể dục buổi sáng, vận động ngoài trời, chơi cát. Xây sức bền cho một buổi học tiểu học.' },
+  { icon: '🦁', name: 'Vai trò lãnh đạo lớp', text: 'Mỗi tuần con giữ một việc thật: dẫn hàng, tưới cây, phát khăn. Theo tinh thần Leader in Me.' },
+];
+
+const ways = [
+  {
+    key: 'lop-la',
+    title: 'Lớp Lá Việt Anh',
+    who: 'Dành cho trẻ đang học lớp Lá tại hệ thống Trường Việt Anh',
+    points: [
+      'School Ready tích hợp sẵn trong chương trình lớp Lá, không đăng ký riêng',
+      'Morning Meeting mỗi sáng, Wellbeing, Phonics, STEAME, vận động',
+      'Mỗi lớp 20 trẻ, 2 giáo viên và 1 bảo mẫu; giáo viên bản ngữ khoảng 1/3 số tiết',
+      'Báo cáo sự phát triển của con mỗi 8 tuần',
+    ],
+    cta: 'Hỏi giáo viên chủ nhiệm hoặc Zalo OA →',
+    href: ZALO_OA,
+    external: true,
+  },
+  {
+    key: 'trong-tuan',
+    title: 'Học trong tuần',
+    who: 'Dành cho trẻ 5–6 tuổi muốn học School Ready từ thứ Hai đến thứ Sáu',
+    points: [
+      'Thứ Hai – thứ Sáu, chọn nguyên ngày hoặc nửa ngày',
+      'Học tại 6 cơ sở của hệ thống Trường Việt Anh',
+      'Cùng chương trình, cùng 16 năng lực như lớp Lá Việt Anh',
+      'Báo cáo sự phát triển của con mỗi 8 tuần',
+    ],
+    cta: 'Nhận học phí học trong tuần →',
+    href: '/school-ready?khoa=trong-tuan#pp-form',
+    external: false,
+  },
+  {
+    key: 'thu-bay',
+    title: 'Khoá rút gọn thứ Bảy',
+    who: 'Dành cho trẻ đang học trường khác trong tuần',
+    points: [
+      'Thứ Bảy, nguyên ngày, tại 6 cơ sở của hệ thống',
+      'Mỗi buổi là một chuỗi trạm trò chơi và trải nghiệm, vui trước tiên',
+      'Con mang về một sản phẩm tự làm sau mỗi buổi; bạn nhận câu chuyện kèm ảnh về con',
+      'Không bài tập về nhà, không kiểm tra. Báo cáo sự phát triển của con mỗi 8 tuần',
+    ],
+    cta: 'Nhận học phí khoá thứ Bảy →',
+    href: '/school-ready?khoa=thu-bay#pp-form',
+    external: false,
+  },
+];
+
+const related = [
+  { name: 'Mầm non Việt Anh', text: 'Môi trường kích hoạt bản năng siêu học tập', href: '/mam-non' },
+  { name: 'Tiểu học Việt Anh', text: 'Nơi con bắt đầu biết cách học và làm chủ bản thân', href: '/tieu-hoc' },
+  { name: 'Bản đồ phát triển của con', text: 'Trắc nghiệm 2 phút, kết quả 4 trục', href: '/quiz?src=school-ready' },
+  { name: 'Siêu Ăn Giỏi', text: 'Thói quen ăn uống lành mạnh và tự lập', href: '/sieu-an-gioi' },
+  { name: 'Tiếng Anh Trẻ Em', text: 'Tiếng Anh như ngôn ngữ, không để thi', href: '/tieng-anh-tre-em' },
+  { name: 'Kỷ luật tích cực', text: 'Cách Việt Anh đồng hành cùng hành vi của trẻ', href: '/chuong-trinh/ky-luat-tich-cuc' },
+];
+---
+
+<BaseLayout
+  title="School Ready – Sẵn sàng vào lớp 1 | Mầm non Việt Anh"
+  description="School Ready của Trường Việt Anh: không dạy trước lớp 1, chuẩn bị 16 năng lực để con vào lớp 1 tự tin, tự lập. Lớp Lá, học trong tuần và khoá thứ Bảy tại 6 cơ sở."
+  canonical="https://truongvietanh.com/school-ready"
+  ogImage="https://media.truongvietanh.com/images/thuyet-trinh-09.webp"
+  structuredData={structuredData}
+>
+  <div class="sr-page">
+    <HeaderBase />
+
+    <!-- 7.1 HERO -->
+    <section class="sr-hero">
+      <div class="sr-hero-inner">
+        <p class="sr-eyebrow">School Ready · Trường Việt Anh · 6 cơ sở</p>
+        <h1 class="sr-h1">
+          Lớp 1 không cần con học trước
+          <span class="sr-h1-accent">Lớp 1 cần con sẵn sàng</span>
+        </h1>
+        <p class="sr-sub">
+          Đôi tay cầm bút vững. Đôi tai nghe âm chuẩn. Tâm thế tự tin khi bước vào lớp học mới. Tự lo được cặp sách, đôi giày, giờ ăn của mình. School Ready chuẩn bị cho con 16 năng lực đó, qua trò chơi, trải nghiệm và thói quen mỗi ngày.
+        </p>
+        <div class="sr-cta-row">
+          <a href="#pp-form" class="sr-btn sr-btn-gold">Nhận học phí và lịch học →</a>
+          <a href={ZALO_OA} target="_blank" rel="noopener" class="sr-btn sr-btn-outline">Chat Zalo OA →</a>
+        </div>
+        <ul class="sr-statbar">
+          <li><strong>16</strong><span>năng lực sẵn sàng vào lớp 1</span></li>
+          <li><strong>4</strong><span>lĩnh vực: Kiến thức · Kỹ năng · Phẩm chất · Sức khoẻ</span></li>
+          <li><strong>3</strong><span>cách tham gia</span></li>
+          <li><strong>6</strong><span>cơ sở trên toàn hệ thống</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7.2 VẤN ĐỀ -->
+    <section class="sr-sec sr-sec-white">
+      <div class="sr-narrow">
+        <h2>Trẻ bỡ ngỡ ở lớp 1 thường không phải vì chưa biết chữ</h2>
+        <p>Bạn có thể đã nghe những câu chuyện này từ bạn bè có con vào lớp 1: con khóc vì không dám xin cô đi vệ sinh. Con ngồi 35 phút thấy mỏi, tay cầm bút đau sau vài dòng. Con lúng túng khi bị bạn giành đồ, không biết nói gì nên đánh lại.</p>
+        <p>Những khó khăn đó không nằm ở bảng chữ cái. Chúng nằm ở <strong>tâm thế, sự tự lập, khả năng làm chủ cảm xúc, sức bền và đôi tay</strong>. Đây là những thứ giai đoạn 5–6 tuổi cần được chuẩn bị, và cũng là thứ dễ bị bỏ qua nhất khi cha mẹ chỉ lo "con đã biết đọc chưa".</p>
+      </div>
+      <div class="sr-wide sr-compare">
+        <div class="sr-compare-col sr-compare-warn">
+          <h3>Nếu chỉ lo cho con học trước…</h3>
+          <ul>
+            <li>Con vào lớp 1 đã "biết bài", dễ chủ quan, mất hứng thú</li>
+            <li>Ngồi viết sớm khi cơ tay chưa vững, dễ cầm bút sai và khó sửa</li>
+            <li>Áp lực đến sớm, con sợ sai, ngại thử</li>
+            <li>Những kỹ năng tự lập và cảm xúc vẫn còn trống</li>
+          </ul>
+        </div>
+        <div class="sr-compare-col sr-compare-good">
+          <h3>Nếu chuẩn bị đúng năng lực…</h3>
+          <ul>
+            <li>Con háo hức đi học, dám hỏi, dám nói khi cần giúp</li>
+            <li>Đôi tay khéo, tư thế đúng, sẵn sàng tập viết khi đến lúc</li>
+            <li>Biết chờ lượt, biết dùng lời nói khi bất đồng với bạn</li>
+            <li>Tự lo được việc của mình, con tự tin trong lớp học mới</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.3 16 NĂNG LỰC -->
+    <section class="sr-sec sr-sec-navy">
+      <div class="sr-wide">
+        <h2 class="sr-h2-gold">16 năng lực con mang theo vào lớp 1</h2>
+        <p class="sr-lead">Chúng tôi bắt đầu từ câu hỏi: một đứa trẻ cần làm được gì để học lớp 1 vui vẻ? Từ đó, Việt Anh xây 16 năng lực trong 4 lĩnh vực, cùng 4 lĩnh vực của Bản đồ học tập Việt Anh từ mầm non đến lớp 12. Khung dựa trên Bộ chuẩn phát triển trẻ em 5 tuổi của Bộ GD&amp;ĐT và công cụ quan sát COR Advantage của HighScope.</p>
+        <div class="sr-domains">
+          {domains.map((d) => (
+            <div class="sr-domain">
+              <h3>{d.title} <span>({d.count} năng lực)</span></h3>
+              <ol>
+                {d.items.map((it) => <li>{it}</li>)}
+              </ol>
+            </div>
+          ))}
+        </div>
+        <p class="sr-note">Mọi năng lực đều được rèn qua hoạt động trải nghiệm phù hợp lứa tuổi mầm non, đúng tinh thần Chương trình Giáo dục mầm non của Bộ GD&amp;ĐT.</p>
+      </div>
+    </section>
+
+    <!-- 7.4 MORNING MEETING -->
+    <section class="sr-sec sr-sec-white">
+      <div class="sr-wide sr-split">
+        <div>
+          <h2>Mỗi sáng bắt đầu bằng một vòng tròn</h2>
+          <p>Mỗi ngày ở School Ready mở đầu bằng <strong>Morning Meeting</strong> (Vòng tròn buổi sáng) theo phương pháp Responsive Classroom, trong khoảng 20–25 phút. Đây là lúc con học cách chào người khác, nói trước nhóm và lắng nghe bạn, những việc lớp 1 cần ngay từ tuần đầu.</p>
+          <ol class="sr-steps">
+            <li><strong>Chào hỏi:</strong> gọi tên nhau, nhìn vào mắt bạn.</li>
+            <li><strong>Tuyên bố giá trị:</strong> cả lớp cùng nói 5 giá trị của Trường Việt Anh.</li>
+            <li><strong>Chia sẻ:</strong> một bạn kể, cả lớp lắng nghe và hỏi lại.</li>
+            <li><strong>Hoạt động nhóm:</strong> một trò chơi ngắn cần cả lớp cùng làm.</li>
+            <li><strong>Thông điệp buổi sáng:</strong> giá trị của tuần và việc của ngày hôm nay.</li>
+          </ol>
+        </div>
+        <!-- TODO: ảnh Morning Meeting lớp Lá, chỉ dùng trẻ đã có phiếu đồng ý hình ảnh -->
+        <div class="sr-photo-ph" role="img" aria-label="Chỗ đặt ảnh Morning Meeting lớp Lá">
+          <span>Ảnh Morning Meeting lớp Lá<br />(đang chờ ảnh có phiếu đồng ý hình ảnh)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.5 5 GIÁ TRỊ -->
+    <section class="sr-sec sr-sec-light">
+      <div class="sr-narrow">
+        <h2>5 giá trị, 5 câu con nói được và làm được mỗi ngày</h2>
+        <p>Trẻ 5 tuổi học giá trị bằng cách làm và nhìn người lớn làm, không phải bằng lời giảng. Vì vậy mỗi giá trị chỉ có một câu ngắn và một hành vi con làm được ngay hôm nay.</p>
+      </div>
+      <div class="sr-wide">
+        <ul class="sr-pills">
+          {values.map((v) => <li><strong>{v.name}:</strong> {v.line}</li>)}
+        </ul>
+      </div>
+      <div class="sr-narrow">
+        <p>Giáo viên không dùng bảng điểm hay sticker thi đua. Cô ghi lại những gì con làm được và kể cho bạn bằng câu chuyện cụ thể, ví dụ: "Hôm nay kéo khoá áo không được, con thử ba lần rồi mới nhờ cô, và lần thứ ba con làm được."</p>
+      </div>
+    </section>
+
+    <!-- 7.6 MÔI TRƯỜNG HỌC -->
+    <section class="sr-sec sr-sec-white">
+      <div class="sr-wide">
+        <h2 class="sr-center">Con học bằng tay, bằng chân, bằng câu hỏi</h2>
+        <p class="sr-lead sr-center">Mỗi hoạt động trong tuần nuôi một nhóm năng lực cụ thể. Con không ngồi nghe giảng. Con làm, thử, sai và làm lại.</p>
+        <div class="sr-grid3">
+          {env.map((e) => (
+            <div class="sr-card">
+              <span class="sr-icon" aria-hidden="true">{e.icon}</span>
+              <strong>{e.name}</strong>
+              <p>{e.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.7 BA CÁCH THAM GIA -->
+    <section class="sr-sec sr-sec-light" id="ba-cach">
+      <div class="sr-wide">
+        <h2 class="sr-center">Ba cách để con tham gia School Ready</h2>
+        <p class="sr-lead sr-center">Dù con đang học tại Việt Anh hay ở trường khác, con đều có thể chuẩn bị cho lớp 1 cùng chúng tôi. Học phí khác nhau theo từng cơ sở, bạn điền form hoặc nhắn Zalo OA để nhận học phí của cơ sở gần nhà.</p>
+        <div class="sr-ways">
+          {ways.map((w) => (
+            <article class="sr-way">
+              <h3>{w.title}</h3>
+              <p class="sr-way-who"><em>{w.who}</em></p>
+              <ul>
+                {w.points.map((p) => <li>{p}</li>)}
+              </ul>
+              {w.external ? (
+                <a href={w.href} target="_blank" rel="noopener" class="sr-btn sr-btn-navy">{w.cta}</a>
+              ) : (
+                <a href={w.href} class="sr-btn sr-btn-navy" data-khoa={w.key}>{w.cta}</a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.8 BÁO CÁO CHO PHỤ HUYNH -->
+    <section class="sr-sec sr-sec-white">
+      <div class="sr-wide">
+        <h2 class="sr-center">Mỗi 8 tuần, bạn biết con đang ở đâu, mà không cần điểm số</h2>
+        <p class="sr-lead sr-center">Ở tuổi này, điểm số không nói được nhiều. Giáo viên quan sát con trong lúc chơi và học, ghi lại bằng chứng cụ thể theo công cụ quan sát phát triển 9 lĩnh vực của trẻ. Cứ mỗi 8 tuần, bạn nhận một báo cáo về 16 năng lực của con.</p>
+        <div class="sr-grid3">
+          <div class="sr-card sr-card-gold">
+            <strong>Điều con đã vững</strong>
+            <p>Những năng lực con làm được một cách tự giác, kèm câu chuyện và hình ảnh.</p>
+          </div>
+          <div class="sr-card sr-card-gold">
+            <strong>Điều con đang tập</strong>
+            <p>Những năng lực cần thêm thời gian, và cách lớp học đang hỗ trợ con.</p>
+          </div>
+          <div class="sr-card sr-card-gold">
+            <strong>Việc bạn chơi cùng con ở nhà</strong>
+            <p>Một hai gợi ý nhỏ, vừa sức, cho 8 tuần tiếp theo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.9 FAQ -->
+    <section class="sr-sec sr-sec-light">
+      <div class="sr-narrow">
+        <h2 class="sr-center">Câu hỏi phụ huynh thường gặp</h2>
+        <FaqAccordion faqs={faqs} />
+      </div>
+    </section>
+
+    <!-- 7.10 + 4. FORM -->
+    <section class="sr-sec sr-sec-navy" id="pp-form">
+      <div class="sr-wide sr-formgrid">
+        <div class="sr-formtext">
+          <h2 class="sr-h2-gold">Năm cuối mầm non chỉ có một lần</h2>
+          <p>Trong vài tháng tới, con sẽ học cách tự lo cặp sách, nói trước nhóm và đứng dậy sau mỗi lần làm chưa được. Những điều đó sẽ đi cùng con suốt năm lớp 1. Nếu bỏ qua, con vẫn vào lớp 1, nhưng phải học những điều này cùng lúc với chữ và số.</p>
+          <p><strong>Để lại thông tin, trường sẽ:</strong></p>
+          <ul>
+            <li>Gọi lại trong vòng 25 phút (trong giờ hành chính) để tư vấn theo độ tuổi và tính cách của con</li>
+            <li>Gửi học phí và lịch học tại cơ sở bạn chọn</li>
+            <li>Mời con đến trải nghiệm một buổi School Ready</li>
+          </ul>
+          <p>Hoặc nhắn ngay <a href={ZALO_OA} target="_blank" rel="noopener">Zalo OA Trường Việt Anh</a> · Hotline <a href="tel:0916961409">0916 961 409</a></p>
+        </div>
+
+        <div class="sr-formcard" id="sr-formcard">
+          <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
+          <form id="sr-form" novalidate>
+            <div class="sr-field">
+              <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
+              <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
+            </div>
+            <div class="sr-field">
+              <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
+              <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
+            </div>
+            <div class="sr-field">
+              <label for="sr-nam-sinh">Năm sinh của con <span aria-hidden="true">*</span></label>
+              <select id="sr-nam-sinh" name="nam_sinh" required>
+                <option value="">— Chọn năm sinh —</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="khac">Khác</option>
+              </select>
+            </div>
+            <div class="sr-field">
+              <label for="sr-khoa">Khoá quan tâm <span aria-hidden="true">*</span></label>
+              <select id="sr-khoa" name="khoa" required>
+                <option value="">— Chọn khoá —</option>
+                <option value="lop-la">Lớp Lá Việt Anh</option>
+                <option value="trong-tuan">Học trong tuần (thứ Hai – thứ Sáu)</option>
+                <option value="thu-bay">Khoá rút gọn thứ Bảy</option>
+                <option value="chua-ro">Chưa rõ, cần tư vấn</option>
+              </select>
+            </div>
+            <div class="sr-field" id="sr-hinhthuc-wrap" hidden>
+              <label for="sr-hinhthuc">Hình thức học trong tuần <span aria-hidden="true">*</span></label>
+              <select id="sr-hinhthuc" name="hinh_thuc">
+                <option value="">— Chọn hình thức —</option>
+                <option value="nguyen-ngay">Nguyên ngày</option>
+                <option value="nua-ngay">Nửa ngày</option>
+              </select>
+            </div>
+            <div class="sr-field">
+              <label for="sr-coso">Cơ sở muốn học <span aria-hidden="true">*</span></label>
+              <select id="sr-coso" name="campus" required>
+                <option value="">— Chọn cơ sở —</option>
+                <optgroup label="TP.HCM">
+                  <option value="mn-viet-anh-go-vap" data-loc="go-vap" data-province="TP.HCM">Mầm non Việt Anh Gò Vấp — 573 Lê Đức Thọ, P. An Hội Đông</option>
+                  <option value="vagv" data-loc="go-vap-lien-cap" data-province="TP.HCM">Liên cấp Việt Anh Gò Vấp — 160/72 Phan Huy Ích, P. An Hội Tây</option>
+                  <option value="vabt" data-loc="binh-tan" data-province="TP.HCM">Liên cấp Việt Anh Bình Tân — Số 7 Đường 38A, P. Tân Tạo</option>
+                </optgroup>
+                <optgroup label="Cần Giuộc – Tây Ninh">
+                  <option value="nhan-le" data-loc="can-giuoc" data-province="Tây Ninh">Mầm non Nhân Lễ — 22 Đường D2, KDC Long Hậu</option>
+                  <option value="thai-son" data-loc="thai-son" data-province="Tây Ninh">Mầm non Thái Sơn — Đường 11, KDC Thái Sơn, Cần Giuộc</option>
+                </optgroup>
+                <optgroup label="Rạch Giá – An Giang">
+                  <option value="mgis" data-loc="rach-gia" data-province="An Giang">Mầm non Quốc tế Mekong Xanh (MGIS) — Lô E7, Đường số 13, KĐT Tây Bắc</option>
+                </optgroup>
+                <option value="chua-chon" data-loc="" data-province="">Chưa chọn, cần tư vấn</option>
+              </select>
+            </div>
+            <div class="sr-field">
+              <label for="sr-hoc-o">Con đang học ở <span class="sr-opt">(không bắt buộc)</span></label>
+              <select id="sr-hoc-o" name="hoc_o">
+                <option value="">— Chọn —</option>
+                <option value="mam-non-viet-anh">Mầm non Việt Anh</option>
+                <option value="truong-khac">Trường khác</option>
+              </select>
+            </div>
+            <div class="sr-hp" aria-hidden="true">
+              <label for="sr-website">Website</label>
+              <input id="sr-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <label class="sr-consent" for="sr-consent">
+              <input id="sr-consent" name="consent" type="checkbox" required />
+              <span>Tôi đồng ý để Trường Việt Anh dùng thông tin trên để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span>
+            </label>
+            <p class="sr-err" id="sr-err" role="alert" hidden></p>
+            <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí và lịch học →</button>
+          </form>
+          <div class="sr-success" id="sr-success" hidden>
+            <p class="sr-tick" aria-hidden="true">✓</p>
+            <p>Cảm ơn bạn. Trong giờ hành chính, chuyên viên tư vấn của trường sẽ gọi lại cho bạn trong vòng 25 phút để gửi học phí và lịch học tại cơ sở bạn chọn. Ngoài giờ, trường sẽ gọi vào đầu giờ làm việc kế tiếp. Bạn cũng có thể nhắn ngay cho Zalo OA Trường Việt Anh.</p>
+            <a href={ZALO_OA} target="_blank" rel="noopener" class="sr-btn sr-btn-navy">Nhắn Zalo OA Trường Việt Anh →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.11 CHƯƠNG TRÌNH LIÊN QUAN -->
+    <section class="sr-sec sr-sec-light">
+      <div class="sr-wide">
+        <h2 class="sr-center">Khám phá các chương trình phù hợp</h2>
+        <div class="sr-links">
+          {related.map((r) => (
+            <a href={r.href} class="sr-link-card">
+              <strong>{r.name}</strong>
+              <span>{r.text}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog nội bộ (giống /mam-non) -->
+    <section class="sr-blog">
+      <div class="sr-wide">
+        <h2>📚 Kiến thức nuôi dạy trẻ Mầm Non</h2>
+        <p>Bài viết chuyên sâu từ đội ngũ giáo dục Trường Việt Anh dành cho phụ huynh có con từ 2–5&nbsp;tuổi.</p>
+        <div class="sr-chips">
+          <a href="/blog/danh-muc/phu-huynh">👨‍👩‍👧 Phụ Huynh &amp; Con</a>
+          <a href="/blog/danh-muc/ky-nang-song">⭐ Kỹ Năng Sống</a>
+          <a href="/blog/danh-muc/hoat-dong">🏕️ Trại Hè &amp; Ngoại Khóa</a>
+          <a href="/blog/danh-muc/tin-tuc">🏫 Tin Tức Trường</a>
+          <a href="/blog" class="sr-chip-main">📰 Tất Cả Bài Viết →</a>
+        </div>
+      </div>
+    </section>
+
+    <FooterBase />
+  </div>
+
+  <script src="/js/va-utm.js" is:inline></script>
+  <script is:inline>
+    (function () {
+      var FUNNEL = 'school-ready';
+      var API = '/api/lead';
+      var KHOA_LABEL = {
+        'lop-la': 'Lớp Lá Việt Anh',
+        'trong-tuan': 'Học trong tuần',
+        'thu-bay': 'Khoá rút gọn thứ Bảy',
+        'chua-ro': 'Chưa rõ, cần tư vấn'
+      };
+      var HINH_THUC_LABEL = { 'nguyen-ngay': 'Nguyên ngày', 'nua-ngay': 'Nửa ngày' };
+      var HOC_O_LABEL = { 'mam-non-viet-anh': 'Mầm non Việt Anh', 'truong-khac': 'Trường khác' };
+
+      var form = document.getElementById('sr-form');
+      if (!form) return;
+      var khoa = document.getElementById('sr-khoa');
+      var htWrap = document.getElementById('sr-hinhthuc-wrap');
+      var ht = document.getElementById('sr-hinhthuc');
+      var coso = document.getElementById('sr-coso');
+      var errEl = document.getElementById('sr-err');
+      var btn = document.getElementById('sr-submit');
+
+      function syncHinhThuc() {
+        var on = khoa.value === 'trong-tuan';
+        htWrap.hidden = !on;
+        ht.required = on;
+        if (!on) ht.value = '';
+      }
+      khoa.addEventListener('change', syncHinhThuc);
+
+      function selectKhoa(v) {
+        if (!KHOA_LABEL[v]) return;
+        khoa.value = v;
+        syncHinhThuc();
+      }
+
+      // ?khoa=trong-tuan | thu-bay → chọn sẵn khoá
+      try {
+        var q = new URLSearchParams(location.search).get('khoa');
+        if (q) selectKhoa(q);
+      } catch (e) {}
+
+      // Nút ở thẻ "Ba cách": chọn sẵn khoá rồi cuộn xuống form, không tải lại trang
+      document.querySelectorAll('a[data-khoa]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          selectKhoa(a.getAttribute('data-khoa'));
+          var target = document.getElementById('pp-form');
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          try { history.replaceState(null, '', '/school-ready?khoa=' + a.getAttribute('data-khoa') + '#pp-form'); } catch (err) {}
+        });
+      });
+
+      function showError(msg, el) {
+        errEl.textContent = msg;
+        errEl.hidden = false;
+        if (el && el.focus) el.focus();
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errEl.hidden = true;
+
+        // Bẫy bot: ô ẩn có chữ thì giả vờ thành công, không gửi
+        if (form.website.value) { form.hidden = true; document.getElementById('sr-success').hidden = false; return; }
+
+        var name = form.parent_name.value.trim();
+        if (!name) return showError('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
+        var phone = (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0');
+        if (!/^0[35789][0-9]{8}$/.test(phone)) return showError('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
+        if (!form.nam_sinh.value) return showError('Bạn chọn năm sinh của con nhé.', form.nam_sinh);
+        if (!khoa.value) return showError('Bạn chọn khoá quan tâm nhé.', khoa);
+        if (khoa.value === 'trong-tuan' && !ht.value) return showError('Bạn chọn hình thức học trong tuần (nguyên ngày hoặc nửa ngày) nhé.', ht);
+        if (!coso.value) return showError('Bạn chọn cơ sở muốn học, hoặc chọn "Chưa chọn, cần tư vấn".', coso);
+        if (!form.consent.checked) return showError('Bạn đánh dấu đồng ý để trường liên hệ tư vấn nhé.', form.consent);
+
+        var opt = coso.options[coso.selectedIndex];
+        var campusLabel = opt.text.split(' — ')[0];
+        var loc = opt.getAttribute('data-loc') || '';
+        var province = opt.getAttribute('data-province') || '';
+        var namSinh = form.nam_sinh.value === 'khac' ? 'Khác' : form.nam_sinh.value;
+        var funnelCode = FUNNEL + (loc ? '-' + loc : '');
+        var hocO = form.hoc_o.value;
+
+        // Thẻ tag đề xuất của Pancake → ghi vào ghi chú (Pancake không nhận tag qua /api/lead)
+        var tags = ['School Ready', KHOA_LABEL[khoa.value], coso.value];
+        var note = 'School Ready · Năm sinh con: ' + namSinh
+          + ' · Khoá quan tâm: ' + KHOA_LABEL[khoa.value]
+          + (ht.value ? ' (' + HINH_THUC_LABEL[ht.value] + ')' : '')
+          + ' · Cơ sở: ' + campusLabel
+          + (hocO ? ' · Con đang học: ' + HOC_O_LABEL[hocO] : '')
+          + ' · Tag: ' + tags.join(', ');
+
+        var utm = (window.__vaUTM ? window.__vaUTM() : {});
+        var payload = Object.assign({
+          fullName: name,
+          phone: phone,
+          email: '',
+          school_level: 'mam-non',
+          grade: '5-tuoi',
+          source: funnelCode,
+          funnel_code: funnelCode,
+          campus: coso.value,
+          campus_label: campusLabel,
+          province: province,
+          khoa_quan_tam: khoa.value,
+          hinh_thuc: ht.value,
+          nam_sinh_con: namSinh,
+          con_dang_hoc_o: hocO,
+          note: note,
+          consent: true,
+          page_url: location.href,
+          submitted_at: new Date().toISOString()
+        }, utm);
+
+        btn.disabled = true;
+        var oldText = btn.textContent;
+        btn.textContent = 'Đang gửi…';
+
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        })
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'form_submit',
+              form_name: 'school_ready',
+              funnel_code: funnelCode,
+              campus: coso.value,
+              khoa: khoa.value
+            });
+            form.hidden = true;
+            var ok = document.getElementById('sr-success');
+            ok.hidden = false;
+            document.getElementById('sr-formcard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = oldText;
+            showError('Có lỗi khi gửi. Bạn thử lại, hoặc gọi hotline 0916 961 409 để được hỗ trợ.');
+          });
+      });
+    })();
+  </script>
+
+  <style is:global>
+    .sr-page{font-family:'Be Vietnam Pro','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;color:#1a1a2e;line-height:1.7;font-size:1rem}
+    .sr-page *,.sr-page *::before,.sr-page *::after{box-sizing:border-box}
+    .sr-page h1,.sr-page h2,.sr-page h3{line-height:1.3}
+    .sr-page p,.sr-page li,.sr-page label,.sr-page input,.sr-page select{font-size:1rem}
+    .sr-page .sr-h1-accent{font-size:inherit}
+
+    /* Hero */
+    .sr-hero{background:linear-gradient(160deg,rgba(24,25,58,.78) 0%,rgba(38,39,93,.72) 50%,rgba(16,16,36,.82) 100%),url('https://media.truongvietanh.com/images/Block%20Hero%20_%20BG%20-%20website/mam-non-banner-chinh-1.jpg') center/cover no-repeat;color:#fff;padding:4rem 1.25rem 3rem;text-align:center}
+    .sr-hero-inner{max-width:900px;margin:0 auto}
+    .sr-eyebrow{display:inline-block;background:#f9dd0e;color:#26275D;font-weight:700;padding:.35rem 1rem;border-radius:999px;margin:0 0 1.25rem}
+    .sr-h1{font-size:2.4rem;font-weight:800;color:#fff;margin:0 0 1.25rem}
+    .sr-page .sr-h1-accent{display:block;color:#f9dd0e;margin-top:.25rem}
+    .sr-sub{color:#fff;margin:0 auto 2rem;max-width:760px;font-size:1.1rem!important;line-height:1.8}
+    .sr-cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+    .sr-btn{display:inline-block;padding:.9rem 1.8rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:1rem;border:2px solid transparent;cursor:pointer;transition:opacity .2s;text-align:center}
+    .sr-btn:hover{opacity:.88}
+    .sr-btn-gold{background:#f9dd0e;color:#26275D}
+    .sr-btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.75)}
+    .sr-btn-navy{background:#26275D;color:#f9dd0e;margin-top:auto}
+    .sr-statbar{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+    .sr-statbar li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1rem .75rem}
+    .sr-statbar strong{display:block;font-size:2rem;color:#f9dd0e;line-height:1.1}
+    .sr-statbar span{color:#fff}
+
+    /* Sections */
+    .sr-sec{padding:4rem 1.25rem}
+    .sr-sec-white{background:#fff}
+    .sr-sec-light{background:#f0f4f8}
+    .sr-sec-navy{background:#26275D;color:#fff}
+    .sr-narrow{max-width:820px;margin:0 auto}
+    .sr-wide{max-width:1100px;margin:0 auto}
+    .sr-page h2{font-size:1.6rem;font-weight:800;color:#26275D;margin:0 0 1.25rem}
+    .sr-page .sr-h2-gold{color:#f9dd0e}
+    .sr-center{text-align:center}
+    .sr-lead{color:#475569;max-width:860px;margin:0 auto 2rem;font-size:1.05rem!important}
+    .sr-sec-navy .sr-lead{color:rgba(255,255,255,.9)}
+    .sr-sec-white p,.sr-sec-light p{color:#334155}
+    .sr-narrow p{margin:0 0 1rem}
+
+    /* So sánh */
+    .sr-compare{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+    .sr-compare-col{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .sr-compare-warn{border-top:4px solid #cbd5e1}
+    .sr-compare-good{border-top:4px solid #f9dd0e}
+    .sr-compare-col h3{font-size:1.2rem;color:#26275D;margin:0 0 1rem}
+    .sr-compare-col ul{list-style:none;margin:0;padding:0}
+    .sr-compare-col li{position:relative;padding:.35rem 0 .35rem 1.6rem;color:#475569}
+    .sr-compare-warn li::before{content:'•';position:absolute;left:.3rem;color:#94a3b8;font-weight:700}
+    .sr-compare-good li::before{content:'✓';position:absolute;left:0;color:#16a34a;font-weight:700}
+
+    /* 16 năng lực */
+    .sr-domains{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+    .sr-domain{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:1.25rem}
+    .sr-domain h3{color:#f9dd0e;font-size:1.2rem;margin:0 0 .75rem}
+    .sr-domain h3 span{color:#fff;font-weight:500;font-size:1rem}
+    .sr-domain ol{margin:0;padding-left:1.25rem}
+    .sr-domain li{color:#fff;margin-bottom:.5rem}
+    .sr-note{margin:1.75rem 0 0;color:rgba(255,255,255,.9);text-align:center}
+
+    /* Morning Meeting */
+    .sr-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .sr-steps{margin:1rem 0 0;padding-left:1.25rem;color:#334155}
+    .sr-steps li{margin-bottom:.6rem}
+    .sr-photo-ph{min-height:320px;border-radius:16px;background:repeating-linear-gradient(45deg,#e8edf4,#e8edf4 14px,#f0f4f8 14px,#f0f4f8 28px);border:2px dashed #94a3b8;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#475569}
+
+    /* Giá trị */
+    .sr-pills{list-style:none;margin:1.5rem 0;padding:0;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+    .sr-pills li{background:#fff;border:2px solid #f9dd0e;border-radius:999px;padding:.6rem 1.25rem;color:#26275D}
+
+    /* Thẻ lưới */
+    .sr-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .sr-card{background:#f8fafc;border-radius:12px;padding:1.5rem;border-top:3px solid #f9dd0e;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .sr-card-gold{background:#fffbeb}
+    .sr-icon{display:block;font-size:2rem!important;margin-bottom:.5rem}
+    .sr-card strong{display:block;color:#26275D;font-size:1.1rem;margin-bottom:.4rem}
+    .sr-card p{margin:0;color:#475569}
+
+    /* Ba cách */
+    .sr-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .sr-way{background:#fff;border-radius:14px;padding:1.5rem;box-shadow:0 2px 14px rgba(0,0,0,.08);display:flex;flex-direction:column;border-top:4px solid #26275D}
+    .sr-way h3{font-size:1.3rem;color:#26275D;margin:0 0 .4rem}
+    .sr-way-who{margin:0 0 1rem!important;color:#475569}
+    .sr-way ul{margin:0 0 1.25rem;padding-left:1.2rem;color:#334155}
+    .sr-way li{margin-bottom:.5rem}
+
+    /* Form */
+    .sr-formgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    .sr-formtext p,.sr-formtext li{color:rgba(255,255,255,.92)}
+    .sr-formtext ul{padding-left:1.25rem}
+    .sr-formtext li{margin-bottom:.6rem}
+    .sr-formtext a{color:#f9dd0e;font-weight:700}
+    .sr-formcard{background:#fff;color:#1a1a2e;border-radius:16px;padding:1.75rem;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .sr-formcard h3{color:#26275D;font-size:1.3rem;margin:0 0 1.25rem}
+    .sr-field{margin-bottom:1rem}
+    .sr-field[hidden],.sr-success[hidden],.sr-err[hidden],#sr-form[hidden]{display:none}
+    .sr-field label{display:block;font-weight:600;color:#26275D;margin-bottom:.35rem}
+    .sr-field label span{color:#b91c1c}
+    .sr-field label .sr-opt{color:#475569;font-weight:400}
+    .sr-field input,.sr-field select{width:100%;padding:.8rem .9rem;border:1.5px solid #cbd5e1;border-radius:8px;background:#fff;color:#1a1a2e;font-family:inherit}
+    .sr-field input:focus,.sr-field select:focus{outline:3px solid #f9dd0e;border-color:#26275D}
+    .sr-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    .sr-consent{display:flex;gap:.7rem;align-items:flex-start;margin:1.25rem 0;color:#334155;cursor:pointer}
+    .sr-consent input{width:1.25rem;height:1.25rem;margin-top:.3rem;flex:none;accent-color:#26275D}
+    .sr-consent a{color:#26275D;font-weight:700}
+    .sr-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:.75rem 1rem;border-radius:8px;margin:0 0 1rem}
+    .sr-submit{width:100%;font-size:1.1rem}
+    .sr-submit:disabled{opacity:.6;cursor:default}
+    .sr-success{text-align:center;padding:1rem 0}
+    .sr-success p{color:#334155}
+    .sr-tick{width:64px;height:64px;line-height:64px;border-radius:50%;background:#26275D;color:#f9dd0e;font-size:2rem!important;margin:0 auto 1rem}
+
+    /* Liên quan */
+    .sr-links{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem}
+    .sr-link-card{display:block;background:#fff;border-left:4px solid #f9dd0e;border-radius:10px;padding:1.1rem 1.4rem;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .15s}
+    .sr-link-card:hover{transform:translateY(-2px)}
+    .sr-link-card strong{display:block;color:#26275D}
+    .sr-link-card span{color:#475569}
+
+    /* Blog */
+    .sr-blog{background:#f8f9fc;padding:3rem 1.25rem;border-top:1px solid #e5e7eb}
+    .sr-blog h2{font-size:1.4rem;margin:0 0 .5rem}
+    .sr-blog p{color:#475569;margin:0 0 1.25rem}
+    .sr-chips{display:flex;flex-wrap:wrap;gap:.75rem}
+    .sr-chips a{display:inline-flex;align-items:center;padding:.6rem 1.2rem;background:#fff;border:1px solid #e5e7eb;border-radius:50px;text-decoration:none;color:#26275D;font-weight:600}
+    .sr-chips a.sr-chip-main{background:#26275D;border-color:#26275D;color:#fff;font-weight:700}
+
+    @media (max-width:960px){
+      .sr-domains{grid-template-columns:repeat(2,1fr)}
+      .sr-grid3,.sr-ways{grid-template-columns:1fr 1fr}
+      .sr-statbar{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:768px){
+      .sr-h1{font-size:1.8rem}
+      .sr-compare,.sr-split,.sr-formgrid,.sr-links{grid-template-columns:1fr}
+      .sr-split{gap:1.5rem}
+      .sr-sec{padding:3rem 1.25rem}
+    }
+    @media (max-width:600px){
+      .sr-domains,.sr-grid3,.sr-ways{grid-template-columns:1fr}
+      .sr-cta-row{flex-direction:column;align-items:stretch}
+      .sr-h1{font-size:1.65rem}
+    }
+  </style>
+</BaseLayout>

@@ -442,8 +442,10 @@
 /tieu-hoc-viet-anh /tieu-hoc 301
 /trung-hoc-co-so-viet-anh/ /trung-hoc-co-so 301
 /trung-hoc-co-so-viet-anh /trung-hoc-co-so 301
-/tien-tieu-hoc/ /mam-non 301
-/tien-tieu-hoc /mam-non 301
+/tien-tieu-hoc/ /school-ready 301
+/tien-tieu-hoc /school-ready 301
+/tuyen-sinh/tien-tieu-hoc/ /school-ready 301
+/tuyen-sinh/tien-tieu-hoc /school-ready 301
 
 # Tuyển sinh cấp học (slug cũ → mới)
 /tuyen-sinh-mam-non/ /tuyen-sinh/mam-non 301
