@@ -1,0 +1,50 @@
+---
+// quiz-doc-ket-qua-hoc-tap — quiz lead magnet "Cẩm nang đọc và hiểu kết quả học tập của con"
+// Form → /api/lead (funnel_code: quiz-doc-ket-qua). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/cam-nang-doc-ket-qua-hoc-tap.pdf · ảnh bìa: public/lm/
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#26275D" />
+<title>Bạn Đã Biết Cách Đọc Kết Quả Học Tập Của Con Chưa? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút để biết bạn đã đọc kết quả học tập của con theo quá trình, không chỉ điểm số, kèm cẩm nang 6–8 trang và câu hỏi dành cho giáo viên." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/lm/cover-doc-ket-qua.png" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<header class="lm-head"><div class="lm-head-in">
+  <a class="lm-brand" href="/" aria-label="Trường Việt Anh"><img src="/logo-vietanh-header.webp" alt="" width="81" height="40" /><span>Trường Việt Anh</span></a>
+  <a class="lm-call" href="tel:0916961409"><small>Hotline</small> 0916 961 409</a>
+</div></header>
+<main class="lm-main" id="lm-wrap" data-phase="intro">
+  <section class="lm-pitch">
+    <span class="lm-pill">2 phút · miễn phí</span>
+    <h1>Bạn đọc kết quả học tập của con theo cách nào?</h1>
+    <p class="lm-lead">7 câu hỏi, 2 phút. Biết cách nhìn kết quả theo quá trình, không chỉ điểm số.</p>
+    <ul class="lm-bullets"><li>Biết bạn đã nhìn kết quả học tập trong bối cảnh nào, và còn thiếu điều gì</li><li>Cách phân biệt: chưa hiểu kiến thức, thiếu luyện tập, hay quản lý thời gian chưa tốt</li><li>Câu hỏi hữu ích khi trao đổi với giáo viên</li></ul>
+    <div class="lm-gift"><img src="/lm/cover-doc-ket-qua.png" alt="Bìa tài liệu Cẩm nang đọc và hiểu kết quả học tập của con" width="104" height="147" /><div><b>Quà tặng: Cẩm nang đọc và hiểu kết quả học tập của con</b><span>Tài liệu PDF miễn phí, gửi về email của bạn ngay sau khi làm xong quiz.</span></div></div>
+    <p class="lm-trust"><span>Miễn phí</span><span>Kết quả hiện ngay</span><span>Không cần tạo tài khoản</span></p>
+  </section>
+  <section class="lm-card" aria-label="Quiz">
+    <div class="lm-card-top"><button class="lm-back" type="button" id="lm-back" hidden>← Quay lại</button><span class="lm-step" id="lm-step" aria-live="polite"></span></div>
+    <div class="lm-prog" aria-hidden="true"><i id="lm-pb"></i></div>
+    <div class="lm-body" id="lm-root" tabindex="-1"><noscript><p>Trang này cần bật JavaScript để làm quiz. Bạn có thể gọi hotline 0916 961 409 để được hỗ trợ.</p></noscript></div>
+  </section>
+</main>
+<footer class="lm-foot">© Trường Việt Anh · <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></footer>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Bạn đọc kết quả học tập của con theo cách nào?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết bạn đã nhìn kết quả học tập của con trong bối cảnh nào. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Một bài kiểm tra chưa phản ánh đầy đủ quá trình học. Bộ này giúp cha mẹ đọc kết quả cùng với thói quen và phản hồi của giáo viên.\",\"scoreLabel\":\"cách làm bạn đã áp dụng\",\"groups\":[\"Nhìn điểm số\",\"Tìm nguyên nhân\",\"Nói chuyện với con\",\"Làm việc với giáo viên\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2016\",\"2016–2020 (tiểu học)\"],[\"2012\",\"2012–2015 (THCS)\"],[\"2009\",\"2009–2011 (THPT)\"],[\"2022\",\"2022 trở về sau\"]],\"redirect\":{\"2022\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của bộ này\",\"d\":\"Bộ này dành cho học sinh từ tiểu học đến THPT. Với trẻ mầm non, mời bạn xem checklist mầm non của nhà trường.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn băn khoăn nhất về kết quả của con?\",\"o\":[[\"A\",\"Điểm thấp bất ngờ\"],[\"B\",\"Điểm lúc cao lúc thấp\"],[\"C\",\"Con nói đã học nhưng vẫn làm sai\"],[\"D\",\"Chưa biết nên hỏi giáo viên điều gì\"]]},{\"id\":\"cur\",\"t\":\"Khi con có điểm không như mong đợi, bạn thường làm gì?\",\"o\":[[\"A\",\"Nhắc con cần cố gắng hơn\"],[\"B\",\"Hỏi điểm cụ thể và so sánh\"],[\"C\",\"Hỏi con cảm thấy thế nào\"],[\"D\",\"Chưa có cách nhất quán\"]]},{\"id\":\"s4\",\"t\":\"Nhìn điểm số và tìm nguyên nhân: bạn đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Xem điểm cùng với mục tiêu và dạng bài\",0],[\"Xem cả quá trình, không chỉ một bài kiểm tra\",0],[\"Ghi nhận điều con đã làm tốt\",0],[\"Tìm lỗi sai lặp lại thay vì chỉ nhìn điểm tổng\",1],[\"Phân biệt chưa hiểu, thiếu luyện tập, thiếu thời gian\",1],[\"Hỏi con vì sao chọn đáp án đó\",1]]},{\"id\":\"s5\",\"t\":\"Trao đổi với con và giáo viên: bạn đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Mở đầu bằng điều tích cực trước khi nói chuyện điểm\",2],[\"Hỏi cảm nhận của con trước khi nhận xét\",2],[\"Cùng con chọn một việc nhỏ để cải thiện\",2],[\"Chuẩn bị sẵn câu hỏi cho giáo viên\",3],[\"Nắm phản hồi của giáo viên về con\",3],[\"Cùng giáo viên thống nhất cách hỗ trợ\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":1,\"B\":0,\"C\":1,\"D\":3},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Bạn đọc kết quả khá toàn diện\",\"desc\":\"Bạn đã nhìn kết quả theo quá trình. Phần còn lại là nhóm {g}. Hãy dùng phiếu một môn trong tuần để biến nhận định thành kế hoạch nhỏ.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Còn vài điểm có thể thêm\",\"desc\":\"Bạn đã nắm một phần, còn nhóm {g} chưa vững. Chọn một môn, ghi điều con làm tốt, dạng lỗi thường gặp và một kế hoạch hỗ trợ trong tuần.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu từ việc đặt câu hỏi\",\"desc\":\"Nhiều cha mẹ cũng chỉ nhìn điểm số, đó là điều dễ hiểu. Hãy bắt đầu với nhóm {g}: mỗi lần chỉ chọn một môn và một dạng lỗi.\"}],\"nextStep\":\"chọn một môn, cùng con xem nhóm {g}, ghi điều con làm tốt và một dạng lỗi lặp lại.\",\"rewardText\":\"cẩm nang 5 bước đọc kết quả, cách phân biệt 3 nguyên nhân, cách nói chuyện không áp lực, câu hỏi cho giáo viên và phiếu một môn trong tuần.\",\"ctaText\":\"Muốn trao đổi về cách nhà trường theo dõi tiến bộ và lộ trình học của con tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Cẩm nang đọc và hiểu kết quả học tập của con\",\"formId\":\"lm-doc-ket-qua\",\"funnel\":\"quiz-doc-ket-qua\",\"pdf\":\"/downloads/cam-nang-doc-ket-qua-hoc-tap.pdf\",\"tags\":[\"lm-doc-ket-qua\"],\"levelByYob\":{\"2009\":\"thpt\",\"2012\":\"thcs\",\"2016\":\"tieu-hoc\"},\"cover\":\"/lm/cover-doc-ket-qua.png\",\"bullets\":[\"Biết bạn đã nhìn kết quả học tập trong bối cảnh nào, và còn thiếu điều gì\",\"Cách phân biệt: chưa hiểu kiến thức, thiếu luyện tập, hay quản lý thời gian chưa tốt\",\"Câu hỏi hữu ích khi trao đổi với giáo viên\"],\"lead\":\"7 câu hỏi, 2 phút. Biết cách nhìn kết quả theo quá trình, không chỉ điểm số.\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

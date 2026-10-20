@@ -1,0 +1,50 @@
+---
+// quiz-ky-nang-tu-lap — quiz lead magnet "Cẩm nang phát triển kỹ năng tự lập cho học sinh"
+// Form → /api/lead (funnel_code: quiz-tu-lap). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/cam-nang-ky-nang-tu-lap.pdf · ảnh bìa: public/lm/
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#26275D" />
+<title>Con Bạn Tự Lập Đến Đâu? Kiểm Tra Kỹ Năng Tự Lập | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút về tự chăm sóc bản thân, tự quản lý học tập và tự giải quyết vấn đề của con, kèm cẩm nang chia nhỏ kỹ năng tự lập." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/lm/cover-tu-lap.png" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<header class="lm-head"><div class="lm-head-in">
+  <a class="lm-brand" href="/" aria-label="Trường Việt Anh"><img src="/logo-vietanh-header.webp" alt="" width="81" height="40" /><span>Trường Việt Anh</span></a>
+  <a class="lm-call" href="tel:0916961409"><small>Hotline</small> 0916 961 409</a>
+</div></header>
+<main class="lm-main" id="lm-wrap" data-phase="intro">
+  <section class="lm-pitch">
+    <span class="lm-pill">2 phút · miễn phí</span>
+    <h1>Con bạn tự lập đến đâu?</h1>
+    <p class="lm-lead">7 câu hỏi, 2 phút. Biết con đang vững kỹ năng tự lập nào và nên bắt đầu giao việc gì.</p>
+    <ul class="lm-bullets"><li>Biết con đã tự làm được gì ở 3 nhóm: chăm sóc bản thân, quản lý học tập, giải quyết vấn đề</li><li>Cách chia kỹ năng tự lập thành bước nhỏ: làm mẫu, làm cùng, quan sát, giảm dần hỗ trợ</li><li>Bảng thử thách tự lập 7 ngày: chọn một việc, theo dõi và ghi nhận tiến bộ</li></ul>
+    <div class="lm-gift"><img src="/lm/cover-tu-lap.png" alt="Bìa tài liệu Cẩm nang phát triển kỹ năng tự lập cho học sinh" width="104" height="147" /><div><b>Quà tặng: Cẩm nang phát triển kỹ năng tự lập cho học sinh</b><span>Tài liệu PDF miễn phí, gửi về email của bạn ngay sau khi làm xong quiz.</span></div></div>
+    <p class="lm-trust"><span>Miễn phí</span><span>Kết quả hiện ngay</span><span>Không cần tạo tài khoản</span></p>
+  </section>
+  <section class="lm-card" aria-label="Quiz">
+    <div class="lm-card-top"><button class="lm-back" type="button" id="lm-back" hidden>← Quay lại</button><span class="lm-step" id="lm-step" aria-live="polite"></span></div>
+    <div class="lm-prog" aria-hidden="true"><i id="lm-pb"></i></div>
+    <div class="lm-body" id="lm-root" tabindex="-1"><noscript><p>Trang này cần bật JavaScript để làm quiz. Bạn có thể gọi hotline 0916 961 409 để được hỗ trợ.</p></noscript></div>
+  </section>
+</main>
+<footer class="lm-foot">© Trường Việt Anh · <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></footer>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con bạn tự lập đến đâu?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết con đã tự làm được những gì trong chăm sóc bản thân, quản lý học tập và giải quyết vấn đề. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Đây là cách \\u003cb>quan sát\\u003c/b>, không phải bài kiểm tra. Tự lập được xây từng bước nhỏ, phù hợp độ tuổi.\",\"scoreLabel\":\"kỹ năng con đã làm được\",\"groups\":[\"Tự chăm sóc\",\"Quản lý học tập\",\"Giải quyết vấn đề\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Để mình chọn đúng nội dung theo độ tuổi.\",\"o\":[[\"2016\",\"2016–2020 (tiểu học)\"],[\"2012\",\"2012–2015 (THCS)\"],[\"2011\",\"2011 trở về trước\"],[\"2021\",\"2021 trở về sau\"]],\"redirect\":{\"2011\":{\"t\":\"Bộ này dành cho học sinh tiểu học và THCS\",\"d\":\"Cẩm nang này được thiết kế cho học sinh tiểu học và THCS. Bạn có thể liên hệ nhà trường để được tư vấn phù hợp với độ tuổi của con.\"},\"2021\":{\"t\":\"Con bạn còn nhỏ hơn độ tuổi của bộ này\",\"d\":\"Bộ này dành cho học sinh tiểu học và THCS. Với trẻ mầm non, mời bạn xem checklist mầm non của nhà trường.\",\"href\":\"/checklist-mam-non\",\"cta\":\"Xem checklist mầm non\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn lo nhất về sự tự lập của con?\",\"o\":[[\"A\",\"Con hay ỷ lại, chờ nhắc mới làm\"],[\"B\",\"Cha mẹ hay làm hộ vì nhanh hơn\"],[\"C\",\"Con sợ sai nên không dám tự thử\"],[\"D\",\"Chưa biết nên giao việc gì cho con\"]]},{\"id\":\"cur\",\"t\":\"Hiện bạn giao cho con những việc gì?\",\"o\":[[\"A\",\"Chưa giao việc nào\"],[\"B\",\"Một vài việc nhỏ\"],[\"C\",\"Khá nhiều việc nhưng vẫn phải nhắc\"],[\"D\",\"Con tự làm gần hết việc của mình\"]]},{\"id\":\"s4\",\"t\":\"Chăm sóc bản thân và học tập: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Tự chuẩn bị đồ dùng cho ngày hôm sau\",0],[\"Tự giữ vệ sinh cá nhân\",0],[\"Tự sắp xếp góc học tập\",0],[\"Tự cất đồ về đúng chỗ\",0],[\"Tự ghi bài tập vào sổ\",1],[\"Tự chia bài lớn thành các bước nhỏ\",1]]},{\"id\":\"s5\",\"t\":\"Quản lý và giải quyết vấn đề: con làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Tự kiểm tra đồ dùng trước khi đi học\",1],[\"Bắt đầu làm bài mà không cần nhắc\",1],[\"Thử cách làm của mình trước khi nhờ giúp\",2],[\"Nhận ra lúc nào cần nhờ người lớn\",2],[\"Nói rõ mình đang gặp khó khăn gì\",2],[\"Thử lại sau khi làm sai\",2]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":1,\"B\":0,\"C\":2,\"D\":0},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Con khá tự lập\",\"desc\":\"Con đã tự làm được nhiều việc. Điều nên làm là giao thêm quyền quyết định ở nhóm {g}, cha mẹ đứng bên cạnh quan sát thay vì làm giúp.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Con đang tập tự lập\",\"desc\":\"Con đã có nền tảng, còn nhóm {g} cần luyện thêm. Chọn \\u003cb>một việc\\u003c/b> con có thể tự làm, thống nhất tiêu chí hoàn thành và theo dõi trong 7 ngày.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu bằng việc nhỏ\",\"desc\":\"Con mới bắt đầu tự lập, và điều đó hoàn toàn bình thường. Hãy bắt đầu với nhóm {g}, mỗi lần chỉ một việc nhỏ, người lớn làm mẫu rồi làm cùng con.\"}],\"nextStep\":\"chọn một việc nhỏ ở nhóm {g}, làm mẫu cho con, làm cùng, rồi để con tự làm.\",\"rewardText\":\"cẩm nang tự lập: 3 nhóm kỹ năng, 4 bước hỗ trợ, điều nên tránh và bảng thử thách 7 ngày.\",\"ctaText\":\"Muốn tìm hiểu cách học sinh được rèn tính chủ động trong học tập và sinh hoạt tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Cẩm nang phát triển kỹ năng tự lập cho học sinh\",\"formId\":\"lm-tu-lap\",\"funnel\":\"quiz-tu-lap\",\"pdf\":\"/downloads/cam-nang-ky-nang-tu-lap.pdf\",\"tags\":[\"lm-tu-lap\"],\"levelByYob\":{\"2012\":\"thcs\",\"2016\":\"tieu-hoc\"},\"cover\":\"/lm/cover-tu-lap.png\",\"bullets\":[\"Biết con đã tự làm được gì ở 3 nhóm: chăm sóc bản thân, quản lý học tập, giải quyết vấn đề\",\"Cách chia kỹ năng tự lập thành bước nhỏ: làm mẫu, làm cùng, quan sát, giảm dần hỗ trợ\",\"Bảng thử thách tự lập 7 ngày: chọn một việc, theo dõi và ghi nhận tiến bộ\"],\"lead\":\"7 câu hỏi, 2 phút. Biết con đang vững kỹ năng tự lập nào và nên bắt đầu giao việc gì.\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

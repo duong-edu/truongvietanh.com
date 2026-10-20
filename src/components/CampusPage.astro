@@ -158,7 +158,7 @@ const structuredData = {
           <div class="pdr-card">
             <div class="pdr-icon">🎯</div>
             <h3>PLAN — Kiến tạo mục tiêu</h3>
-            <p>Đầu năm học, mỗi học sinh tự xác định mục tiêu phát triển trên 4 lĩnh vực: <strong>Kiến thức · Kỹ năng · Tiếng Anh · Thể chất</strong>.</p>
+            <p>Đầu năm học, mỗi học sinh tự xác định mục tiêu phát triển trên 4 lĩnh vực: <strong>Kiến thức · Kỹ năng lãnh đạo · Phẩm chất · Sức khoẻ</strong>.</p>
             <p>Mục tiêu được phân rã có hệ thống — từ năm học → học kỳ → quý → tháng, và cụ thể hóa thành <em>hành động đòn bẩy hàng tuần</em>.</p>
           </div>
           <div class="pdr-card">
@@ -177,7 +177,55 @@ const structuredData = {
       </div>
     </section>
 
-    {level !== 'mam-non' && (
+    {level === 'mam-non-tieu-hoc' && (
+      <!-- ============== III. KẾT QUẢ / CƠ SỞ VẬT CHẤT (MẦM NON · TIỂU HỌC) ==============
+           Cơ sở chỉ có Mầm non + Tiểu học: KHÔNG dùng số liệu THPT (ICDL, điểm 10 Tiếng Anh,
+           IELTS tốt nghiệp, nhận thẳng ĐH). Anh Dương chốt 15/10/2026.
+           Số liệu từng cơ sở lấy từ website riêng của trường (16/10/2026):
+           · Mekong Xanh (mgis.edu.vn/thanh-tich): 24 giải/3 năm học. KHÔNG dùng "95% phụ huynh đề xuất" (chưa có nguồn khảo sát).
+           · Thái Sơn (truongthaison.com): khai giảng năm đầu 2026 → CHƯA có kết quả, chỉ nêu cơ sở vật chất. -->
+      <section class="content-section">
+        <div class="container narrow">
+          {shortName === 'Mekong Xanh' ? (
+            <>
+              <div class="section-eyebrow">III. Kết quả đã ghi nhận</div>
+              <h2 class="section-title">Học sinh Mekong Xanh trên các sân chơi học thuật</h2>
+              <ul class="commitment-list">
+                <li><strong>24 giải thưởng</strong> trong 3 năm học (2023–2026), trong đó <strong>12 giải cấp Quốc gia</strong> và <strong>2 Giải Vàng Quốc gia</strong></li>
+                <li>2023–2024: <strong>11 giải thưởng</strong>, 6 giải Quốc gia — Toán quốc tế HIPPO 5 giải Quốc gia, gồm 1 Giải Vàng</li>
+                <li>2024–2025: <strong>2 Giải Nhất cấp Tỉnh</strong> Tiếng Anh IOE và thành tích Hùng biện Tiếng Anh cấp Thành phố</li>
+                <li>2025–2026: <strong>6 giải Quốc gia</strong> Toán tư duy TIMO, nổi bật 1 Giải Vàng của học sinh lớp 2, cùng nhiều giải IOE Tiếng Anh</li>
+                <li>Hơn <strong>200 học sinh</strong> Mầm non và Tiểu học đang theo học</li>
+              </ul>
+              <p><a href="https://mgis.edu.vn/thanh-tich" target="_blank" rel="noopener">Xem bảng vàng thành tích chi tiết →</a></p>
+            </>
+          ) : shortName === 'Thái Sơn' ? (
+            <>
+              <div class="section-eyebrow">III. Cơ sở vật chất &amp; chương trình</div>
+              <h2 class="section-title">Ngôi trường mới, khai giảng năm học đầu tiên 2026–2027</h2>
+              <ul class="commitment-list">
+                <li>Nằm trong Khu dân cư Thái Sơn <strong>hơn 46 ha</strong> tại Long Hậu, sức chứa gần <strong>1.000 học sinh</strong> Mầm non và Tiểu học</li>
+                <li>Khối phòng học mới cho cả 2 cấp, phòng năng khiếu (Âm nhạc, Mỹ thuật, Dance) và phòng SteamE thực hành</li>
+                <li>Sân chơi ngoài trời rộng, bếp ăn và khu bán trú đảm bảo dinh dưỡng</li>
+                <li>Học theo phương pháp Trường Việt Anh: tiếng Anh với giáo viên bản ngữ, 5 Giá trị cốt lõi, hệ thống PDR và liên cấp lên THCS, THPT không đứt đoạn</li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <div class="section-eyebrow">III. Chương trình Mầm non · Tiểu học</div>
+              <h2 class="section-title">Nền tảng vững cho cả hành trình liên cấp</h2>
+              <ul class="commitment-list">
+                <li>Lộ trình Tiếng Anh xuyên suốt với <strong>giáo viên bản ngữ</strong> — mục tiêu <strong>IELTS 4.0</strong> khi lên lớp 5</li>
+                <li><strong>16 kỹ năng thiết yếu</strong> được tích hợp vào từng tiết học, phẩm chất lãnh đạo phát triển qua <strong>Leader in Me</strong></li>
+                <li>Học sinh Tiểu học tự thuyết trình hành trình phát triển của mình trước phụ huynh <strong>5 lần mỗi năm</strong> (hệ thống PDR)</li>
+              </ul>
+            </>
+          )}
+        </div>
+      </section>
+    )}
+
+    {level === 'lien-cap' && (
       <!-- ============== III. CAM KẾT ĐẦU RA ============== -->
       <section class="content-section">
         <div class="container narrow">
@@ -188,7 +236,6 @@ const structuredData = {
             <li><strong>100%</strong> học sinh tốt nghiệp sở hữu chứng chỉ Tin học quốc tế ICDL — chuẩn Châu Âu, được công nhận tại hơn 150 quốc gia</li>
             <li>Lộ trình Tiếng Anh xuyên suốt với <strong>giáo viên bản ngữ từ lớp 1 đến lớp 12</strong> — từ Starters ở bậc Tiểu học đến IELTS 6.0+ khi tốt nghiệp THPT</li>
             <li><strong>Top 15 toàn cầu</strong> — Cuộc thi Leader in Me 2023, cạnh tranh với các trường từ hơn 50 quốc gia</li>
-            <li>Học sinh tốt nghiệp được nhận thẳng vào <strong>Đại học Buckinghamshire, Birmingham City</strong> tại Việt Nam hoặc UK — không qua thi tuyển</li>
           </ul>
         </div>
       </section>
@@ -202,30 +249,31 @@ const structuredData = {
         <div class="program-tier">
           <div class="tier-num">1</div>
           <div class="tier-body">
-            <h3>Học thuật chuẩn quốc gia</h3>
+            <h3>Kiến thức</h3>
             <p>Bám sát khung chuẩn của Bộ Giáo dục và Đào tạo, đảm bảo học sinh tự tin trong mọi kỳ thi chuyển cấp. Học sinh Việt Anh có đầy đủ hành trang xét tuyển vào các trường Đại học Công lập hàng đầu Việt Nam.</p>
+            <p>Học tiếng Anh với giáo viên bản ngữ theo phương pháp tích hợp nội dung và ngôn ngữ, để học sinh có phát âm chuẩn, có thói quen sử dụng tiếng Anh trong học tập và cuộc sống.</p>
           </div>
         </div>
         <div class="program-tier">
           <div class="tier-num">2</div>
           <div class="tier-body">
-            <h3>Kỹ năng thế kỷ 21</h3>
-            <p><strong>16 kỹ năng thiết yếu</strong> được tích hợp có hệ thống vào từng tiết học — không phải môn học riêng lẻ. Phẩm chất lãnh đạo phát triển qua chương trình <strong>Leader in Me</strong> của FranklinCovey (Hoa Kỳ) — lần đầu được triển khai tại TP.HCM bởi Trường Việt Anh.</p>
-            <p>7 Thói quen lãnh đạo và 5 Giá trị cốt lõi: <em>Tôn trọng · Trách nhiệm · Tài giỏi · Chính trực · Yêu thương</em>.</p>
+            <h3>Kỹ năng lãnh đạo</h3>
+            <p><strong>16 kỹ năng thiết yếu</strong> được tích hợp có hệ thống vào từng tiết học — không phải môn học riêng lẻ. Phẩm chất lãnh đạo phát triển qua chương trình <strong>Leader in Me</strong> của FranklinCovey (Hoa Kỳ) — được Trường Việt Anh triển khai tại TP.HCM.</p>
+            <p>7 Thói quen lãnh đạo hiệu quả được học sinh thực hành hằng ngày.</p>
           </div>
         </div>
         <div class="program-tier">
           <div class="tier-num">3</div>
           <div class="tier-body">
-            <h3>Tiếng Anh</h3>
-            <p>Học tiếng Anh với giáo viên bản ngữ theo phương pháp tích hợp nội dung và ngôn ngữ, để học sinh có phát âm chuẩn, có thói quen sử dụng tiếng Anh trong học tập và cuộc sống.</p>
+            <h3>Phẩm chất</h3>
+            <p>5 Giá trị cốt lõi định hướng cách học sinh ứng xử và trưởng thành: <em>Tôn trọng · Trách nhiệm · Tài giỏi · Chính trực · Yêu thương</em>.</p>
           </div>
         </div>
         <div class="program-tier">
           <div class="tier-num">4</div>
           <div class="tier-body">
-            <h3>Thể chất</h3>
-            <p>Học sinh thực hành 5 nguyên tắc sống khỏe: <strong>Ăn tốt · Uống tốt · Nghỉ ngơi tốt · Tập luyện · Niềm vui mỗi ngày</strong>. 100% học sinh tham gia hoạt động thể thao thường xuyên.</p>
+            <h3>Sức khoẻ</h3>
+            <p>Học sinh thực hành 5 nguyên tắc sống khỏe: <strong>Ăn tốt · Uống tốt · Nghỉ ngơi tốt · Thể thao · Niềm vui mỗi ngày</strong>. 100% học sinh tham gia hoạt động thể thao thường xuyên.</p>
           </div>
         </div>
       </div>

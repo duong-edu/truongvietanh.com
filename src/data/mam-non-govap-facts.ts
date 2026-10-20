@@ -44,8 +44,8 @@ export const mnFacts = {
   tiLeGvHs: '1:8',
 
   // ---------- Độ tuổi & cách xếp lớp ----------
-  ageFrom: '13 tháng',
-  ageRange: '13 tháng – 6 tuổi',
+  ageFrom: '12 tháng',
+  ageRange: '12 tháng – 6 tuổi',
   // ⚠️ Tài liệu gốc mô tả lớp preschool theo mô hình ĐA ĐỘ TUỔI: bé 3, 4 và 5 tuổi
   //    học chung một lớp. Không chia Mầm/Chồi/Lá theo tuổi như cách gọi truyền thống.
   groupingModel: 'Đa độ tuổi (Multi-age) — bé 3, 4 và 5 tuổi học chung một lớp',

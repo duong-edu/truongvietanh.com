@@ -1,0 +1,50 @@
+---
+// quiz-chuan-bi-chuyen-cap — quiz lead magnet "Bộ câu hỏi giúp cha mẹ chuẩn bị cho con chuyển cấp"
+// Form → /api/lead (funnel_code: quiz-chuyen-cap). Logic chung: public/js/lm-quiz.js · giao diện: public/css/lm-quiz.css
+// Nội dung quiz nằm trong JSON bên dưới. PDF nhận được: public/downloads/bo-cau-hoi-chuan-bi-chuyen-cap.pdf · ảnh bìa: public/lm/
+// Không gửi quiz_score lên worker (xem ghi chú đầu public/js/lm-quiz.js).
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#26275D" />
+<title>Con Sắp Chuyển Cấp: Gia Đình Đã Chuẩn Bị Đến Đâu? | Trường Việt Anh</title>
+<meta name="description" content="7 câu hỏi trong 2 phút cho gia đình có con sắp vào lớp 1, lớp 6 hoặc lớp 10, kèm bộ câu hỏi chuẩn bị theo 5 khía cạnh và kế hoạch 30 ngày đầu." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/lm/cover-chuyen-cap.png" />
+<link rel="stylesheet" href="/css/lm-quiz.css" />
+</head>
+<body>
+<header class="lm-head"><div class="lm-head-in">
+  <a class="lm-brand" href="/" aria-label="Trường Việt Anh"><img src="/logo-vietanh-header.webp" alt="" width="81" height="40" /><span>Trường Việt Anh</span></a>
+  <a class="lm-call" href="tel:0916961409"><small>Hotline</small> 0916 961 409</a>
+</div></header>
+<main class="lm-main" id="lm-wrap" data-phase="intro">
+  <section class="lm-pitch">
+    <span class="lm-pill">2 phút · miễn phí</span>
+    <h1>Con sắp chuyển cấp, gia đình đã chuẩn bị đến đâu?</h1>
+    <p class="lm-lead">7 câu hỏi, 2 phút. Dành cho gia đình có con sắp vào lớp 1, lớp 6 hoặc lớp 10.</p>
+    <ul class="lm-bullets"><li>Biết gia đình đã chuẩn bị đến đâu về học tập, nề nếp, cảm xúc và môi trường mới</li><li>Bộ câu hỏi cho cha mẹ và cho con, chia theo 5 khía cạnh</li><li>Kế hoạch 30 ngày đầu: quan sát, trao đổi, điều chỉnh</li></ul>
+    <div class="lm-gift"><img src="/lm/cover-chuyen-cap.png" alt="Bìa tài liệu Bộ câu hỏi giúp cha mẹ chuẩn bị cho con chuyển cấp" width="104" height="147" /><div><b>Quà tặng: Bộ câu hỏi giúp cha mẹ chuẩn bị cho con chuyển cấp</b><span>Tài liệu PDF miễn phí, gửi về email của bạn ngay sau khi làm xong quiz.</span></div></div>
+    <p class="lm-trust"><span>Miễn phí</span><span>Kết quả hiện ngay</span><span>Không cần tạo tài khoản</span></p>
+  </section>
+  <section class="lm-card" aria-label="Quiz">
+    <div class="lm-card-top"><button class="lm-back" type="button" id="lm-back" hidden>← Quay lại</button><span class="lm-step" id="lm-step" aria-live="polite"></span></div>
+    <div class="lm-prog" aria-hidden="true"><i id="lm-pb"></i></div>
+    <div class="lm-body" id="lm-root" tabindex="-1"><noscript><p>Trang này cần bật JavaScript để làm quiz. Bạn có thể gọi hotline 0916 961 409 để được hỗ trợ.</p></noscript></div>
+  </section>
+</main>
+<footer class="lm-foot">© Trường Việt Anh · <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></footer>
+<script type="application/json" id="lm-config" is:inline set:html={"{\"introTag\":\"2 phút · miễn phí\",\"introTitle\":\"Con sắp chuyển cấp, gia đình đã chuẩn bị đến đâu?\",\"introText\":\"Trả lời 7 câu hỏi nhanh để biết gia đình đã chuẩn bị cho con về học tập, nề nếp, cảm xúc và môi trường mới. \\u003cb>Bạn nhận kết quả ngay\\u003c/b> sau câu cuối.\",\"introCard\":\"Chuyển cấp kéo theo nhiều thay đổi: chương trình, bạn bè, lịch học và tâm lý. Bộ này giúp cả nhà chuẩn bị theo từng khía cạnh.\",\"scoreLabel\":\"điều gia đình đã chuẩn bị\",\"groups\":[\"Học tập\",\"Nề nếp\",\"Cảm xúc\",\"Môi trường mới\"],\"questions\":[{\"id\":\"yob\",\"t\":\"Con bạn sinh năm nào?\",\"h\":\"Chọn theo cấp con sắp chuyển.\",\"o\":[[\"2021\",\"2021–2022 (sắp vào lớp 1)\"],[\"2016\",\"2016–2017 (sắp vào lớp 6)\"],[\"2011\",\"2011–2012 (sắp vào lớp 10)\"],[\"2025\",\"Năm sinh khác\"]],\"redirect\":{\"2025\":{\"t\":\"Bộ này dành cho 3 mốc chuyển cấp\",\"d\":\"Bộ câu hỏi này dành cho gia đình có con sắp vào lớp 1, lớp 6 hoặc lớp 10. Bạn có thể liên hệ nhà trường để được tư vấn theo độ tuổi của con.\"}}},{\"id\":\"worry\",\"t\":\"Điều bạn lo nhất khi con chuyển cấp?\",\"o\":[[\"A\",\"Con theo kịp chương trình mới\"],[\"B\",\"Con làm quen bạn bè và thầy cô\"],[\"C\",\"Lịch học, đi lại, nề nếp thay đổi\"],[\"D\",\"Con lo lắng, áp lực tâm lý\"]]},{\"id\":\"cur\",\"t\":\"Gia đình đã trao đổi với con về việc chuyển cấp chưa?\",\"o\":[[\"A\",\"Chưa nói gì\"],[\"B\",\"Mới nói sơ qua\"],[\"C\",\"Đã hỏi con mong chờ và lo điều gì\"],[\"D\",\"Đã cùng con lập kế hoạch\"]]},{\"id\":\"s4\",\"t\":\"Học tập và nề nếp: gia đình đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được. Có thể không chọn gì.\",\"multi\":[[\"Biết con cần ôn lại phần nào\",0],[\"Biết môn nào con cần hỗ trợ thêm\",0],[\"Con đã có cách học quen thuộc\",0],[\"Giờ ngủ và giờ dậy ổn định\",1],[\"Đã tính đường đi, đưa đón đến trường\",1],[\"Con tự chuẩn bị đồ dùng, tập tự học\",1]]},{\"id\":\"s5\",\"t\":\"Cảm xúc và môi trường mới: gia đình đã làm được gì?\",\"h\":\"Chọn tất cả điều con đã làm được.\",\"multi\":[[\"Con nói được điều mình đang lo\",2],[\"Con biết nhờ ai khi cần giúp\",2],[\"Con kể được điều mình mong chờ\",2],[\"Đã cùng con xem trường mới, tìm lớp\",3],[\"Con biết cách hỏi thầy cô khi chưa hiểu\",3],[\"Con có cơ hội làm quen bạn mới\",3]]},{\"id\":\"when\",\"t\":\"Gia đình dự tính tìm hiểu hoặc đổi môi trường học khi nào?\",\"o\":[[\"A\",\"Trong 3 tháng tới\"],[\"B\",\"Trong 3–12 tháng tới\"],[\"C\",\"Sau hơn 12 tháng\"],[\"D\",\"Chưa nghĩ tới, con đang ổn ở trường hiện tại\"]]},{\"id\":\"prio\",\"t\":\"Bạn mong con phát triển điều gì nhất?\",\"o\":[[\"A\",\"Học phí & môi trường học hợp lý\"],[\"B\",\"Học thuật, nền tảng vững\"],[\"C\",\"Tiếng Anh\"],[\"D\",\"Kỹ năng sống & phát triển toàn diện\"]]}],\"worryPref\":{\"A\":0,\"B\":3,\"C\":1,\"D\":2},\"tier\":{\"A\":\"nóng\",\"B\":\"ấm\",\"C\":\"lạnh\",\"D\":\"lạnh\"},\"branches\":[{\"min\":9,\"key\":\"A\",\"tag\":\"Gia đình đã chuẩn bị tốt\",\"desc\":\"Gia đình đã chuẩn bị nhiều khía cạnh. Chỉ cần bổ sung nhóm {g} và giữ nhịp trao đổi với con trong 30 ngày đầu.\"},{\"min\":5,\"key\":\"B\",\"tag\":\"Đã có nền, cần bổ sung\",\"desc\":\"Gia đình đã chuẩn bị một phần, còn nhóm {g} cần chú ý. Dùng bộ câu hỏi để trao đổi với con và lập kế hoạch 30 ngày đầu.\"},{\"min\":0,\"key\":\"C\",\"tag\":\"Hãy bắt đầu từ những câu hỏi nhỏ\",\"desc\":\"Chưa chuẩn bị nhiều là rất bình thường. Hãy bắt đầu với nhóm {g}: ngồi cùng con và hỏi ba câu, con mong chờ gì, con lo gì, người lớn hỗ trợ thế nào.\"}],\"nextStep\":\"ngồi cùng con 15 phút, hỏi ba câu về nhóm {g}: mong chờ, lo lắng, cần hỗ trợ.\",\"rewardText\":\"bộ câu hỏi chuyển cấp cho cha mẹ và cho con (5 khía cạnh), kế hoạch 30 ngày đầu và phiếu hỏi con.\",\"ctaText\":\"Muốn tìm hiểu cơ sở vật chất, chương trình và nề nếp học tập tại Trường Việt Anh?\",\"address\":\"160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM\",\"hours\":\"Thứ 2 – Thứ 7: 07:00 – 19:00 · Chủ nhật: hẹn trước\",\"hotline\":\"0916 961 409\",\"name\":\"Bộ câu hỏi giúp cha mẹ chuẩn bị cho con chuyển cấp\",\"formId\":\"lm-chuyen-cap\",\"funnel\":\"quiz-chuyen-cap\",\"pdf\":\"/downloads/bo-cau-hoi-chuan-bi-chuyen-cap.pdf\",\"tags\":[\"lm-chuyen-cap\"],\"levelByYob\":{\"2011\":\"thpt\",\"2016\":\"thcs\",\"2021\":\"tieu-hoc\"},\"cover\":\"/lm/cover-chuyen-cap.png\",\"bullets\":[\"Biết gia đình đã chuẩn bị đến đâu về học tập, nề nếp, cảm xúc và môi trường mới\",\"Bộ câu hỏi cho cha mẹ và cho con, chia theo 5 khía cạnh\",\"Kế hoạch 30 ngày đầu: quan sát, trao đổi, điều chỉnh\"],\"lead\":\"7 câu hỏi, 2 phút. Dành cho gia đình có con sắp vào lớp 1, lớp 6 hoặc lớp 10.\"}"} />
+<script src="/js/va-utm.js" is:inline></script>
+<script src="/js/lm-quiz.js" is:inline></script>
+</body>
+</html>

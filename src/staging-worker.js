@@ -1016,7 +1016,7 @@ async function handleLeadSubmission(request, env) {
       else if (!skipGhl && data.email && (data.source || '').match(/^(mam-non|tieu-hoc|thcs|thpt|ngay-mo-cua|dat-lich-tham-quan|brand-story|future-ready-challenge)/)) {
         promises.push(sendLandingConfirmEmail(data, env, contactId, ghlApiKey).catch((e) => { console.error('landing confirm email fail', e); }));
       }
-      if (skipGhl && data.email) {
+      if (data.email) { // mọi form có email → GetResponse (lead không email thì bỏ qua)
         promises.push(addToGetResponse(rawData, data, env)
           .then((r) => { results.getresponse = r; })
           .catch((e) => { results.getresponse = { error: e.message }; }));
@@ -1044,12 +1044,46 @@ async function handleLeadSubmission(request, env) {
 }
 
 function isGetResponseFunnel(source) {
-  return /^(mam-non-trai-nghiem|school-tour)(-|$)/.test(String(source || ''));
+  return /^(mam-non-trai-nghiem|school-tour|lm01-quiz-lop-1)(-|$)/.test(String(source || ''));
+}
+
+// 5 quiz lead magnet 2026-2027 → list GetResponse "Danh bạ nhận lead magnet 2026-2027" (GR_LISTS.leadMagnet).
+// Key = funnel_code do trang gửi lên (= data.source). Số LMxx theo Kế hoạch 30 lead magnet.
+//  - lm01-quiz-lop-1 : đi Pancake + GetResponse, BỎ QUA GHL (xem isGetResponseFunnel).
+//  - các quiz-*      : vẫn đi GHL + Pancake như thiết kế của team, chỉ THÊM GetResponse.
+const LM_GR_FUNNELS = {
+  'lm01-quiz-lop-1':       { tag: 'LM01_Quiz_Lop1' },        // #1  Sẵn sàng vào lớp 1
+  'quiz-tieng-anh-1-12':   { tag: 'LM02_Tieng_Anh_1_12' },    // #2  Lộ trình tiếng Anh
+  'quiz-dong-hanh-7-ngay': { tag: 'LM07_Dong_Hanh_7_Ngay' },  // #7  Đồng hành 7 ngày
+  'quiz-planner-7-ngay':   { tag: 'LM10_Planner_7_Ngay' },    // #10 Planner 7 ngày
+  'quiz-tham-quan-truong': { tag: 'LM16_Tham_Quan_Truong' },  // #16 Tham quan trường
+  'quiz-tu-lap':           { tag: 'LM03_Tu_Lap' },            // #3  Kỹ năng tự lập
+  'quiz-chuyen-cap':       { tag: 'LM04_Chuyen_Cap' },        // #4  Chuẩn bị chuyển cấp
+  'quiz-doc-ket-qua':      { tag: 'LM08_Doc_Ket_Qua' },       // #8  Đọc kết quả học tập
+  'quiz-hanh-trang-thpt':  { tag: 'LM11_Hanh_Trang_THPT' },   // #11 Hành trang THPT
+  'quiz-thu-thach-tu-hoc': { tag: 'LM13_Thu_Thach_Tu_Hoc' },  // #13 Thử thách 7 ngày tự học
+};
+function isLmGrFunnel(source) {
+  return Object.prototype.hasOwnProperty.call(LM_GR_FUNNELS, String(source || ''));
+}
+// Tên tag GetResponse của một lead: tag funnel + TS_2026 + tầng (nóng/ấm/lạnh) + nhóm cần tập (LM01).
+// Tag do trình duyệt gửi lên CHỈ dùng để suy ra tên theo whitelist, không bao giờ dùng nguyên văn
+// → khách không tự gắn được tag kích hoạt automation (vd Check_Active, Mam_Non).
+// Thẻ đánh dấu phụ huynh đã vào chuỗi nuôi dưỡng 435 ngày. Thẻ MỚI, CỐ Ý không dùng lại 'TangSach_NuoiDuong' (chuỗi tặng sách cũ).
+const GR_NURTURE_TAG = 'Nuoi_Duong_435';
+function lmGrTagNames(source, clientTags) {
+  const out = [LM_GR_FUNNELS[source].tag, 'TS_2026', GR_NURTURE_TAG];
+  for (const t of clientTags || []) {
+    const m = /^(?:LM01_)?tier[-_](nong|am|lanh)$/i.exec(String(t));
+    if (m) out.push('LM_Tier_' + m[1][0].toUpperCase() + m[1].slice(1).toLowerCase());
+    else if (source === 'lm01-quiz-lop-1' && /^LM01_Yeu_(NeNep|GiaoTiep|HocTap|CamXuc)$/.test(String(t))) out.push(String(t));
+  }
+  return [...new Set(out)];
 }
 
 // GetResponse (tài khoản BKpyQ) — list/field/tag tạo 27/09/2026. CỐ Ý KHÔNG gắn tag cấp học có sẵn
 // (Mam_Non, Tieu_Hoc, THCS...) vì các automation "Email 0 – Phân loại độ tuổi" đang bắt những tag đó.
-const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi' };
+const GR_LISTS = { mamNon: 'P5Bde', schoolTour: 'P5Bsi', leadMagnet: 'PLchW', all: 'P6RCh' }; // leadMagnet = "Danh bạ nhận lead magnet 2026-2027"
 const GR_FIELDS = {
   ten_hoc_sinh: 'njZtaT', co_so: 'njZt82', hotline_co_so: 'njZtWM', ngay_hen: 'njZtKY',
   khung_gio: 'njZtoC', hinh_thuc: 'njZtr8', lop: 'njZtQe', nhom_dinh_tuyen: 'njZtMi',
@@ -1087,19 +1121,69 @@ async function ensureGrTag(gr, name) {
   return id;
 }
 
+// Mọi lead magnet (LM_GR_FUNNELS) ngoài việc vào danh bạ lead magnet còn được thêm vào danh bạ
+// "Nuôi dưỡng 435 ngày" ngay lúc điền form → chuỗi nuôi dưỡng (autoresponder theo ngày) tự chạy,
+// "Ngày 3" của chuỗi = 3 ngày sau khi đăng ký. Lỗi ở bước này KHÔNG được làm hỏng lead chính.
 async function addToGetResponse(raw, data, env) {
+  const main = await addToGetResponseMain(raw, data, env);
+  if (isLmGrFunnel(data.source) && env.GETRESPONSE_API_KEY && data.email) {
+    main.nurture = await addToNurtureList(data, env).catch((e) => ({ error: e.message }));
+  }
+  return main;
+}
+
+const GR_NURTURE_LIST_NAME = 'Nuôi dưỡng 435 ngày';
+const GR_NURTURE_LIST_ID = 'PLYBU'; // danh bạ "Nuôi dưỡng 435 ngày" (88 thư trả lời tự động, Ngày 3 → 435); để trống thì tự tra theo tên
+let grNurtureListCache = null;
+async function addToNurtureList(data, env) {
+  const gr = (method, path, body) => fetch('https://api.getresponse.com/v3' + path, {
+    method,
+    headers: { 'X-Auth-Token': 'api-key ' + env.GETRESPONSE_API_KEY, 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  let listId = GR_NURTURE_LIST_ID || grNurtureListCache;
+  if (!listId) {
+    const found = await (await gr('GET', `/campaigns?query[name]=${encodeURIComponent(GR_NURTURE_LIST_NAME)}&fields=campaignId,name`)).json().catch(() => []);
+    listId = Array.isArray(found) ? (found.find((c) => c.name === GR_NURTURE_LIST_NAME) || {}).campaignId : null;
+    if (listId) grNurtureListCache = listId;
+  }
+  if (!listId) return { skipped: true, reason: 'no_list' };
+  // Chỉ gắn trường tùy chỉnh và thẻ nuôi dưỡng, KHÔNG gắn tag lead magnet: automation theo tag LMxx sẽ gửi lại email quà tặng nếu tag xuất hiện ở đây.
+  const customFieldValues = [
+    data.phone ? { customFieldId: GR_FIELDS.phone, value: ['+84' + data.phone.slice(1)] } : null,
+    data.source ? { customFieldId: GR_FIELDS.origin, value: [String(data.source).slice(0, 255)] } : null,
+  ].filter(Boolean);
+  const nurtureTagId = await ensureGrTag(gr, GR_NURTURE_TAG).catch(() => null);
+  const res = await gr('POST', '/contacts', {
+    email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
+    ...(data.fullName ? { name: data.fullName } : {}),
+    customFieldValues,
+    ...(nurtureTagId ? { tags: [{ tagId: nurtureTagId }] } : {}),
+  });
+  if (res.status === 202) return { status: 202, list: listId };
+  // 409 = đã trong chuỗi (làm lead magnet thứ hai): giữ nguyên lịch, không đặt lại ngày
+  if (res.status === 409) return { status: 409, already: true };
+  return { status: res.status, error: (await res.text()).slice(0, 300) };
+}
+
+async function addToGetResponseMain(raw, data, env) {
   const key = env.GETRESPONSE_API_KEY;
   if (!key) return { skipped: true, reason: 'no_key' };
   const isMn = String(data.source).startsWith('mam-non-trai-nghiem');
+  const isLm = isLmGrFunnel(data.source);
+  // Mọi form còn lại trên web (squeeze, trại hè, tuyển sinh, đặt lịch...) → list "Trường Việt Anh - All"
+  const isGeneric = !isMn && !isLm && !isGetResponseFunnel(data.source);
+  const isSite = isLm || isGeneric; // form chỉ có tên phụ huynh, không có trường lịch hẹn
   const hocThu = raw.visit_type === 'hoc-thu';
   const d = String(raw.preferred_date || '');
   const values = {
-    ten_hoc_sinh: data.childName || data.fullName,
+    // Lead magnet: form chỉ có tên PHỤ HUYNH → không ghi vào ô "tên học sinh".
+    ten_hoc_sinh: isSite ? '' : (data.childName || data.fullName),
     co_so: raw.campus_label,
     hotline_co_so: raw.campus_hotline,
     ngay_hen: /^\d{4}-\d{2}-\d{2}$/.test(d) ? d.split('-').reverse().join('/') : d,
     khung_gio: raw.preferred_slot,
-    hinh_thuc: isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
+    hinh_thuc: isSite ? '' : isMn ? 'Học thử 1 buổi' : hocThu ? `Tham quan + học thử ${raw.trial_days} ngày` : 'Tham quan trường',
     lop: isMn ? raw.program : String(raw.grade || '').replace(/^lop-(\d+)$/, 'Lớp $1'),
     nhom_dinh_tuyen: isMn ? 'MN' : raw.routing_group,
     phone: data.phone ? '+84' + data.phone.slice(1) : '',
@@ -1110,15 +1194,33 @@ async function addToGetResponse(raw, data, env) {
   const customFieldValues = Object.entries(values)
     .filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '')
     .map(([k, v]) => ({ customFieldId: GR_FIELDS[k], value: [String(v).slice(0, 255)] }));
-  const tags = isMn ? [GR_TAGS.hocThuMamNon]
+  const tags = isSite ? []
+    : isMn ? [GR_TAGS.hocThuMamNon]
     : [GR_TAGS.schoolTour, ...(hocThu ? [GR_TAGS.hocThuK12] : []), ...(raw.boarding ? [GR_TAGS.noiTru] : [])];
-  const listId = isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
+  const listId = isLm ? GR_LISTS.leadMagnet : isGeneric ? GR_LISTS.all : isMn ? GR_LISTS.mamNon : GR_LISTS.schoolTour;
 
   const gr = (method, path, body) => fetch('https://api.getresponse.com/v3' + path, {
     method,
     headers: { 'X-Auth-Token': 'api-key ' + key, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined,
   });
+
+  if (isLm) {
+    // Tag theo tên (whitelist) → tự tạo nếu chưa có. KHÔNG gắn tag cấp học có sẵn (xem ghi chú đầu khối).
+    for (const name of lmGrTagNames(data.source, data.tags)) {
+      const id = await ensureGrTag(gr, name).catch(() => null);
+      if (id) tags.push(id);
+    }
+  }
+
+  if (isGeneric) {
+    // Tag theo mã funnel (tự tạo nếu chưa có) để sau này lọc theo nguồn; chỉ ký tự an toàn.
+    const slug = String(data.source || 'khac').replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40) || 'khac';
+    for (const name of ['TS_2026', 'Web_' + slug]) {
+      const id = await ensureGrTag(gr, name).catch(() => null);
+      if (id) tags.push(id);
+    }
+  }
 
   if (raw.src === 'bdkl') {
     tags.push(GR_TAGS.banDoKhonLon);
@@ -1129,6 +1231,7 @@ async function addToGetResponse(raw, data, env) {
 
   const res = await gr('POST', '/contacts', {
     email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
+    ...(isSite && data.fullName ? { name: data.fullName } : {}),
     customFieldValues, tags: tags.map((tagId) => ({ tagId })),
   });
   if (res.status === 202) return { status: 202, list: listId };

@@ -18,6 +18,9 @@ export default defineConfig({
   // 2 route trùng nhau (warning "route collision", sẽ thành hard error ở
   // Astro bản sau). Static host tự resolve '/x/' về cùng file /x/index.html.
   redirects: {
+    // LM01: đường dẫn cũ → đường dẫn chính thức
+    '/quiz-vao-lop-1':                       '/giai-ma-tam-ly-tien-tieu-hoc',
+    '/quiz-san-sang-vao-lop-1':              '/giai-ma-tam-ly-tien-tieu-hoc',
     '/squeeze/checklist-mam-non':            '/checklist-mam-non',
     '/squeeze/ebook-9-linh-vuc-mam-non':     '/ebook-9-linh-vuc-mam-non',
     '/squeeze/giai-doan-vang-ngon-ngu':      '/giai-doan-vang-ngon-ngu',
@@ -99,10 +102,11 @@ export default defineConfig({
         if (page.includes('/mam-non-go-vap/hoc-phi')) return false;
         // /ketnoi (đích của 35 QR lớp) và /ketnoi-mam-non (3 kênh mầm non) là trang
         // tiện ích quét QR, noindex — không vào sitemap
-        if (/\/ketnoi(-mam-non)?\/?$/.test(page)) return false;
+        // /theo-doi (mời theo dõi Facebook + YouTube) cùng loại trang tiện ích
+        if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
-        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh)\/?$/.test(page)) return false;
+        if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|giai-ma-tam-ly-tien-tieu-hoc|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12|quiz-ky-nang-tu-lap|quiz-chuan-bi-chuyen-cap|quiz-doc-ket-qua-hoc-tap|quiz-hanh-trang-thpt|quiz-thu-thach-tu-hoc-7-ngay)\/?$/.test(page)) return false;
         // Bài blog văn mẫu (noindex) không đưa vào sitemap
         const blogSlug = page.match(/\/blog\/([^/]+)\/?$/);
         if (blogSlug && NOINDEX_BLOG.has(blogSlug[1])) return false;
