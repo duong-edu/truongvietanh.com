@@ -1119,7 +1119,50 @@ async function ensureGrTag(gr, name) {
   return id;
 }
 
+// Mọi lead magnet (LM_GR_FUNNELS) ngoài việc vào danh bạ lead magnet còn được thêm vào danh bạ
+// "Nuôi dưỡng 435 ngày" ngay lúc điền form → chuỗi nuôi dưỡng (autoresponder theo ngày) tự chạy,
+// "Ngày 3" của chuỗi = 3 ngày sau khi đăng ký. Lỗi ở bước này KHÔNG được làm hỏng lead chính.
 async function addToGetResponse(raw, data, env) {
+  const main = await addToGetResponseMain(raw, data, env);
+  if (isLmGrFunnel(data.source) && env.GETRESPONSE_API_KEY && data.email) {
+    main.nurture = await addToNurtureList(data, env).catch((e) => ({ error: e.message }));
+  }
+  return main;
+}
+
+const GR_NURTURE_LIST_NAME = 'Nuôi dưỡng 435 ngày';
+const GR_NURTURE_LIST_ID = 'PLYBU'; // danh bạ "Nuôi dưỡng 435 ngày" (88 thư trả lời tự động, Ngày 3 → 435); để trống thì tự tra theo tên
+let grNurtureListCache = null;
+async function addToNurtureList(data, env) {
+  const gr = (method, path, body) => fetch('https://api.getresponse.com/v3' + path, {
+    method,
+    headers: { 'X-Auth-Token': 'api-key ' + env.GETRESPONSE_API_KEY, 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  let listId = GR_NURTURE_LIST_ID || grNurtureListCache;
+  if (!listId) {
+    const found = await (await gr('GET', `/campaigns?query[name]=${encodeURIComponent(GR_NURTURE_LIST_NAME)}&fields=campaignId,name`)).json().catch(() => []);
+    listId = Array.isArray(found) ? (found.find((c) => c.name === GR_NURTURE_LIST_NAME) || {}).campaignId : null;
+    if (listId) grNurtureListCache = listId;
+  }
+  if (!listId) return { skipped: true, reason: 'no_list' };
+  // Chỉ gắn trường tùy chỉnh, KHÔNG gắn tag lead magnet: automation theo tag LMxx sẽ gửi lại email quà tặng nếu tag xuất hiện ở đây.
+  const customFieldValues = [
+    data.phone ? { customFieldId: GR_FIELDS.phone, value: ['+84' + data.phone.slice(1)] } : null,
+    data.source ? { customFieldId: GR_FIELDS.origin, value: [String(data.source).slice(0, 255)] } : null,
+  ].filter(Boolean);
+  const res = await gr('POST', '/contacts', {
+    email: data.email, campaign: { campaignId: listId }, dayOfCycle: 0,
+    ...(data.fullName ? { name: data.fullName } : {}),
+    customFieldValues,
+  });
+  if (res.status === 202) return { status: 202, list: listId };
+  // 409 = đã trong chuỗi (làm lead magnet thứ hai): giữ nguyên lịch, không đặt lại ngày
+  if (res.status === 409) return { status: 409, already: true };
+  return { status: res.status, error: (await res.text()).slice(0, 300) };
+}
+
+async function addToGetResponseMain(raw, data, env) {
   const key = env.GETRESPONSE_API_KEY;
   if (!key) return { skipped: true, reason: 'no_key' };
   const isMn = String(data.source).startsWith('mam-non-trai-nghiem');
