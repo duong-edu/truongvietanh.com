@@ -284,10 +284,14 @@ const related = [
             <li><strong>Thông điệp buổi sáng:</strong> giá trị của tuần và việc của ngày hôm nay.</li>
           </ol>
         </div>
-        <!-- TODO: ảnh Morning Meeting lớp Lá, chỉ dùng trẻ đã có phiếu đồng ý hình ảnh -->
-        <div class="sr-photo-ph" role="img" aria-label="Chỗ đặt ảnh Morning Meeting lớp Lá">
-          <span>Ảnh Morning Meeting lớp Lá<br />(đang chờ ảnh có phiếu đồng ý hình ảnh)</span>
-        </div>
+        <figure class="sr-mm-fig">
+          <img src="/images/school-ready/morning-meeting-lop-la-vong-tron.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Cô giáo ngồi cùng trẻ lớp Lá thành vòng tròn trên thảm xanh, mọi người nắm tay nhau trong Morning Meeting" />
+          <div class="sr-mm-pair">
+            <img src="/images/school-ready/morning-meeting-lop-la-co-giao-huong-dan.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Cô giáo hướng dẫn trẻ lớp Lá ngồi thành vòng tròn, các bạn nhìn nhau và mỉm cười" />
+            <img src="/images/school-ready/morning-meeting-lop-la-nam-tay-vong-tron.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Trẻ lớp Lá nắm tay nhau thành vòng tròn cùng cô giáo trong giờ Morning Meeting" />
+          </div>
+          <figcaption>Morning Meeting ở lớp Lá: cả lớp ngồi thành vòng tròn, nắm tay và chào nhau mỗi sáng.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -726,6 +730,10 @@ const related = [
     .sr-steps{margin:1rem 0 0;padding-left:1.25rem;color:#334155}
     .sr-steps li{margin-bottom:.6rem}
     .sr-photo-ph{min-height:320px;border-radius:16px;background:repeating-linear-gradient(45deg,#e8edf4,#e8edf4 14px,#f0f4f8 14px,#f0f4f8 28px);border:2px dashed #94a3b8;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#475569}
+    .sr-mm-fig{margin:0}
+    .sr-mm-fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
+    .sr-mm-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+    .sr-mm-fig figcaption{margin-top:.75rem;font-size:.9rem;color:#475569;line-height:1.5}
 
     /* Giá trị */
     .sr-pills{list-style:none;margin:1.5rem 0;padding:0;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
