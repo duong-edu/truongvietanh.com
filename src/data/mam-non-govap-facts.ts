@@ -43,6 +43,27 @@ export const mnFacts = {
   khuonVien: '2.000m²',
   tiLeGvHs: '1:8',
 
+  // ---------- Riêng LỚP LÁ (5–6 tuổi, chương trình School Ready) ----------
+  // Văn chốt 26/10/2026: lấy theo trang /school-ready đang live. ĐỪNG gán ba số này
+  // cho cả bậc mầm non — trên trang chúng nằm trong thẻ "Lớp Lá Việt Anh", tức chỉ
+  // đúng cho năm cuối mầm non. Sĩ số 20 nằm trong dải classSize 10–24 ở trên, nên
+  // hai nguồn KHÔNG trái nhau.
+  //
+  // ⚠ Một chỗ chưa khớp, cần Văn/anh Dương chốt: 20 trẻ / 2 giáo viên = 1:10, tính
+  // cả bảo mẫu thì 1:6,7 — trong khi tiLeGvHs ở trên là 1:8 (anh Dương xác nhận
+  // 02/09/2026). Cách hiểu hợp lý nhất: 1:8 là mức trung bình toàn bậc (lớp bé ít
+  // trẻ hơn), còn lớp Lá là lớp đông nhất nên ở 1:10. Khi viết bài thì nêu con số
+  // kèm phạm vi, đừng trộn hai mức thành một.
+  lopLa: {
+    siSo: 20,
+    siSoLabel: '20 trẻ/lớp',
+    nguoiLon: '2 giáo viên và 1 bảo mẫu',
+    tiLeGvTre: '1:10 (tính cả bảo mẫu là 1:6,7)',
+    banNgu: 'khoảng 1/3 số tiết',
+    baoCao: 'mỗi 8 tuần, theo công cụ quan sát COR Advantage của HighScope',
+    nguon: 'https://truongvietanh.com/school-ready/',
+  },
+
   // ---------- Độ tuổi & cách xếp lớp ----------
   ageFrom: '12 tháng',
   ageRange: '12 tháng – 6 tuổi',
