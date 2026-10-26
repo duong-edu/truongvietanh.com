@@ -82,11 +82,15 @@ export const mnFacts = {
   ninthArea: 'Ngôn ngữ Tiếng Anh — đưa vào khi phù hợp, dành cho bé mà tiếng Anh không phải tiếng mẹ đẻ',
 
   // Hoạt động cốt lõi mỗi ngày
-  pdrName: 'Plan – Do – Review (lập kế hoạch – thực hiện – chiêm nghiệm)',
+  // Văn chốt 26/10/2026: một tên gọi Plan – Do – Review cho cả bốn cấp. Bỏ "chiêm nghiệm" —
+  // bản dịch đó quá nặng cho trẻ 3–5 tuổi; bản dùng toàn site là "nhìn lại".
+  pdrName: 'Plan – Do – Review (lên kế hoạch – thực hiện – nhìn lại)',
   pdrSteps: [
     { step: 'Plan', desc: 'Cô và bé ngồi thành vòng tròn, cùng bàn xem hôm nay bé sẽ làm gì và làm thế nào' },
     { step: 'Do', desc: 'Bé bắt tay thực hiện đúng kế hoạch mình vừa đặt ra; bé có thể lên hai hoặc nhiều kế hoạch' },
-    { step: 'Review', desc: 'Cuối giờ cả lớp ngồi lại: điều gì làm được, điều gì chưa, khó ở đâu, lần sau sẽ làm khác thế nào' },
+    // Ở tuổi này bước ba là một LỜI KỂ, không phải bản tự chấm — trẻ 3–5 tuổi chưa so được
+    // việc mình làm với một chuẩn. Đừng viết thành "điều gì làm được, điều gì chưa".
+    { step: 'Review', desc: 'Cuối giờ cả lớp ngồi lại, bé kể mình vừa chơi gì, với ai, bằng thứ gì, và chỗ nào chưa như bé nghĩ' },
   ],
   pdrPurpose: 'Rèn thói quen làm việc có mục đích, có kế hoạch rõ ràng, và luôn nhìn lại để tự rút ra bài học',
 

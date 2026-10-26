@@ -5,26 +5,29 @@ import FooterBase from '../components/FooterBase.astro';
 import LeadFormTwoStepEmailFirst from '../components/LeadFormTwoStepEmailFirst.astro';
 import { schoolFacts } from '../data/school-facts';
 
-// Viết lại toàn bộ 28/08/2026 — PDR = Plan – Do – Review (mầm non: Plan – Do – Recall).
-// Bản cũ dịch sai thành "Play – Discover – Reflect". Nội dung theo bản duyệt của anh Dương.
+// Viết lại toàn bộ 28/08/2026 — PDR = Plan – Do – Review. Bản cũ dịch sai thành
+// "Play – Discover – Reflect". Nội dung theo bản duyệt của anh Dương.
+// Sửa 26/10/2026 (Văn chốt): MỘT tên gọi cho cả bốn cấp. Bỏ hẳn "mầm non = Plan – Do – Recall"
+// và bỏ mục H2 giải thích vì sao mầm non gọi khác. Đây là đổi TÊN BƯỚC — phần tả trẻ mầm non
+// KỂ LẠI việc vừa chơi thì giữ, vì trẻ 3–5 tuổi thật sự làm việc đó chứ không tự chấm điểm.
 // KHÔNG lấy title/description/FAQ từ Directus nữa: bản ghi CMS còn giữ định nghĩa sai,
 // nếu fallback về CMS thì trang live sẽ hiển thị lại nội dung cũ.
 // KHÔNG thêm aggregateRating/review (self-serving review — rủi ro manual action).
 
 const PAGE_TITLE = 'PDR là gì? Plan – Do – Review tại Trường Việt Anh';
 const PAGE_DESC =
-  'PDR tại Việt Anh là Plan – Do – Review: con tự lên kế hoạch, tự làm, tự nhìn lại. Mầm non gọi là Plan – Do – Recall. Xem cách làm ở từng cấp học.';
+  'PDR tại Việt Anh là Plan – Do – Review: con tự lên kế hoạch, tự làm, tự nhìn lại — từ mầm non đến lớp 12. Xem cách làm ở từng cấp học.';
 const PAGE_URL = 'https://truongvietanh.com/he-thong-pdr/';
 const PAGE_IMAGE = 'https://media.truongvietanh.com/images/extra-giao-vien-va-hoc-sinh-2.webp';
 
 const faqs = [
   {
     q: 'PDR là viết tắt của gì?',
-    a: 'PDR là Plan – Do – Review: Lên kế hoạch – Thực hiện – Nhìn lại. Học sinh tự đặt kế hoạch, tự thực hiện, rồi tự đối chiếu kết quả với kế hoạch ban đầu. Ở bậc mầm non, bước thứ ba là Recall — trẻ kể lại việc mình vừa làm, thay vì tự đánh giá.',
+    a: 'PDR là Plan – Do – Review: Lên kế hoạch – Thực hiện – Nhìn lại. Học sinh tự đặt kế hoạch, tự thực hiện, rồi tự nhìn lại việc mình vừa làm. Cùng một nhịp ba bước này chạy suốt từ mầm non đến lớp 12, chỉ khác độ sâu theo tuổi.',
   },
   {
-    q: 'Vì sao mầm non dùng Recall còn tiểu học trở lên dùng Review?',
-    a: 'Trẻ ba đến năm tuổi chưa đủ năng lực siêu nhận thức để tự đánh giá theo một chuẩn, nhưng hoàn toàn kể lại được điều vừa trải qua. Recall rèn đúng việc đó: nhớ lại, sắp xếp, diễn đạt. Từ tiểu học, khi con đọc được kế hoạch mình đã viết, bước thứ ba mới thành Review đúng nghĩa.',
+    q: 'Bước Nhìn lại ở mầm non và ở THPT khác nhau thế nào?',
+    a: 'Khác ở độ sâu, không khác ở tên. Trẻ mầm non kể lại điều vừa trải qua: hôm nay chơi gì, với ai, bằng thứ gì — nhớ lại, sắp xếp, diễn đạt. Học sinh THPT thì đối chiếu kế hoạch với kết quả, gọi tên chỗ chênh và cam kết một điều làm khác đi, gắn với lộ trình IELTS, Capstone hay hồ sơ du học.',
   },
   {
     q: 'PDR có phải phương pháp riêng của Trường Việt Anh không?',
@@ -128,7 +131,7 @@ const structuredData = [
         '@type': 'HowToStep',
         position: 4,
         name: 'Với con mẫu giáo, đổi thành lời kể',
-        text: 'Hỏi con kể mẹ nghe hôm nay con chơi gì, và nghe hết, không sửa lưng. Đó là bước Recall.',
+        text: 'Hỏi con kể mẹ nghe hôm nay con chơi gì, và nghe hết, không sửa lưng. Đó là bước Nhìn lại ở tuổi mẫu giáo.',
       },
       {
         '@type': 'HowToStep',
@@ -201,7 +204,7 @@ const structuredData = [
         <p class="gi-toc-title">Mục lục</p>
         <ol class="gi-toc-list">
           <li><a href="#pdr-la-gi">PDR là viết tắt của gì?</a></li>
-          <li><a href="#vi-sao-recall">Vì sao mầm non gọi là Recall?</a></li>
+          <li><a href="#vi-sao-recall">Nhìn lại ở mầm non trông thế nào?</a></li>
           <li><a href="#cap-hoc">Mỗi cấp làm bao lâu một lần?</a></li>
           <li><a href="#co-so-khoa-hoc">Cơ sở khoa học</a></li>
           <li><a href="#so-sanh">Khác gì Montessori &amp; Reggio Emilia?</a></li>
@@ -219,9 +222,9 @@ const structuredData = [
         <!-- Direct answer block -->
         <p class="pdr-answer">
           PDR là ba bước học sinh Việt Anh lặp lại mỗi ngày: <strong>Plan</strong> (tự lên kế hoạch) —
-          <strong>Do</strong> (tự thực hiện) — <strong>Review</strong> (tự nhìn lại). Ở mầm non, bước thứ ba là
-          <strong>Recall</strong> — trẻ kể lại việc mình vừa làm. Mục đích không phải dạy thêm kiến thức, mà dạy
-          đứa trẻ cách tự điều khiển việc học của chính nó.
+          <strong>Do</strong> (tự thực hiện) — <strong>Review</strong> (tự nhìn lại). Cùng ba bước đó chạy từ
+          mầm non đến lớp 12; ở mầm non, bước thứ ba là trẻ kể lại việc mình vừa làm. Mục đích không phải dạy
+          thêm kiến thức, mà dạy đứa trẻ cách tự điều khiển việc học của chính nó.
         </p>
 
         <section class="gi-section">
@@ -258,20 +261,19 @@ const structuredData = [
             </div>
           </div>
 
-          <p>Ở mầm non, bước thứ ba được gọi là <strong>Recall (Kể lại)</strong>. Tôi sẽ giải thích ngay sau đây vì sao.</p>
+          <p>Ba bước này giữ nguyên tên ở cả bốn cấp học. Thứ thay đổi theo tuổi là <strong>độ sâu của bước thứ ba</strong> — tôi nói rõ ngay sau đây.</p>
 
           <p>Một điều cần nói thẳng: <strong>PDR không phải phát minh của Trường Việt Anh.</strong> Nhịp plan–do–review là cấu trúc lõi trong mô hình giáo dục sớm của <a href="https://highscope.org/" target="_blank" rel="noopener">HighScope Educational Research Foundation</a> (Ypsilanti, Michigan, Hoa Kỳ), nơi ba phân đoạn của một ngày học được gọi đúng là <em>planning time – work time – recall time</em>. Việt Anh là trường <strong>HighScope inspired</strong> — chúng tôi lấy cảm hứng từ nhịp này, đưa vào chương trình quốc gia GDPT 2018 và mở rộng nó lên tiểu học, THCS và THPT. Trường không được HighScope cấp phép, chứng nhận hay nhượng quyền.</p>
         </section>
 
         <!-- Section 2 -->
         <section id="vi-sao-recall" class="gi-section">
-          <h2>Vì sao mầm non gọi là Recall mà không phải Review?</h2>
-          <p><strong>Vì trẻ ba đến năm tuổi chưa đủ năng lực để tự đánh giá mình theo một chuẩn — nhưng đã thừa sức kể lại điều mình vừa làm.</strong></p>
-          <p><em>Review</em> đòi hỏi so sánh: kế hoạch với kết quả, mong đợi với thực tế. Đó là thao tác siêu nhận thức, cần ngôn ngữ và cần khả năng giữ hai hình ảnh trong đầu cùng lúc. Ép một đứa trẻ mẫu giáo tự đánh giá sẽ chỉ nhận được câu trả lời làm vừa lòng cô.</p>
-          <p><em>Recall</em> thì khác. Trẻ <strong>tái hiện lại trải nghiệm</strong>: kể bằng lời, vẽ lại, hoặc đơn giản là dắt cô ra góc xây dựng chỉ vào công trình của mình. Việc đó vẫn rèn đúng cơ bắp — nhớ lại, sắp xếp, diễn đạt — nhưng ở đúng mức tuổi.</p>
-          <p>Đến tiểu học, khi con đã đọc được kế hoạch mình viết sáng nay, bước thứ ba mới thành <strong>Review</strong> đúng nghĩa.</p>
+          <h2>Bước Nhìn lại ở mầm non trông thế nào?</h2>
+          <p><strong>Nó là một lời kể, không phải một bản tự đánh giá.</strong> Trẻ ba đến năm tuổi đã thừa sức kể lại điều mình vừa làm, nhưng chưa đủ năng lực tự chấm mình theo một chuẩn.</p>
+          <p>Vì vậy ở lớp mầm non, bước thứ ba là trẻ <strong>tái hiện lại trải nghiệm</strong>: kể bằng lời, vẽ lại, hoặc đơn giản là dắt cô ra góc xây dựng chỉ vào công trình của mình. Việc đó vẫn rèn đúng cơ bắp cần rèn — nhớ lại, sắp xếp, diễn đạt — nhưng ở đúng mức tuổi. Ép một đứa trẻ mẫu giáo tự đánh giá thì chỉ nhận được câu trả lời làm vừa lòng cô.</p>
+          <p>Đến tiểu học, khi con đã đọc được kế hoạch mình viết sáng nay, bước Nhìn lại mới thành việc <strong>so sánh</strong>: kế hoạch với kết quả, mong đợi với thực tế. Đó là thao tác siêu nhận thức, cần ngôn ngữ và cần khả năng giữ hai hình ảnh trong đầu cùng lúc. Lên THCS và THPT, con làm việc đó với mục tiêu theo môn, theo kỳ và theo lộ trình cá nhân.</p>
 
-          <img src="https://media.truongvietanh.com/images/vui-ve-03.webp" alt="Trẻ mầm non Việt Anh trong giờ Recall cuối buổi" loading="lazy" width="1200" height="auto" style="border-radius:12px;width:100%;height:auto;margin:1.5rem 0" />
+          <img src="https://media.truongvietanh.com/images/vui-ve-03.webp" alt="Trẻ mầm non Việt Anh kể lại việc mình vừa chơi trong giờ Nhìn lại cuối buổi" loading="lazy" width="1200" height="auto" style="border-radius:12px;width:100%;height:auto;margin:1.5rem 0" />
         </section>
 
         <!-- Section 3 -->
@@ -283,7 +285,7 @@ const structuredData = [
               <thead>
                 <tr>
                   <th>Cấp học</th>
-                  <th>Tên đúng của ba bước</th>
+                  <th>Tên ba bước</th>
                   <th>Bước thứ ba con làm gì</th>
                   <th>Nhịp</th>
                 </tr>
@@ -291,7 +293,7 @@ const structuredData = [
               <tbody>
                 <tr>
                   <td><strong>Mầm non</strong></td>
-                  <td>Plan – Do – <strong>Recall</strong></td>
+                  <td>Plan – Do – <strong>Review</strong></td>
                   <td>Trẻ <strong>kể lại</strong> vừa chơi gì, với ai, bằng vật liệu nào — bằng lời, bằng tranh, hoặc dẫn cô ra tận nơi</td>
                   <td><strong>Hằng ngày</strong></td>
                 </tr>
