@@ -673,7 +673,13 @@ const related = [
     .sr-page .sr-h1-accent{font-size:inherit}
 
     /* Hero */
-    .sr-hero{background:linear-gradient(160deg,rgba(24,25,58,.78) 0%,rgba(38,39,93,.72) 50%,rgba(16,16,36,.82) 100%),url('https://media.truongvietanh.com/images/Block%20Hero%20_%20BG%20-%20website/mam-non-banner-chinh-1.jpg') center/cover no-repeat;color:#fff;padding:4rem 1.25rem 3rem;text-align:center}
+    .sr-hero{position:relative;isolation:isolate;overflow:hidden;background:#1f2058;color:#fff;padding:4rem 1.25rem 3rem;text-align:center}
+    /* Ảnh banner 1920x650: đặt đúng tỉ lệ, bám mép trên, mờ dần xuống nền navy — không dùng cover để khỏi cắt mặt người ở hai mép */
+    .sr-hero::before{content:"";position:absolute;inset:0 0 auto 0;aspect-ratio:1920/650;z-index:-1;background:url('https://media.truongvietanh.com/images/Block%20Hero%20_%20BG%20-%20website/mam-non-banner-chinh-1.jpg') center top/100% 100% no-repeat;-webkit-mask-image:linear-gradient(#000 70%,transparent 100%);mask-image:linear-gradient(#000 70%,transparent 100%)}
+    @media (max-width:1279px){
+      .sr-hero{padding-top:15rem}
+      .sr-hero::before{aspect-ratio:auto;height:15rem;background-size:cover;background-position:left top;-webkit-mask-image:linear-gradient(#000 65%,transparent 100%);mask-image:linear-gradient(#000 65%,transparent 100%)}
+    }
     .sr-hero-inner{max-width:900px;margin:0 auto}
     .sr-eyebrow{display:inline-block;background:#f9dd0e;color:#26275D;font-weight:700;padding:.35rem 1rem;border-radius:999px;margin:0 0 1.25rem}
     .sr-h1{font-size:2.4rem;font-weight:800;color:#fff;margin:0 0 1.25rem}
