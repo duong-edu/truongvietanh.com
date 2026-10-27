@@ -400,41 +400,23 @@ const related = [
         <div class="sr-formcard" id="sr-formcard">
           <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
           <form id="sr-form" novalidate>
-            <div class="sr-field">
-              <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
-              <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
+            <ol class="sr-steps" aria-label="Các bước">
+              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Thông tin liên hệ</li>
+              <li id="sr-dot-2"><span>2</span> Con và cơ sở</li>
+            </ol>
+            <div class="sr-step" id="sr-step-1">
+              <div class="sr-field">
+                <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
+                <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
+              </div>
+              <div class="sr-field">
+                <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
+                <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
+              </div>
+              <p class="sr-err" id="sr-err-1" role="alert" hidden></p>
+              <button class="sr-btn sr-btn-gold sr-submit" id="sr-next" type="button">Tiếp tục →</button>
             </div>
-            <div class="sr-field">
-              <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
-              <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
-            </div>
-            <div class="sr-field">
-              <label for="sr-nam-sinh">Năm sinh của con <span aria-hidden="true">*</span></label>
-              <select id="sr-nam-sinh" name="nam_sinh" required>
-                <option value="">— Chọn năm sinh —</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="khac">Khác</option>
-              </select>
-            </div>
-            <div class="sr-field">
-              <label for="sr-khoa">Khoá quan tâm <span aria-hidden="true">*</span></label>
-              <select id="sr-khoa" name="khoa" required>
-                <option value="">— Chọn khoá —</option>
-                <option value="lop-la">Lớp Lá Việt Anh</option>
-                <option value="trong-tuan">Học trong tuần (thứ Hai – thứ Sáu)</option>
-                <option value="thu-bay">Khoá rút gọn thứ Bảy</option>
-                <option value="chua-ro">Chưa rõ, cần tư vấn</option>
-              </select>
-            </div>
-            <div class="sr-field" id="sr-hinhthuc-wrap" hidden>
-              <label for="sr-hinhthuc">Hình thức học trong tuần <span aria-hidden="true">*</span></label>
-              <select id="sr-hinhthuc" name="hinh_thuc">
-                <option value="">— Chọn hình thức —</option>
-                <option value="nguyen-ngay">Nguyên ngày</option>
-                <option value="nua-ngay">Nửa ngày</option>
-              </select>
-            </div>
+            <div class="sr-step" id="sr-step-2" hidden>
             <div class="sr-field">
               <label for="sr-coso">Cơ sở muốn học <span aria-hidden="true">*</span></label>
               <select id="sr-coso" name="campus" required>
@@ -455,11 +437,22 @@ const related = [
               </select>
             </div>
             <div class="sr-field">
-              <label for="sr-hoc-o">Con đang học ở <span class="sr-opt">(không bắt buộc)</span></label>
-              <select id="sr-hoc-o" name="hoc_o">
-                <option value="">— Chọn —</option>
-                <option value="mam-non-viet-anh">Mầm non Việt Anh</option>
-                <option value="truong-khac">Trường khác</option>
+              <label for="sr-nam-sinh">Năm sinh của con <span aria-hidden="true">*</span></label>
+              <select id="sr-nam-sinh" name="nam_sinh" required>
+                <option value="">— Chọn năm sinh —</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="khac">Khác</option>
+              </select>
+            </div>
+            <div class="sr-field">
+              <label for="sr-khoa">Khoá quan tâm <span aria-hidden="true">*</span></label>
+              <select id="sr-khoa" name="khoa" required>
+                <option value="">— Chọn khoá —</option>
+                <option value="lop-la">Lớp Lá Việt Anh</option>
+                <option value="trong-tuan">Học trong tuần (thứ Hai – thứ Sáu)</option>
+                <option value="thu-bay">Khoá rút gọn thứ Bảy</option>
+                <option value="chua-ro">Chưa rõ, cần tư vấn</option>
               </select>
             </div>
             <div class="sr-hp" aria-hidden="true">
@@ -470,8 +463,12 @@ const related = [
               <input id="sr-consent" name="consent" type="checkbox" required />
               <span>Tôi đồng ý để Trường Việt Anh dùng thông tin trên để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span>
             </label>
-            <p class="sr-err" id="sr-err" role="alert" hidden></p>
-            <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí và lịch học →</button>
+              <p class="sr-err" id="sr-err" role="alert" hidden></p>
+              <div class="sr-actions">
+                <button class="sr-btn sr-btn-back" id="sr-back" type="button">← Quay lại</button>
+                <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí →</button>
+              </div>
+            </div>
           </form>
           <div class="sr-success" id="sr-success" hidden>
             <p class="sr-tick" aria-hidden="true">✓</p>
@@ -526,30 +523,45 @@ const related = [
         'thu-bay': 'Khoá rút gọn thứ Bảy',
         'chua-ro': 'Chưa rõ, cần tư vấn'
       };
-      var HINH_THUC_LABEL = { 'nguyen-ngay': 'Nguyên ngày', 'nua-ngay': 'Nửa ngày' };
-      var HOC_O_LABEL = { 'mam-non-viet-anh': 'Mầm non Việt Anh', 'truong-khac': 'Trường khác' };
 
       var form = document.getElementById('sr-form');
       if (!form) return;
       var khoa = document.getElementById('sr-khoa');
-      var htWrap = document.getElementById('sr-hinhthuc-wrap');
-      var ht = document.getElementById('sr-hinhthuc');
       var coso = document.getElementById('sr-coso');
       var errEl = document.getElementById('sr-err');
       var btn = document.getElementById('sr-submit');
+      var step1 = document.getElementById('sr-step-1');
+      var step2 = document.getElementById('sr-step-2');
+      var err1 = document.getElementById('sr-err-1');
 
-      function syncHinhThuc() {
-        var on = khoa.value === 'trong-tuan';
-        htWrap.hidden = !on;
-        ht.required = on;
-        if (!on) ht.value = '';
+      function goStep(n) {
+        errEl.hidden = true; err1.hidden = true;
+        step1.hidden = n !== 1;
+        step2.hidden = n !== 2;
+        document.getElementById('sr-dot-1').className = n === 1 ? 'sr-steps-on' : 'sr-steps-done';
+        document.getElementById('sr-dot-2').className = n === 2 ? 'sr-steps-on' : '';
+        var f = n === 1 ? form.parent_name : coso;
+        if (f && f.focus) f.focus();
       }
-      khoa.addEventListener('change', syncHinhThuc);
+      function cleanPhone() { return (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0'); }
+      document.getElementById('sr-next').addEventListener('click', function () {
+        err1.hidden = true;
+        function bad(msg, el) { err1.textContent = msg; err1.hidden = false; el.focus(); }
+        if (!form.parent_name.value.trim()) return bad('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
+        if (!/^0[35789][0-9]{8}$/.test(cleanPhone())) return bad('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_step1', form_name: 'school_ready' });
+        goStep(2);
+      });
+      document.getElementById('sr-back').addEventListener('click', function () { goStep(1); });
+      // Enter ở bước 1 = bấm "Tiếp tục", không gửi form
+      step1.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); document.getElementById('sr-next').click(); }
+      });
 
       function selectKhoa(v) {
         if (!KHOA_LABEL[v]) return;
         khoa.value = v;
-        syncHinhThuc();
       }
 
       // ?khoa=trong-tuan | thu-bay → chọn sẵn khoá
@@ -583,13 +595,11 @@ const related = [
         if (form.website.value) { form.hidden = true; document.getElementById('sr-success').hidden = false; return; }
 
         var name = form.parent_name.value.trim();
-        if (!name) return showError('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
-        var phone = (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0');
-        if (!/^0[35789][0-9]{8}$/.test(phone)) return showError('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
+        var phone = cleanPhone();
+        if (!name || !/^0[35789][0-9]{8}$/.test(phone)) { goStep(1); document.getElementById('sr-next').click(); return; }
+        if (!coso.value) return showError('Bạn chọn cơ sở muốn học, hoặc chọn "Chưa chọn, cần tư vấn".', coso);
         if (!form.nam_sinh.value) return showError('Bạn chọn năm sinh của con nhé.', form.nam_sinh);
         if (!khoa.value) return showError('Bạn chọn khoá quan tâm nhé.', khoa);
-        if (khoa.value === 'trong-tuan' && !ht.value) return showError('Bạn chọn hình thức học trong tuần (nguyên ngày hoặc nửa ngày) nhé.', ht);
-        if (!coso.value) return showError('Bạn chọn cơ sở muốn học, hoặc chọn "Chưa chọn, cần tư vấn".', coso);
         if (!form.consent.checked) return showError('Bạn đánh dấu đồng ý để trường liên hệ tư vấn nhé.', form.consent);
 
         var opt = coso.options[coso.selectedIndex];
@@ -598,15 +608,12 @@ const related = [
         var province = opt.getAttribute('data-province') || '';
         var namSinh = form.nam_sinh.value === 'khac' ? 'Khác' : form.nam_sinh.value;
         var funnelCode = FUNNEL + (loc ? '-' + loc : '');
-        var hocO = form.hoc_o.value;
 
         // Thẻ tag đề xuất của Pancake → ghi vào ghi chú (Pancake không nhận tag qua /api/lead)
         var tags = ['School Ready', KHOA_LABEL[khoa.value], coso.value];
         var note = 'School Ready · Năm sinh con: ' + namSinh
           + ' · Khoá quan tâm: ' + KHOA_LABEL[khoa.value]
-          + (ht.value ? ' (' + HINH_THUC_LABEL[ht.value] + ')' : '')
           + ' · Cơ sở: ' + campusLabel
-          + (hocO ? ' · Con đang học: ' + HOC_O_LABEL[hocO] : '')
           + ' · Tag: ' + tags.join(', ');
 
         var utm = (window.__vaUTM ? window.__vaUTM() : {});
@@ -622,9 +629,7 @@ const related = [
           campus_label: campusLabel,
           province: province,
           khoa_quan_tam: khoa.value,
-          hinh_thuc: ht.value,
           nam_sinh_con: namSinh,
-          con_dang_hoc_o: hocO,
           note: note,
           consent: true,
           page_url: location.href,
@@ -695,6 +700,18 @@ const related = [
     .sr-statbar li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1rem .75rem}
     .sr-statbar strong{display:block;font-size:2rem;color:#f9dd0e;line-height:1.1}
     .sr-statbar span{color:#fff}
+
+    /* Form 2 bước */
+    .sr-steps{list-style:none;display:flex;gap:.5rem;margin:0 0 1.25rem;padding:0;font-size:.9rem;color:#6b7280}
+    .sr-steps li{flex:1;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:3px solid #e5e7eb}
+    .sr-steps span{display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border-radius:50%;background:#e5e7eb;color:#4b5563;font-weight:700;font-size:.85rem}
+    .sr-steps .sr-steps-on{color:#26275D;font-weight:700;border-color:#f9dd0e}
+    .sr-steps .sr-steps-on span{background:#26275D;color:#f9dd0e}
+    .sr-steps .sr-steps-done{border-color:#26275D}
+    .sr-steps .sr-steps-done span{background:#26275D;color:#fff}
+    .sr-actions{display:flex;gap:.75rem}
+    .sr-actions .sr-submit{flex:1}
+    .sr-btn-back{background:transparent;color:#26275D;border-color:#cbd5e1}
 
     /* Sections */
     .sr-sec{padding:4rem 1.25rem}
