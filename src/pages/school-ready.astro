@@ -192,7 +192,9 @@ const related = [
   title="School Ready – Sẵn sàng vào lớp 1 | Mầm non Việt Anh"
   description="School Ready của Trường Việt Anh: không dạy trước lớp 1, chuẩn bị 16 năng lực để con vào lớp 1 tự tin, tự lập. Lớp Lá, học trong tuần và khoá thứ Bảy tại 6 cơ sở."
   canonical="https://truongvietanh.com/school-ready"
-  ogImage="https://media.truongvietanh.com/images/thuyet-trinh-09.webp"
+  ogImage="https://truongvietanh.com/images/school-ready/school-ready-og.jpg"
+  ogImageWidth={1200}
+  ogImageHeight={630}
   structuredData={structuredData}
 >
   <div class="sr-page">
@@ -325,6 +327,13 @@ const related = [
             </div>
           ))}
         </div>
+        <figure class="sr-act-fig">
+          <div class="sr-act-pair">
+            <img src="/images/school-ready/hoat-dong-in-dau-ban-tay.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Cô giáo cùng các bé trong lớp in dấu bàn tay lên tờ giấy lớn" />
+            <img src="/images/school-ready/hoat-dong-thu-cong-nhom.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Các bé cười tươi cùng cô giáo bên bàn làm thủ công với bút màu và khăn giấy" />
+          </div>
+          <figcaption>Con học bằng cách làm: in dấu bàn tay, tô màu, làm thủ công cùng cô và bạn.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -711,6 +720,12 @@ const related = [
     .sr-mm-fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
     .sr-mm-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
     .sr-mm-fig figcaption{margin:.9rem auto 0;max-width:34rem;font-size:.95rem;font-style:italic;color:#475569;line-height:1.5;text-align:center}
+
+    .sr-act-fig{margin:2rem 0 0}
+    .sr-act-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .sr-act-pair img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
+    .sr-act-fig figcaption{margin:.9rem auto 0;max-width:34rem;font-size:.95rem;font-style:italic;color:#475569;line-height:1.5;text-align:center}
+    @media (max-width:600px){.sr-act-pair{grid-template-columns:1fr}}
 
     /* Giá trị */
     .sr-pills{list-style:none;margin:1.5rem 0;padding:0;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
