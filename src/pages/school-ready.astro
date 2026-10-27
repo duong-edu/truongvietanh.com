@@ -277,11 +277,11 @@ const related = [
           <h2>Mỗi sáng bắt đầu bằng một vòng tròn</h2>
           <p>Mỗi ngày ở School Ready mở đầu bằng <strong>Morning Meeting</strong> (Vòng tròn buổi sáng) theo phương pháp Responsive Classroom, trong khoảng 20–25 phút. Đây là lúc con học cách chào người khác, nói trước nhóm và lắng nghe bạn, những việc lớp 1 cần ngay từ tuần đầu.</p>
           <ol class="sr-steps">
-            <li><strong>Chào hỏi:</strong> gọi tên nhau, nhìn vào mắt bạn.</li>
-            <li><strong>Tuyên bố giá trị:</strong> cả lớp cùng nói 5 giá trị của Trường Việt Anh.</li>
-            <li><strong>Chia sẻ:</strong> một bạn kể, cả lớp lắng nghe và hỏi lại.</li>
-            <li><strong>Hoạt động nhóm:</strong> một trò chơi ngắn cần cả lớp cùng làm.</li>
-            <li><strong>Thông điệp buổi sáng:</strong> giá trị của tuần và việc của ngày hôm nay.</li>
+            <li><strong>Chào hỏi:</strong> Gọi tên nhau, nhìn vào mắt bạn.</li>
+            <li><strong>Tuyên bố giá trị:</strong> Cả lớp cùng nói 5 giá trị của Trường Việt Anh.</li>
+            <li><strong>Chia sẻ:</strong> Một bạn kể, cả lớp lắng nghe và hỏi lại.</li>
+            <li><strong>Hoạt động nhóm:</strong> Một trò chơi ngắn cần cả lớp cùng làm.</li>
+            <li><strong>Thông điệp buổi sáng:</strong> Giá trị của tuần và việc của ngày hôm nay.</li>
           </ol>
         </div>
         <figure class="sr-mm-fig">
@@ -400,8 +400,8 @@ const related = [
         <div class="sr-formcard" id="sr-formcard">
           <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
           <form id="sr-form" novalidate>
-            <ol class="sr-steps" aria-label="Các bước">
-              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Tuổi của con</li>
+            <ol class="sr-fsteps" aria-label="Các bước">
+              <li class="sr-fsteps-on" id="sr-dot-1"><span>1</span> Tuổi của con</li>
               <li id="sr-dot-2"><span>2</span> Thông tin liên hệ</li>
             </ol>
             <div class="sr-step" id="sr-step-1">
@@ -503,8 +503,8 @@ const related = [
         errEl.hidden = true;
         step1.hidden = n !== 1;
         step2.hidden = n !== 2;
-        document.getElementById('sr-dot-1').className = n === 1 ? 'sr-steps-on' : 'sr-steps-done';
-        document.getElementById('sr-dot-2').className = n === 2 ? 'sr-steps-on' : '';
+        document.getElementById('sr-dot-1').className = n === 1 ? 'sr-fsteps-on' : 'sr-fsteps-done';
+        document.getElementById('sr-dot-2').className = n === 2 ? 'sr-fsteps-on' : '';
         if (n === 2) form.parent_name.focus();
       }
 
@@ -645,13 +645,13 @@ const related = [
     .sr-statbar span{color:#fff}
 
     /* Form 2 bước */
-    .sr-steps{list-style:none;display:flex;gap:.5rem;margin:0 0 1.25rem;padding:0;font-size:.9rem;color:#6b7280}
-    .sr-steps li{flex:1;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:3px solid #e5e7eb}
-    .sr-steps span{display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border-radius:50%;background:#e5e7eb;color:#4b5563;font-weight:700;font-size:.85rem}
-    .sr-steps .sr-steps-on{color:#26275D;font-weight:700;border-color:#f9dd0e}
-    .sr-steps .sr-steps-on span{background:#26275D;color:#f9dd0e}
-    .sr-steps .sr-steps-done{border-color:#26275D}
-    .sr-steps .sr-steps-done span{background:#26275D;color:#fff}
+    .sr-fsteps{list-style:none;display:flex;gap:.5rem;margin:0 0 1.25rem;padding:0;font-size:.9rem;color:#6b7280}
+    .sr-fsteps li{flex:1;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:3px solid #e5e7eb}
+    .sr-fsteps span{display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border-radius:50%;background:#e5e7eb;color:#4b5563;font-weight:700;font-size:.85rem}
+    .sr-fsteps .sr-fsteps-on{color:#26275D;font-weight:700;border-color:#f9dd0e}
+    .sr-fsteps .sr-fsteps-on span{background:#26275D;color:#f9dd0e}
+    .sr-fsteps .sr-fsteps-done{border-color:#26275D}
+    .sr-fsteps .sr-fsteps-done span{background:#26275D;color:#fff}
     .sr-actions{display:flex;gap:.75rem}
     .sr-actions .sr-submit{flex:1}
     .sr-btn-back{background:transparent;color:#26275D;border-color:#cbd5e1}
@@ -710,7 +710,7 @@ const related = [
     .sr-mm-fig{margin:0}
     .sr-mm-fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
     .sr-mm-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
-    .sr-mm-fig figcaption{margin-top:.75rem;font-size:.9rem;color:#475569;line-height:1.5}
+    .sr-mm-fig figcaption{margin:.9rem auto 0;max-width:34rem;font-size:.95rem;font-style:italic;color:#475569;line-height:1.5;text-align:center}
 
     /* Giá trị */
     .sr-pills{list-style:none;margin:1.5rem 0;padding:0;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
