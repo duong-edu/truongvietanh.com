@@ -401,22 +401,21 @@ const related = [
           <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
           <form id="sr-form" novalidate>
             <ol class="sr-steps" aria-label="Các bước">
-              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Lớp của con</li>
+              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Tuổi của con</li>
               <li id="sr-dot-2"><span>2</span> Thông tin liên hệ</li>
             </ol>
             <div class="sr-step" id="sr-step-1">
-              <p class="sr-q" id="sr-q">Con đang học lớp nào? <span aria-hidden="true">*</span></p>
+              <p class="sr-q" id="sr-q">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></p>
               <div class="sr-lop" role="group" aria-labelledby="sr-q">
-                <button type="button" class="sr-lop-btn" data-lop="Milk">Milk</button>
-                <button type="button" class="sr-lop-btn" data-lop="Toys">Toys</button>
-                <button type="button" class="sr-lop-btn" data-lop="Safari">Safari</button>
-                <button type="button" class="sr-lop-btn" data-lop="Sky">Sky</button>
-                <button type="button" class="sr-lop-btn" data-lop="Flowers">Flowers</button>
-                <button type="button" class="sr-lop-btn" data-lop="Galaxy">Galaxy</button>
+                <button type="button" class="sr-lop-btn" data-lop="12-23 tháng">12 – 23 tháng</button>
+                <button type="button" class="sr-lop-btn" data-lop="2 tuổi">2 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="3 tuổi">3 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="4 tuổi">4 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="5 tuổi">5 tuổi</button>
               </div>
             </div>
             <div class="sr-step" id="sr-step-2" hidden>
-              <p class="sr-picked">Lớp của con: <strong id="sr-lop-show"></strong> · <button type="button" class="sr-link" id="sr-back">đổi lớp</button></p>
+              <p class="sr-picked">Tuổi của con: <strong id="sr-lop-show"></strong> · <button type="button" class="sr-link" id="sr-back">đổi tuổi</button></p>
               <div class="sr-field">
                 <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
                 <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
@@ -515,7 +514,7 @@ const related = [
           lop = b.getAttribute('data-lop');
           document.getElementById('sr-lop-show').textContent = lop;
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'form_step1', form_name: 'school_ready', lop: lop });
+          window.dataLayer.push({ event: 'form_step1', form_name: 'school_ready', tuoi: lop });
           goStep(2);
         });
       });
@@ -560,7 +559,7 @@ const related = [
         var email = form.email.value.trim();
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError('Email chưa đúng. Bạn kiểm tra lại giúp trường nhé.', form.email);
 
-        var note = 'School Ready · Lớp của con: ' + lop
+        var note = 'School Ready · Tuổi của con: ' + lop
           + (khoa ? ' · Khoá quan tâm: ' + KHOA_LABEL[khoa] : '')
           + ' · Tag: School Ready, ' + lop;
 
@@ -573,7 +572,7 @@ const related = [
           grade: '5-tuoi',
           source: FUNNEL,
           funnel_code: FUNNEL,
-          lop_hoc: lop,
+          tuoi_con: lop,
           khoa_quan_tam: khoa,
           note: note,
           consent: true,
@@ -598,7 +597,7 @@ const related = [
               event: 'form_submit',
               form_name: 'school_ready',
               funnel_code: FUNNEL,
-              lop: lop,
+              tuoi: lop,
               khoa: khoa
             });
             form.hidden = true;
@@ -661,6 +660,7 @@ const related = [
     .sr-q span{color:#b91c1c}
     .sr-lop{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
     .sr-lop-btn{padding:1rem .75rem;border:2px solid #cbd5e1;border-radius:10px;background:#fff;color:#26275D;font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer;transition:border-color .15s,background .15s}
+    .sr-lop-btn:last-child:nth-child(odd){grid-column:1/-1}
     .sr-lop-btn:hover,.sr-lop-btn:focus-visible{border-color:#26275D;background:#fffbe0;outline:none}
     .sr-formcard .sr-picked{margin:0 0 1rem;color:#475569;text-align:left}
     .sr-formcard .sr-q{text-align:left;color:#26275D}
