@@ -171,7 +171,8 @@ const canonicalUrl = 'https://truongvietanh.com/tuyen-sinh/mam-non/nhap-hoc-2026
       background: var(--g2);
       width: 30px;
       transition: .3s;
-    }.sd i.on{ background: var(--p); width: 48px; }.sd i.ok{ background: var(--gn); }/* Form fields */
+    }.sd i.on{ background: var(--p); width: 48px; }.sd i.ok{ background: var(--gn); }.tq{font-weight:700;font-size:15px;color:var(--b,#26275D);margin:4px 0 10px}.tq span{color:#b91c1c}.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:10px}.tb{padding:13px 8px;border:2px solid #cbd5e1;border-radius:10px;background:#fff;color:var(--b,#26275D);font:inherit;font-weight:800;font-size:15px;cursor:pointer;transition:.15s}.tb:hover,.tb:focus-visible{border-color:var(--b,#26275D);background:#fffbe0;outline:none}.tb:last-child:nth-child(odd){grid-column:1/-1}
+    /* Form fields */
     .fg{ margin-bottom: 14px; }.fg label{
       display: block;
       font-size: 16px;
@@ -358,13 +359,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="sd"><i class="on"></i><i></i></div>
           <h2>Đăng ký ưu đãi hè ngay</h2>
           <div class="fd">Còn <b>29 ngày</b> để cùng con bắt đầu hành trình mới</div>
-          <form id="f1">
-            <div class="fg">
-              <label>Email của ba/mẹ</label>
-              <input type="email" id="email" placeholder="email@example.com" autocomplete="email" required />
-            </div>
-            <button type="submit" class="btn bs" id="b1">Nhận ưu đãi hè ngay →</button>
-          </form>
+          <div class="tq">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></div>
+          <div class="tg" role="group">
+            <button type="button" class="tb" data-t="12 – 23 tháng">12 – 23 tháng</button>
+            <button type="button" class="tb" data-t="2 tuổi">2 tuổi</button>
+            <button type="button" class="tb" data-t="3 tuổi">3 tuổi</button>
+            <button type="button" class="tb" data-t="4 tuổi">4 tuổi</button>
+            <button type="button" class="tb" data-t="5 tuổi">5 tuổi</button>
+          </div>
           <div class="fm">🔒 Bảo mật · Tư vấn trong 5 phút</div>
           <div class="fb">
             <span>✓ Miễn phí</span>
@@ -386,9 +388,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <label>Số điện thoại (Zalo)</label>
               <input type="tel" id="ph" placeholder="0912 345 678" required />
             </div>
+            <div class="fg">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="email@example.com" autocomplete="email" required />
+            </div>
             <button type="submit" class="btn bs" id="b2">Hoàn tất &amp; nhận quà 🎁</button>
           </form>
-          <div class="fm"><a href="#" id="sk">Bỏ qua →</a></div>
         </div>
 
         <!-- Success -->
@@ -406,32 +411,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const WEBHOOK = '/api/lead';
     const $ = s => document.getElementById(s);
 
-    $('f1').onsubmit = async e => {
-      e.preventDefault();
-      const b = $('b1'), v = $('email').value.trim();
-      if (!v) return;
-      b.disabled = 1;
-      b.textContent = 'Đang gửi...';
-      try {
-        await fetch(WEBHOOK, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            step: 'partial_capture',
-            email: v,
-            source: 'seasonal_mn',
-            page: window.location.href,
-            ...(window.__vaUTM ? window.__vaUTM() : {}),
-            timestamp: new Date().toISOString()
-          })
-        });
-      } catch (err) {
-        console.error('[LeadForm] Step 1 error:', err);
-      }
-      $('s1').style.display = 'none';
-      $('s2').style.display = 'block';
-      window.dataLayer?.push({ event: 'lead_s1', variant: 'seasonal', email: v });
-    };
+    let TUOI = '';
+    document.querySelectorAll('.tb').forEach(btn => {
+      btn.onclick = () => {
+        TUOI = btn.dataset.t;
+        $('s1').style.display = 'none';
+        $('s2').style.display = 'block';
+        window.dataLayer?.push({ event: 'lead_s1', tuoi: TUOI });
+        $('nm').focus();
+      };
+    });
 
     $('f2').onsubmit = async e => {
       e.preventDefault();
@@ -445,6 +434,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             email: $('email').value.trim(),
             fullName: $('nm').value.trim(),
             phone: $('ph').value.trim(),
+            tuoi_con: TUOI,
+            note: 'Tuổi của con: ' + TUOI,
+            school_level: 'mam-non',
+            funnel_code: 'seasonal_mn',
+            ...(window.__vaUTM ? window.__vaUTM() : {}),
             source: 'seasonal_mn',
             page: window.location.href,
             timestamp: new Date().toISOString()
@@ -456,8 +450,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ok();
       window.dataLayer?.push({ event: 'lead_done', variant: 'seasonal' });
     };
-
-    $('sk').onclick = e => { e.preventDefault(); ok(); };
 
     function ok() {
       const name = $('nm')?.value?.trim() || '';

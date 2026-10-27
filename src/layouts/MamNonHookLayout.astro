@@ -177,6 +177,12 @@ a{color:inherit;text-decoration:none}
 .btn-step{width:100%;background:var(--gold);color:var(--navy-dk);border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:900;font-family:'Montserrat',sans-serif;cursor:pointer;transition:.15s;text-transform:uppercase;letter-spacing:.4px;box-shadow:0 4px 14px rgba(249,221,14,.45)}
 .btn-step:hover{background:var(--gold-dk);transform:translateY(-1px);box-shadow:0 6px 20px rgba(249,221,14,.55)}
 .btn-back{background:none;border:none;color:var(--text-muted);font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:underline;padding:8px 0 0;width:100%;text-align:center}
+.tuoi-q{font-weight:700;font-size:14px;color:#26275D;margin:0 0 10px}
+.tuoi-q span{color:#b91c1c}
+.tuoi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:6px}
+.tuoi-btn{padding:13px 8px;border:2px solid #cbd5e1;border-radius:10px;background:#fff;color:#26275D;font:inherit;font-weight:800;font-size:15px;cursor:pointer;transition:.15s}
+.tuoi-btn:hover,.tuoi-btn:focus-visible{border-color:#26275D;background:#fffbe0;outline:none}
+.tuoi-btn:last-child:nth-child(odd){grid-column:1/-1}
 .fcard-foot{display:flex;justify-content:space-around;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--text-muted);margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-weight:600}
 .fcard-foot span{display:inline-flex;align-items:center;gap:4px}
 .fcard-success{text-align:center;padding:26px 22px}
@@ -257,17 +263,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="sdot active" id="dot1">1</div>
             <div class="sline"></div>
             <div class="sdot" id="dot2">2</div>
-            <span class="slabel" id="slabel">Email của Ba/Mẹ</span>
+            <span class="slabel" id="slabel">Tuổi của con</span>
           </div>
 
           <div id="step1">
-            <input class="sin" type="email" id="sq-email" placeholder="email@cuabame.com" autocomplete="email" />
-            <button type="button" class="btn-step" onclick="sqNext()">Tiếp tục →</button>
+            <p class="tuoi-q">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></p>
+            <div class="tuoi-grid">
+              <button type="button" class="tuoi-btn" onclick="sqPick('12 – 23 tháng')">12 – 23 tháng</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('2 tuổi')">2 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('3 tuổi')">3 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('4 tuổi')">4 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('5 tuổi')">5 tuổi</button>
+            </div>
           </div>
 
           <div id="step2" style="display:none">
             <input class="sin" type="text" id="sq-name" placeholder="Họ tên Ba/Mẹ" autocomplete="name" />
             <input class="sin" type="tel" id="sq-phone" placeholder="Số điện thoại" autocomplete="tel" />
+            <input class="sin" type="email" id="sq-email" placeholder="Email" autocomplete="email" />
             <button type="button" class="btn-step" onclick="sqSubmit()">{ctaStep2}</button>
             <button type="button" class="btn-back" onclick="sqBack()">← Quay lại</button>
           </div>
@@ -304,17 +317,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (su) su.style.display = 'block';
   }
 
-  window.sqNext = function(){
-    var el = document.getElementById('sq-email');
-    var v = el ? el.value.trim() : '';
-    if (!v || v.indexOf('@') < 1) { if (el){ el.classList.add('error'); el.focus(); } return; }
-    el.classList.remove('error');
+  var TUOI = '';
+  window.sqPick = function(t){
+    TUOI = t;
     document.getElementById('step1').style.display = 'none';
     document.getElementById('step2').style.display = 'block';
     var d1 = document.getElementById('dot1'), d2 = document.getElementById('dot2'), sl = document.getElementById('slabel');
     if (d1){ d1.classList.remove('active'); d1.classList.add('done'); }
     if (d2) d2.classList.add('active');
-    if (sl) sl.textContent = 'Họ tên & SĐT';
+    if (sl) sl.textContent = 'Họ tên, SĐT & email';
+    if (window.dataLayer) window.dataLayer.push({ event: 'form_step_complete', step: 1, tuoi: t });
     var n = document.getElementById('sq-name'); if (n) n.focus();
   };
 
@@ -324,7 +336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var d1 = document.getElementById('dot1'), d2 = document.getElementById('dot2'), sl = document.getElementById('slabel');
     if (d2) d2.classList.remove('active');
     if (d1){ d1.classList.remove('done'); d1.classList.add('active'); }
-    if (sl) sl.textContent = 'Email của Ba/Mẹ';
+    if (sl) sl.textContent = 'Tuổi của con';
   };
 
   window.sqSubmit = function(){
@@ -338,6 +350,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     phoneEl.classList.remove('error');
     var emailEl = document.getElementById('sq-email');
     var email = emailEl ? emailEl.value.trim() : '';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { if (emailEl){ emailEl.classList.add('error'); emailEl.focus(); } return; }
+    if (emailEl) emailEl.classList.remove('error');
 
     localStorage.setItem('sq_' + SRC, '1');
     var fa = document.getElementById('formArea');
@@ -348,6 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var payload = JSON.stringify(Object.assign({
       fullName: name, phone: phone, email: email,
       source: SRC, funnel_code: FC, school_level: LEVEL,
+      tuoi_con: TUOI, note: 'Tuổi của con: ' + TUOI,
       page_url: location.href,
       submitted_at: new Date().toISOString()
     },(window.__vaUTM||(window.__vaUTM=function(){var k=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_pke_mkter','pke_mkter'],o={};try{var p=new URLSearchParams(location.search);k.forEach(function(x){var g=p.get(x);if(g){try{sessionStorage.setItem('va_'+x,g)}catch(e){}}var v=g||(function(){try{return sessionStorage.getItem('va_'+x)}catch(e){return ''}})()||'';if(v)o[x]=v})}catch(e){}if(!o.utm_source){o.utm_source='direct';o.utm_medium='none'}o.page_url=location.href;return o}))()));
@@ -380,10 +395,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     setTimeout(doRedirect, 3000);
   };
 
-  var ein = document.getElementById('sq-email');
-  if (ein) ein.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); sqNext(); } });
-  var pin = document.getElementById('sq-phone');
-  if (pin) pin.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); sqSubmit(); } });
+  ['sq-name','sq-phone','sq-email'].forEach(function(id){ var el = document.getElementById(id); if (el) el.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); sqSubmit(); } }); });
 })();
 </script>
     <script src="/js/phone-vn.js" defer></script>

@@ -29,6 +29,7 @@ interface Props {
   redirectUrl?: string;
   logoSrc?: string;
   extended?: boolean;
+  formMode?: 'email' | 'tuoi';
 }
 
 const {
@@ -52,7 +53,9 @@ const {
   redirectUrl = '/cam-on/',
   logoSrc = '/logo-vietanh.webp',
   extended = false,
+  formMode = 'email',
 } = Astro.props;
+const isTuoi = formMode === 'tuoi';
 
 const phoneDisplay = hotline;
 const phoneHref = `tel:${hotline.replace(/\s/g, '')}`;
@@ -146,6 +149,12 @@ body.extended .hero{flex:none;min-height:calc(100vh - 90px)}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
 /* ★ MEGA CTA ★ */
+.tuoi-q{font-weight:700;font-size:14px;color:#26275D;margin:0 0 10px}
+.tuoi-q span{color:#b91c1c}
+.tuoi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:6px}
+.tuoi-btn{padding:13px 8px;border:2px solid #cbd5e1;border-radius:10px;background:#fff;color:#26275D;font:inherit;font-weight:800;font-size:15px;cursor:pointer;transition:.15s}
+.tuoi-btn:hover,.tuoi-btn:focus-visible{border-color:#26275D;background:#fffbe0;outline:none}
+.tuoi-btn:last-child:nth-child(odd){grid-column:1/-1}
 .btn-cta{width:100%;padding:16px 12px;background:linear-gradient(135deg,#f9dd0e 0%,#f9dd0e 60%,#f9dd0e 100%);color:#26275D;font-family:'Montserrat',sans-serif;font-weight:900;font-size:15px;border:none;border-radius:11px;cursor:pointer;text-transform:uppercase;letter-spacing:.3px;box-shadow:0 6px 26px rgba(249,221,14,.65);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;line-height:1.25}
 .btn-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.18),transparent);border-radius:11px}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(249,221,14,.75)}
@@ -260,8 +269,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="step-dot active" id="dot1">1</div>
             <div class="step-line"></div>
             <div class="step-dot" id="dot2">2</div>
-            <span class="step-label" id="stepLabel">Email</span>
+            <span class="step-label" id="stepLabel">{isTuoi ? 'Tuổi của con' : 'Email'}</span>
           </div>
+{isTuoi ? (
+<Fragment>
+          <!-- STEP 1: TUỔI CỦA CON -->
+          <div id="step1">
+            <p class="tuoi-q">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></p>
+            <div class="tuoi-grid">
+              <button type="button" class="tuoi-btn" onclick="sqPick('12 – 23 tháng')">12 – 23 tháng</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('2 tuổi')">2 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('3 tuổi')">3 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('4 tuổi')">4 tuổi</button>
+              <button type="button" class="tuoi-btn" onclick="sqPick('5 tuổi')">5 tuổi</button>
+            </div>
+          </div>
+          <!-- STEP 2: HỌ TÊN + SĐT -->
+          <div id="step2" style="display:none">
+            <label class="form-label" for="sq-name">Họ và tên</label>
+            <input class="form-input" type="text" id="sq-name" placeholder="Nguyễn Văn A" autocomplete="name" />
+            <label class="form-label" for="sq-phone">Số điện thoại</label>
+            <input class="form-input" type="tel" id="sq-phone" placeholder="0916 961 409" autocomplete="tel" />
+            <label class="form-label" for="sq-email">Email</label>
+            <input class="form-input" type="email" id="sq-email" placeholder="ten@gmail.com" autocomplete="email" />
+            <button class="btn-cta" onclick="sqSubmit()">{ctaStep2}</button>
+            <div class="urgency-row">
+              <span class="micro"><span onclick="sqBack()" style="cursor:pointer;color:#bbb">← Quay lại</span> · 🔒 Bảo mật</span>
+            </div>
+          </div>
+</Fragment>
+) : (
+<Fragment>
           <!-- STEP 1: EMAIL -->
           <div id="step1">
             <label class="form-label" for="sq-email">Email của bạn</label>
@@ -282,6 +320,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="micro"><span onclick="sqBack()" style="cursor:pointer;color:#bbb">← Quay lại</span> · 🔒 Bảo mật</span>
             </div>
           </div>
+</Fragment>
+)}
         </div>
         <div class="success-box" id="sqSuccess">
           <div class="s-ico">🎉</div>
@@ -305,7 +345,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 )}
 
-<script define:vars={{ source, funnelCode, schoolLevel }}>
+<script define:vars={{ source, funnelCode, schoolLevel, isTuoi }}>
 (function(){
   var SRC = source;
   var FC  = funnelCode;
@@ -338,6 +378,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (nameEl) nameEl.focus();
   };
 
+  var TUOI = '';
+  window.sqPick = function(t){
+    TUOI = t;
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    var d1 = document.getElementById('dot1'), d2 = document.getElementById('dot2'), sl = document.getElementById('stepLabel');
+    if (d1){ d1.classList.remove('active'); d1.classList.add('done'); }
+    if (d2) d2.classList.add('active');
+    if (sl) sl.textContent = 'Họ tên, SĐT & email';
+    if (window.dataLayer) window.dataLayer.push({ event: 'form_step_complete', step: 1, tuoi: t });
+    var n = document.getElementById('sq-name'); if (n) n.focus();
+  };
+
   window.sqBack = function() {
     document.getElementById('step2').style.display = 'none';
     document.getElementById('step1').style.display = 'block';
@@ -346,7 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var sl = document.getElementById('stepLabel');
     if (d2) d2.classList.remove('active');
     if (d1) { d1.classList.remove('done'); d1.classList.add('active'); }
-    if (sl) sl.textContent = 'Email';
+    if (sl) sl.textContent = isTuoi ? 'Tuổi của con' : 'Email';
   };
 
   window.sqSubmit = function() {
@@ -366,6 +419,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (phoneEl) phoneEl.classList.remove('error');
     var emailEl = document.getElementById('sq-email');
     var email = emailEl ? emailEl.value.trim() : '';
+    if (isTuoi && (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))) { if (emailEl){ emailEl.classList.add('error'); emailEl.focus(); } return; }
+    if (emailEl) emailEl.classList.remove('error');
     localStorage.setItem('sq_' + SRC, '1');
     var fa = document.getElementById('formArea');
     var su = document.getElementById('sqSuccess');
@@ -378,6 +433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       body: JSON.stringify(Object.assign({
         fullName: name, phone: phone, email: email,
         source: SRC, funnel_code: FC, school_level: SL,
+        tuoi_con: TUOI, note: TUOI ? 'Tuổi của con: ' + TUOI : '',
         page_url: location.href,
         submitted_at: new Date().toISOString()
       },(window.__vaUTM||(window.__vaUTM=function(){var k=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_pke_mkter','pke_mkter'],o={};try{var p=new URLSearchParams(location.search);k.forEach(function(x){var g=p.get(x);if(g){try{sessionStorage.setItem('va_'+x,g)}catch(e){}}var v=g||(function(){try{return sessionStorage.getItem('va_'+x)}catch(e){return ''}})()||'';if(v)o[x]=v})}catch(e){}if(!o.utm_source){o.utm_source='direct';o.utm_medium='none'}o.page_url=location.href;return o}))())),
@@ -389,7 +445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   var emailInput = document.getElementById('sq-email');
   if (emailInput) {
-    emailInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') sqNext(); });
+    emailInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') { if (isTuoi) sqSubmit(); else sqNext(); } });
   }
 })();
 </script>
