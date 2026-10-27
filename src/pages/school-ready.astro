@@ -401,10 +401,22 @@ const related = [
           <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
           <form id="sr-form" novalidate>
             <ol class="sr-steps" aria-label="Các bước">
-              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Thông tin liên hệ</li>
-              <li id="sr-dot-2"><span>2</span> Con và cơ sở</li>
+              <li class="sr-steps-on" id="sr-dot-1"><span>1</span> Lớp của con</li>
+              <li id="sr-dot-2"><span>2</span> Thông tin liên hệ</li>
             </ol>
             <div class="sr-step" id="sr-step-1">
+              <p class="sr-q" id="sr-q">Con đang học lớp nào? <span aria-hidden="true">*</span></p>
+              <div class="sr-lop" role="group" aria-labelledby="sr-q">
+                <button type="button" class="sr-lop-btn" data-lop="Milk">Milk</button>
+                <button type="button" class="sr-lop-btn" data-lop="Toys">Toys</button>
+                <button type="button" class="sr-lop-btn" data-lop="Safari">Safari</button>
+                <button type="button" class="sr-lop-btn" data-lop="Sky">Sky</button>
+                <button type="button" class="sr-lop-btn" data-lop="Flowers">Flowers</button>
+                <button type="button" class="sr-lop-btn" data-lop="Galaxy">Galaxy</button>
+              </div>
+            </div>
+            <div class="sr-step" id="sr-step-2" hidden>
+              <p class="sr-picked">Lớp của con: <strong id="sr-lop-show"></strong> · <button type="button" class="sr-link" id="sr-back">đổi lớp</button></p>
               <div class="sr-field">
                 <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
                 <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
@@ -413,61 +425,17 @@ const related = [
                 <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
                 <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
               </div>
-              <p class="sr-err" id="sr-err-1" role="alert" hidden></p>
-              <button class="sr-btn sr-btn-gold sr-submit" id="sr-next" type="button">Tiếp tục →</button>
-            </div>
-            <div class="sr-step" id="sr-step-2" hidden>
-            <div class="sr-field">
-              <label for="sr-coso">Cơ sở muốn học <span aria-hidden="true">*</span></label>
-              <select id="sr-coso" name="campus" required>
-                <option value="">— Chọn cơ sở —</option>
-                <optgroup label="TP.HCM">
-                  <option value="mn-viet-anh-go-vap" data-loc="go-vap" data-province="TP.HCM">Mầm non Việt Anh Gò Vấp — 573 Lê Đức Thọ, P. An Hội Đông</option>
-                  <option value="vagv" data-loc="go-vap-lien-cap" data-province="TP.HCM">Liên cấp Việt Anh Gò Vấp — 160/72 Phan Huy Ích, P. An Hội Tây</option>
-                  <option value="vabt" data-loc="binh-tan" data-province="TP.HCM">Liên cấp Việt Anh Bình Tân — Số 7 Đường 38A, P. Tân Tạo</option>
-                </optgroup>
-                <optgroup label="Cần Giuộc – Tây Ninh">
-                  <option value="nhan-le" data-loc="can-giuoc" data-province="Tây Ninh">Mầm non Nhân Lễ — 22 Đường D2, KDC Long Hậu</option>
-                  <option value="thai-son" data-loc="thai-son" data-province="Tây Ninh">Mầm non Thái Sơn — Đường 11, KDC Thái Sơn, Cần Giuộc</option>
-                </optgroup>
-                <optgroup label="Rạch Giá – An Giang">
-                  <option value="mgis" data-loc="rach-gia" data-province="An Giang">Mầm non Quốc tế Mekong Xanh (MGIS) — Lô E7, Đường số 13, KĐT Tây Bắc</option>
-                </optgroup>
-                <option value="chua-chon" data-loc="" data-province="">Chưa chọn, cần tư vấn</option>
-              </select>
-            </div>
-            <div class="sr-field">
-              <label for="sr-nam-sinh">Năm sinh của con <span aria-hidden="true">*</span></label>
-              <select id="sr-nam-sinh" name="nam_sinh" required>
-                <option value="">— Chọn năm sinh —</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="khac">Khác</option>
-              </select>
-            </div>
-            <div class="sr-field">
-              <label for="sr-khoa">Khoá quan tâm <span aria-hidden="true">*</span></label>
-              <select id="sr-khoa" name="khoa" required>
-                <option value="">— Chọn khoá —</option>
-                <option value="lop-la">Lớp Lá Việt Anh</option>
-                <option value="trong-tuan">Học trong tuần (thứ Hai – thứ Sáu)</option>
-                <option value="thu-bay">Khoá rút gọn thứ Bảy</option>
-                <option value="chua-ro">Chưa rõ, cần tư vấn</option>
-              </select>
-            </div>
-            <div class="sr-hp" aria-hidden="true">
-              <label for="sr-website">Website</label>
-              <input id="sr-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-            </div>
-            <label class="sr-consent" for="sr-consent">
-              <input id="sr-consent" name="consent" type="checkbox" required />
-              <span>Tôi đồng ý để Trường Việt Anh dùng thông tin trên để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span>
-            </label>
-              <p class="sr-err" id="sr-err" role="alert" hidden></p>
-              <div class="sr-actions">
-                <button class="sr-btn sr-btn-back" id="sr-back" type="button">← Quay lại</button>
-                <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí →</button>
+              <div class="sr-field">
+                <label for="sr-email">Email <span aria-hidden="true">*</span></label>
+                <input id="sr-email" name="email" type="email" autocomplete="email" placeholder="ten@email.com" required />
               </div>
+              <div class="sr-hp" aria-hidden="true">
+                <label for="sr-website">Website</label>
+                <input id="sr-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <p class="sr-err" id="sr-err" role="alert" hidden></p>
+              <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí và lịch học →</button>
+              <p class="sr-note">Bằng việc gửi, bạn đồng ý để Trường Việt Anh dùng thông tin này để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</p>
             </div>
           </form>
           <div class="sr-success" id="sr-success" hidden>
@@ -520,57 +488,47 @@ const related = [
       var KHOA_LABEL = {
         'lop-la': 'Lớp Lá Việt Anh',
         'trong-tuan': 'Học trong tuần',
-        'thu-bay': 'Khoá rút gọn thứ Bảy',
-        'chua-ro': 'Chưa rõ, cần tư vấn'
+        'thu-bay': 'Khoá rút gọn thứ Bảy'
       };
 
       var form = document.getElementById('sr-form');
       if (!form) return;
-      var khoa = document.getElementById('sr-khoa');
-      var coso = document.getElementById('sr-coso');
       var errEl = document.getElementById('sr-err');
       var btn = document.getElementById('sr-submit');
       var step1 = document.getElementById('sr-step-1');
       var step2 = document.getElementById('sr-step-2');
-      var err1 = document.getElementById('sr-err-1');
+      var lop = '';
+      var khoa = '';
 
       function goStep(n) {
-        errEl.hidden = true; err1.hidden = true;
+        errEl.hidden = true;
         step1.hidden = n !== 1;
         step2.hidden = n !== 2;
         document.getElementById('sr-dot-1').className = n === 1 ? 'sr-steps-on' : 'sr-steps-done';
         document.getElementById('sr-dot-2').className = n === 2 ? 'sr-steps-on' : '';
-        var f = n === 1 ? form.parent_name : coso;
-        if (f && f.focus) f.focus();
+        if (n === 2) form.parent_name.focus();
       }
-      function cleanPhone() { return (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0'); }
-      document.getElementById('sr-next').addEventListener('click', function () {
-        err1.hidden = true;
-        function bad(msg, el) { err1.textContent = msg; err1.hidden = false; el.focus(); }
-        if (!form.parent_name.value.trim()) return bad('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
-        if (!/^0[35789][0-9]{8}$/.test(cleanPhone())) return bad('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'form_step1', form_name: 'school_ready' });
-        goStep(2);
+
+      // Bước 1: bấm một lớp là sang bước 2
+      document.querySelectorAll('.sr-lop-btn').forEach(function (b) {
+        b.addEventListener('click', function () {
+          lop = b.getAttribute('data-lop');
+          document.getElementById('sr-lop-show').textContent = lop;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'form_step1', form_name: 'school_ready', lop: lop });
+          goStep(2);
+        });
       });
       document.getElementById('sr-back').addEventListener('click', function () { goStep(1); });
-      // Enter ở bước 1 = bấm "Tiếp tục", không gửi form
-      step1.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); document.getElementById('sr-next').click(); }
-      });
 
-      function selectKhoa(v) {
-        if (!KHOA_LABEL[v]) return;
-        khoa.value = v;
-      }
-
-      // ?khoa=trong-tuan | thu-bay → chọn sẵn khoá
+      // ?khoa=trong-tuan | thu-bay → nhớ khoá quan tâm (ghi vào ghi chú, không còn ô chọn)
+      function selectKhoa(v) { if (KHOA_LABEL[v]) khoa = v; }
       try {
         var q = new URLSearchParams(location.search).get('khoa');
         if (q) selectKhoa(q);
       } catch (e) {}
 
-      // Nút ở thẻ "Ba cách": chọn sẵn khoá rồi cuộn xuống form, không tải lại trang
+      // Nút ở thẻ "Ba cách": nhớ khoá rồi cuộn xuống form, không tải lại trang
       document.querySelectorAll('a[data-khoa]').forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
@@ -594,42 +552,29 @@ const related = [
         // Bẫy bot: ô ẩn có chữ thì giả vờ thành công, không gửi
         if (form.website.value) { form.hidden = true; document.getElementById('sr-success').hidden = false; return; }
 
+        if (!lop) { goStep(1); return; }
         var name = form.parent_name.value.trim();
-        var phone = cleanPhone();
-        if (!name || !/^0[35789][0-9]{8}$/.test(phone)) { goStep(1); document.getElementById('sr-next').click(); return; }
-        if (!coso.value) return showError('Bạn chọn cơ sở muốn học, hoặc chọn "Chưa chọn, cần tư vấn".', coso);
-        if (!form.nam_sinh.value) return showError('Bạn chọn năm sinh của con nhé.', form.nam_sinh);
-        if (!khoa.value) return showError('Bạn chọn khoá quan tâm nhé.', khoa);
-        if (!form.consent.checked) return showError('Bạn đánh dấu đồng ý để trường liên hệ tư vấn nhé.', form.consent);
+        if (!name) return showError('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
+        var phone = (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0');
+        if (!/^0[35789][0-9]{8}$/.test(phone)) return showError('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
+        var email = form.email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError('Email chưa đúng. Bạn kiểm tra lại giúp trường nhé.', form.email);
 
-        var opt = coso.options[coso.selectedIndex];
-        var campusLabel = opt.text.split(' — ')[0];
-        var loc = opt.getAttribute('data-loc') || '';
-        var province = opt.getAttribute('data-province') || '';
-        var namSinh = form.nam_sinh.value === 'khac' ? 'Khác' : form.nam_sinh.value;
-        var funnelCode = FUNNEL + (loc ? '-' + loc : '');
-
-        // Thẻ tag đề xuất của Pancake → ghi vào ghi chú (Pancake không nhận tag qua /api/lead)
-        var tags = ['School Ready', KHOA_LABEL[khoa.value], coso.value];
-        var note = 'School Ready · Năm sinh con: ' + namSinh
-          + ' · Khoá quan tâm: ' + KHOA_LABEL[khoa.value]
-          + ' · Cơ sở: ' + campusLabel
-          + ' · Tag: ' + tags.join(', ');
+        var note = 'School Ready · Lớp của con: ' + lop
+          + (khoa ? ' · Khoá quan tâm: ' + KHOA_LABEL[khoa] : '')
+          + ' · Tag: School Ready, ' + lop;
 
         var utm = (window.__vaUTM ? window.__vaUTM() : {});
         var payload = Object.assign({
           fullName: name,
           phone: phone,
-          email: '',
+          email: email,
           school_level: 'mam-non',
           grade: '5-tuoi',
-          source: funnelCode,
-          funnel_code: funnelCode,
-          campus: coso.value,
-          campus_label: campusLabel,
-          province: province,
-          khoa_quan_tam: khoa.value,
-          nam_sinh_con: namSinh,
+          source: FUNNEL,
+          funnel_code: FUNNEL,
+          lop_hoc: lop,
+          khoa_quan_tam: khoa,
           note: note,
           consent: true,
           page_url: location.href,
@@ -652,13 +597,12 @@ const related = [
             window.dataLayer.push({
               event: 'form_submit',
               form_name: 'school_ready',
-              funnel_code: funnelCode,
-              campus: coso.value,
-              khoa: khoa.value
+              funnel_code: FUNNEL,
+              lop: lop,
+              khoa: khoa
             });
             form.hidden = true;
-            var ok = document.getElementById('sr-success');
-            ok.hidden = false;
+            document.getElementById('sr-success').hidden = false;
             document.getElementById('sr-formcard').scrollIntoView({ behavior: 'smooth', block: 'center' });
           })
           .catch(function () {
@@ -713,6 +657,16 @@ const related = [
     .sr-actions .sr-submit{flex:1}
     .sr-btn-back{background:transparent;color:#26275D;border-color:#cbd5e1}
 
+    .sr-q{font-weight:600;color:#26275D;margin:0 0 .75rem}
+    .sr-q span{color:#b91c1c}
+    .sr-lop{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+    .sr-lop-btn{padding:1rem .75rem;border:2px solid #cbd5e1;border-radius:10px;background:#fff;color:#26275D;font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer;transition:border-color .15s,background .15s}
+    .sr-lop-btn:hover,.sr-lop-btn:focus-visible{border-color:#26275D;background:#fffbe0;outline:none}
+    .sr-formcard .sr-picked{margin:0 0 1rem;color:#475569;text-align:left}
+    .sr-formcard .sr-q{text-align:left;color:#26275D}
+    .sr-link{background:none;border:0;padding:0;font:inherit;color:#26275D;text-decoration:underline;cursor:pointer}
+    .sr-formcard .sr-note{margin:.75rem 0 0;font-size:.85rem!important;color:#475569;line-height:1.5;text-align:left}
+    .sr-formcard .sr-note a{color:#26275D;font-weight:600}
     /* Sections */
     .sr-sec{padding:4rem 1.25rem}
     .sr-sec-white{background:#fff}
