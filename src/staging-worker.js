@@ -1062,6 +1062,10 @@ const LM_GR_FUNNELS = {
   'quiz-doc-ket-qua':      { tag: 'LM08_Doc_Ket_Qua' },       // #8  Đọc kết quả học tập
   'quiz-hanh-trang-thpt':  { tag: 'LM11_Hanh_Trang_THPT' },   // #11 Hành trang THPT
   'quiz-thu-thach-tu-hoc': { tag: 'LM13_Thu_Thach_Tu_Hoc' },  // #13 Thử thách 7 ngày tự học
+  // Tài liệu "16 câu hỏi: Con đã sẵn sàng vào lớp 1 chưa?" (/tai-lieu-16-cau-hoi-school-ready).
+  // Không có số trong Kế hoạch 30 lead magnet → tag riêng SR (School Ready); automation
+  // "Tặng tài liệu" trên GetResponse bắt tag này để gửi PDF.
+  'squeeze-16-cau-hoi-school-ready': { tag: 'LM_SR_16_Cau_Hoi' },
 };
 function isLmGrFunnel(source) {
   return Object.prototype.hasOwnProperty.call(LM_GR_FUNNELS, String(source || ''));
