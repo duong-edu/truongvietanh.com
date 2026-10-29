@@ -3,8 +3,9 @@
 // Lead magnet của School Ready: điểm đến cho quảng cáo muốn nhận tài liệu ngay.
 // Nội dung theo bản "06 – Nội dung landing tặng tài liệu 16 câu hỏi (School Ready)".
 // Giao diện dùng chung ngôn ngữ với /school-ready (navy #26275D, vàng #F9DD0E, ảnh thật lớp Lá).
-// Form: POST /api/lead → Pancake (+ GetResponse khi có email). Pancake không nhận tag qua
-// /api/lead nên năm sinh, cơ sở và tag được ghép vào `note`.
+// Form 2 bước: (1) email → partial_capture, (2) họ tên cha mẹ + SĐT → full submit.
+// POST /api/lead → Pancake + GetResponse. Pancake không nhận tag qua /api/lead nên tag
+// được ghép vào `note`.
 // Gửi xong: mở nút tải PDF ngay trên trang (file ở public/downloads/).
 // noindex: trang gate tài liệu, giống các squeeze khác của site.
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -21,23 +22,6 @@ const fitList = [
   'Bạn không muốn ép con học chữ sớm, chỉ muốn con vào lớp 1 nhẹ nhàng và tự tin.',
   'Bạn cần một danh sách rõ ràng để biết bắt đầu từ đâu, thay vì tự đoán.',
 ];
-
-const inside = [
-  { name: '16 câu hỏi quan sát', text: 'Mỗi câu có 3 mức trả lời, bạn chọn mức giống con nhất. Không có đúng hay sai.' },
-  { name: '4 lĩnh vực', text: 'Kiến thức (4 câu) · Kỹ năng (5 câu) · Phẩm chất (4 câu) · Sức khoẻ (3 câu).' },
-  { name: '5 bài thử 1 phút', text: 'Làm cùng con bằng đồ vật sẵn trong nhà: chia bánh cho cả nhà, cầm bút màu, nhảy lò cò, nhắc lại lời dặn 3 việc, nói tên và số điện thoại của bố mẹ.' },
-  { name: 'Dòng “Ở lớp 1”', text: 'Giải thích vì sao năng lực đó quan trọng khi con bước vào lớp 1.' },
-  { name: 'Việc làm ngay tuần này', text: 'Với mỗi năng lực, một việc nhỏ bạn làm được ngay ở nhà, không cần mua thêm gì.' },
-];
-
-// Sơ đồ 16 câu: câu có ★ là câu có bài thử nhỏ làm cùng con
-const domains = [
-  { name: 'Kiến thức', cells: [1, 2, 3, 4] },
-  { name: 'Kỹ năng', cells: [5, 6, 7, 8, 9] },
-  { name: 'Phẩm chất', cells: [10, 11, 12, 13] },
-  { name: 'Sức khoẻ', cells: [14, 15, 16] },
-];
-const STAR = [2, 4, 6, 9, 15];
 
 // Chỉ hiện câu hỏi và lựa chọn, không hiện việc làm tuần này để giữ giá trị tài liệu
 const samples = [
@@ -59,27 +43,11 @@ const samples = [
   },
 ];
 
-// 6 cơ sở — cùng mã với form /school-ready trước 27/10/2026
-const campusGroups = [
-  { label: 'TP.HCM', province: 'TP.HCM', items: [
-    { value: 'mn-viet-anh-go-vap', label: 'Mầm non Việt Anh Gò Vấp — 573 Lê Đức Thọ, P. An Hội Đông' },
-    { value: 'vagv', label: 'Liên cấp Việt Anh Gò Vấp — 160/72 Phan Huy Ích, P. An Hội Tây' },
-    { value: 'vabt', label: 'Liên cấp Việt Anh Bình Tân — Số 7 Đường 38A, P. Tân Tạo' },
-  ] },
-  { label: 'Cần Giuộc – Tây Ninh', province: 'Tây Ninh', items: [
-    { value: 'nhan-le', label: 'Mầm non Nhân Lễ — 22 Đường D2, KDC Long Hậu' },
-    { value: 'thai-son', label: 'Mầm non Thái Sơn — Đường 11, KDC Thái Sơn, Cần Giuộc' },
-  ] },
-  { label: 'Rạch Giá – An Giang', province: 'An Giang', items: [
-    { value: 'mgis', label: 'Mầm non Quốc tế Mekong Xanh (MGIS) — Lô E7, Đường số 13, KĐT Tây Bắc' },
-  ] },
-];
-
 const faqs = [
   {
     id: 'faq-mien-phi',
     q: 'Tài liệu này có miễn phí thật không?',
-    a: 'Có. Bạn chỉ cần để lại họ tên và số Zalo để trường gửi tài liệu. Bạn không phải đăng ký học hay trả bất kỳ khoản nào.',
+    a: 'Có. Bạn chỉ cần để lại email, họ tên và số điện thoại để trường gửi tài liệu. Bạn không phải đăng ký học hay trả bất kỳ khoản nào.',
   },
   {
     id: 'faq-do-tuoi',
@@ -183,39 +151,7 @@ const structuredData = [
       </div>
     </section>
 
-    <!-- 3. BÊN TRONG TÀI LIỆU -->
-    <section class="t16-sec t16-sec-white">
-      <div class="t16-wide">
-        <h2 class="t16-center">Bên trong tài liệu có gì?</h2>
-        <div class="t16-inside">
-          <div class="t16-cards">
-            {inside.map((c) => (
-              <div class="t16-card">
-                <strong>{c.name}</strong>
-                <p>{c.text}</p>
-              </div>
-            ))}
-          </div>
-          <div class="t16-map" role="img" aria-label="Sơ đồ 16 câu hỏi theo 4 lĩnh vực: Kiến thức câu 1 đến 4, Kỹ năng câu 5 đến 9, Phẩm chất câu 10 đến 13, Sức khoẻ câu 14 đến 16. Năm câu có bài thử nhỏ: câu 2, 4, 6, 9 và 15.">
-            <h3>16 câu, 4 lĩnh vực</h3>
-            <p class="t16-map-sub">Ô vàng là câu có bài thử nhỏ làm cùng con.</p>
-            {domains.map((d) => (
-              <div class="t16-domain">
-                <div class="t16-domain-head"><span>{d.name}</span><span>{d.cells.length} câu</span></div>
-                <div class="t16-cells">
-                  {d.cells.map((n) => (
-                    <span class={STAR.includes(n) ? 't16-cell t16-cell-star' : 't16-cell'}>{n}{STAR.includes(n) ? '★' : ''}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <p class="t16-note">Tài liệu dựa trên những gì bạn quan sát ở nhà, không phải đánh giá chuyên môn. Mỗi đứa trẻ có nhịp phát triển riêng.</p>
-      </div>
-    </section>
-
-    <!-- 4. SAU 5 PHÚT -->
+    <!-- 3. SAU 5 PHÚT -->
     <section class="t16-sec t16-sec-navy">
       <div class="t16-wide">
         <h2 class="t16-h2-gold t16-center">Sau 5 phút, bạn sẽ biết</h2>
@@ -275,7 +211,7 @@ const structuredData = [
       <div class="t16-wide t16-formgrid">
         <div class="t16-formtext">
           <h2 class="t16-h2-gold">Nhận tài liệu 16 câu hỏi miễn phí</h2>
-          <p>Để lại số Zalo, trường gửi bản PDF qua Zalo OA Trường Việt Anh. Gửi xong, bạn tải được bản PDF ngay trên trang này.</p>
+          <p>Điền email, trường gửi tài liệu 16 câu hỏi cho bạn. Gửi xong, bạn tải được bản PDF ngay trên trang này.</p>
           <ul>
             <li>16 câu hỏi quan sát, chia theo 4 lĩnh vực</li>
             <li>Dòng “Ở lớp 1” và việc làm ngay tuần này cho từng năng lực</li>
@@ -285,58 +221,43 @@ const structuredData = [
         </div>
 
         <div class="t16-formcard" id="t16-formcard">
-          <h3>Nhận tài liệu qua Zalo</h3>
+          <h3>Nhận tài liệu qua email</h3>
           <form id="t16-form" novalidate>
-            <div class="t16-field">
-              <label for="t16-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
-              <input id="t16-name" name="parent_name" type="text" autocomplete="name" required />
+            <ol class="t16-fsteps" aria-label="Các bước">
+              <li class="t16-fsteps-on" id="t16-dot-1"><span>1</span> Email</li>
+              <li id="t16-dot-2"><span>2</span> Họ tên, SĐT</li>
+            </ol>
+            <div class="t16-step" id="t16-step-1">
+              <div class="t16-field">
+                <label for="t16-email">Email nhận tài liệu <span aria-hidden="true">*</span></label>
+                <input id="t16-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="ten@email.com" required />
+              </div>
+              <button class="t16-btn t16-btn-gold t16-submit" id="t16-next" type="button">Tiếp tục →</button>
             </div>
-            <div class="t16-field">
-              <label for="t16-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
-              <input id="t16-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912 345 678" required />
+            <div class="t16-step" id="t16-step-2" hidden>
+              <p class="t16-picked">Gửi tài liệu tới: <strong id="t16-email-show"></strong> · <button type="button" class="t16-link" id="t16-back">đổi email</button></p>
+              <div class="t16-field">
+                <label for="t16-name">Họ tên cha mẹ <span aria-hidden="true">*</span></label>
+                <input id="t16-name" name="parent_name" type="text" autocomplete="name" required />
+              </div>
+              <div class="t16-field">
+                <label for="t16-phone">Số điện thoại <span aria-hidden="true">*</span></label>
+                <input id="t16-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912 345 678" required />
+              </div>
+              <div class="t16-hp" aria-hidden="true">
+                <label for="t16-website">Website</label>
+                <input id="t16-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <button class="t16-btn t16-btn-gold t16-submit" id="t16-submit" type="submit">Gửi tài liệu cho tôi →</button>
             </div>
-            <div class="t16-field">
-              <label for="t16-namsinh">Năm sinh của con <span aria-hidden="true">*</span></label>
-              <select id="t16-namsinh" name="nam_sinh" required>
-                <option value="">— Chọn năm sinh —</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="khac">Khác</option>
-              </select>
-            </div>
-            <div class="t16-field">
-              <label for="t16-coso">Cơ sở thuận tiện <span class="t16-opt">(không bắt buộc)</span></label>
-              <select id="t16-coso" name="campus">
-                <option value="">— Chọn cơ sở —</option>
-                {campusGroups.map((g) => (
-                  <optgroup label={g.label}>
-                    {g.items.map((c) => (<option value={c.value} data-province={g.province}>{c.label}</option>))}
-                  </optgroup>
-                ))}
-                <option value="chua-chon" data-province="">Chưa chọn, cần tư vấn</option>
-              </select>
-            </div>
-            <div class="t16-field">
-              <label for="t16-email">Email <span class="t16-opt">(không bắt buộc, để nhận thêm bản PDF qua email)</span></label>
-              <input id="t16-email" name="email" type="email" autocomplete="email" placeholder="ten@email.com" />
-            </div>
-            <div class="t16-hp" aria-hidden="true">
-              <label for="t16-website">Website</label>
-              <input id="t16-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-            </div>
-            <label class="t16-consent">
-              <input type="checkbox" name="consent" required />
-              <span>Tôi đồng ý để Trường Việt Anh dùng thông tin trên để gửi tài liệu và liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a> và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15.</span>
-            </label>
             <p class="t16-err" id="t16-err" role="alert" hidden></p>
-            <button class="t16-btn t16-btn-gold t16-submit" id="t16-submit" type="submit">Nhận tài liệu qua Zalo →</button>
-            <p class="t16-under">Không hỏi tên con. Trường không gửi tin quảng cáo nếu bạn không đồng ý. Trong giờ hành chính, chuyên viên tư vấn có thể gọi lại trong vòng 25 phút để hỗ trợ nếu bạn cần.</p>
+            <p class="t16-under">Bằng việc gửi, bạn đồng ý để Trường Việt Anh dùng thông tin này để gửi tài liệu và liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a> và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15. Trường không hỏi tên con.</p>
           </form>
 
           <div class="t16-success" id="t16-success" hidden>
             <p class="t16-success-tick" aria-hidden="true">✓</p>
             <h3 tabindex="-1" id="t16-success-title">Cảm ơn bạn.</h3>
-            <p>Tài liệu 16 câu hỏi sẽ được gửi qua Zalo OA Trường Việt Anh. Bạn có thể tải ngay bên dưới.</p>
+            <p>Tài liệu 16 câu hỏi sẽ được gửi tới email của bạn. Bạn có thể tải ngay bên dưới.</p>
             <a href={PDF_URL} download class="t16-btn t16-btn-gold t16-submit" id="t16-pdf">Tải PDF 16 câu hỏi</a>
             <a href="/school-ready" class="t16-btn t16-btn-outline-navy t16-submit" data-keep-utm>Tìm hiểu chương trình School Ready →</a>
           </div>
@@ -389,7 +310,49 @@ const structuredData = [
       if (!form) return;
       var errEl = document.getElementById('t16-err');
       var btn = document.getElementById('t16-submit');
-      var coso = form.campus;
+      var step1 = document.getElementById('t16-step-1');
+      var step2 = document.getElementById('t16-step-2');
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var partialSent = '';
+
+      function goStep(n) {
+        errEl.hidden = true;
+        step1.hidden = n !== 1;
+        step2.hidden = n !== 2;
+        document.getElementById('t16-dot-1').className = n === 1 ? 't16-fsteps-on' : 't16-fsteps-done';
+        document.getElementById('t16-dot-2').className = n === 2 ? 't16-fsteps-on' : '';
+        (n === 1 ? form.email : form.parent_name).focus();
+      }
+
+      // Bước 1: email. Hợp lệ thì sang bước 2 và gửi partial_capture (giữ được email
+      // nếu phụ huynh bỏ dở ở bước 2) — cùng cách LeadFormTwoStepEmailFirst đang làm.
+      function nextStep() {
+        var email = form.email.value.trim();
+        if (!EMAIL_RE.test(email)) return showError('Email chưa đúng. Bạn kiểm tra lại giúp trường nhé.', form.email);
+        document.getElementById('t16-email-show').textContent = email;
+        goStep(2);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_step_complete', form_name: 'tai_lieu_16_cau', funnel_code: FUNNEL, step: 1 });
+        if (partialSent === email) return;
+        partialSent = email;
+        try {
+          fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({
+              step: 'partial_capture',
+              email: email,
+              source: FUNNEL,
+              funnel_code: FUNNEL,
+              page: location.href,
+              timestamp: new Date().toISOString()
+            }, (window.__vaUTM ? window.__vaUTM() : {}))),
+            keepalive: true
+          }).catch(function () {});
+        } catch (err) {}
+      }
+      document.getElementById('t16-next').addEventListener('click', nextStep);
+      document.getElementById('t16-back').addEventListener('click', function () { goStep(1); });
 
       function showError(msg, el) {
         errEl.textContent = msg;
@@ -413,27 +376,21 @@ const structuredData = [
         e.preventDefault();
         errEl.hidden = true;
 
+        // Enter ở bước 1 = bấm "Tiếp tục"
+        if (!step1.hidden) { nextStep(); return; }
+
         // Bẫy bot: ô ẩn có chữ thì giả vờ thành công, không gửi
         if (form.website.value) { showSuccess(); return; }
 
+        var email = form.email.value.trim();
+        if (!EMAIL_RE.test(email)) { goStep(1); return showError('Email chưa đúng. Bạn kiểm tra lại giúp trường nhé.', form.email); }
         var name = form.parent_name.value.trim();
-        if (!name) return showError('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
+        if (!name) return showError('Bạn cho trường biết họ tên cha mẹ nhé.', form.parent_name);
         var phone = (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0');
         if (!/^0[35789][0-9]{8}$/.test(phone)) return showError('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
-        if (!form.nam_sinh.value) return showError('Bạn chọn năm sinh của con nhé.', form.nam_sinh);
-        var email = form.email.value.trim();
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError('Email chưa đúng. Bạn kiểm tra lại, hoặc để trống ô này.', form.email);
-        if (!form.consent.checked) return showError('Bạn đánh dấu đồng ý để trường gửi được tài liệu nhé.', form.consent);
-
-        var opt = coso.options[coso.selectedIndex];
-        var campusLabel = coso.value ? opt.text.split(' — ')[0] : 'Chưa chọn';
-        var province = (opt && opt.getAttribute('data-province')) || '';
-        var namSinh = form.nam_sinh.value === 'khac' ? 'Khác' : form.nam_sinh.value;
 
         // Tag đề xuất cho Pancake → ghi vào ghi chú (Pancake không nhận tag qua /api/lead)
-        var note = 'Tài liệu 16 câu hỏi School Ready · Năm sinh con: ' + namSinh
-          + ' · Cơ sở: ' + campusLabel
-          + ' · Tag: School Ready, Tai lieu 16 cau';
+        var note = 'Tài liệu 16 câu hỏi School Ready · Tag: School Ready, Tai lieu 16 cau';
 
         var utm = (window.__vaUTM ? window.__vaUTM() : {});
         var payload = Object.assign({
@@ -444,10 +401,6 @@ const structuredData = [
           grade: '5-tuoi',
           source: FUNNEL,
           funnel_code: FUNNEL,
-          campus: coso.value,
-          campus_label: campusLabel,
-          province: province,
-          nam_sinh_con: namSinh,
           note: note,
           consent: true,
           page_url: location.href,
@@ -470,9 +423,7 @@ const structuredData = [
             window.dataLayer.push(Object.assign({
               event: 'form_submit',
               form_name: 'tai_lieu_16_cau',
-              funnel_code: FUNNEL,
-              campus_code: coso.value,
-              child_birth_year: namSinh
+              funnel_code: FUNNEL
             }, utm));
             showSuccess();
           })
@@ -550,23 +501,6 @@ const structuredData = [
     .t16-checks li{display:flex;gap:.85rem;align-items:flex-start;background:#fff;border-radius:12px;padding:1rem 1.1rem;box-shadow:0 2px 10px rgba(0,0,0,.05);color:#334155}
     .t16-tick{flex:none;width:1.9rem;height:1.9rem;border-radius:50%;background:#f9dd0e;color:#26275D;font-weight:800;display:inline-flex;align-items:center;justify-content:center;line-height:1}
 
-    /* Bên trong tài liệu */
-    .t16-inside{display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:start;margin-top:1rem}
-    .t16-cards{display:grid;gap:.85rem}
-    .t16-card{background:#fff;border:1px solid #e2e8f0;border-left:5px solid #f9dd0e;border-radius:12px;padding:1rem 1.2rem}
-    .t16-card strong{display:block;color:#26275D;font-size:1.1rem;margin-bottom:.2rem}
-    .t16-card p{margin:0;color:#475569}
-    .t16-map{background:#26275D;color:#fff;border-radius:16px;padding:1.5rem 1.25rem}
-    .t16-map h3{color:#fff;margin:0 0 .2rem;font-size:1.2rem}
-    .t16-page .t16-map-sub{color:rgba(255,255,255,.8);margin:0 0 1.1rem}
-    .t16-domain{margin-bottom:1rem}
-    .t16-domain-head{display:flex;justify-content:space-between;font-weight:700;margin-bottom:.45rem}
-    .t16-domain-head span:last-child{color:#f9dd0e}
-    .t16-cells{display:flex;flex-wrap:wrap;gap:.5rem}
-    .t16-cell{width:3.1rem;height:3.1rem;border-radius:10px;border:2px solid rgba(255,255,255,.35);display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:rgba(255,255,255,.06)}
-    .t16-cell-star{background:#f9dd0e;border-color:#f9dd0e;color:#26275D}
-    .t16-page .t16-note{margin:2rem auto 0;max-width:820px;text-align:center;color:#475569;background:#f0f4f8;border-radius:10px;padding:.9rem 1.2rem}
-
     /* Sau 5 phút */
     .t16-know{list-style:none;counter-reset:k;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .t16-know li{counter-increment:k;position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:4.2rem 1.25rem 1.5rem;font-weight:600;font-size:1.1rem!important;color:#fff}
@@ -596,19 +530,26 @@ const structuredData = [
     .t16-field{margin-bottom:1rem}
     .t16-field label{display:block;font-weight:600;color:#26275D;margin-bottom:.35rem}
     .t16-field label span{color:#b91c1c}
-    .t16-field label .t16-opt{color:#475569;font-weight:400}
+    .t16-fsteps{list-style:none;display:flex;gap:.5rem;margin:0 0 1.25rem;padding:0;color:#6b7280}
+    .t16-fsteps li{flex:1;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:3px solid #e5e7eb;line-height:1.35}
+    .t16-fsteps span{flex:none;display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;background:#e5e7eb;color:#4b5563;font-weight:700}
+    .t16-fsteps .t16-fsteps-on{color:#26275D;font-weight:700;border-color:#f9dd0e}
+    .t16-fsteps .t16-fsteps-on span{background:#26275D;color:#f9dd0e}
+    .t16-fsteps .t16-fsteps-done{border-color:#26275D}
+    .t16-fsteps .t16-fsteps-done span{background:#26275D;color:#fff}
+    .t16-step[hidden]{display:none}
+    .t16-page .t16-picked{margin:0 0 1rem;color:#475569;overflow-wrap:anywhere}
+    .t16-link{background:none;border:0;padding:0;font:inherit;color:#26275D;text-decoration:underline;cursor:pointer}
     .t16-field input,.t16-field select{width:100%;padding:.8rem .9rem;border:1.5px solid #cbd5e1;border-radius:8px;background:#fff;color:#1a1a2e;font-family:inherit;min-height:3.2rem}
     .t16-field input:focus,.t16-field select:focus{outline:3px solid #f9dd0e;border-color:#26275D}
     .t16-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-    .t16-consent{display:flex;gap:.7rem;align-items:flex-start;margin:1.1rem 0;color:#334155;cursor:pointer;line-height:1.55}
-    .t16-consent input{width:1.25rem;height:1.25rem;margin-top:.2rem;flex:none;accent-color:#26275D}
-    .t16-consent a{color:#26275D;font-weight:700}
-    .t16-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:.75rem 1rem;border-radius:8px;margin:0 0 1rem}
+    .t16-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:.75rem 1rem;border-radius:8px;margin:1rem 0 0}
     .t16-err a{color:#991b1b;font-weight:700}
     .t16-err[hidden],.t16-success[hidden],#t16-form[hidden]{display:none}
     .t16-submit{width:100%;font-size:1.1rem}
     .t16-submit:disabled{opacity:.6;cursor:default}
-    .t16-page .t16-under{margin:.8rem 0 0;color:#475569;line-height:1.55}
+    .t16-page .t16-under{margin:1rem 0 0;color:#475569;line-height:1.55}
+    .t16-under a{color:#26275D;font-weight:700}
     .t16-success{text-align:center;padding:.5rem 0}
     .t16-success h3:focus{outline:none}
     .t16-success p{color:#334155}
@@ -624,7 +565,6 @@ const structuredData = [
     @media (max-width:960px){
       .t16-hero-grid{grid-template-columns:1fr;gap:2.5rem}
       .t16-hero-visual{max-width:560px;margin:0 auto;width:100%}
-      .t16-inside{grid-template-columns:1fr}
       .t16-qgrid{grid-template-columns:1fr;max-width:640px;margin-left:auto;margin-right:auto}
     }
     @media (max-width:768px){
