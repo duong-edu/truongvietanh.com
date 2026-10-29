@@ -1,0 +1,656 @@
+---
+// /tai-lieu-16-cau-hoi-school-ready — trang tặng tài liệu "16 câu hỏi: Con đã sẵn sàng vào lớp 1 chưa?".
+// Lead magnet của School Ready: điểm đến cho quảng cáo muốn nhận tài liệu ngay.
+// Nội dung theo bản "06 – Nội dung landing tặng tài liệu 16 câu hỏi (School Ready)".
+// Giao diện dùng chung ngôn ngữ với /school-ready (navy #26275D, vàng #F9DD0E, ảnh thật lớp Lá).
+// Form: POST /api/lead → Pancake (+ GetResponse khi có email). Pancake không nhận tag qua
+// /api/lead nên năm sinh, cơ sở và tag được ghép vào `note`.
+// Gửi xong: mở nút tải PDF ngay trên trang (file ở public/downloads/).
+// noindex: trang gate tài liệu, giống các squeeze khác của site.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeaderBase from '../components/HeaderBase.astro';
+import FooterBase from '../components/FooterBase.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+
+const ZALO_OA = 'https://zalo.me/1678310120468101523';
+const PDF_URL = '/downloads/16-cau-hoi-school-ready.pdf';
+
+const fitList = [
+  'Con bạn 5–6 tuổi và sắp vào lớp 1, bạn muốn biết nên chuẩn bị gì cho con.',
+  'Bạn lo con chưa tự lập, chưa dám nói với cô, hoặc nhanh mệt trong buổi học dài.',
+  'Bạn không muốn ép con học chữ sớm, chỉ muốn con vào lớp 1 nhẹ nhàng và tự tin.',
+  'Bạn cần một danh sách rõ ràng để biết bắt đầu từ đâu, thay vì tự đoán.',
+];
+
+const inside = [
+  { name: '16 câu hỏi quan sát', text: 'Mỗi câu có 3 mức trả lời, bạn chọn mức giống con nhất. Không có đúng hay sai.' },
+  { name: '4 lĩnh vực', text: 'Kiến thức (4 câu) · Kỹ năng (5 câu) · Phẩm chất (4 câu) · Sức khoẻ (3 câu).' },
+  { name: '5 bài thử 1 phút', text: 'Làm cùng con bằng đồ vật sẵn trong nhà: chia bánh cho cả nhà, cầm bút màu, nhảy lò cò, nhắc lại lời dặn 3 việc, nói tên và số điện thoại của bố mẹ.' },
+  { name: 'Dòng “Ở lớp 1”', text: 'Giải thích vì sao năng lực đó quan trọng khi con bước vào lớp 1.' },
+  { name: 'Việc làm ngay tuần này', text: 'Với mỗi năng lực, một việc nhỏ bạn làm được ngay ở nhà, không cần mua thêm gì.' },
+];
+
+// Sơ đồ 16 câu: câu có ★ là câu có bài thử nhỏ làm cùng con
+const domains = [
+  { name: 'Kiến thức', cells: [1, 2, 3, 4] },
+  { name: 'Kỹ năng', cells: [5, 6, 7, 8, 9] },
+  { name: 'Phẩm chất', cells: [10, 11, 12, 13] },
+  { name: 'Sức khoẻ', cells: [14, 15, 16] },
+];
+const STAR = [2, 4, 6, 9, 15];
+
+// Chỉ hiện câu hỏi và lựa chọn, không hiện việc làm tuần này để giữ giá trị tài liệu
+const samples = [
+  {
+    meta: 'Câu 6 · Kỹ năng', star: true,
+    q: 'Bạn nói một lần duy nhất: “Con cất giày, rửa tay, rồi lấy cho mẹ cái khăn.” Con làm được bao nhiêu việc?',
+    tryNow: 'Thử tối nay, không nhắc lại.',
+    opts: ['Một việc hoặc chưa làm việc nào', 'Hai việc, hoặc đủ nhưng sai thứ tự', 'Đủ ba việc, đúng thứ tự'],
+  },
+  {
+    meta: 'Câu 11 · Phẩm chất', star: false,
+    q: 'Khi không làm được một việc (tháp xếp hình đổ, thua trò chơi), con thường làm gì?',
+    opts: ['Khóc to, ném đồ hoặc giận dỗi lâu', 'Buồn, cần người lớn dỗ mới nguôi', 'Nói được “Con đang bực” hoặc “Con buồn”, rồi tự bình tĩnh lại'],
+  },
+  {
+    meta: 'Câu 16 · Sức khoẻ', star: false,
+    q: 'Ở một nơi lạ, khi cần đi vệ sinh, con làm gì?',
+    opts: ['Không dám nói, cố nhịn hoặc khóc', 'Nói với bố mẹ nhưng cần người lớn đi cùng và giúp', 'Tự hỏi người lớn, tự đi và tự rửa tay'],
+  },
+];
+
+// 6 cơ sở — cùng mã với form /school-ready trước 27/10/2026
+const campusGroups = [
+  { label: 'TP.HCM', province: 'TP.HCM', items: [
+    { value: 'mn-viet-anh-go-vap', label: 'Mầm non Việt Anh Gò Vấp — 573 Lê Đức Thọ, P. An Hội Đông' },
+    { value: 'vagv', label: 'Liên cấp Việt Anh Gò Vấp — 160/72 Phan Huy Ích, P. An Hội Tây' },
+    { value: 'vabt', label: 'Liên cấp Việt Anh Bình Tân — Số 7 Đường 38A, P. Tân Tạo' },
+  ] },
+  { label: 'Cần Giuộc – Tây Ninh', province: 'Tây Ninh', items: [
+    { value: 'nhan-le', label: 'Mầm non Nhân Lễ — 22 Đường D2, KDC Long Hậu' },
+    { value: 'thai-son', label: 'Mầm non Thái Sơn — Đường 11, KDC Thái Sơn, Cần Giuộc' },
+  ] },
+  { label: 'Rạch Giá – An Giang', province: 'An Giang', items: [
+    { value: 'mgis', label: 'Mầm non Quốc tế Mekong Xanh (MGIS) — Lô E7, Đường số 13, KĐT Tây Bắc' },
+  ] },
+];
+
+const faqs = [
+  {
+    id: 'faq-mien-phi',
+    q: 'Tài liệu này có miễn phí thật không?',
+    a: 'Có. Bạn chỉ cần để lại họ tên và số Zalo để trường gửi tài liệu. Bạn không phải đăng ký học hay trả bất kỳ khoản nào.',
+  },
+  {
+    id: 'faq-do-tuoi',
+    q: 'Con tôi bao nhiêu tuổi thì phù hợp?',
+    a: 'Tài liệu viết cho trẻ 5–6 tuổi, trước hoặc trong năm con vào lớp 1.',
+  },
+  {
+    id: 'faq-con-lam-bai',
+    q: 'Tôi có cần đưa con làm bài không?',
+    a: 'Không. Bạn tự quan sát con ở nhà. Có 5 câu bạn thử cùng con trong khoảng 1 phút bằng đồ vật sẵn có, con không phải ngồi làm bài.',
+  },
+  {
+    id: 'faq-truong-khac',
+    q: 'Con đang học trường khác thì dùng được không?',
+    a: 'Được. Tài liệu dành cho mọi phụ huynh có con sắp vào lớp 1, không cần con học ở Trường Việt Anh.',
+  },
+  {
+    id: 'faq-chuyen-mon',
+    q: 'Kết quả có phải đánh giá chuyên môn không?',
+    a: 'Không. Đây là công cụ giúp bạn nhìn lại con qua những gì bạn thấy hằng ngày. Mỗi đứa trẻ có nhịp phát triển riêng.',
+  },
+  {
+    id: 'faq-thong-tin',
+    q: 'Thông tin của tôi được dùng vào việc gì?',
+    a: 'Trường dùng để gửi tài liệu và liên hệ tư vấn khi bạn đồng ý, theo Chính sách bảo mật và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15. Chúng tôi không hỏi tên con.',
+  },
+];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Tặng bạn tài liệu 16 câu hỏi: Con đã sẵn sàng vào lớp 1 chưa? | School Ready – Trường Việt Anh"
+  description="Nhận miễn phí tài liệu 16 câu hỏi giúp bạn tự quan sát con 5–6 tuổi qua 4 lĩnh vực Kiến thức, Kỹ năng, Phẩm chất, Sức khoẻ, kèm việc làm ngay tại nhà cho từng năng lực."
+  canonical="https://truongvietanh.com/tai-lieu-16-cau-hoi-school-ready"
+  noindex={true}
+  ogImage="https://truongvietanh.com/images/school-ready/tai-lieu-16-cau-hoi-og.jpg"
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  structuredData={structuredData}
+>
+  <div class="t16-page">
+    <HeaderBase />
+
+    <!-- 1. HERO -->
+    <section class="t16-hero">
+      <div class="t16-wide t16-hero-grid">
+        <div class="t16-hero-text">
+          <p class="t16-eyebrow">Tài liệu tặng phụ huynh · School Ready</p>
+          <h1 class="t16-h1">Con sắp vào lớp 1? Nhận <span class="t16-hl">16 câu hỏi</span> giúp bạn nhìn lại con trong 5 phút</h1>
+          <p class="t16-sub">Lớp 1 cần một đứa trẻ tự lo việc của mình, nghe hiểu lời cô, dám nói khi cần giúp và đủ sức cho một buổi học dài. Tài liệu này giúp bạn nhìn lại con qua 4 lĩnh vực, bằng chính những gì bạn thấy ở nhà mỗi ngày.</p>
+          <ul class="t16-stats">
+            <li><strong>16 câu</strong><span>quan sát</span></li>
+            <li><strong>4 lĩnh vực</strong><span>Kiến thức · Kỹ năng · Phẩm chất · Sức khoẻ</span></li>
+            <li><strong>5 bài thử nhỏ</strong><span>làm cùng con ngay tối nay</span></li>
+          </ul>
+          <a href="#nhan-tai-lieu" class="t16-btn t16-btn-gold t16-btn-lg">Nhận tài liệu miễn phí →</a>
+          <p class="t16-hero-note">Miễn phí. Đây không phải bài kiểm tra con. Bạn trả lời theo những gì bạn thấy ở nhà.</p>
+        </div>
+
+        <div class="t16-hero-visual">
+          <img class="t16-hero-photo" src="/images/school-ready/morning-meeting-lop-la-vong-tron.webp" width="1400" height="1050" loading="eager" fetchpriority="high" decoding="async" alt="Cô giáo ngồi cùng trẻ lớp Lá thành vòng tròn trên thảm xanh, mọi người nắm tay nhau trong Morning Meeting" />
+          <!-- Bìa tài liệu dựng bằng CSS, giống trang 1 của file PDF -->
+          <div class="t16-cover" aria-hidden="true">
+            <span class="t16-cover-badge">Miễn phí</span>
+            <span class="t16-cover-kicker">SCHOOL READY · TRƯỜNG VIỆT ANH</span>
+            <span class="t16-cover-gift">Tài liệu tặng phụ huynh</span>
+            <span class="t16-cover-title">16 câu hỏi</span>
+            <span class="t16-cover-sub">Con đã sẵn sàng vào lớp 1 chưa?</span>
+            <span class="t16-cover-rule"></span>
+            <span class="t16-cover-foot">5 phút · 16 câu · 5 bài thử nhỏ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DÀNH CHO BẠN NẾU -->
+    <section class="t16-sec t16-sec-light">
+      <div class="t16-wide t16-split">
+        <figure class="t16-fig">
+          <img src="/images/school-ready/hoat-dong-thu-cong-nhom.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Các bé cười tươi cùng cô giáo bên bàn làm thủ công với bút màu và khăn giấy" />
+        </figure>
+        <div>
+          <h2>Tài liệu này dành cho bạn nếu…</h2>
+          <ul class="t16-checks">
+            {fitList.map((t) => (
+              <li><span class="t16-tick" aria-hidden="true">✓</span><span>{t}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BÊN TRONG TÀI LIỆU -->
+    <section class="t16-sec t16-sec-white">
+      <div class="t16-wide">
+        <h2 class="t16-center">Bên trong tài liệu có gì?</h2>
+        <div class="t16-inside">
+          <div class="t16-cards">
+            {inside.map((c) => (
+              <div class="t16-card">
+                <strong>{c.name}</strong>
+                <p>{c.text}</p>
+              </div>
+            ))}
+          </div>
+          <div class="t16-map" role="img" aria-label="Sơ đồ 16 câu hỏi theo 4 lĩnh vực: Kiến thức câu 1 đến 4, Kỹ năng câu 5 đến 9, Phẩm chất câu 10 đến 13, Sức khoẻ câu 14 đến 16. Năm câu có bài thử nhỏ: câu 2, 4, 6, 9 và 15.">
+            <h3>16 câu, 4 lĩnh vực</h3>
+            <p class="t16-map-sub">Ô vàng là câu có bài thử nhỏ làm cùng con.</p>
+            {domains.map((d) => (
+              <div class="t16-domain">
+                <div class="t16-domain-head"><span>{d.name}</span><span>{d.cells.length} câu</span></div>
+                <div class="t16-cells">
+                  {d.cells.map((n) => (
+                    <span class={STAR.includes(n) ? 't16-cell t16-cell-star' : 't16-cell'}>{n}{STAR.includes(n) ? '★' : ''}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p class="t16-note">Tài liệu dựa trên những gì bạn quan sát ở nhà, không phải đánh giá chuyên môn. Mỗi đứa trẻ có nhịp phát triển riêng.</p>
+      </div>
+    </section>
+
+    <!-- 4. SAU 5 PHÚT -->
+    <section class="t16-sec t16-sec-navy">
+      <div class="t16-wide">
+        <h2 class="t16-h2-gold t16-center">Sau 5 phút, bạn sẽ biết</h2>
+        <ol class="t16-know">
+          <li>Con đã vững bao nhiêu trong 16 năng lực.</li>
+          <li>Năng lực nào con đang cần thêm thời gian.</li>
+          <li>Một việc bạn làm được ngay trong tuần này cho từng năng lực đó.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. XEM THỬ VÀI CÂU -->
+    <section class="t16-sec t16-sec-light">
+      <div class="t16-wide">
+        <h2 class="t16-center">Xem thử vài câu hỏi trong tài liệu</h2>
+        <div class="t16-qgrid">
+          {samples.map((s) => (
+            <article class="t16-q">
+              <p class="t16-q-meta">{s.meta}{s.star && <span class="t16-q-star"> ★</span>}</p>
+              <p class="t16-q-text">{s.q}</p>
+              {s.tryNow && <p class="t16-try"><strong>★ Thử ngay với con trong 1 phút:</strong> {s.tryNow}</p>}
+              <ul class="t16-opts">
+                {s.opts.map((o) => (<li><span class="t16-box" aria-hidden="true"></span>{o}</li>))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <div class="t16-more">
+          <p>Tài liệu đầy đủ có cả 16 câu, kèm dòng “Ở lớp 1” và một việc làm ngay tuần này cho từng câu.</p>
+          <a href="#nhan-tai-lieu" class="t16-btn t16-btn-navy">Nhận tài liệu miễn phí →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. VÌ SAO TRƯỜNG LÀM TÀI LIỆU NÀY -->
+    <section class="t16-sec t16-sec-white">
+      <div class="t16-wide t16-split">
+        <div>
+          <h2>Vì sao Trường Việt Anh làm tài liệu này</h2>
+          <p>Chúng tôi không dạy trước chương trình lớp 1. Chúng tôi giúp con chuẩn bị 16 năng lực để vào lớp 1 nhẹ nhàng, tự tin: tự lo việc của mình, nghe hiểu chỉ dẫn, dám nói khi cần giúp, đủ sức khoẻ cho một buổi học dài. Khung 16 năng lực dựa trên Bộ chuẩn phát triển trẻ em 5 tuổi của Bộ GD&amp;ĐT.</p>
+          <p>Tài liệu này là cách chúng tôi chia sẻ với phụ huynh những gì giáo viên Việt Anh vẫn quan sát ở trẻ mỗi ngày.</p>
+          <a href="/school-ready" class="t16-arrow" data-keep-utm>Tìm hiểu chương trình School Ready →</a>
+        </div>
+        <figure class="t16-fig">
+          <img src="/images/school-ready/morning-meeting-lop-la-co-giao-huong-dan.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Cô giáo hướng dẫn trẻ lớp Lá ngồi thành vòng tròn, các bạn nhìn nhau và mỉm cười" />
+          <div class="t16-fig-pair">
+            <img src="/images/school-ready/hoat-dong-in-dau-ban-tay.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Cô giáo cùng các bé trong lớp in dấu bàn tay lên tờ giấy lớn" />
+            <img src="/images/school-ready/morning-meeting-lop-la-nam-tay-vong-tron.webp" width="1400" height="1050" loading="lazy" decoding="async" alt="Trẻ lớp Lá nắm tay nhau thành vòng tròn cùng cô giáo trong giờ Morning Meeting" />
+          </div>
+          <figcaption>Lớp Lá School Ready: Morning Meeting mỗi sáng và giờ học bằng tay cùng cô.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 7. FORM NHẬN TÀI LIỆU -->
+    <section class="t16-sec t16-sec-navy" id="nhan-tai-lieu">
+      <div class="t16-wide t16-formgrid">
+        <div class="t16-formtext">
+          <h2 class="t16-h2-gold">Nhận tài liệu 16 câu hỏi miễn phí</h2>
+          <p>Để lại số Zalo, trường gửi bản PDF qua Zalo OA Trường Việt Anh. Gửi xong, bạn tải được bản PDF ngay trên trang này.</p>
+          <ul>
+            <li>16 câu hỏi quan sát, chia theo 4 lĩnh vực</li>
+            <li>Dòng “Ở lớp 1” và việc làm ngay tuần này cho từng năng lực</li>
+            <li>Bảng đếm và gợi ý theo từng mức của con</li>
+          </ul>
+          <p>Hoặc nhắn ngay <a href={ZALO_OA} target="_blank" rel="noopener">Zalo OA Trường Việt Anh</a> · Hotline <a href="tel:0916961409">0916 961 409</a></p>
+        </div>
+
+        <div class="t16-formcard" id="t16-formcard">
+          <h3>Nhận tài liệu qua Zalo</h3>
+          <form id="t16-form" novalidate>
+            <div class="t16-field">
+              <label for="t16-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
+              <input id="t16-name" name="parent_name" type="text" autocomplete="name" required />
+            </div>
+            <div class="t16-field">
+              <label for="t16-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
+              <input id="t16-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912 345 678" required />
+            </div>
+            <div class="t16-field">
+              <label for="t16-namsinh">Năm sinh của con <span aria-hidden="true">*</span></label>
+              <select id="t16-namsinh" name="nam_sinh" required>
+                <option value="">— Chọn năm sinh —</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="khac">Khác</option>
+              </select>
+            </div>
+            <div class="t16-field">
+              <label for="t16-coso">Cơ sở thuận tiện <span class="t16-opt">(không bắt buộc)</span></label>
+              <select id="t16-coso" name="campus">
+                <option value="">— Chọn cơ sở —</option>
+                {campusGroups.map((g) => (
+                  <optgroup label={g.label}>
+                    {g.items.map((c) => (<option value={c.value} data-province={g.province}>{c.label}</option>))}
+                  </optgroup>
+                ))}
+                <option value="chua-chon" data-province="">Chưa chọn, cần tư vấn</option>
+              </select>
+            </div>
+            <div class="t16-field">
+              <label for="t16-email">Email <span class="t16-opt">(không bắt buộc, để nhận thêm bản PDF qua email)</span></label>
+              <input id="t16-email" name="email" type="email" autocomplete="email" placeholder="ten@email.com" />
+            </div>
+            <div class="t16-hp" aria-hidden="true">
+              <label for="t16-website">Website</label>
+              <input id="t16-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <label class="t16-consent">
+              <input type="checkbox" name="consent" required />
+              <span>Tôi đồng ý để Trường Việt Anh dùng thông tin trên để gửi tài liệu và liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a> và Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15.</span>
+            </label>
+            <p class="t16-err" id="t16-err" role="alert" hidden></p>
+            <button class="t16-btn t16-btn-gold t16-submit" id="t16-submit" type="submit">Nhận tài liệu qua Zalo →</button>
+            <p class="t16-under">Không hỏi tên con. Trường không gửi tin quảng cáo nếu bạn không đồng ý. Trong giờ hành chính, chuyên viên tư vấn có thể gọi lại trong vòng 25 phút để hỗ trợ nếu bạn cần.</p>
+          </form>
+
+          <div class="t16-success" id="t16-success" hidden>
+            <p class="t16-success-tick" aria-hidden="true">✓</p>
+            <h3 tabindex="-1" id="t16-success-title">Cảm ơn bạn.</h3>
+            <p>Tài liệu 16 câu hỏi sẽ được gửi qua Zalo OA Trường Việt Anh. Bạn có thể tải ngay bên dưới.</p>
+            <a href={PDF_URL} download class="t16-btn t16-btn-gold t16-submit" id="t16-pdf">Tải PDF 16 câu hỏi</a>
+            <a href="/school-ready" class="t16-btn t16-btn-outline-navy t16-submit" data-keep-utm>Tìm hiểu chương trình School Ready →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="t16-sec t16-sec-light">
+      <div class="t16-narrow">
+        <h2 class="t16-center">Câu hỏi thường gặp</h2>
+        <FaqAccordion faqs={faqs} />
+      </div>
+    </section>
+
+    <!-- 9. CTA CUỐI -->
+    <section class="t16-final">
+      <div class="t16-wide t16-center">
+        <h2>Bắt đầu từ 16 câu hỏi, 5 phút thôi</h2>
+        <div class="t16-final-row">
+          <a href="#nhan-tai-lieu" class="t16-btn t16-btn-navy t16-btn-lg">Nhận tài liệu miễn phí →</a>
+          <a href="/school-ready" class="t16-arrow" data-keep-utm>Tìm hiểu chương trình School Ready →</a>
+        </div>
+      </div>
+    </section>
+
+    <FooterBase />
+  </div>
+
+  <script src="/js/va-utm.js" is:inline></script>
+  <script is:inline>
+    (function () {
+      var FUNNEL = 'squeeze-16-cau-hoi-school-ready';
+      var API = '/api/lead';
+
+      // Giữ UTM khi bấm sang /school-ready
+      var utmNow = (window.__vaUTM ? window.__vaUTM() : {});
+      document.querySelectorAll('a[data-keep-utm]').forEach(function (a) {
+        try {
+          var u = new URL(a.getAttribute('href'), location.origin);
+          ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+            if (utmNow[k] && !u.searchParams.has(k)) u.searchParams.set(k, utmNow[k]);
+          });
+          u.searchParams.set('src', 'tai-lieu-16-cau');
+          a.setAttribute('href', u.pathname + u.search + u.hash);
+        } catch (e) {}
+      });
+
+      var form = document.getElementById('t16-form');
+      if (!form) return;
+      var errEl = document.getElementById('t16-err');
+      var btn = document.getElementById('t16-submit');
+      var coso = form.campus;
+
+      function showError(msg, el) {
+        errEl.textContent = msg;
+        errEl.hidden = false;
+        if (el && el.focus) el.focus();
+      }
+      function showSuccess() {
+        form.hidden = true;
+        var ok = document.getElementById('t16-success');
+        ok.hidden = false;
+        document.getElementById('t16-formcard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('t16-success-title').focus({ preventScroll: true });
+      }
+
+      document.getElementById('t16-pdf').addEventListener('click', function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'pdf_download', form_name: 'tai_lieu_16_cau', funnel_code: FUNNEL });
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errEl.hidden = true;
+
+        // Bẫy bot: ô ẩn có chữ thì giả vờ thành công, không gửi
+        if (form.website.value) { showSuccess(); return; }
+
+        var name = form.parent_name.value.trim();
+        if (!name) return showError('Bạn cho trường biết họ tên phụ huynh nhé.', form.parent_name);
+        var phone = (form.phone.value || '').replace(/[\s\-\.\(\)]/g, '').replace(/^\+?84/, '0');
+        if (!/^0[35789][0-9]{8}$/.test(phone)) return showError('Số điện thoại chưa đúng. Bạn nhập số di động Việt Nam 10 số (ví dụ 0912 345 678).', form.phone);
+        if (!form.nam_sinh.value) return showError('Bạn chọn năm sinh của con nhé.', form.nam_sinh);
+        var email = form.email.value.trim();
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError('Email chưa đúng. Bạn kiểm tra lại, hoặc để trống ô này.', form.email);
+        if (!form.consent.checked) return showError('Bạn đánh dấu đồng ý để trường gửi được tài liệu nhé.', form.consent);
+
+        var opt = coso.options[coso.selectedIndex];
+        var campusLabel = coso.value ? opt.text.split(' — ')[0] : 'Chưa chọn';
+        var province = (opt && opt.getAttribute('data-province')) || '';
+        var namSinh = form.nam_sinh.value === 'khac' ? 'Khác' : form.nam_sinh.value;
+
+        // Tag đề xuất cho Pancake → ghi vào ghi chú (Pancake không nhận tag qua /api/lead)
+        var note = 'Tài liệu 16 câu hỏi School Ready · Năm sinh con: ' + namSinh
+          + ' · Cơ sở: ' + campusLabel
+          + ' · Tag: School Ready, Tai lieu 16 cau';
+
+        var utm = (window.__vaUTM ? window.__vaUTM() : {});
+        var payload = Object.assign({
+          fullName: name,
+          phone: phone,
+          email: email,
+          school_level: 'mam-non',
+          grade: '5-tuoi',
+          source: FUNNEL,
+          funnel_code: FUNNEL,
+          campus: coso.value,
+          campus_label: campusLabel,
+          province: province,
+          nam_sinh_con: namSinh,
+          note: note,
+          consent: true,
+          page_url: location.href,
+          submitted_at: new Date().toISOString()
+        }, utm);
+
+        btn.disabled = true;
+        var oldText = btn.textContent;
+        btn.textContent = 'Đang gửi…';
+
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        })
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push(Object.assign({
+              event: 'form_submit',
+              form_name: 'tai_lieu_16_cau',
+              funnel_code: FUNNEL,
+              campus_code: coso.value,
+              child_birth_year: namSinh
+            }, utm));
+            showSuccess();
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = oldText;
+            errEl.innerHTML = 'Chưa gửi được thông tin. Thông tin bạn nhập vẫn còn nguyên, bạn bấm gửi lại, hoặc nhắn <a href="' + 'https://zalo.me/1678310120468101523' + '" target="_blank" rel="noopener">Zalo OA Trường Việt Anh</a> / gọi <a href="tel:0916961409">0916 961 409</a> để nhận tài liệu ngay.';
+            errEl.hidden = false;
+          });
+      });
+    })();
+  </script>
+
+  <style is:global>
+    .t16-page{font-family:'Be Vietnam Pro','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;color:#1a1a2e;line-height:1.7;font-size:1rem}
+    .t16-page *,.t16-page *::before,.t16-page *::after{box-sizing:border-box}
+    .t16-page h1,.t16-page h2,.t16-page h3{line-height:1.3}
+    .t16-page p,.t16-page li,.t16-page label,.t16-page input,.t16-page select{font-size:1rem}
+    .t16-wide{max-width:1100px;margin:0 auto}
+    .t16-narrow{max-width:820px;margin:0 auto}
+    .t16-center{text-align:center}
+
+    /* Nút */
+    .t16-btn{display:inline-block;padding:.9rem 1.8rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:1rem;border:2px solid transparent;cursor:pointer;transition:opacity .2s;text-align:center;font-family:inherit}
+    .t16-btn:hover{opacity:.88}
+    .t16-btn-lg{font-size:1.1rem;padding:1rem 2rem}
+    .t16-btn-gold{background:#f9dd0e;color:#26275D}
+    .t16-btn-navy{background:#26275D;color:#f9dd0e}
+    .t16-btn-outline-navy{background:#fff;color:#26275D;border-color:#cbd5e1}
+    .t16-arrow{display:inline-block;margin-top:.5rem;color:#26275D;font-weight:700;text-decoration:none;border-bottom:2px solid #f9dd0e}
+    .t16-arrow:hover{border-bottom-color:#26275D}
+
+    /* Hero */
+    .t16-hero{background:#1f2058;color:#fff;padding:3.5rem 1.25rem 4rem;overflow:hidden}
+    .t16-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+    .t16-eyebrow{display:inline-block;background:#f9dd0e;color:#26275D;font-weight:700;padding:.35rem 1rem;border-radius:999px;margin:0 0 1.25rem}
+    .t16-h1{font-size:2.35rem;font-weight:800;color:#fff;margin:0 0 1.1rem}
+    .t16-page .t16-hl{color:#f9dd0e;font-size:inherit}
+    .t16-sub{color:rgba(255,255,255,.92);margin:0 0 1.5rem;font-size:1.1rem!important;line-height:1.8}
+    .t16-stats{list-style:none;margin:0 0 1.75rem;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+    .t16-stats li{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:.9rem .8rem;line-height:1.4}
+    .t16-stats strong{display:block;color:#f9dd0e;font-size:1.3rem;line-height:1.2;margin-bottom:.25rem}
+    .t16-stats span{color:#fff}
+    .t16-hero-note{margin:1rem 0 0;color:rgba(255,255,255,.8);max-width:34rem}
+
+    .t16-hero-visual{position:relative;padding:0 0 3.5rem 2.5rem}
+    .t16-hero-photo{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+    .t16-cover{position:absolute;left:0;bottom:0;width:46%;min-width:200px;aspect-ratio:210/297;background:#26275D;border:3px solid #f9dd0e;border-radius:10px;padding:1.1rem 1rem;display:flex;flex-direction:column;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.45);transform:rotate(-4deg)}
+    .t16-cover-badge{position:absolute;top:-.9rem;right:-.9rem;background:#f9dd0e;color:#26275D;font-weight:800;border:2px solid #26275D;border-radius:999px;padding:.2rem .8rem;transform:rotate(8deg)}
+    .t16-cover-kicker{color:#f9dd0e;font-weight:800;font-size:1rem;line-height:1.3}
+    .t16-cover-gift{font-weight:700;margin-top:.6rem}
+    .t16-cover-title{font-size:2rem;font-weight:800;line-height:1.1;margin-top:.6rem}
+    .t16-cover-sub{font-weight:700;line-height:1.3;margin-top:.4rem}
+    .t16-cover-rule{display:block;height:5px;background:#f9dd0e;margin:auto -1rem .7rem}
+    .t16-cover-foot{line-height:1.35}
+    .t16-page .t16-cover span{line-height:1.3}
+
+    /* Khối chung */
+    .t16-sec{padding:4rem 1.25rem}
+    .t16-sec-white{background:#fff}
+    .t16-sec-light{background:#f0f4f8}
+    .t16-sec-navy{background:#26275D;color:#fff}
+    .t16-page h2{font-size:1.6rem;font-weight:800;color:#26275D;margin:0 0 1.25rem}
+    .t16-page .t16-h2-gold{color:#f9dd0e}
+    .t16-sec-white p,.t16-sec-light p{color:#334155}
+    .t16-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .t16-split p{margin:0 0 1rem}
+    .t16-fig{margin:0}
+    .t16-fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
+    .t16-fig-pair{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+    .t16-fig figcaption{margin:.9rem auto 0;max-width:34rem;font-style:italic;color:#475569;line-height:1.5;text-align:center}
+
+    /* Dành cho bạn nếu */
+    .t16-checks{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+    .t16-checks li{display:flex;gap:.85rem;align-items:flex-start;background:#fff;border-radius:12px;padding:1rem 1.1rem;box-shadow:0 2px 10px rgba(0,0,0,.05);color:#334155}
+    .t16-tick{flex:none;width:1.9rem;height:1.9rem;border-radius:50%;background:#f9dd0e;color:#26275D;font-weight:800;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+
+    /* Bên trong tài liệu */
+    .t16-inside{display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:start;margin-top:1rem}
+    .t16-cards{display:grid;gap:.85rem}
+    .t16-card{background:#fff;border:1px solid #e2e8f0;border-left:5px solid #f9dd0e;border-radius:12px;padding:1rem 1.2rem}
+    .t16-card strong{display:block;color:#26275D;font-size:1.1rem;margin-bottom:.2rem}
+    .t16-card p{margin:0;color:#475569}
+    .t16-map{background:#26275D;color:#fff;border-radius:16px;padding:1.5rem 1.25rem}
+    .t16-map h3{color:#fff;margin:0 0 .2rem;font-size:1.2rem}
+    .t16-page .t16-map-sub{color:rgba(255,255,255,.8);margin:0 0 1.1rem}
+    .t16-domain{margin-bottom:1rem}
+    .t16-domain-head{display:flex;justify-content:space-between;font-weight:700;margin-bottom:.45rem}
+    .t16-domain-head span:last-child{color:#f9dd0e}
+    .t16-cells{display:flex;flex-wrap:wrap;gap:.5rem}
+    .t16-cell{width:3.1rem;height:3.1rem;border-radius:10px;border:2px solid rgba(255,255,255,.35);display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:rgba(255,255,255,.06)}
+    .t16-cell-star{background:#f9dd0e;border-color:#f9dd0e;color:#26275D}
+    .t16-page .t16-note{margin:2rem auto 0;max-width:820px;text-align:center;color:#475569;background:#f0f4f8;border-radius:10px;padding:.9rem 1.2rem}
+
+    /* Sau 5 phút */
+    .t16-know{list-style:none;counter-reset:k;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .t16-know li{counter-increment:k;position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:4.2rem 1.25rem 1.5rem;font-weight:600;font-size:1.1rem!important;color:#fff}
+    .t16-know li::before{content:counter(k);position:absolute;left:1.25rem;top:1.25rem;width:2.4rem;height:2.4rem;border-radius:50%;background:#f9dd0e;color:#26275D;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+    /* Xem thử câu hỏi */
+    .t16-qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1rem}
+    .t16-q{background:#fff;border-radius:14px;padding:1.4rem 1.25rem;box-shadow:0 2px 14px rgba(0,0,0,.07);border-top:4px solid #26275D}
+    .t16-page .t16-q-meta{display:inline-block;background:#e9eaf3;color:#26275D;font-weight:700;border-radius:999px;padding:.15rem .8rem;margin:0 0 .8rem}
+    .t16-q-star{color:#8a6d00}
+    .t16-page .t16-q-text{font-weight:700;color:#26275D;line-height:1.5;margin:0 0 .9rem}
+    .t16-page .t16-try{background:#fff8cf;border:1px solid #f0d64a;border-radius:8px;padding:.6rem .8rem;margin:0 0 .9rem;color:#1a1a2e}
+    .t16-opts{list-style:none;margin:0;padding:0}
+    .t16-opts li{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem 0;border-top:1px solid #e2e8f0;color:#334155}
+    .t16-opts li:first-child{border-top:0}
+    .t16-box{flex:none;width:1.2rem;height:1.2rem;border:2px solid #26275D;border-radius:5px;margin-top:.25rem}
+    .t16-more{text-align:center;margin-top:2rem}
+
+    /* Form */
+    .t16-formgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    .t16-formtext p,.t16-formtext li{color:rgba(255,255,255,.92)}
+    .t16-formtext ul{padding-left:1.25rem}
+    .t16-formtext li{margin-bottom:.6rem}
+    .t16-formtext a{color:#f9dd0e;font-weight:700}
+    .t16-formcard{background:#fff;color:#1a1a2e;border-radius:16px;padding:1.75rem;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .t16-formcard h3{color:#26275D;font-size:1.3rem;margin:0 0 1.1rem}
+    .t16-field{margin-bottom:1rem}
+    .t16-field label{display:block;font-weight:600;color:#26275D;margin-bottom:.35rem}
+    .t16-field label span{color:#b91c1c}
+    .t16-field label .t16-opt{color:#475569;font-weight:400}
+    .t16-field input,.t16-field select{width:100%;padding:.8rem .9rem;border:1.5px solid #cbd5e1;border-radius:8px;background:#fff;color:#1a1a2e;font-family:inherit;min-height:3.2rem}
+    .t16-field input:focus,.t16-field select:focus{outline:3px solid #f9dd0e;border-color:#26275D}
+    .t16-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    .t16-consent{display:flex;gap:.7rem;align-items:flex-start;margin:1.1rem 0;color:#334155;cursor:pointer;line-height:1.55}
+    .t16-consent input{width:1.25rem;height:1.25rem;margin-top:.2rem;flex:none;accent-color:#26275D}
+    .t16-consent a{color:#26275D;font-weight:700}
+    .t16-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:.75rem 1rem;border-radius:8px;margin:0 0 1rem}
+    .t16-err a{color:#991b1b;font-weight:700}
+    .t16-err[hidden],.t16-success[hidden],#t16-form[hidden]{display:none}
+    .t16-submit{width:100%;font-size:1.1rem}
+    .t16-submit:disabled{opacity:.6;cursor:default}
+    .t16-page .t16-under{margin:.8rem 0 0;color:#475569;line-height:1.55}
+    .t16-success{text-align:center;padding:.5rem 0}
+    .t16-success h3:focus{outline:none}
+    .t16-success p{color:#334155}
+    .t16-success .t16-btn{margin-top:.75rem}
+    .t16-page .t16-success-tick{width:64px;height:64px;line-height:64px;border-radius:50%;background:#26275D;color:#f9dd0e;font-size:2rem!important;margin:0 auto 1rem}
+
+    /* CTA cuối */
+    .t16-final{background:#f9dd0e;padding:3.5rem 1.25rem}
+    .t16-final h2{margin-bottom:1.5rem}
+    .t16-final-row{display:flex;flex-wrap:wrap;gap:1rem 1.75rem;justify-content:center;align-items:center}
+    .t16-final .t16-arrow{border-bottom-color:#26275D;margin-top:0}
+
+    @media (max-width:960px){
+      .t16-hero-grid{grid-template-columns:1fr;gap:2.5rem}
+      .t16-hero-visual{max-width:560px;margin:0 auto;width:100%}
+      .t16-inside{grid-template-columns:1fr}
+      .t16-qgrid{grid-template-columns:1fr;max-width:640px;margin-left:auto;margin-right:auto}
+    }
+    @media (max-width:768px){
+      .t16-h1{font-size:1.85rem}
+      .t16-split,.t16-formgrid{grid-template-columns:1fr;gap:1.75rem}
+      .t16-sec{padding:3rem 1.25rem}
+      .t16-know{grid-template-columns:1fr}
+      .t16-know li{padding:1.1rem 1.1rem 1.1rem 4.3rem}
+      .t16-know li::before{top:50%;transform:translateY(-50%)}
+      /* Điện thoại: ô form lên trước phần lời dẫn */
+      .t16-formcard{order:-1}
+    }
+    @media (max-width:600px){
+      .t16-hero{padding-top:2.5rem}
+      .t16-h1{font-size:1.65rem}
+      .t16-stats{grid-template-columns:1fr}
+      .t16-stats li{display:flex;gap:.9rem;align-items:center}
+      .t16-stats strong{min-width:9rem;margin:0;font-size:1.2rem}
+      .t16-btn-lg{display:block}
+      .t16-hero-visual{padding:0 0 2.5rem 1.25rem}
+      .t16-cover{width:52%;min-width:170px;padding:.8rem .75rem}
+      .t16-cover-title{font-size:1.6rem}
+      .t16-cover-kicker,.t16-cover-gift{display:none}
+      .t16-cover-rule{margin-left:-.75rem;margin-right:-.75rem}
+      .t16-final-row{flex-direction:column}
+      .t16-final .t16-btn{width:100%}
+    }
+  </style>
+</BaseLayout>
