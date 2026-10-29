@@ -224,6 +224,70 @@ const related = [
       </div>
     </section>
 
+    <!-- FORM: đặt ngay sau hero để phụ huynh thấy sớm -->
+    <section class="sr-sec sr-sec-navy sr-formsec" id="pp-form">
+      <div class="sr-wide sr-formgrid">
+        <div class="sr-formtext">
+          <h2 class="sr-h2-gold">Năm cuối mầm non chỉ có một lần</h2>
+          <p>Trong vài tháng tới, con sẽ học cách tự lo cặp sách, nói trước nhóm và đứng dậy sau mỗi lần làm chưa được. Những điều đó sẽ đi cùng con suốt năm lớp 1. Nếu bỏ qua, con vẫn vào lớp 1, nhưng phải học những điều này cùng lúc với chữ và số.</p>
+          <p><strong>Để lại thông tin, trường sẽ:</strong></p>
+          <ul>
+            <li>Gọi lại trong vòng 25 phút (trong giờ hành chính) để tư vấn theo độ tuổi và tính cách của con</li>
+            <li>Gửi học phí và lịch học tại cơ sở bạn chọn</li>
+            <li>Mời con đến trải nghiệm một buổi School Ready</li>
+          </ul>
+          <p>Hoặc nhắn ngay <a href={ZALO_OA} target="_blank" rel="noopener">Zalo OA Trường Việt Anh</a> · Hotline <a href="tel:0916961409">0916 961 409</a></p>
+        </div>
+
+        <div class="sr-formcard" id="sr-formcard">
+          <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
+          <form id="sr-form" novalidate>
+            <ol class="sr-fsteps" aria-label="Các bước">
+              <li class="sr-fsteps-on" id="sr-dot-1"><span>1</span> Tuổi của con</li>
+              <li id="sr-dot-2"><span>2</span> Thông tin liên hệ</li>
+            </ol>
+            <div class="sr-step" id="sr-step-1">
+              <p class="sr-q" id="sr-q">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></p>
+              <div class="sr-lop" role="group" aria-labelledby="sr-q">
+                <button type="button" class="sr-lop-btn" data-lop="12-23 tháng">12 – 23 tháng</button>
+                <button type="button" class="sr-lop-btn" data-lop="2 tuổi">2 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="3 tuổi">3 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="4 tuổi">4 tuổi</button>
+                <button type="button" class="sr-lop-btn" data-lop="5 tuổi">5 tuổi</button>
+              </div>
+            </div>
+            <div class="sr-step" id="sr-step-2" hidden>
+              <p class="sr-picked">Tuổi của con: <strong id="sr-lop-show"></strong> · <button type="button" class="sr-link" id="sr-back">đổi tuổi</button></p>
+              <div class="sr-field">
+                <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
+                <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
+              </div>
+              <div class="sr-field">
+                <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
+                <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
+              </div>
+              <div class="sr-field">
+                <label for="sr-email">Email <span aria-hidden="true">*</span></label>
+                <input id="sr-email" name="email" type="email" autocomplete="email" placeholder="ten@email.com" required />
+              </div>
+              <div class="sr-hp" aria-hidden="true">
+                <label for="sr-website">Website</label>
+                <input id="sr-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <p class="sr-err" id="sr-err" role="alert" hidden></p>
+              <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí và lịch học →</button>
+              <p class="sr-note">Bằng việc gửi, bạn đồng ý để Trường Việt Anh dùng thông tin này để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</p>
+            </div>
+          </form>
+          <div class="sr-success" id="sr-success" hidden>
+            <p class="sr-tick" aria-hidden="true">✓</p>
+            <p>Cảm ơn bạn. Trong giờ hành chính, chuyên viên tư vấn của trường sẽ gọi lại cho bạn trong vòng 25 phút để gửi học phí và lịch học tại cơ sở bạn chọn. Ngoài giờ, trường sẽ gọi vào đầu giờ làm việc kế tiếp. Bạn cũng có thể nhắn ngay cho Zalo OA Trường Việt Anh.</p>
+            <a href={ZALO_OA} target="_blank" rel="noopener" class="sr-btn sr-btn-navy">Nhắn Zalo OA Trường Việt Anh →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 7.2 VẤN ĐỀ -->
     <section class="sr-sec sr-sec-white">
       <div class="sr-narrow">
@@ -388,70 +452,7 @@ const related = [
       <div class="sr-narrow">
         <h2 class="sr-center">Câu hỏi phụ huynh thường gặp</h2>
         <FaqAccordion faqs={faqs} />
-      </div>
-    </section>
-
-    <!-- 7.10 + 4. FORM -->
-    <section class="sr-sec sr-sec-navy" id="pp-form">
-      <div class="sr-wide sr-formgrid">
-        <div class="sr-formtext">
-          <h2 class="sr-h2-gold">Năm cuối mầm non chỉ có một lần</h2>
-          <p>Trong vài tháng tới, con sẽ học cách tự lo cặp sách, nói trước nhóm và đứng dậy sau mỗi lần làm chưa được. Những điều đó sẽ đi cùng con suốt năm lớp 1. Nếu bỏ qua, con vẫn vào lớp 1, nhưng phải học những điều này cùng lúc với chữ và số.</p>
-          <p><strong>Để lại thông tin, trường sẽ:</strong></p>
-          <ul>
-            <li>Gọi lại trong vòng 25 phút (trong giờ hành chính) để tư vấn theo độ tuổi và tính cách của con</li>
-            <li>Gửi học phí và lịch học tại cơ sở bạn chọn</li>
-            <li>Mời con đến trải nghiệm một buổi School Ready</li>
-          </ul>
-          <p>Hoặc nhắn ngay <a href={ZALO_OA} target="_blank" rel="noopener">Zalo OA Trường Việt Anh</a> · Hotline <a href="tel:0916961409">0916 961 409</a></p>
-        </div>
-
-        <div class="sr-formcard" id="sr-formcard">
-          <h3>Nhận học phí và lịch học tại cơ sở gần nhà</h3>
-          <form id="sr-form" novalidate>
-            <ol class="sr-fsteps" aria-label="Các bước">
-              <li class="sr-fsteps-on" id="sr-dot-1"><span>1</span> Tuổi của con</li>
-              <li id="sr-dot-2"><span>2</span> Thông tin liên hệ</li>
-            </ol>
-            <div class="sr-step" id="sr-step-1">
-              <p class="sr-q" id="sr-q">Con bạn đang bao nhiêu tuổi? <span aria-hidden="true">*</span></p>
-              <div class="sr-lop" role="group" aria-labelledby="sr-q">
-                <button type="button" class="sr-lop-btn" data-lop="12-23 tháng">12 – 23 tháng</button>
-                <button type="button" class="sr-lop-btn" data-lop="2 tuổi">2 tuổi</button>
-                <button type="button" class="sr-lop-btn" data-lop="3 tuổi">3 tuổi</button>
-                <button type="button" class="sr-lop-btn" data-lop="4 tuổi">4 tuổi</button>
-                <button type="button" class="sr-lop-btn" data-lop="5 tuổi">5 tuổi</button>
-              </div>
-            </div>
-            <div class="sr-step" id="sr-step-2" hidden>
-              <p class="sr-picked">Tuổi của con: <strong id="sr-lop-show"></strong> · <button type="button" class="sr-link" id="sr-back">đổi tuổi</button></p>
-              <div class="sr-field">
-                <label for="sr-name">Họ tên phụ huynh <span aria-hidden="true">*</span></label>
-                <input id="sr-name" name="parent_name" type="text" autocomplete="name" required />
-              </div>
-              <div class="sr-field">
-                <label for="sr-phone">Số điện thoại / Zalo <span aria-hidden="true">*</span></label>
-                <input id="sr-phone" name="phone" type="tel" autocomplete="tel" placeholder="0912 345 678" required />
-              </div>
-              <div class="sr-field">
-                <label for="sr-email">Email <span aria-hidden="true">*</span></label>
-                <input id="sr-email" name="email" type="email" autocomplete="email" placeholder="ten@email.com" required />
-              </div>
-              <div class="sr-hp" aria-hidden="true">
-                <label for="sr-website">Website</label>
-                <input id="sr-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-              </div>
-              <p class="sr-err" id="sr-err" role="alert" hidden></p>
-              <button class="sr-btn sr-btn-gold sr-submit" id="sr-submit" type="submit">Nhận học phí và lịch học →</button>
-              <p class="sr-note">Bằng việc gửi, bạn đồng ý để Trường Việt Anh dùng thông tin này để liên hệ tư vấn, theo <a href="/chinh-sach-bao-mat" target="_blank" rel="noopener">Chính sách bảo mật</a>.</p>
-            </div>
-          </form>
-          <div class="sr-success" id="sr-success" hidden>
-            <p class="sr-tick" aria-hidden="true">✓</p>
-            <p>Cảm ơn bạn. Trong giờ hành chính, chuyên viên tư vấn của trường sẽ gọi lại cho bạn trong vòng 25 phút để gửi học phí và lịch học tại cơ sở bạn chọn. Ngoài giờ, trường sẽ gọi vào đầu giờ làm việc kế tiếp. Bạn cũng có thể nhắn ngay cho Zalo OA Trường Việt Anh.</p>
-            <a href={ZALO_OA} target="_blank" rel="noopener" class="sr-btn sr-btn-navy">Nhắn Zalo OA Trường Việt Anh →</a>
-          </div>
-        </div>
+        <p class="sr-center sr-faq-cta"><a href="#pp-form" class="sr-btn sr-btn-navy">Nhận học phí và lịch học →</a></p>
       </div>
     </section>
 
@@ -748,6 +749,8 @@ const related = [
     .sr-way li{margin-bottom:.5rem}
 
     /* Form */
+    .sr-formsec{border-top:1px solid rgba(255,255,255,.12)}
+    .sr-narrow .sr-faq-cta{margin:2rem 0 0}
     .sr-formgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
     .sr-formtext p,.sr-formtext li{color:rgba(255,255,255,.92)}
     .sr-formtext ul{padding-left:1.25rem}
@@ -796,6 +799,9 @@ const related = [
     @media (max-width:768px){
       .sr-h1{font-size:1.8rem}
       .sr-compare,.sr-split,.sr-formgrid,.sr-links{grid-template-columns:1fr}
+      /* Điện thoại: hiện ô form trước, phần lời dẫn xuống dưới */
+      .sr-formgrid{gap:2rem}
+      .sr-formcard{order:-1}
       .sr-split{gap:1.5rem}
       .sr-sec{padding:3rem 1.25rem}
     }
