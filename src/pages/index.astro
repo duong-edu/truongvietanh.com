@@ -131,15 +131,16 @@ const testimonials = cmsVideoTestimonials.length > 0
       <section class="aio-answer">
         <div class="aio-answer__inner">
           <p class="aio-answer__eyebrow">Về Trường Việt Anh</p>
-          <p class="aio-answer__text">
-            <strong>Trường Việt Anh</strong> là hệ thống giáo dục liên cấp song ngữ K-12, thành lập năm 2011 tại TP.HCM, nay có 6 cơ sở tại TP.HCM, Tây Ninh và An Giang, dạy trẻ từ 1 đến 18 tuổi.
+          {/* Bản anh Dương chốt 03/11/2026 — thay đoạn văn 3 đoạn của 01/09. */}
+          <p class="aio-answer__lead">
+            <strong>Trường Việt Anh:</strong> Nơi những đứa trẻ bình thường trở nên phi thường, bất kể hoàn cảnh hay điểm số
           </p>
-          <p class="aio-answer__text">
-            Trường kết hợp chương trình Bộ GD-ĐT với chương trình Oxford và tiếng Anh do giáo viên bản ngữ phụ trách, cùng 16 kỹ năng thế kỷ 21 theo WEF — tất cả để phát triển mô hình giáo dục toàn diện: Kiến thức, Kỹ năng lãnh đạo, Phẩm chất và Sức khỏe. Cả bốn lĩnh vực được đo cụ thể 3 lần mỗi năm, và mỗi học sinh được <strong>đo tiến bộ so với chính mình</strong>.
-          </p>
-          <p class="aio-answer__text">
-            Từ năm học 2026–2027, Trường Việt Anh chính thức chuyển đổi thành <strong>AI-Powered School</strong>: mọi lớp 1–12 học 30 tiết AI mỗi năm — gấp 2,5 lần mức Bộ GD-ĐT yêu cầu. Mục tiêu không phải để con dùng AI nhiều hơn, mà để con <strong>cưỡi lên con sóng AI</strong>, làm chủ công nghệ và giành quyền chọn con đường riêng, thay vì phụ thuộc vào hoàn cảnh.
-          </p>
+          <ul class="aio-answer__list">
+            <li>Thành lập từ 2011 và năm 2026 từ trường chuyên Anh trở thành một trong những trường AI Powered School đầu tiên của Việt Nam. Việt Anh không phải nơi dạy học thuần tuý, đó là nơi cung cấp sự lựa chọn, cơ hội lãnh đạo, sự đồng hành và kèm cặp.</li>
+            <li><strong>Đặc trưng:</strong> Khác với thói quen tập trung vào kiến thức, học sinh được kèm cặp để phát triển toàn diện 4 lĩnh vực: Kiến thức, Kỹ năng lãnh đạo, Phẩm chất, Sức khoẻ. Khẩu hiệu của học sinh Việt Anh không phải là “Giỏi nhất” mà là “Tiến lên”.</li>
+            <li><strong>Thế mạnh:</strong> Lượng hoá rõ ràng sự tiến bộ của từng học sinh, để phụ huynh và chính các con nhìn thấy được, quản trị được, cải thiện được 1% mỗi ngày.</li>
+            <li><strong>Lý do bạn nên chọn:</strong> Ở Việt Anh, con không học để trở thành một nhân viên mẫn cán. Con học để trở nên những nhà lãnh đạo tự thân tò mò, có giá trị đạo đức rõ ràng, biết sử dụng AI làm đòn bẩy để nâng cao hiệu suất của bản thân trên mọi ngả đường mình tự chọn.</li>
+          </ul>
         </div>
       </section>
 
@@ -200,7 +201,26 @@ const testimonials = cmsVideoTestimonials.length > 0
     margin: 0.5rem auto 0;
   }
   .aio-answer__text { margin: 0; }
+  .aio-answer__lead {
+    margin: 0 0 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    color: #26275D;
+  }
+  .aio-answer__list {
+    margin: 0;
+    padding-left: 1.25rem;
+    text-align: left;
+    color: #334155;
+    display: grid;
+    gap: 0.7rem;
+    line-height: 1.65;
+  }
+  .aio-answer__list li::marker { color: #c9a800; }
+  .aio-answer__list strong { color: #26275D; }
   @media (max-width: 760px) {
+    .aio-answer__lead { font-size: 1.08rem; }
     .aio-answer { margin-top: -1.5rem; padding: 0 1rem; }
     .aio-answer__inner { padding: 1.5rem 1.25rem 1.75rem; }
   }
