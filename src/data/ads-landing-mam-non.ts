@@ -45,7 +45,7 @@ export type AdsPage = {
   faq: { q: string; a: string }[];
 };
 
-const callLine = `Cần hỏi nhanh, gọi ${F.hotlineMamNon} — hotline mầm non trực 24/7.`;
+const callLine = `Cần hỏi nhanh, gọi ${F.hotlineMamNon} — hotline mầm non, Thứ 2–Thứ 7, 07:00–19:00.`;
 
 // Khối Plan–Do–Review dùng lại ở nhiều trang
 const pdrTimeline = `
@@ -69,13 +69,13 @@ export const adsPages: AdsPage[] = [
       `Mặt tiền ${F.addressShort} — ${F.wardNote}`,
       'Cơ sở chuyên mầm non, bé không dùng chung sân với anh chị cấp lớn',
       `Lớp ${F.classSizeLabel} — cô lên kế hoạch cho từng bé, không phải một giáo án chung`,
-      'Camera 24/7, phụ huynh mầm non được cấp tài khoản xem trong giờ học',
+      'Camera giám sát 24/7 toàn khu, gồm cả hành lang',
     ],
     metrics: [
       { number: String(F.yearsRunning) + '+', label: `Năm vận hành từ ${F.foundedYear}` },
       { number: F.classSize, label: 'Bé mỗi lớp, tuỳ độ tuổi' },
-      { number: F.rating + '/5', label: `Từ ${F.reviewCount} đánh giá phụ huynh` },
       { number: F.familiesServed, label: 'Gia đình đã đồng hành' },
+      { number: '8h–17h', label: 'Phòng y tế trực trong trường' },
     ],
     formTitle: 'Nhận thông tin & đặt lịch tham quan',
     formDesc: 'Chọn tuổi của con và để lại thông tin, nhà trường gửi thông tin cơ sở và hẹn giờ ba/mẹ tới xem lớp thật.',
@@ -136,13 +136,12 @@ export const adsPages: AdsPage[] = [
       `${F.yearsRunning}+ năm vận hành, ${F.familiesServed} gia đình đã đồng hành`,
       `${F.method} theo ${F.curriculumFrameMid}`,
       'Kỷ luật tích cực — không thưởng, không phạt, bé tự cam kết',
-      `${F.rating}/5 từ ${F.reviewCount} đánh giá, ${F.retention} gia đình học tiếp năm sau`,
     ],
     metrics: [
       { number: String(F.foundedYear), label: 'Năm thành lập hệ thống' },
       { number: F.familiesServed, label: 'Gia đình đã đồng hành' },
-      { number: F.retention, label: 'Tỷ lệ gia đình học tiếp' },
-      { number: F.rating + '/5', label: `Từ ${F.reviewCount} đánh giá` },
+      { number: '4 tuần', label: 'Chu kỳ xoay vòng thực đơn' },
+      { number: '8h–17h', label: 'Phòng y tế trực trong trường' },
     ],
     formTitle: 'Tìm hiểu Mầm non Việt Anh',
     formDesc: 'Chọn tuổi của con và để lại thông tin — nhà trường gửi giới thiệu chương trình, học phí và lịch tham quan cơ sở Gò Vấp.',
@@ -200,7 +199,6 @@ export const adsPages: AdsPage[] = [
       { q: 'Mầm non Việt Anh khác gì các trường tư khác?', a: `Bốn điểm cụ thể: (1) chương trình dựa trên ${F.method} theo ${F.curriculumFrameMid}, không phải chương trình quốc gia và cũng không phải Montessori; (2) ${F.englishModelMid}; (3) lớp tổ chức đa độ tuổi và đa trình độ; (4) kỷ luật tích cực, không thưởng phạt. Ba/mẹ nên yêu cầu xem tận nơi cả bốn thứ này chứ đừng tin mô tả.` },
       { q: 'Trường có bao nhiêu cơ sở?', a: `Hệ thống có nhiều cơ sở tại TP.HCM, Tây Ninh và An Giang. Dù tên gọi tại từng địa phương có khác nhau, tất cả vận hành theo một triết lý và một cam kết chất lượng thống nhất. Cơ sở chuyên mầm non tại TP.HCM là ${F.addressShort}.` },
       { q: 'Học phí mầm non Việt Anh bao nhiêu?', a: 'Học phí khác nhau theo độ tuổi của bé và theo cách ba/mẹ chọn đóng (theo tháng, theo kỳ hay trọn năm). Nhà trường gửi trọn bảng chi tiết qua email kèm giải thích từng khoản, thay vì đưa một con số dễ gây hiểu nhầm. Ba/mẹ điền email ở form trên trang là nhận được.' },
-      { q: 'Tỷ lệ phụ huynh học tiếp năm sau là bao nhiêu?', a: `${F.retention}. Với trường mầm non thì đây là con số đáng tin hơn mọi lời quảng cáo — vì phụ huynh gia hạn năm học sau nghĩa là họ đã sống qua một năm thật với nhà trường rồi mới quyết định.` },
     ],
   },
 
@@ -469,7 +467,7 @@ export const adsPages: AdsPage[] = [
       { number: '2', label: 'Cơ sở Việt Anh tại Gò Vấp' },
       { number: F.ageFrom, label: 'Độ tuổi nhỏ nhất nhận bé' },
       { number: F.gymArea, label: 'Phòng giáo dục thể chất' },
-      { number: '24/7', label: 'Hotline mầm non trực' },
+      { number: '7h–19h', label: 'Hotline mầm non, Thứ 2–Thứ 7' },
     ],
     formTitle: 'Nhà ba/mẹ ở khu nào?',
     formDesc: 'Để lại thông tin — nhà trường chỉ lối đi ngắn nhất và cho biết xe đưa đón có chạy ngang nhà không.',
@@ -534,13 +532,13 @@ export const adsPages: AdsPage[] = [
     adGroup: 'AG 07 — An toàn, camera, sĩ số, dinh dưỡng',
     keywords: 'trường mầm non có camera, mầm non sĩ số ít, mầm non bữa ăn dinh dưỡng, trường mầm non an toàn, mầm non gò vấp camera',
     funnelCode: 'mn-govap-antoan',
-    title: 'Mầm non Việt Anh Gò Vấp Có Camera Cho Phụ Huynh, Lớp Nhỏ, Bếp Nấu Tại Trường',
-    description: `Mẹ đi làm vẫn nhìn thấy con: camera 24/7 có tài khoản cho phụ huynh mầm non, lớp ${F.classSize} bé, bếp riêng nấu tại trường, nề nếp lặp lại mỗi ngày.`,
+    title: 'Mầm non Việt Anh Gò Vấp: Camera Giám Sát, Lớp Nhỏ, Bếp Nấu Tại Trường',
+    description: `Mẹ đi làm yên tâm: camera giám sát 24/7 toàn khu, lớp ${F.classSize} bé, bếp riêng nấu tại trường, nề nếp lặp lại mỗi ngày.`,
     eyebrow: 'An toàn · Sĩ số · Dinh dưỡng',
-    h1: 'Mẹ đang họp vẫn mở điện thoại nhìn thấy con',
-    sub: 'Gắn camera thì trường nào cũng nói có. Khác biệt nằm ở chỗ ba/mẹ có mở lên xem được không — phụ huynh lớp mầm non ở đây được cấp tài khoản xem trực tuyến trong giờ học.',
+    h1: 'Mẹ đang họp vẫn yên tâm về con ở trường',
+    sub: 'An toàn không nằm ở một lời hứa trên quảng cáo. Nó nằm ở sĩ số, ở người trực, ở bếp và ở quy trình mỗi ngày — những thứ ba/mẹ tới tận nơi là xem được.',
     heroPoints: [
-      'Phụ huynh lớp Mầm non được cấp tài khoản xem camera trong giờ học',
+      'Camera giám sát 24/7 toàn khu, gồm cả hành lang',
       `Lớp ${F.classSizeLabel} — cô lên kế hoạch cho từng bé, không phải giáo án chung`,
       'Bếp riêng nấu tại trường, không dùng thực phẩm đóng gói công nghiệp',
       'Mọi quy trình trong ngày lặp lại y hệt nhau để bé thấy an toàn',
@@ -563,9 +561,9 @@ export const adsPages: AdsPage[] = [
   <p class="lede">Mà là: lúc mình đang họp, con đang làm gì, có ai để ý tới con không, trưa nay con ăn có ngon không. Ở tuổi mầm non bé chưa kể lại được ngày của mình — nên trường phải kể thay.</p>
   <div class="cards">
     <div class="card">
-      <h3>Camera — và tài khoản thật cho ba/mẹ</h3>
-      <p>Phụ huynh lớp Mầm non được cấp <strong>tài khoản xem camera trực tuyến trong giờ học</strong>. Nhiều mẹ mở lên lúc nghỉ trưa chỉ để nhìn con ăn, rồi yên tâm làm tiếp. Toàn khu, gồm cả hành lang, có camera giám sát 24/7.</p>
-      <p>Với các cấp lớn hơn, camera phục vụ an ninh và quản lý nội bộ chứ không mở tài khoản cho phụ huynh — chính sách này là riêng cho mầm non.</p>
+      <h3>Camera giám sát toàn khu</h3>
+      <p>Toàn khu, gồm cả hành lang, có <strong>camera giám sát 24/7</strong> phục vụ an ninh. Khách tới trường phải đăng ký và đeo thẻ, có bảo vệ trực.</p>
+      <p>Ba/mẹ tới tham quan có thể hỏi trực tiếp vị trí camera và quy trình an ninh của trường.</p>
     </div>
     <div class="card">
       <h3>Cô nhìn thấy từng bé, không nhìn cả lớp</h3>
@@ -595,14 +593,14 @@ export const adsPages: AdsPage[] = [
   <div class="panel">
     <ul class="checklist">
       <li><strong>Một lớp bao nhiêu bé, và cho tôi nhìn vào lớp thật lúc bé đang sinh hoạt được không?</strong> Lớp trống lúc 5h chiều không nói lên điều gì.</li>
-      <li><strong>Phụ huynh có tài khoản xem camera không, hay chỉ có camera để trường xem?</strong> Hai chuyện hoàn toàn khác nhau.</li>
+      <li><strong>Khách lạ vào trường thế nào, ai trực cổng, camera đặt ở đâu?</strong> Trường nào cũng nói an toàn; hỏi quy trình mới thấy khác biệt.</li>
       <li><strong>Bếp nấu tại trường hay đặt suất ăn ngoài? Cho tôi xem khu bếp và thực đơn tuần.</strong> Trường không ngại cho xem là trường đáng cân nhắc.</li>
       <li><strong>Khi con làm sai, trường xử lý thế nào?</strong> Nếu câu trả lời là phạt hoặc doạ, hãy hỏi tiếp xem còn cách nào khác không.</li>
     </ul>
   </div>
 </section>`,
     faq: [
-      { q: 'Tôi có xem được camera lớp của con trong giờ làm không?', a: 'Có. Phụ huynh lớp Mầm non được nhà trường cấp tài khoản xem camera trực tuyến trong giờ học — đây là chính sách riêng cho cấp mầm non, vì đây là độ tuổi bé chưa kể lại được ngày hôm nay của mình. Ngoài lớp học, hành lang và toàn khu đều có camera giám sát 24/7.' },
+      { q: 'Trường có camera không?', a: 'Có. Toàn khu, gồm cả lớp học và hành lang, có camera giám sát 24/7 phục vụ an ninh. Khách tới trường phải đăng ký và đeo thẻ, có bảo vệ trực. Ba/mẹ tới tham quan có thể hỏi trực tiếp về quy trình an ninh của trường.' },
       { q: 'Một lớp bao nhiêu bé?', a: `${F.classSizeLabel}. Nhưng con số quan trọng không kém là cách cô làm việc: ${F.teacherPlanning.toLowerCase()}. Khi đi tham quan bất kỳ trường nào, ba/mẹ hãy hỏi thẳng cả hai điều này.` },
       { q: 'Bữa ăn của bé nấu ở đâu?', a: 'Trường có bếp riêng nấu tại chỗ, bếp một chiều, không đặt suất ăn công nghiệp và không dùng thực phẩm đóng gói sẵn. Thực đơn do chuyên gia dinh dưỡng thiết kế, xoay vòng theo chu kỳ 4 tuần. Ba/mẹ tới tham quan có thể yêu cầu xem khu bếp và bảng thực đơn tuần.' },
       { q: 'Khi con đánh bạn hoặc không nghe lời thì cô xử lý thế nào?', a: 'Nhà trường không dùng thưởng phạt. Cô đặt câu hỏi để bé tự thấy hệ quả của hành vi rồi tự đưa ra cam kết — ví dụ "Nếu em đánh bạn thì bạn sẽ như thế nào? Nếu bạn đánh em thì em phản ứng ra sao?". Bé cũng được rèn kỹ năng tỉnh thức qua yoga, ngồi thiền và có góc yên tĩnh để bình tâm trước khi quyết định.' },
@@ -630,8 +628,8 @@ export const adsPages: AdsPage[] = [
     metrics: [
       { number: '3', label: 'Trường phái được so sánh' },
       { number: '15+', label: 'Tiêu chí trong bảng' },
-      { number: F.rating + '/5', label: `Từ ${F.reviewCount} đánh giá phụ huynh` },
-      { number: F.retention, label: 'Tỷ lệ gia đình học tiếp' },
+      { number: String(F.foundedYear), label: 'Năm thành lập hệ thống' },
+      { number: F.familiesServed, label: 'Gia đình đã đồng hành' },
     ],
     formTitle: 'Nhận bảng so sánh 15+ tiêu chí',
     formDesc: 'PDF gửi ngay vào email — mang theo khi đi tham quan từng trường.',
@@ -668,7 +666,7 @@ export const adsPages: AdsPage[] = [
       <thead><tr><th>Tiêu chí</th><th>Câu hỏi cụ thể nên đặt ra</th><th>Ở Việt Anh Gò Vấp</th></tr></thead>
       <tbody>
         <tr><td><strong>Sĩ số</strong></td><td>Một lớp bao nhiêu bé? Cho tôi nhìn vào lớp thật lúc bé đang sinh hoạt được không?</td><td>${F.classSizeLabel}</td></tr>
-        <tr><td><strong>Camera</strong></td><td>Phụ huynh có tài khoản xem không, hay chỉ trường xem?</td><td>Phụ huynh mầm non được cấp tài khoản xem trong giờ học</td></tr>
+        <tr><td><strong>Camera</strong></td><td>Camera đặt ở đâu? Khách lạ vào trường thế nào?</td><td>Camera giám sát 24/7 toàn khu; khách đăng ký và đeo thẻ, có bảo vệ trực</td></tr>
         <tr><td><strong>Bếp ăn</strong></td><td>Nấu tại trường hay đặt suất ngoài? Cho tôi xem bếp và thực đơn tuần.</td><td>Bếp riêng nấu tại trường, thực đơn xoay vòng 4 tuần</td></tr>
         <tr><td><strong>Tiếng Anh</strong></td><td>Bao nhiêu thời gian bé thật sự nghe tiếng Anh mỗi ngày?</td><td>${F.englishModel}</td></tr>
         <tr><td><strong>Kỷ luật</strong></td><td>Khi con làm sai thì trường xử lý thế nào?</td><td>Không thưởng phạt; bé được dẫn dắt để tự thấy hệ quả và tự cam kết</td></tr>
@@ -704,7 +702,6 @@ export const adsPages: AdsPage[] = [
       { q: 'Bảng so sánh này có thiên vị Việt Anh không?', a: 'Bảng liệt kê tiêu chí và câu hỏi nên đặt ra, có cột trống để ba/mẹ tự điền cho từng trường — dùng được cho mọi trường đang cân nhắc. Nếu một trường khác đáp ứng tốt hơn ở những tiêu chí quan trọng với gia đình mình, ba/mẹ nên chọn trường đó.' },
       { q: 'Nên xem bao nhiêu trường trước khi quyết định?', a: 'Hai đến ba trường là đủ để có điểm so sánh mà chưa bị rối. Quan trọng hơn số lượng là xem cùng một khung giờ và hỏi cùng một bộ câu hỏi — nếu không, ba/mẹ đang so trường A buổi sáng với trường B buổi chiều, hai thứ khác hẳn nhau.' },
       { q: 'Trường công hay trường tư tốt hơn cho mầm non?', a: 'Không có câu trả lời chung. Trường công học phí thấp và ổn định nhưng sĩ số thường cao và chương trình theo khung quốc gia. Trường tư linh hoạt hơn về sĩ số, chương trình và giờ giấc nhưng chi phí lớn hơn. Điều nên hỏi là: với đứa trẻ cụ thể của gia đình mình và lịch làm việc cụ thể của ba/mẹ, thứ nào quan trọng hơn?' },
-      { q: 'Đánh giá của phụ huynh hiện tại thế nào?', a: `${F.rating}/5 từ ${F.reviewCount} đánh giá, và ${F.retention} gia đình học tiếp năm sau. Với trường mầm non thì tỷ lệ học tiếp là con số đáng tin nhất, vì phụ huynh gia hạn nghĩa là đã sống qua một năm thật rồi mới quyết định.` },
     ],
   },
 

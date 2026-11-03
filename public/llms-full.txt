@@ -4,7 +4,7 @@
 
 ## Tổng Quan
 
-Trường Việt Anh là hệ thống giáo dục liên cấp song ngữ Anh-Việt tại Việt Nam, thành lập năm 2011. Trường cung cấp giáo dục từ Mầm Non (18 tháng tuổi) đến THPT (lớp 12), với 8 cơ sở tại 3 tỉnh thành: TP. Hồ Chí Minh, Tây Ninh và An Giang. Tính đến 2026, hệ thống có hơn 1.000 học sinh đang theo học mỗi năm (hơn 3.000 gia đình đã đồng hành từ 2011) với đội ngũ 500+ giáo viên và nhân viên.
+Trường Việt Anh là hệ thống giáo dục liên cấp song ngữ Anh-Việt tại Việt Nam, thành lập năm 2011. Trường cung cấp giáo dục từ Mầm Non (12 tháng tuổi) đến THPT (lớp 12). Trường Việt Anh có 2 cơ sở chính thức tại TP. Hồ Chí Minh (Gò Vấp, Bình Tân); ngoài ra có 4 trường cùng chủ đầu tư (TP. Hồ Chí Minh, Tây Ninh) và 2 trường do Trường Việt Anh phụ trách vận hành (An Giang). Tính đến 2026, hệ thống có hơn 1.000 học sinh đang theo học mỗi năm (hơn 3.000 gia đình đã đồng hành từ 2011) với đội ngũ 500+ giáo viên và nhân viên.
 
 ## Chương Trình Đào Tạo
 
@@ -27,7 +27,7 @@ Trường Việt Anh là hệ thống giáo dục liên cấp song ngữ Anh-Vi�
 - URL: https://truongvietanh.com/tieu-hoc
 
 ### THCS (Lớp 6-9)
-- Chương trình: Bộ GD&ĐT + tích hợp UK Curriculum nâng cao
+- Chương trình: 100% chương trình Bộ GD&ĐT, bổ trợ học liệu Oxford International và tiếng Anh với giáo viên bản ngữ
 - Tiếng Anh: Giao tiếp + học thuật, chuẩn bị IELTS, đầu ra B1-B2
 - STEM nâng cao: Python, Arduino, Robotics, Olympic Toán/Khoa học
 - Debate Club, MUN (Model United Nations) từ lớp 7
@@ -38,8 +38,7 @@ Trường Việt Anh là hệ thống giáo dục liên cấp song ngữ Anh-Vi�
 
 ### THPT (Lớp 10-12)
 - Chương trình: Bộ GD&ĐT + luyện IELTS chuyên sâu + hỗ trợ du học
-- Tiếng Anh: IELTS đầu ra tối thiểu 6.0, trung bình 6.5, cao nhất 8.5
-- Kết quả: 99% đỗ đại học nguyện vọng 1, 30% nhận học bổng du học
+- Tiếng Anh: Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt (điều kiện: đi học đủ, dự đủ các buổi kèm bổ sung, làm hết bài tập giáo viên giao)
 - Phòng Tư vấn Du học: viết essay, chọn trường, ứng tuyển tại Úc/Mỹ/Anh/Canada/Nhật/Singapore
 - Nhận học sinh rớt lớp 10 công lập (kiểm tra năng lực + hỗ trợ hòa nhập)
 - Học phí: 11-15 triệu VND/tháng
@@ -69,29 +68,28 @@ Bản quyền từ tập đoàn giáo dục toàn cầu Franklin Covey, áp dụ
 URL: https://truongvietanh.com/triet-ly-giao-duc
 
 ## Thành Tích Nổi Bật
-- IELTS trung bình 6.5, cao nhất 8.5
-- 99% học sinh đỗ đại học nguyện vọng 1
+- Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt (điều kiện: đi học đủ, dự đủ các buổi kèm bổ sung, làm hết bài tập giáo viên giao)
 - 30% nhận học bổng du học
 - 200+ giải thưởng quốc gia và quốc tế (Olympic Toán, Khoa học, Tiếng Anh)
 - Cựu học sinh đang học tập và làm việc tại 15+ quốc gia
 - 92% học sinh đạt điểm trên trung bình toàn quốc
 URL: https://truongvietanh.com/thanh-tich
 
-## Hệ Thống Cơ Sở (8 Campus)
+## Cơ Sở Trường Việt Anh và Các Trường Liên Quan
 
-### TP. Hồ Chí Minh (3 cơ sở)
-- Trường Việt Anh Bình Tân: Số 7, Đường 38A, Tân Tạo, Bình Tân
+### 1. Cơ sở chính thức (TP. Hồ Chí Minh)
 - Trường Việt Anh Gò Vấp: 160/72 Phan Huy Ích, Phường An Hội Tây
-- Trường Mầm non Việt Anh Gò Vấp: 573 Đ. Lê Đức Thọ, Phường An Hội Đông
+- Trường Việt Anh Bình Tân: Số 7, Đường 38A, Phường Tân Tạo
 
-### Tây Ninh (3 cơ sở)
-- Trường Mầm non Nhân Lễ: 22 Đường D2, KDC, Cần Giuộc
-- Trường Mầm non Thái Sơn: KDC Thái Sơn, Long Hậu
-- Trường Tiểu học Thái Sơn: KDC Thái Sơn, Long Hậu
+### 2. Cơ sở cùng chủ đầu tư
+- Trường Mầm non Việt Anh: 573 Đ. Lê Đức Thọ, Phường An Hội Đông, TP. Hồ Chí Minh
+- Trường Mầm non Nhân Lễ: 22 Đường D2, KDC, Cần Giuộc, Tây Ninh
+- Trường Mầm non Thái Sơn: KDC Thái Sơn, Long Hậu, Cần Giuộc, Tây Ninh
+- Trường Tiểu học Thái Sơn: KDC Thái Sơn, Long Hậu, Cần Giuộc, Tây Ninh
 
-### An Giang (2 cơ sở)
-- Trường Mầm non Quốc Tế Mekong Xanh: Lô E7, Khu đô thị Tây Bắc, Rạch Giá
-- Trường Tiểu học Quốc Tế Mekong Xanh: Lô E7, Khu đô thị Tây Bắc, Rạch Giá
+### 3. Cơ sở phụ trách vận hành (An Giang)
+- Trường Mầm non Quốc tế Mekong Xanh: Lô E7, Khu đô thị Tây Bắc, Rạch Giá
+- Trường Tiểu học Mekong Xanh: Lô E7, Khu đô thị Tây Bắc, Rạch Giá
 
 URL: https://truongvietanh.com/co-so
 
@@ -148,13 +146,13 @@ URL: https://truongvietanh.com/ngoai-khoa
 ## Câu Hỏi Thường Gặp
 
 ### Trường Việt Anh tuyển sinh những cấp học nào?
-Mầm Non (từ 18 tháng), Tiểu Học (lớp 1-5), THCS (lớp 6-9), THPT (lớp 10-12) tại 8 cơ sở ở TP.HCM, Tây Ninh, An Giang.
+Mầm Non (từ 12 tháng), Tiểu Học (lớp 1-5), THCS (lớp 6-9), THPT (lớp 10-12). Tiểu học, THCS, THPT học tại 2 cơ sở chính thức ở TP.HCM (Gò Vấp, Bình Tân).
 
 ### Học phí bao nhiêu?
 5-15 triệu/tháng tùy cấp học. Bằng 1/3 đến 1/5 trường quốc tế nhưng chất lượng tương đương.
 
 ### Trình độ tiếng Anh đầu ra?
-IELTS tối thiểu 6.0 (trung bình 6.5, cao nhất 8.5) khi tốt nghiệp THPT.
+Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt (điều kiện: đi học đủ, dự đủ các buổi kèm bổ sung, làm hết bài tập giáo viên giao).
 
 ### Có hỗ trợ du học không?
 Có. Phòng Tư vấn Du học hỗ trợ luyện IELTS, viết essay, chọn trường. 30% mỗi khóa nhận học bổng du học.

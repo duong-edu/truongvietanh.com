@@ -1,4 +1,5 @@
 ---
+import { nhanNhomCoSo } from '../data/school-facts';
 import { stripUrlPiiScript } from '../lib/strip-url-pii';
 /**
  * MamNonCamOnLayout — Thank-you page after Mầm non hook landing form submit
@@ -222,9 +223,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="trust">
-      <span>Bộ GD&ĐT cấp phép</span>
+      <span>Có quyết định cho phép hoạt động</span>
       <span>15 năm K12 từ 2011</span>
-      <span>3 cơ sở TPHCM + Tây Ninh</span>
+      <span>{nhanNhomCoSo(location, schoolLevel)}</span>
     </div>
     <p class="foot-note">Thông tin được bảo mật tuyệt đối theo chính sách của Trường Việt Anh.</p>
   </div>

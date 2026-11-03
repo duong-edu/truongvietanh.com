@@ -57,7 +57,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "Trường Việt Anh có bao nhiêu cơ sở?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Trường Việt Anh có 6 cơ sở tại TP.HCM (3), Tây Ninh – Cần Giuộc (3) và An Giang – Rạch Giá (2)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Trường Việt Anh có 2 cơ sở chính thức tại TP.HCM: cơ sở Gò Vấp (160/72 Phan Huy Ích) và cơ sở Bình Tân. Cùng chủ đầu tư với Trường Việt Anh có 4 trường: Mầm non Việt Anh (Gò Vấp), Mầm non Nhân Lễ, Mầm non và Tiểu học Thái Sơn (Cần Giuộc, Tây Ninh). Trường Việt Anh còn phụ trách vận hành Mầm non và Tiểu học Mekong Xanh (Rạch Giá, An Giang)." }
       },
       {
         "@type": "Question",
@@ -127,7 +127,7 @@ const structuredData = [
 
 <BaseLayout
   title={cmsPage?.title || "Giới Thiệu Trường Việt Anh – Liên Cấp Song Ngữ"}
-  description={cmsPage?.description || "Trường Việt Anh thành lập 2011: hệ thống liên cấp Mầm non – THPT tại TP.HCM. IELTS, 16 kỹ năng thế kỷ 21, 6 cơ sở. Tham quan miễn phí."}
+  description={cmsPage?.description || "Trường Việt Anh thành lập 2011: hệ thống liên cấp Mầm non – THPT tại TP.HCM. IELTS, 16 kỹ năng thế kỷ 21, 2 cơ sở chính thức. Tham quan miễn phí."}
   keywords="giới thiệu trường việt anh, vsc trường song ngữ, cambridge international school tphcm, trường liên cấp gò vấp bình tân, trường tư thục chất lượng cao"
   canonical="https://truongvietanh.com/gioi-thieu"
   ogImage="https://media.truongvietanh.com/images/extra-giao-vien-va-hoc-sinh-2.webp"
@@ -147,14 +147,14 @@ const structuredData = [
           </nav>
 
           <h1 class="gi-h1">Trường Việt Anh: Hệ Thống Giáo Dục Liên Cấp Song Ngữ Tại TP.HCM</h1>
-          <p class="gi-subtitle">Tạo ra môi trường học tập vui vẻ và thực dụng kể từ năm 2011</p>
+          <p class="gi-subtitle">Xây dựng môi trường học tập vui vẻ và thực dụng từ năm 2011</p>
           <p class="gi-last-updated">Cập nhật lần cuối: Tháng 6/2026</p>
 
 
           <div class="gi-trust-badges">
             <div class="gi-badge"><strong>15+</strong> năm</div>
-            <div class="gi-badge"><strong>{schoolFacts.campuses}</strong> cơ sở</div>
-            <div class="gi-badge"><strong>IELTS</strong> 6.0–8.0</div>
+            <div class="gi-badge"><strong>{schoolFacts.campuses}</strong> cơ sở chính thức</div>
+            <div class="gi-badge"><strong>Mầm non → THPT</strong> liên cấp</div>
             <div class="gi-badge"><strong>IELTS 6.0+</strong> có bảo hành</div>
           </div>
         </div>
@@ -172,7 +172,7 @@ const structuredData = [
       <nav class="gi-toc" aria-label="Mục lục">
         <p class="gi-toc-title">Mục lục</p>
         <ol class="gi-toc-list">
-          <li><a href="#tam-nhin">Tầm nhìn & Sứ mệnh</a></li>
+          <li><a href="#tam-nhin">Sứ mệnh, tầm nhìn, mục tiêu</a></li>
           <li><a href="#noi-dung-hoc">Nội dung học thực dụng</a></li>
           <li><a href="#tieng-anh">Tiếng Anh đủ du học</a></li>
           <li><a href="#truong-thanh">Học sinh sớm trưởng thành</a></li>
@@ -189,9 +189,14 @@ const structuredData = [
 
         <!-- Section 1: Tầm nhìn -->
         <section id="tam-nhin" class="gi-section">
-          <h2><span class="si"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>Tầm nhìn và sứ mệnh của Trường Việt Anh là gì?</h2>
-          <p>Trường Việt Anh được thành lập năm 2011 với sứ mệnh <strong>"Tạo ra môi trường học tập vui vẻ và thực dụng"</strong>. Tầm nhìn của trường: tất cả học sinh hạnh phúc, ra trường với 16 kỹ năng thế kỷ 21 và nền tảng tiếng Anh đủ du học.</p>
-          <p>Sau hơn 15 năm hoạt động, Trường Việt Anh đã xây dựng hệ thống 6 cơ sở tại TP.HCM, Tây Ninh (Cần Giuộc) và An Giang (Rạch Giá), phục vụ hơn 1.000 học sinh mỗi năm — từ Mầm non đến THPT.</p>
+          <h2><span class="si"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>Sứ mệnh, tầm nhìn và mục tiêu của Trường Việt Anh là gì?</h2>
+          <p>Trường Việt Anh được thành lập năm 2011.</p>
+          <dl class="gi-smtn">
+            <div><dt>Sứ mệnh</dt><dd>Xây dựng môi trường học tập vui vẻ và thực dụng.</dd></div>
+            <div><dt>Tầm nhìn</dt><dd>Tất cả học sinh hạnh phúc, ra trường với 16 kỹ năng thế kỷ 21 và nền tảng tiếng Anh đủ du học.</dd></div>
+            <div><dt>Mục tiêu</dt><dd>100% học sinh tiến bộ so với chính mình qua từng năm học, xét trên 4 lĩnh vực phát triển toàn diện: Kiến thức, Kỹ năng lãnh đạo, Phẩm chất và Sức khoẻ.</dd></div>
+          </dl>
+          <p>Sau hơn 15 năm hoạt động, Trường Việt Anh có 2 cơ sở chính thức tại TP.HCM, cùng các trường cùng chủ đầu tư (TP.HCM, Tây Ninh) và trường do Việt Anh phụ trách vận hành (An Giang), phục vụ hơn 1.000 học sinh mỗi năm — từ Mầm non đến THPT.</p>
 
           <div class="gi-values-grid">
             <h3>5 giá trị cốt lõi</h3>
@@ -233,15 +238,11 @@ const structuredData = [
             </div>
             <div class="gi-evidence-item">
               <strong>{schoolFacts.campuses}</strong>
-              <span>Cơ sở</span>
+              <span>Cơ sở chính thức</span>
             </div>
             <div class="gi-evidence-item">
               <strong>3.000+</strong>
               <span>Học sinh</span>
-            </div>
-            <div class="gi-evidence-item">
-              <strong>3</strong>
-              <span>Tỉnh thành</span>
             </div>
           </div>
         </section>
@@ -424,44 +425,44 @@ const structuredData = [
         <!-- Section 6: Cơ sở -->
         <section id="co-so" class="gi-section">
           <h2><span class="si"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>Trường Việt Anh có bao nhiêu cơ sở? Ở đâu?</h2>
-          <p>Trường Việt Anh hiện có 6 cơ sở tại TP.HCM, Tây Ninh (Cần Giuộc) và An Giang (Rạch Giá). Mỗi cơ sở được trang bị đầy đủ phòng học máy lạnh, sân chơi, phòng lab và thư viện.</p>
+          <p>Trường Việt Anh có 2 cơ sở chính thức tại TP.HCM. Cùng chủ đầu tư với trường có 4 trường tại TP.HCM và Tây Ninh (Cần Giuộc); Trường Việt Anh còn phụ trách vận hành 2 trường tại An Giang (Rạch Giá). Mỗi cơ sở được trang bị đầy đủ phòng học máy lạnh, sân chơi, phòng lab và thư viện.</p>
 
           <div class="gi-campus-groups">
             <div class="gi-campus-group">
-              <h3>TP. Hồ Chí Minh (3 cơ sở)</h3>
+              <h3>1. Cơ sở chính thức (TP. Hồ Chí Minh)</h3>
               <ul>
                 <li>
-                  <strong>1. Liên Cấp cơ sở Gò Vấp (MN–TH–THCS–THPT)</strong><br/>
+                  <strong>Cơ sở Gò Vấp (TH–THCS–THPT)</strong><br/>
                   📍 160/72 Phan Huy Ích, Phường An Hội Tây, TP.HCM
                 </li>
                 <li>
-                  <strong>2. Liên Cấp cơ sở Bình Tân (TH–THCS–THPT)</strong><br/>
+                  <strong>Cơ sở Bình Tân (TH–THCS–THPT)</strong><br/>
                   📍 Số 7, Đường 38A, Phường Tân Tạo, TP.HCM
-                </li>
-                <li>
-                  <strong>3. Mầm non Việt Anh Gò Vấp</strong><br/>
-                  📍 573 Lê Đức Thọ, Phường An Hội Đông, TP.HCM
                 </li>
               </ul>
             </div>
             <div class="gi-campus-group">
-              <h3>Tây Ninh – Cần Giuộc (2 cơ sở)</h3>
+              <h3>2. Cơ sở cùng chủ đầu tư</h3>
               <ul>
                 <li>
-                  <strong>4. Mầm Non Nhân Lễ</strong><br/>
+                  <strong>Mầm non Việt Anh</strong><br/>
+                  📍 573 Lê Đức Thọ, Phường An Hội Đông, TP.HCM
+                </li>
+                <li>
+                  <strong>Mầm non Nhân Lễ</strong><br/>
                   📍 22 Đường D2, KDC Long Hậu, Ấp Long Hậu 3, Xã Cần Giuộc, Tây Ninh
                 </li>
                 <li>
-                  <strong>5. Mầm Non và Tiểu Học Thái Sơn</strong> <em>(hai trường chung một khuôn viên)</em><br/>
+                  <strong>Mầm non Thái Sơn và Tiểu học Thái Sơn</strong><br/>
                   📍 Khu dân cư T&amp;T Cần Giuộc, Tây Ninh
                 </li>
               </ul>
             </div>
             <div class="gi-campus-group">
-              <h3>An Giang – Rạch Giá (1 cơ sở)</h3>
+              <h3>3. Cơ sở phụ trách vận hành (An Giang)</h3>
               <ul>
                 <li>
-                  <strong>6. Mầm Non và Tiểu Học Quốc Tế Mekong Xanh</strong> <em>(hai trường chung một khuôn viên)</em><br/>
+                  <strong>Mầm non và Tiểu học Mekong Xanh</strong><br/>
                   📍 Lô E7, Đường số 13, KĐT Tây Bắc, P. Rạch Giá, An Giang
                 </li>
               </ul>
@@ -523,7 +524,7 @@ const structuredData = [
             <details class="gi-faq-item" open>
               <summary>Trường Việt Anh có bao nhiêu cơ sở?</summary>
               <div class="gi-faq-answer">
-                <p>Trường Việt Anh hiện có 6 cơ sở đang hoạt động, gồm 8 trường: TP.HCM (3 cơ sở — Liên cấp Gò Vấp, Liên cấp Bình Tân, Mầm non Việt Anh Gò Vấp), Tây Ninh/Cần Giuộc (2 cơ sở — Mầm Non Nhân Lễ; Mầm Non và Tiểu Học Thái Sơn dùng chung một khuôn viên) và An Giang/Rạch Giá (1 cơ sở — Mầm Non và Tiểu Học Mekong Xanh dùng chung một khuôn viên). <a href="/co-so">Xem địa chỉ chi tiết</a>.</p>
+                <p>Trường Việt Anh có 2 cơ sở chính thức tại TP.HCM: cơ sở Gò Vấp (160/72 Phan Huy Ích) và cơ sở Bình Tân. Cùng chủ đầu tư với Trường Việt Anh có 4 trường: Mầm non Việt Anh (Gò Vấp), Mầm non Nhân Lễ, Mầm non và Tiểu học Thái Sơn (Cần Giuộc, Tây Ninh). Trường Việt Anh còn phụ trách vận hành Mầm non và Tiểu học Mekong Xanh (Rạch Giá, An Giang). <a href="/co-so">Xem địa chỉ chi tiết</a>.</p>
               </div>
             </details>
             <details class="gi-faq-item">
@@ -624,13 +625,19 @@ const structuredData = [
 </BaseLayout>
 
 <style>
-  /* Ảnh hero riêng của trang này — banner-chinh.jpg dùng chung bị "contain" nên hở nền, nhìn rời rạc */
+  /* Sứ mệnh – Tầm nhìn – Mục tiêu: mỗi ý một dòng (anh Dương góp ý 03/11/2026) */
+  .gi-smtn { margin: 1rem 0 1.25rem; display: grid; gap: 0.6rem; }
+  .gi-smtn > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.75rem; padding: 0.75rem 1rem; border-left: 3px solid #f9dd0e; background: #f8fafc; border-radius: 0 8px 8px 0; }
+  .gi-smtn dt { font-weight: 700; color: #26275D; }
+  .gi-smtn dd { margin: 0; line-height: 1.6; }
+  @media (max-width: 480px) { .gi-smtn > div { grid-template-columns: 1fr; gap: 0.2rem; } }
+  /* Ảnh hero riêng của trang này. 03/11/2026 anh Dương chê ảnh cũ (vui-ve-07, học sinh làm mặt hề, chữ đè mặt) → đổi sang ảnh đồng phục chụp studio */
   .gi-hero--gioi-thieu {
     background-image:
       linear-gradient(90deg, rgba(16,17,44,0.88) 0%, rgba(24,25,58,0.62) 45%, rgba(24,25,58,0.2) 100%),
-      url('https://media.truongvietanh.com/images/vui-ve-07.webp');
+      url('https://media.truongvietanh.com/images/extra-big-img3-scaled.webp');
     background-size: cover, cover;
-    background-position: center, center 35%;
+    background-position: center, right 20%;
   }
   /* Hero không còn form bên phải → giới hạn cột chữ cho dòng khỏi quá dài */
   .gi-hero--gioi-thieu .gi-hero-left { max-width: 760px; }
@@ -638,8 +645,8 @@ const structuredData = [
     .gi-hero--gioi-thieu {
       background-image:
         linear-gradient(180deg, rgba(16,17,44,0.78) 0%, rgba(24,25,58,0.85) 100%),
-        url('https://media.truongvietanh.com/images/vui-ve-07.webp');
-      background-position: center, center 30%;
+        url('https://media.truongvietanh.com/images/extra-big-img3-scaled.webp');
+      background-position: center, 60% 20%;
     }
   }
 </style>

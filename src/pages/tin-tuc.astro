@@ -90,7 +90,7 @@ const structuredData = [
         name: 'Trường Việt Anh tổ chức những sự kiện gì trong năm học?',
         acceptedAnswer: { '@type': 'Answer', text: 'Trong năm học, trường tổ chức: Open Day cho phụ huynh tham quan, Hội thao liên cấp, English Day, STEM Fair, Music Show, Lễ tri ân thầy cô, Dã ngoại theo cấp học, và các workshop kỹ năng sống dành cho phụ huynh và học sinh.' },
       },
-      { '@type': 'Question', name: 'Blog Trường Việt Anh có chia sẻ kinh nghiệm luyện thi IELTS không?', acceptedAnswer: { '@type': 'Answer', text: 'Có. Blog thường xuyên đăng bài về lộ trình luyện IELTS từ lớp 6 đến lớp 12, mẹo làm bài thi, chia sẻ từ học sinh đạt IELTS 6.0-8.0, và hướng dẫn chuẩn bị hồ sơ du học.' } },
+      { '@type': 'Question', name: 'Blog Trường Việt Anh có chia sẻ kinh nghiệm luyện thi IELTS không?', acceptedAnswer: { '@type': 'Answer', text: 'Có. Blog thường xuyên đăng bài về lộ trình luyện IELTS từ lớp 6 đến lớp 12, mẹo làm bài thi, chia sẻ từ học sinh đạt IELTS cao, và hướng dẫn chuẩn bị hồ sơ du học.' } },
       { '@type': 'Question', name: 'Phụ huynh có thể đóng góp bài viết cho blog Trường Việt Anh không?', acceptedAnswer: { '@type': 'Answer', text: 'Trường khuyến khích phụ huynh chia sẻ câu chuyện, kinh nghiệm và cảm nhận. Gửi bài qua email hoặc liên hệ đội ngũ truyền thông để được hỗ trợ đăng bài.' } },
     ],
   },
@@ -100,7 +100,7 @@ const faqItems = [
   { question: 'Trường Việt Anh có blog hoặc kênh chia sẻ kiến thức giáo dục không?', answer: 'Có. Trường Việt Anh duy trì blog với hơn 500 bài viết về kiến thức giáo dục, kinh nghiệm nuôi dạy con, thông tin tuyển sinh và các sự kiện trường. Nội dung được cập nhật thường xuyên tại truongvietanh.com/tin-tuc.' },
   { question: 'Làm sao để nhận thông tin mới nhất từ Trường Việt Anh?', answer: 'Phụ huynh có thể theo dõi fanpage Facebook Trường Việt Anh, kênh YouTube, hoặc đăng ký nhận bản tin qua email trên website. Ngoài ra, đội ngũ tuyển sinh sẽ liên hệ trực tiếp khi có sự kiện Open Day, workshop hoặc chương trình ưu đãi.' },
   { question: 'Trường Việt Anh tổ chức những sự kiện gì trong năm học?', answer: 'Trong năm học, trường tổ chức: Open Day cho phụ huynh tham quan, Hội thao liên cấp, English Day, STEM Fair, Music Show, Lễ tri ân thầy cô, Dã ngoại theo cấp học, và các workshop kỹ năng sống dành cho phụ huynh và học sinh.' },
-  { question: 'Blog Trường Việt Anh có chia sẻ kinh nghiệm luyện thi IELTS không?', answer: 'Có. Blog thường xuyên đăng bài về lộ trình luyện IELTS từ lớp 6 đến lớp 12, mẹo làm bài thi, chia sẻ từ học sinh đạt IELTS 6.0–8.0, và hướng dẫn chuẩn bị hồ sơ du học cho phụ huynh quan tâm.' },
+  { question: 'Blog Trường Việt Anh có chia sẻ kinh nghiệm luyện thi IELTS không?', answer: 'Có. Blog thường xuyên đăng bài về lộ trình luyện IELTS từ lớp 6 đến lớp 12, mẹo làm bài thi, chia sẻ từ học sinh đã đạt IELTS, và hướng dẫn chuẩn bị hồ sơ du học cho phụ huynh quan tâm.' },
   { question: 'Phụ huynh có thể đóng góp bài viết cho blog Trường Việt Anh không?', answer: 'Trường Việt Anh khuyến khích phụ huynh chia sẻ câu chuyện, kinh nghiệm và cảm nhận. Phụ huynh có thể gửi bài viết qua email hoặc liên hệ đội ngũ truyền thông trường để được hỗ trợ đăng bài.' },
 ];
 ---
@@ -165,7 +165,7 @@ const faqItems = [
           <a href="/thanh-tich-hoc-tap" class="topic-card">
             <span class="topic-icon">🏆</span>
             <strong>Thành Tích Học Sinh</strong>
-            <span>Olympic, IELTS 6.0–8.0, 99% đỗ ĐH nguyện vọng 1, du học thành công</span>
+            <span>Olympic, IELTS, du học</span>
           </a>
           <a href="/ngoai-khoa" class="topic-card">
             <span class="topic-icon">⚽</span>
@@ -235,20 +235,20 @@ const faqItems = [
               </a>
               <a href="/thanh-tich-hoc-tap" class="news-card">
                 <div class="news-card__body">
-                  <h3 class="news-card__title">Thành tích nổi bật: 99% đỗ ĐH nguyện vọng 1, IELTS 6.0–8.0</h3>
+                  <h3 class="news-card__title">Thành tích nổi bật của học sinh Việt Anh</h3>
                   <p class="news-card__excerpt">Học sinh Trường Việt Anh liên tục đạt thành tích xuất sắc trong các kỳ thi Olympic, IELTS và kỳ thi tốt nghiệp THPT quốc gia. Nhiều em nhận học bổng du học.</p>
                 </div>
               </a>
               <a href="/co-so" class="news-card">
                 <div class="news-card__body">
-                  <h3 class="news-card__title">Hệ thống 6 cơ sở: TP.HCM, Tây Ninh, An Giang</h3>
-                  <p class="news-card__excerpt">Trường Việt Anh mở rộng hệ thống trường liên cấp với 6 cơ sở tại 3 tỉnh thành. Mỗi cơ sở đều đạt chuẩn về cơ sở vật chất, phòng lab STEM và sân thể thao.</p>
+                  <h3 class="news-card__title">Cơ sở Trường Việt Anh và các trường liên quan</h3>
+                  <p class="news-card__excerpt">2 cơ sở chính thức tại TP.HCM, cùng các trường cùng chủ đầu tư và trường do Việt Anh phụ trách vận hành tại Tây Ninh, An Giang.</p>
                 </div>
               </a>
               <a href="/mam-non" class="news-card">
                 <div class="news-card__body">
-                  <h3 class="news-card__title">Mầm Non song ngữ: Montessori kết hợp chương trình Việt – Anh</h3>
-                  <p class="news-card__excerpt">Chương trình Mầm Non Việt Anh áp dụng phương pháp Montessori, giúp trẻ từ 12 tháng đến 6 tuổi phát triển ngôn ngữ, tư duy và kỹ năng xã hội trong môi trường an toàn.</p>
+                  <h3 class="news-card__title">Mầm Non song ngữ: học tập chủ động, 100% tiếng Anh trong lớp</h3>
+                  <p class="news-card__excerpt">Chương trình Mầm Non Việt Anh theo phương pháp học tập chủ động (Plan–Do–Review), lấy cảm hứng từ HighScope, giúp trẻ từ 12 tháng đến 6 tuổi phát triển ngôn ngữ, tư duy và kỹ năng xã hội trong môi trường an toàn.</p>
                 </div>
               </a>
             </div>

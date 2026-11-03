@@ -7,7 +7,7 @@ import { stripUrlPiiScript } from '../lib/strip-url-pii';
 
 // Fetch site settings from Directus CMS (cached at build time)
 const siteSettings = await getSiteSettings();
-const announcementText = siteSettings?.announcement_text || 'Tuyển sinh 2026–2027 đã mở — đặt lịch tham quan để nhận tư vấn lộ trình & chính sách ưu đãi Early bird.';
+const announcementText = siteSettings?.announcement_text || 'Đặt lịch tham quan trường để được tư vấn lộ trình học và học phí.';
 const announcementLink = siteSettings?.announcement_link || '/tuyen-sinh';
 const announcementActive = siteSettings?.announcement_active ?? true;
 const hotline = siteSettings?.hotline || '0916 961 409';
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             socialProof=""
             nextText="Nhận tư vấn ngay"
             submitText="Gửi thông tin"
-            successMessage="Cảm ơn Ba/Mẹ! Tư vấn viên sẽ gọi trong ít phút."
+            successMessage="Cảm ơn Ba/Mẹ! Tư vấn viên sẽ liên hệ trong 24 giờ làm việc."
           />
         </div>
         <p class="exit-popup__note">

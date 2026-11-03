@@ -104,6 +104,17 @@ export default defineConfig({
         // tiện ích quét QR, noindex — không vào sitemap
         // /theo-doi (mời theo dõi Facebook + YouTube) cùng loại trang tiện ích
         if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
+        // /cong-khai đang là khung nháp noindex, chờ luật sư audit — mở lại khi công bố
+        if (/\/cong-khai\/?$/.test(page)) return false;
+        // 4 trang "Ưu đãi vàng" hết hạn 30/08/2026, worker redirect đi (31/10/2026)
+        if (/\/tuyen-sinh\/(lop-1|tieu-hoc|thcs|lop-10)-uu-dai-vang\/?$/.test(page)) return false;
+        // 2 trang học bổng tỉnh redirect về /hoc-bong (bảng quyết định B11, 01/11/2026)
+        if (/\/hoc-bong-(can-giuoc|rach-gia)\/?$/.test(page)) return false;
+        if (/\/hoc-phi-(can-giuoc|rach-gia)\/?$/.test(page)) return false;
+        // /oxford-pathway-go-vap: noindex chờ nhà trường chứng minh IGCSE/A-Level (bảng quyết định A3)
+        if (/\/oxford-pathway-go-vap\/?$/.test(page)) return false;
+        // 5 landing lớp 10 hè 2026 đang ẩn (worker redirect về /trung-hoc-pho-thong, 31/10/2026)
+        if (/\/(lop-10|lop-10-noi-tru|tuyen-sinh\/lop-10|tuyen-sinh\/lop-10-hoc-bong|tuyen-sinh\/lop-10-ban-tru)\/?$/.test(page)) return false;
         // Squeeze page tặng tài liệu đều đặt noindex — đưa vào sitemap chỉ tổ dính
         // cảnh báo "Submitted URL marked noindex" trong Search Console.
         if (/\/(7-cau-hoi-ke-chuyen-truong-lop|chi-phi-that-12-nam|12-cau-hoi-hop-phu-huynh|quiz-vao-lop-1|quiz-san-sang-vao-lop-1|giai-ma-tam-ly-tien-tieu-hoc|quiz-chuan-bi-tham-quan-truong|quiz-dong-hanh-cung-con-7-ngay|quiz-tu-quan-ly-viec-hoc|quiz-tieng-anh-lop-1-12|quiz-ky-nang-tu-lap|quiz-chuan-bi-chuyen-cap|quiz-doc-ket-qua-hoc-tap|quiz-hanh-trang-thpt|quiz-thu-thach-tu-hoc-7-ngay)\/?$/.test(page)) return false;

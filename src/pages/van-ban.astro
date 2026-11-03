@@ -1,0 +1,152 @@
+---
+// Danh mục VĂN BẢN đã ban hành — menu Giới thiệu › Văn bản (anh Dương giao 03/11/2026 trong file
+// đối chiếu TT09: "tạo Menu Văn bản trong Menu Giới thiệu và để link pdf các văn bản đã phát hành").
+// Toàn văn vẫn nằm ở /chinh-sach và trang riêng của từng văn bản; trang này chỉ là danh mục + link PDF.
+//
+// THÊM VĂN BẢN: thêm một dòng vào mảng vanBan. Có bản scan thì chép PDF vào public/van-ban/ rồi điền `pdf`.
+// Còn thiếu PDF có chữ ký, con dấu (xin anh Dương / anh Trường):
+//   · QĐ 0828/2026/QĐ-HĐT — Chính sách sử dụng AI
+//   · Văn bản phê duyệt chính sách học bổng 2026–2027 (số hiệu?)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeaderBase from '../components/HeaderBase.astro';
+import FooterBase from '../components/FooterBase.astro';
+
+const canonical = 'https://truongvietanh.com/van-ban';
+
+interface VanBan {
+  soHieu?: string;
+  ngay: string;
+  coQuan: string;
+  trichYeu: string;
+  /** đường dẫn PDF trong public/ — bỏ trống khi chưa có bản scan */
+  pdf?: string;
+  web: { text: string; href: string };
+}
+
+const vanBan: VanBan[] = [
+  {
+    soHieu: '0728.1/2026/QĐ-MAJOR',
+    ngay: '29/7/2026',
+    coQuan: 'Công ty CP Giáo dục Major',
+    trichYeu: 'Quyết định ban hành Chính sách "Cam kết Giá trị 4 Tuần" — hoàn học phí trong 4 tuần đầu năm học.',
+    pdf: '/van-ban/quyet-dinh-0728-1-2026-cam-ket-gia-tri-4-tuan.pdf',
+    web: { text: 'Toàn văn', href: '/chinh-sach#cam-ket-4-tuan' },
+  },
+  {
+    soHieu: '0828/2026/QĐ-HĐT',
+    ngay: '28/8/2026',
+    coQuan: 'Hội đồng Trường',
+    trichYeu: 'Quyết định ban hành Chính sách sử dụng Trí tuệ nhân tạo (AI) trong nhà trường.',
+    web: { text: 'Toàn văn', href: '/chinh-sach-ai' },
+  },
+  {
+    ngay: '8/2026',
+    coQuan: 'Hội đồng Trường',
+    trichYeu: 'Chính sách học bổng và ưu đãi học phí năm học 2026–2027.',
+    web: { text: 'Toàn văn', href: '/hoc-bong' },
+  },
+];
+
+const quyDinhKhac = [
+  { text: 'Chính sách bảo mật', href: '/chinh-sach-bao-mat' },
+  { text: 'Điều khoản sử dụng website', href: '/dieu-khoan-su-dung' },
+  { text: 'Quy trình giải quyết khiếu nại', href: '/khieu-nai' },
+  { text: 'Bảng học phí năm học 2026–2027', href: '/hoc-phi' },
+];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Văn bản đã ban hành — Trường Việt Anh',
+    url: canonical,
+    inLanguage: 'vi-VN',
+    hasPart: vanBan.map((v) => ({
+      '@type': 'DigitalDocument',
+      name: (v.soHieu ? `${v.soHieu} — ` : '') + v.trichYeu,
+      url: 'https://truongvietanh.com' + (v.pdf ?? v.web.href),
+      ...(v.pdf ? { encodingFormat: 'application/pdf' } : {}),
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://truongvietanh.com' },
+      { '@type': 'ListItem', position: 2, name: 'Giới thiệu', item: 'https://truongvietanh.com/gioi-thieu' },
+      { '@type': 'ListItem', position: 3, name: 'Văn bản', item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Văn bản đã ban hành — Trường Việt Anh"
+  description="Danh mục các văn bản Trường Việt Anh đã ban hành: số hiệu, ngày, cơ quan ban hành, kèm bản PDF có chữ ký và con dấu để tải về."
+  canonical={canonical}
+  structuredData={structuredData}
+>
+  <div class="gi-page">
+    <HeaderBase currentPath="/van-ban" />
+
+    <section class="gi-hero">
+      <div class="gi-container gi-hero-inner">
+        <div class="gi-hero-left" style="flex:1">
+          <nav class="gi-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Trang chủ</a>
+            <span aria-hidden="true">›</span>
+            <a href="/gioi-thieu">Giới thiệu</a>
+            <span aria-hidden="true">›</span>
+            <span>Văn bản</span>
+          </nav>
+          <h1 class="gi-h1">Văn bản đã ban hành</h1>
+          <p class="gi-subtitle">Số hiệu, ngày ban hành và bản PDF để phụ huynh tải về, đối chiếu.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="gi-container gi-body">
+      <article class="gi-main" data-no-collapse>
+        <section class="gi-section">
+          <h2>Quyết định, chính sách có số hiệu</h2>
+          <ol class="vb-ds">
+            {vanBan.map((v) => (
+              <li class="vb-muc">
+                <p class="vb-so">
+                  {v.soHieu ? <strong>{v.soHieu}</strong> : <strong>Chính sách</strong>}
+                  <span>Ngày {v.ngay} · {v.coQuan}</span>
+                </p>
+                <p class="vb-trich">{v.trichYeu}</p>
+                <p class="vb-link">
+                  {v.pdf && <a class="vb-pdf" href={v.pdf} target="_blank" rel="noopener">Tải PDF</a>}
+                  <a href={v.web.href}>{v.web.text} →</a>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="gi-section">
+          <h2>Quy định khác</h2>
+          <ul class="vb-khac">
+            {quyDinhKhac.map((q) => <li><a href={q.href}>{q.text}</a></li>)}
+          </ul>
+        </section>
+      </article>
+    </div>
+
+    <FooterBase />
+  </div>
+</BaseLayout>
+
+<style>
+  .vb-ds { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+  .vb-muc { border: 1px solid #e2e8f0; border-left: 4px solid #26275D; border-radius: 8px; padding: 0.9rem 1.1rem; background: #fff; }
+  .vb-so { margin: 0 0 0.3rem; display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; }
+  .vb-so strong { color: #26275D; }
+  .vb-so span { color: #64748b; font-size: 0.9rem; }
+  .vb-trich { margin: 0 0 0.5rem; line-height: 1.6; }
+  .vb-link { margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+  .vb-pdf { display: inline-block; background: #f9dd0e; color: #26275D; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 6px; text-decoration: none; }
+  .vb-khac { margin: 0; padding-left: 1.2rem; line-height: 1.9; }
+</style>

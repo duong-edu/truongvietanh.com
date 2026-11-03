@@ -118,9 +118,9 @@ const faqs = [
           </li>
         </ul>
         <a href="#dang-ky" class="ts-cta-btn ts-cta-btn--xl ts-cta-track" data-cta="hero">
-          Nhận học bổng ngay — chỉ còn <span data-seats>23</span> suất
+          Nhận học bổng ngay
         </a>
-        <p class="ts-hero__scarcity">⏰ Cập nhật theo thời gian thực: <span data-registered>52</span> / 100 phụ huynh đã đăng ký</p>
+        <p class="ts-hero__scarcity">Nhà trường phản hồi trong 24 giờ làm việc.</p>
       </div>
     </section>
 
@@ -212,7 +212,7 @@ const faqs = [
     <section class="ts-program">
       <div class="ts-container">
         <h2 class="ts-h2-center">Trong 4 Tiết Một Tuần, Con Bạn Sẽ Học Gì?</h2>
-        <p class="ts-h2-sub">Chương trình thiết kế bởi đội ngũ chuyên gia có nhiều năm kinh nghiệm tại Major Education và các hệ thống giáo dục tiếng Anh hàng đầu Việt Nam.</p>
+        <p class="ts-h2-sub">Chương trình thiết kế bởi đội ngũ chuyên gia có nhiều năm kinh nghiệm tại Major Education.</p>
         <div class="ts-program__list">
           {lessons.map(l => (
             <article class="ts-lesson">
@@ -309,7 +309,7 @@ const faqs = [
                 <label for="tsEmail" class="ts-label">Email của Anh/Chị <span class="ts-req">*</span></label>
                 <input id="tsEmail" name="email" type="email" required placeholder="vd: nguyenthilan@gmail.com" autocomplete="email" />
                 <button type="submit" class="ts-cta-btn ts-cta-btn--xl ts-cta-btn--full">GIỮ CHỖ HỌC BỔNG NGAY →</button>
-                <p class="ts-form__trust">🔒 Email Anh/Chị được bảo mật theo Nghị định 13/2023/NĐ-CP. Chúng tôi <strong>KHÔNG</strong> gửi spam.</p>
+                <p class="ts-form__trust">🔒 Email Anh/Chị được bảo mật theo Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15. Chúng tôi <strong>KHÔNG</strong> gửi spam.</p>
               </div>
 
               <!-- Step 2 -->
@@ -338,7 +338,6 @@ const faqs = [
                   <a href={`${FB_MESSENGER}?ref=hoc_bong_99k`} target="_blank" rel="noopener" class="ts-cta-btn ts-cta-btn--fb ts-cta-btn--full">💬 Chat ngay qua Messenger</a>
                   <a href={`tel:${HOTLINE}`} class="ts-cta-btn ts-cta-btn--outline ts-cta-btn--full">📞 GỌI HOTLINE NGAY: {HOTLINE_DISPLAY}</a>
                 </div>
-                <p class="ts-success__counter">🔥 Vừa có thêm 1 phụ huynh đăng ký – còn <strong data-seats>22</strong> suất</p>
               </div>
             </form>
           </div>
@@ -383,10 +382,8 @@ const faqs = [
     <!-- ============ COUNTDOWN + SCARCITY ============ -->
     <section class="ts-scarcity">
       <div class="ts-container ts-center">
-        <p class="ts-scarcity__eyebrow">⏰ HỌC BỔNG NÀY KHÔNG KÉO DÀI</p>
+        <p class="ts-scarcity__eyebrow">HỌC BỔNG THÁNG ĐẦU</p>
         <div class="ts-scarcity__counters">
-          <div><strong data-seats>23</strong><span>SUẤT CÒN LẠI</span></div>
-          <div><strong>7</strong><span>NGÀY ĐẾN HẠN</span></div>
           <div><strong>99.000Đ</strong><span>THÁNG ĐẦU</span></div>
         </div>
         <p class="ts-scarcity__sub"><em>Khi đủ 100 phụ huynh đăng ký, chúng tôi đóng nhận hồ sơ. Sau đó học phí trở về mức thông thường 999.000đ/tháng – sẽ <strong>KHÔNG</strong> còn mức 99.000đ.</em></p>
@@ -398,13 +395,13 @@ const faqs = [
     <section class="ts-contact">
       <div class="ts-container">
         <h2 class="ts-h2-center">Liên hệ trực tiếp</h2>
-        <p class="ts-h2-sub">Tư vấn 24/7 — chúng tôi luôn sẵn sàng giải đáp.</p>
+        <p class="ts-h2-sub">Thứ 2–Thứ 7, 07:00–19:00 — gọi hoặc nhắn Zalo để được tư vấn.</p>
         <div class="ts-contact__cards">
           <a href={`tel:${HOTLINE}`} class="ts-contact-card" data-cta="contact-phone">
             <span class="ts-contact-card__icon">📞</span>
             <span class="ts-contact-card__label">Hotline</span>
             <span class="ts-contact-card__value">{HOTLINE_DISPLAY}</span>
-            <span class="ts-contact-card__sub">24/7 — không giới hạn thời gian</span>
+            <span class="ts-contact-card__sub">Thứ 2–Thứ 7, 07:00–19:00</span>
           </a>
           <a href={ZALO_OA} target="_blank" rel="noopener" class="ts-contact-card" data-cta="contact-zalo">
             <span class="ts-contact-card__icon">💬</span>
@@ -430,7 +427,7 @@ const faqs = [
     <div class="ts-sticky" id="tsSticky" hidden>
       <button class="ts-sticky__close" aria-label="Đóng" id="tsStickyClose">×</button>
       <div class="ts-sticky__inner">
-        <span class="ts-sticky__count">CÒN <strong data-seats>23</strong> SUẤT</span>
+        <span class="ts-sticky__count">HỌC BỔNG THÁNG ĐẦU</span>
         <a href="#dang-ky" class="ts-sticky__cta ts-cta-track" data-cta="sticky">GIỮ CHỖ – 99.000Đ</a>
       </div>
     </div>
@@ -454,7 +451,7 @@ const faqs = [
         <div>
           <p class="ts-footer__heading">Liên hệ Mr Khải</p>
           <ul>
-            <li>Hotline 24/7: <a href={`tel:${HOTLINE}`}>{HOTLINE_DISPLAY}</a></li>
+            <li>Hotline (T2–T7, 07:00–19:00): <a href={`tel:${HOTLINE}`}>{HOTLINE_DISPLAY}</a></li>
             <li>Zalo OA: <a href={ZALO_OA} target="_blank" rel="noopener">Trường Việt Anh</a></li>
             <li>Facebook: <a href={FB_PAGE} target="_blank" rel="noopener">@truongvietanhhcm</a></li>
             <li>Email: <a href="mailto:khai.nguyen@truongvietanh.com">khai.nguyen@truongvietanh.com</a></li>
@@ -1283,8 +1280,7 @@ const faqs = [
       // fallback already in DOM
     }
   }
-  loadSeats();
-  setInterval(loadSeats, 30000);
+  // 01/11/2026: gỡ bộ đếm suất (API /api/seats-remaining không tồn tại, số là số tĩnh) — bảng quyết định A1.
 
   // ====== Scroll fade-in ======
   const animEls = document.querySelectorAll('.ts-page section, .ts-card, .ts-lesson');

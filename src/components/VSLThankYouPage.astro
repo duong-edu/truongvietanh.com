@@ -24,7 +24,7 @@ const {
   bonusIntro, bonusItems, ctaPrimary, ctaZalo, signOff
 } = Astro.props;
 
-const todayCount = 7 + Math.floor(Math.random() * 9); // 7–15
+// todayCount (số ngẫu nhiên 7–15 giả làm "hôm nay có N phụ huynh đăng ký") gỡ 01/11/2026 — bảng quyết định A1
 ---
 <!doctype html>
 <html lang="vi">
@@ -113,7 +113,6 @@ const todayCount = 7 + Math.floor(Math.random() * 9); // 7–15
     <h3>Vì sao nên tư vấn ngay hôm nay?</h3>
     <ul>
       <li>Lớp chỉ 15–18 học sinh — đầy là hết, không mở thêm</li>
-      <li>Hôm nay đã có <strong>{todayCount}</strong> phụ huynh đăng ký tư vấn tại {location}</li>
       <li>Học bổng Early Bird giảm theo thời gian — tư vấn sớm = nhiều lựa chọn nhất</li>
       <li>Tư vấn 1:1 giúp Ba/Mẹ hiểu rõ lộ trình phù hợp nhất cho bé</li>
     </ul>
@@ -122,13 +121,7 @@ const todayCount = 7 + Math.floor(Math.random() * 9); // 7–15
   <!-- 5. WARNING -->
   <div class="warning">
     <div class="ic">⚠️</div>
-    <p><strong>80% phụ huynh không hành động ngay sẽ mất suất trong 24–48h.</strong> Hiện lớp {levelLabel} {location} chỉ còn <strong>{slotsLeft}</strong> chỗ.</p>
-  </div>
-
-  <!-- 6. REAL-TIME PROOF -->
-  <div class="proof">
-    <div class="dot-live"></div>
-    <p>Hôm nay: <strong>{todayCount} phụ huynh</strong> đã đăng ký tư vấn tại {location}. Còn <strong>{slotsLeft} suất</strong>.</p>
+    <p>Nhà trường phản hồi trong 24 giờ làm việc.</p>
   </div>
 
   <!-- 7. RISK REVERSAL -->
@@ -169,10 +162,6 @@ const todayCount = 7 + Math.floor(Math.random() * 9); // 7–15
 <a href={zaloUrl} target="_blank" rel="noopener" class="fzalo" title="Chat Zalo">💬</a>
 
 <!-- Social notif -->
-<div class="snotif" id="sn">
-  <div class="sa" id="snA">👩</div>
-  <div><b id="snN">Chị Nguyễn T.</b> <span id="snAc">vừa đăng ký tư vấn</span><span class="st" id="snT">2p trước</span></div>
-</div>
 
 <!-- Zalo auto popup -->
 <div class="zalo-popup" id="zPopup">

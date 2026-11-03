@@ -32,7 +32,7 @@ Trang triết lý giáo dục: https://truongvietanh.com/triet-ly-giao-duc
 ## Chương trình và hệ thống học thuật
 
 - Chương trình quốc gia theo GDPT 2018, tăng cường tiếng Anh và kỹ năng thế kỷ 21.
-- Chương trình AI: 30 tiết/lớp/năm cho toàn hệ lớp 1–12 từ năm học 2026–2027, nằm trong học phí công bố, không thu thêm (mức sàn của Quyết định 2422/QĐ-BGDĐT là 12 tiết).
+- Chương trình AI: 30 tiết/lớp/năm cho lớp 3–12 từ năm học 2026–2027, nằm trong học phí công bố, không thu thêm (mức sàn của Quyết định 2422/QĐ-BGDĐT là 12 tiết).
 - Khung năng lực AI cho học sinh: UNESCO 4D. Khung năng lực AI cho giáo viên: phân nhóm Create / Deepen / Acquire.
 - Bộ 7 Nguyên tắc Đạo đức AI, dựa trên Khuyến nghị về Đạo đức AI của UNESCO (2021).
 - The Leader in Me (FranklinCovey) và 7 Thói quen Hiệu quả; hệ thống PDR — Plan-Do-Review (một tên gọi từ mầm non đến lớp 12); học kỳ Foundation đầu cấp; hệ thống lãnh đạo học sinh Hoa Tiêu.

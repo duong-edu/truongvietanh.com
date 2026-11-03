@@ -29,6 +29,8 @@ interface Props {
   redirectUrl?: string;
   logoSrc?: string;
   extended?: boolean;
+  /** true = noindex,nofollow (trang đang chờ kiểm chứng nội dung) */
+  noindex?: boolean;
   formMode?: 'email' | 'tuoi';
 }
 
@@ -36,19 +38,20 @@ const {
   title,
   description,
   canonicalUrl,
-  fomoText = '🔥 3,000+ học sinh đang theo học — Đăng ký nhận tư vấn',
+  fomoText = '🔥 1.000+ học sinh đang theo học — Đăng ký nhận tư vấn',
   headline,
   headlineEm,
   subheadline,
   bullets = [],
-  testimonial = 'Trường tư vấn rất nhiệt tình, lộ trình rõ ràng. Con tôi tiến bộ rõ rệt sau một học kỳ!',
-  testimonialAuthor = '— Phụ huynh học sinh Trường Việt Anh',
+  testimonial = '', // 01/11/2026: bỏ lời chứng mặc định không truy được người thật (bảng quyết định A2)
+  testimonialAuthor = '',
   cardUrgency = '⏰ Phản hồi trong 24h · Tư vấn miễn phí',
   cardTitle,
   ctaStep2 = '📋 GỬI THÔNG TIN ĐĂNG KÝ →',
   source,
   funnelCode,
   schoolLevel = 'tieu-hoc',
+  noindex = false,
   mockupImage,
   redirectUrl = '/cam-on/',
   logoSrc = '/logo-vietanh.webp',
@@ -79,7 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content={description} />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
 {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -248,12 +251,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
 
+    {testimonial && (
     <div class="item-social">
       <div class="testimonial">
         {testimonial}
         <strong>{testimonialAuthor}</strong>
       </div>
     </div>
+    )}
   </div>
 
   <!-- RIGHT COLUMN -->

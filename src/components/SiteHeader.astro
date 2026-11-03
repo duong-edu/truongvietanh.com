@@ -3,7 +3,7 @@ import { contactLinks, mainNavLeft, mainNavRight } from '../lib/site-content';
 import { getSiteSettings } from '../lib/directus';
 
 const siteSettings = await getSiteSettings();
-const announcementText = siteSettings?.announcement_text || 'Tuyển sinh 2026–2027 đang mở — Ưu đãi Đăng ký sớm giảm đến 46% học phí.';
+const announcementText = siteSettings?.announcement_text || 'Đặt lịch tham quan trường để được tư vấn lộ trình học và học phí.';
 const announcementLink = siteSettings?.announcement_link || '/tuyen-sinh';
 const announcementActive = siteSettings?.announcement_active ?? true;
 
@@ -181,14 +181,14 @@ function isChildActive(item: NavItem, path: string): boolean {
   const searchPages = [
     { title: 'Trang Chủ', url: '/', desc: 'Hệ thống giáo dục liên cấp song ngữ từ Mầm Non đến THPT' },
     { title: 'Giới Thiệu', url: '/gioi-thieu', desc: 'Sứ mệnh, tầm nhìn, giá trị cốt lõi' },
-    { title: 'Mầm Non', url: '/mam-non', desc: 'Montessori, 100% tiếng Anh từ 12 tháng' },
+    { title: 'Mầm Non', url: '/mam-non', desc: 'Học tập chủ động, 100% tiếng Anh từ 12 tháng' },
     { title: 'School Ready', url: '/school-ready', desc: '16 năng lực để con vào lớp 1 tự tin, tự lập' },
     { title: 'Tiểu Học', url: '/tieu-hoc', desc: 'UK Oxford, STEM, kỹ năng thế kỷ 21' },
     { title: 'THCS', url: '/trung-hoc-co-so', desc: 'Song ngữ, IELTS, Debate, Robotics' },
-    { title: 'THPT', url: '/trung-hoc-pho-thong', desc: 'IELTS 6.0-8.0, du học, 99% đỗ ĐH' },
+    { title: 'THPT', url: '/trung-hoc-pho-thong', desc: 'IELTS 6.0+, du học, xét tuyển đại học' },
     { title: 'Tuyển Sinh', url: '/tuyen-sinh', desc: 'Quy trình, ưu đãi đăng ký sớm, học bổng' },
     { title: 'Học Phí', url: '/hoc-phi', desc: 'Bảng phí Mầm Non đến THPT' },
-    { title: 'Cơ Sở', url: '/co-so', desc: '6 cơ sở TP.HCM, Tây Ninh, An Giang' },
+    { title: 'Cơ Sở', url: '/co-so', desc: '2 cơ sở chính thức và các trường liên quan' },
     { title: 'So Sánh', url: '/so-sanh', desc: 'Việt Anh vs Công lập vs Quốc tế' },
     { title: 'Sự Kiện', url: '/su-kien', desc: 'Open Day, Workshop, Hội thao' },
     { title: 'Học Bổng', url: '/hoc-bong', desc: 'Giảm đến 50% học phí' },

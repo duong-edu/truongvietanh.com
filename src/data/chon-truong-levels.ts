@@ -48,7 +48,7 @@ export const CHON_TRUONG_LEVELS: ChonTruongLevel[] = [
     metrics: [
       { number: '3,000+', label: 'Phụ huynh đã nhận cẩm nang' },
       { number: '12', label: 'Tiêu chí đánh giá toàn diện' },
-      { number: '4.9/5', label: 'Đánh giá từ phụ huynh' },
+      { number: '2011', label: 'Năm thành lập' },
       { number: '15+', label: 'Năm kinh nghiệm biên soạn' },
     ],
     contentTitle: 'Tại sao Ba/Mẹ cần cẩm nang này?',
@@ -101,7 +101,7 @@ export const CHON_TRUONG_LEVELS: ChonTruongLevel[] = [
     metrics: [
       { number: '3,500+', label: 'Phụ huynh đã nhận cẩm nang' },
       { number: '14', label: 'Tiêu chí đánh giá toàn diện' },
-      { number: '4.8/5', label: 'Đánh giá từ phụ huynh' },
+      { number: '2011', label: 'Năm thành lập' },
       { number: '15+', label: 'Năm kinh nghiệm biên soạn' },
     ],
     contentTitle: 'Vì sao chọn trường tiểu học quan trọng?',
@@ -154,7 +154,7 @@ export const CHON_TRUONG_LEVELS: ChonTruongLevel[] = [
     metrics: [
       { number: '2,800+', label: 'Phụ huynh đã nhận cẩm nang' },
       { number: '15', label: 'Tiêu chí đánh giá toàn diện' },
-      { number: '4.8/5', label: 'Đánh giá từ phụ huynh' },
+      { number: '2011', label: 'Năm thành lập' },
       { number: '15+', label: 'Năm kinh nghiệm biên soạn' },
     ],
     contentTitle: 'Vì sao THCS là bước ngoặt quan trọng?',
@@ -207,7 +207,7 @@ export const CHON_TRUONG_LEVELS: ChonTruongLevel[] = [
     metrics: [
       { number: '2,400+', label: 'Phụ huynh đã nhận cẩm nang' },
       { number: '16', label: 'Tiêu chí đánh giá toàn diện' },
-      { number: '4.9/5', label: 'Đánh giá từ phụ huynh' },
+      { number: '2011', label: 'Năm thành lập' },
       { number: '15+', label: 'Năm kinh nghiệm biên soạn' },
     ],
     contentTitle: 'Vì sao chọn trường THPT quyết định tương lai con?',

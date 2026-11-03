@@ -73,7 +73,8 @@ export default {
 
     // Gộp trang nội trú trùng: /tuyen-sinh/lop-10-noi-tru → URL ngắn /lop-10-noi-tru/ (301)
     if (url.pathname === '/tuyen-sinh/lop-10-noi-tru' || url.pathname === '/tuyen-sinh/lop-10-noi-tru/') {
-      return Response.redirect('https://truongvietanh.com/lop-10-noi-tru/', 301);
+      // 31/10/2026: /lop-10-noi-tru dang an (REDIRECTS_2026_09_09) — tro thang dich cuoi, tranh 2 lan 301
+      return Response.redirect('https://truongvietanh.com/trung-hoc-pho-thong/', 301);
     }
 
     // Quiz: /quiz-vietanh → /quiz (301 permanent — canonical short URL)
@@ -120,18 +121,18 @@ export default {
       '/truong-tieu-hoc-tu-thuc-go-vap': '/blog/tieu-hoc-go-vap',
       '/truong-tieu-hoc-quoc-te-quan-go-vap': '/blog/tieu-hoc-go-vap',
       '/danh-sach-cac-truong-dan-lap-go-vap-noi-bat-trong-nam-nay': '/blog/tieu-hoc-go-vap',
-      '/truong-tieu-hoc-tu-thuc-quan-tan-binh': '/blog/tieu-hoc-tan-binh',
-      '/truong-tieu-hoc-tu-thuc-quan-tan-phu': '/blog/tieu-hoc-tan-phu',
-      '/truong-tieu-hoc-quoc-te-quan-tan-phu': '/blog/tieu-hoc-tan-phu',
+      '/truong-tieu-hoc-tu-thuc-quan-tan-binh': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
+      '/truong-tieu-hoc-tu-thuc-quan-tan-phu': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
+      '/truong-tieu-hoc-quoc-te-quan-tan-phu': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
       '/truong-tieu-hoc-quoc-te-quan-binh-tan': '/co-so/lien-cap-binh-tan',
       '/truong-tieu-hoc-tu-thuc-o-quan-binh-tan': '/co-so/lien-cap-binh-tan',
-      '/truong-tieu-hoc-tu-thuc-quan-binh-thanh': '/blog/tieu-hoc-binh-thanh',
+      '/truong-tieu-hoc-tu-thuc-quan-binh-thanh': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
       '/truong-mam-non-tu-thuc-tot-o-quan-12': '/blog/mam-non-quan-12',
       '/truong-mam-non-song-ngu-quan-12': '/blog/mam-non-quan-12',
       '/truong-mam-non-quoc-te-quan-12': '/blog/mam-non-quan-12',
-      '/truong-mam-non-tu-thuc-quan-binh-thanh': '/blog/mam-non-binh-thanh',
-      '/truong-mam-non-tu-thuc-quan-tan-phu': '/blog/mam-non-tan-binh',
-      '/truong-mam-non-quoc-te-quan-tan-phu': '/blog/mam-non-tan-binh',
+      '/truong-mam-non-tu-thuc-quan-binh-thanh': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-tu-thuc-quan-tan-phu': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-quoc-te-quan-tan-phu': '/blog/truong-mam-non-tu-thuc-tphcm/',
       // Binh Tan KHONG co Mam non (xem src/pages/lop-4-6-tuoi-binh-tan.astro) — ve
       // dung trang "lop 4-6 tuoi", KHONG ve /co-so/lien-cap-binh-tan.
       '/truong-mam-non-tu-thuc-quan-binh-tan': '/lop-4-6-tuoi-binh-tan',
@@ -151,7 +152,7 @@ export default {
       '/cach-dat-diem-cao-mon-anh-thi-vao-10': '/blog/bi-quyet-on-thi-lop-10-hieu-qua',
       '/chuyen-truong-tu-thuc-sang-cong-lap': '/blog/blog-lien-cap-vs-chuyen-truong',
       '/thoi-gian-nao-la-tot-nhat-de-chuyen-truong-trong-nam-hoc-tu-van': '/blog/blog-lien-cap-vs-chuyen-truong',
-      '/nen-cho-con-hoc-truong-mam-non-cong-hay-tu': '/blog/blog-cach-chon-truong-mam-non-cho-con',
+      '/nen-cho-con-hoc-truong-mam-non-cong-hay-tu': '/blog/checklist-chon-truong-mam-non/',
       '/cach-day-be-viet-chu': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
       '/day-be-hoc-so': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
       '/cach-day-be-hoc-chu-cai': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
@@ -199,6 +200,31 @@ export default {
       // /truong-thpt-tu-thuc-tphcm (slug khop hon): tieu de #97 la "Top 5 Truong
       // THPT Tu Thuc TPHCM" nen y dinh tim kiem la DANH SACH XEP HANG.
       '/blog/blog-truong-thpt-tu-thuc-tphcm': '/blog/top-truong-thpt-tu-thuc-tphcm/',
+      // 31/10/2026 — chien dich "4 Tuan Vang" da dong 30/08/2026 nhung 4 trang van
+      // mo, con bang "tri gia ~50 trieu" va "Vo gia" (bang quyet dinh A6, A10 — anh
+      // Duong chon Bo). An bang redirect; file trang de nguyen phong khi mo lai.
+      '/tuyen-sinh/lop-1-uu-dai-vang': '/tuyen-sinh/tieu-hoc/',
+      '/tuyen-sinh/tieu-hoc-uu-dai-vang': '/tuyen-sinh/tieu-hoc/',
+      '/tuyen-sinh/thcs-uu-dai-vang': '/tuyen-sinh/thcs/',
+      '/tuyen-sinh/lop-10-uu-dai-vang': '/trung-hoc-pho-thong/',
+      // 31/10/2026 — 5 landing tuyen sinh lop 10 he 2026 (mua tuyen da qua). Ca trang
+      // dung quanh "bang Cu nhan Anh Quoc, khong thi dai hoc" (B13 — Bo), qua Macbook,
+      // "hoc nhanh gap 3 lan" (A10 — Bo), han 30/08 (A6). An tam; mo lai cho mua 2027
+      // thi phai viet lai theo cau an toan cua luat su (xem docs/cong-khai/).
+      '/lop-10': '/trung-hoc-pho-thong/',
+      '/lop-10-noi-tru': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/lop-10': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/lop-10-hoc-bong': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/lop-10-ban-tru': '/trung-hoc-pho-thong/',
+      // 01/11/2026 — bang quyet dinh B11: mot bang hoc bong duy nhat o /hoc-bong. Hai trang
+      // tinh dung bo chinh sach rieng (100%/10 suat, 50%/30 suat, anh chi em 10–15%), han
+      // 30/4 va 30/6/2026 da qua; canonical cua chung von da tro ve /hoc-bong.
+      '/hoc-bong-can-giuoc': '/hoc-bong/',
+      '/hoc-bong-rach-gia': '/hoc-bong/',
+      // B12: tam dung quang ba hoc phi tinh cho toi khi dang du bang phi Thai Son / Nhan Le /
+      // Mekong Xanh. Hai trang nay hua "tra gop 0%" va "khong tang giua nam", lech /hoc-phi.
+      '/hoc-phi-can-giuoc': '/hoc-phi/',
+      '/hoc-phi-rach-gia': '/hoc-phi/',
     };
 
     {
@@ -2336,8 +2362,9 @@ async function handleKhieuNaiSubmission(request, env) {
       return jsonResponse({ ok: false, error: 'missing_field', field }, 400);
     }
   }
-  // 3 checkbox cam kết bắt buộc
-  if (!data.cam_doan || !data.cam_ket_bao_mat || !data.dong_y_dieu_khoan) {
+  // 2 ô xác nhận bắt buộc. Bản 2.0 (31/10/2026) bỏ ô "cam kết bảo mật song phương"
+  // (cấm phụ huynh đăng mạng xã hội) — đừng thêm lại, luật sư đánh giá rủi ro cao.
+  if (!data.cam_doan || !data.dong_y_dieu_khoan) {
     return jsonResponse({ ok: false, error: 'missing_consent' }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
@@ -2427,7 +2454,7 @@ async function handleKhieuNaiSubmission(request, env) {
       • <strong>Trong 5 ngày tiếp theo</strong>: phân loại mức độ và phân công điều tra viên.<br>
       • <strong>Trong 30 ngày làm việc</strong>: gửi văn bản trả lời chính thức (có thể gia hạn lên 60 ngày nếu phức tạp).<br>
       • Nếu liên quan <strong>an toàn học sinh</strong>: báo CT HĐT trong 2 giờ, phản hồi sơ bộ trong 24 giờ.<br>
-      • Nếu là <strong>yêu cầu dữ liệu cá nhân</strong> (NĐ 13/2023): phản hồi cứng 72 giờ.
+      • Nếu là <strong>yêu cầu dữ liệu cá nhân</strong>: chuyển ngay đầu mối dữ liệu cá nhân, trả lời không quá 05 ngày làm việc (Luật 91/2025).
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:12px;color:#64748b;margin-top:18px;">
@@ -2460,7 +2487,7 @@ async function handleKhieuNaiSubmission(request, env) {
     <ul style="font-size:14px;color:#334155;line-height:1.7;padding-left:20px;margin:0;">
       <li>Xác nhận tiếp nhận & phân công đầu mối: <strong>03 ngày làm việc</strong></li>
       <li>Văn bản trả lời chính thức: tối đa <strong>30 ngày làm việc</strong> (có thể gia hạn 60 ngày với vụ phức tạp — sẽ thông báo trước)</li>
-      <li>Yêu cầu liên quan dữ liệu cá nhân (NĐ 13/2023): <strong>72 giờ</strong> (không gia hạn)</li>
+      <li>Yêu cầu liên quan dữ liệu cá nhân: không quá <strong>05 ngày làm việc</strong></li>
       <li>Khẩn cấp an toàn học sinh: phản hồi sơ bộ trong <strong>24 giờ</strong></li>
     </ul>
 

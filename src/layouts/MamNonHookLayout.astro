@@ -1,4 +1,5 @@
 ---
+import { nhanNhomCoSo } from '../data/school-facts';
 /**
  * MamNonHookLayout — Single-screen landing for hook campaigns (generalised)
  * Brand: #26275D #26275D + Yellow #f9dd0e
@@ -39,7 +40,7 @@ interface Props {
 }
 
 const DEFAULT_BULLETS: BulletItem[] = [
-  { icon: '📹', html: '<strong>Camera online 24/7</strong> — mẹ xem con mọi lúc qua app, đi làm vẫn yên tâm' },
+  { icon: '📹', html: '<strong>Camera giám sát 24/7</strong> — toàn khu, có bảo vệ trực, đi làm vẫn yên tâm' },
   { icon: '👶', html: '<strong>Lớp siêu nhỏ &lt; 15 bé</strong> · 2 cô/lớp — từng bé được quan tâm riêng' },
   { icon: '💛', html: '<strong>Cô tận tâm như mẹ thứ hai</strong> — gắn bó nhiều năm, hiểu tính cách từng bé' },
   { icon: '🍱', html: '<strong>Bếp ăn tại trường</strong> — thực đơn dinh dưỡng xoay vòng theo lứa tuổi' },
@@ -57,7 +58,7 @@ const {
   cardTitle = 'Đặt lịch tham quan ' + levelLabel + ' ' + location,
   cardSub = '45–60 phút · Gặp giáo viên · Xem lớp · Tư vấn lộ trình',
   ctaStep2 = '🏫 Đặt lịch tham quan',
-  trustMarks = ['Bộ GD&ĐT cấp phép', '15 năm kinh nghiệm', '3 cơ sở TPHCM + Tây Ninh'],
+  trustMarks,
   schemaType = 'EducationalOrganization',
   heroImage,
 } = Astro.props;
@@ -248,7 +249,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           ))}
         </ul>
         <div class="h-trust">
-          {trustMarks.map((t) => <span>{t}</span>)}
+          {(trustMarks ?? ['Có quyết định cho phép hoạt động', '15 năm kinh nghiệm', nhanNhomCoSo(location, schoolLevel)]).map((t) => <span>{t}</span>)}
         </div>
       </div>
 

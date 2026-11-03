@@ -180,7 +180,7 @@ const headlineLines = splitHeadline(headline);
     <p class="cta-sub">Tư vấn viên phản hồi trong 24 giờ · Cá nhân hóa lộ trình · Không cam kết</p>
 
     <!-- Urgency -->
-    <div class="urg">⏳ Còn <strong>{slotsLeft}</strong> suất — hết trong <span class="cd" id="cd">23:59:59</span></div>
+    <div class="urg">⏳ Nhà trường phản hồi trong 24 giờ làm việc<span id="cd" hidden></span></div>
   </div>
 </section>
 
@@ -214,7 +214,7 @@ const headlineLines = splitHeadline(headline);
   <!-- Mid CTA — prominent, urgency -->
   <div class="mcta">
     <h3>Ba/Mẹ đã sẵn sàng cho con bứt phá mùa hè này?</h3>
-    <div class="urg-line">⏳ Còn {slotsLeft} suất · Hết trong <span class="cd2" id="cd2">23:59:59</span></div>
+    <div class="urg-line">⏳ Nhà trường phản hồi trong 24 giờ làm việc<span id="cd2" hidden></span></div>
     <a href="#vsl-form" class="cta cta-primary">📞 Đăng ký tư vấn cá nhân hóa qua Zalo ngay</a>
   </div>
 
@@ -244,10 +244,6 @@ const headlineLines = splitHeadline(headline);
 </div>
 
 <!-- Social notif -->
-<div class="snotif" id="sn">
-  <div class="sa" id="snA">👩</div>
-  <div><b id="snN">Chị Nguyễn T.</b> <span id="snAc">vừa đăng ký tư vấn</span><span class="st" id="snT">2p trước</span></div>
-</div>
 
 <script is:inline define:vars={{ location: shortLocation }}>
 // Countdown

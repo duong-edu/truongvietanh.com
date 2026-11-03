@@ -10,14 +10,18 @@ export const schoolFacts = {
   yearsRunning: 15, // thành lập 2011 → 15 năm K-12
 
   // Quy mô
-  // CƠ SỞ = địa điểm vật lý đang hoạt động. TRƯỜNG = pháp nhân/đơn vị trên giấy phép.
-  // 8 trường nhưng chỉ 6 cơ sở, vì hai cặp trường dùng chung một khuôn viên:
-  //   · Mầm Non + Tiểu Học Thái Sơn (Tây Ninh) — cùng một khuôn viên
-  //   · Mầm Non + Tiểu Học Mekong Xanh (An Giang) — cùng một khuôn viên
-  // Phân bố cơ sở: TP.HCM (3) · Tây Ninh (2) · An Giang (1). Anh Dương chốt 01/09/2026.
-  // ĐỐI NGOẠI LUÔN DÙNG SỐ CƠ SỞ = 6. Chỉ nói "8 trường" khi có giải thích kèm theo.
-  campuses: 6,
-  schools: 8,
+  // ── CƠ SỞ: 3 NHÓM — anh Dương chốt 03/11/2026 "để người ta khỏi bắt bẻ" ──────
+  // Pháp lý chỉ 2 cơ sở là của Trường Việt Anh. 6 trường còn lại có quyết định riêng:
+  //   1) Cơ sở chính thức: Việt Anh Gò Vấp (VAGV), Việt Anh Bình Tân (VABT) — TP.HCM
+  //   2) Cơ sở cùng chủ đầu tư: MN Việt Anh (Gò Vấp), MN Nhân Lễ, MN Thái Sơn, TH Thái Sơn
+  //   3) Cơ sở phụ trách vận hành: MN + TH Mekong Xanh (Rạch Giá, An Giang)
+  // ĐỪNG viết lại "Trường Việt Anh có 6 cơ sở" / "hệ thống 6 cơ sở" / "8 trường" gộp chung.
+  // Dùng coSoNgan / coSoVua / coSoDayDu bên dưới. Danh sách hiển thị: src/data/cong-khai.ts (nhomCoSo).
+  campuses: 2, // số CƠ SỞ CHÍNH THỨC — badge "2 cơ sở" phải kèm chữ "chính thức"/"tại TP.HCM"
+  coSoNgan: '2 cơ sở chính thức tại TP.HCM',
+  coSoVua: '2 cơ sở chính thức tại TP.HCM, cùng các trường cùng chủ đầu tư (TP.HCM, Tây Ninh) và trường do Việt Anh phụ trách vận hành (An Giang)',
+  coSoDayDu: 'Trường Việt Anh có 2 cơ sở chính thức tại TP.HCM: cơ sở Gò Vấp (160/72 Phan Huy Ích) và cơ sở Bình Tân. Cùng chủ đầu tư với Trường Việt Anh có 4 trường: Mầm non Việt Anh (Gò Vấp), Mầm non Nhân Lễ, Mầm non và Tiểu học Thái Sơn (Cần Giuộc, Tây Ninh). Trường Việt Anh còn phụ trách vận hành Mầm non và Tiểu học Mekong Xanh (Rạch Giá, An Giang).',
+  schools: 8, // tổng số trường của cả 3 nhóm — CHỈ dùng nội bộ, đừng hiển thị "8 trường"
   studentsTotal: '3.000+', // tổng học sinh/gia đình đã đồng hành (mọi khẳng định TỔNG)
   currentEnrollment: '1.000+', // học sinh đang học mỗi năm (metric khác với tổng)
 
@@ -37,6 +41,9 @@ export const schoolFacts = {
   // lớp 10, KHÔNG có trong file canon — nên bài blog chép lại cam kết mà rụng
   // mất điều kiện. Riêng vế "làm hết bài tập" thì trước 18/09 không trang nào
   // trong src/ có. Từ nay trích từ đây, đừng gõ lại.
+  // Câu thống nhất toàn site (anh Dương duyệt B3 31/10/2026, Văn chốt thêm dòng điều kiện 01/11):
+  // "Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt
+  // (theo điều kiện trong hợp đồng)." KHÔNG nêu dải 6.0–8.0, trung bình 6.5 hay tỷ lệ 85%/35%/10%.
   ieltsWarranty: {
     conditions: [
       'đi học đủ',
@@ -48,7 +55,9 @@ export const schoolFacts = {
     // Câu đầy đủ — dùng ở trang chính sách, FAQ, chỗ có không gian giải thích.
     full: 'Cam kết đầu ra IELTS ghi trong hợp đồng ký với từng học sinh. Đây là cam kết về đào tạo: nếu con chưa đạt sau kỳ thi chính thức, trường kèm tiếp miễn phí đến khi đạt. Điều kiện đi kèm là con đi học đủ, dự đủ các buổi kèm bổ sung và làm hết bài tập giáo viên giao.',
   },
-  collegeRate: '100%', // học sinh tốt nghiệp THPT và được tiếp nhận vào đại học (hồ sơ trường v2)
+  // 31/10/2026: anh Dương BỎ mọi tỷ lệ % vào đại học (bảng quyết định B4). ĐỪNG hiển thị
+  // lại; TT09 Điều 9.2.c đòi SỐ LƯỢNG trúng tuyển — chờ nhà trường cấp số thật.
+  collegeRate: '100%',
   universitiesCount: '50+', // số trường ĐH trong & ngoài nước tiếp nhận
   awards: '120', // giải thưởng các loại năm 2025–2026 (hồ sơ trường v2)
 
@@ -63,6 +72,15 @@ export const schoolFacts = {
 // Dùng openingHours cho MỌI schema LocalBusiness/EducationalOrganization.
 // Chủ Nhật CỐ TÌNH không nằm trong openingHours: chỉ phục vụ khi có hẹn,
 // không phải giờ mở cửa thường trực — khai báo sai sẽ sai thông tin trên Google.
+// Nhãn nhóm cơ sở cho landing page dùng chung layout (MamNonHook, MamNonCamOn): trang mầm non
+// và trang ở Cần Giuộc/Thái Sơn thuộc nhóm "cùng chủ đầu tư", Rạch Giá/Mekong Xanh thuộc nhóm
+// "phụ trách vận hành", còn lại là 2 cơ sở chính thức. Xem chú thích campuses ở trên.
+export function nhanNhomCoSo(location = '', schoolLevel = ''): string {
+  if (/Rạch Giá|Mekong/i.test(location)) return 'Do Trường Việt Anh phụ trách vận hành';
+  if (schoolLevel === 'mam-non' || /Cần Giuộc|Thái Sơn|Nhân Lễ|Long Hậu/i.test(location)) return 'Cùng chủ đầu tư với Trường Việt Anh';
+  return schoolFacts.coSoNgan;
+}
+
 // =====================================================================
 export const openingHours = {
   days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

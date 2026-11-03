@@ -53,7 +53,7 @@ reg('class-a-fee-capture', {
   ctaPrimaryText: 'Nhận bảng học phí ngay', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Nhắn Zalo tư vấn', ctaSecondaryHref: 'https://zalo.me/1678310120468101523',
   statsEyebrow: 'Trường Việt Anh trong số liệu', statsTitle: 'Hệ thống giáo dục liên cấp song ngữ được phụ huynh tin tưởng',
-  stats: [{ value: '4', label: 'Cấp học liên cấp' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '15+', label: 'Năm kinh nghiệm' }, { value: '4.9/5', label: 'Đánh giá phụ huynh' }],
+  stats: [{ value: '4', label: 'Cấp học liên cấp' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '15+', label: 'Năm kinh nghiệm' }, { value: '2011', label: 'Năm thành lập' }],
   featuresEyebrow: 'Học phí bao gồm', featuresTitle: 'Những gì gia đình nhận được khi đầu tư vào Trường Việt Anh',
   features: [
     { title: 'Chương trình tiếng Anh chuyên sâu', body: 'Học sinh được học tiếng Anh với giáo viên bản ngữ mỗi ngày, rèn 4 kỹ năng và chuẩn bị nền tảng IELTS từ sớm.' },
@@ -96,7 +96,7 @@ reg('class-b-campus-tour', {
   ctaPrimaryText: 'Đặt lịch tham quan', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Xem đường đi', ctaSecondaryHref: 'https://maps.google.com',
   statsEyebrow: 'Cơ sở Gò Vấp', statsTitle: 'Những con số nói lên chất lượng',
-  stats: [{ value: '2,000m²', label: 'Diện tích khuôn viên' }, { value: '15+', label: 'Phòng học tiêu chuẩn' }, { value: '1:8', label: 'Tỉ lệ giáo viên/học sinh' }, { value: '98%', label: 'PH tiếp tục đăng ký' }],
+  stats: [{ value: '2,000m²', label: 'Diện tích khuôn viên' }, { value: '15+', label: 'Phòng học tiêu chuẩn' }, { value: '1:8', label: 'Tỉ lệ giáo viên/học sinh' }, { value: '2011', label: 'Năm thành lập' }],
   featuresEyebrow: 'Điểm nổi bật', featuresTitle: 'Những gì ba mẹ sẽ thấy khi đến tham quan',
   features: [
     { title: 'Lớp học tiêu chuẩn quốc tế', body: 'Phòng học rộng rãi, thoáng mát, đầy đủ thiết bị dạy học hiện đại và đồ chơi phát triển tư duy.' },
@@ -198,11 +198,11 @@ reg('class-f-tiktok-ugc', {
   heroTitle: 'Ba mẹ đã thấy Trường Việt Anh qua video — giờ hãy kết nối thật với đội ngũ',
   heroCopy: 'Nhắn Zalo để được tư vấn ngay hoặc gọi hotline. Đội ngũ tuyển sinh sẵn sàng giải đáp mọi thắc mắc về chương trình, học phí và lịch tham quan.',
   asideEyebrow: 'Liên hệ nhanh', asideTitle: 'Chỉ cần một tin nhắn để bắt đầu',
-  asidePoints: ['Zalo tư vấn 24/7', 'Hotline: 0916 961 409', 'Trường có 3 cơ sở tại TP.HCM', 'Tư vấn cá nhân hóa Lộ trình học tập'],
+  asidePoints: ['Nhắn Zalo bất cứ lúc nào', 'Hotline: 0916 961 409', 'Trường có 2 cơ sở chính thức tại TP.HCM: Gò Vấp và Bình Tân', 'Tư vấn cá nhân hóa Lộ trình học tập'],
   ctaPrimaryText: 'Nhắn Zalo ngay', ctaPrimaryHref: 'https://zalo.me/1678310120468101523',
   ctaSecondaryText: 'Gọi hotline', ctaSecondaryHref: 'tel:0916961409',
   statsEyebrow: 'Trường Việt Anh', statsTitle: 'Được hàng ngàn gia đình tin tưởng',
-  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '4.9/5', label: 'Đánh giá phụ huynh' }, { value: '4', label: 'Cấp học liên cấp' }],
+  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '2011', label: 'Năm thành lập' }, { value: '4', label: 'Cấp học liên cấp' }],
   featuresEyebrow: 'Tại sao chọn Việt Anh', featuresTitle: 'Điều gia đình nhận được khi đồng hành cùng Trường Việt Anh',
   features: [
     { title: 'Tiếng Anh mỗi ngày', body: 'Giáo viên bản ngữ, chương trình IELTS Foundation từ mầm non.' },
@@ -343,7 +343,7 @@ reg('class-master-campus-profile', {
   ctaPrimaryText: 'Đặt lịch tham quan', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Gọi cơ sở', ctaSecondaryHref: 'tel:0916961409',
   statsEyebrow: 'Cơ sở Phan Huy Ích', statsTitle: 'Không gian học tập chinh phục phụ huynh',
-  stats: [{ value: '2,000m²', label: 'Khuôn viên' }, { value: '15+', label: 'Phòng học' }, { value: '2', label: 'Cấp học' }, { value: '98%', label: 'PH hài lòng' }],
+  stats: [{ value: '2,000m²', label: 'Khuôn viên' }, { value: '15+', label: 'Phòng học' }, { value: '2', label: 'Cấp học' }, { value: '2011', label: 'Năm thành lập' }],
   featuresEyebrow: 'Điểm nổi bật', featuresTitle: 'Những gì làm nên cơ sở Gò Vấp',
   features: [
     { title: 'Vị trí thuận tiện', body: 'Gần trung tâm Gò Vấp, các tuyến đường chính, dễ đưa đón và kết nối giao thông.' },
@@ -619,7 +619,7 @@ reg('class-homepage', {
   ctaPrimaryText: 'Đăng ký tư vấn', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Chọn cấp học', ctaSecondaryHref: '/mam-non',
   statsEyebrow: 'Trường Việt Anh', statsTitle: 'Được hàng ngàn gia đình tin tưởng',
-  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '3', label: 'Cơ sở TP.HCM' }, { value: '4', label: 'Cấp học liên cấp' }, { value: '4.9/5', label: 'Đánh giá phụ huynh' }],
+  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '3', label: 'Cơ sở TP.HCM' }, { value: '4', label: 'Cấp học liên cấp' }, { value: '2011', label: 'Năm thành lập' }],
   featuresEyebrow: 'Khác biệt cốt lõi', featuresTitle: 'Tại sao hàng ngàn gia đình chọn Trường Việt Anh',
   features: [
     { title: 'Hạnh phúc là nền tảng', body: 'Con yêu trường, tự tin đi học mỗi ngày. Hạnh phúc trước, thành tích bền.' },
@@ -830,7 +830,7 @@ reg('class-alumni-success-stories', {
   ctaPrimaryText: 'Xem hành trình', ctaPrimaryHref: '#thanh-tich',
   ctaSecondaryText: 'Nhận tư vấn lộ trình', ctaSecondaryHref: '/tuyen-sinh',
   statsEyebrow: 'Kết quả', statsTitle: 'Đầu ra đo lường được',
-  stats: [{ value: '6.0+', label: 'IELTS trung bình lớp 9' }, { value: '90%', label: 'Vào ĐH nguyện vọng 1' }, { value: '15+', label: 'Học bổng quốc tế/năm' }, { value: '100%', label: 'Tốt nghiệp THPT' }],
+  stats: [{ value: '6.0+', label: 'IELTS trung bình lớp 9' }, { value: '50+', label: 'Trường ĐH trong & ngoài nước tiếp nhận' }, { value: '15+', label: 'Học bổng quốc tế/năm' }, { value: '100%', label: 'Tốt nghiệp THPT' }],
   featuresEyebrow: 'Câu chuyện', featuresTitle: 'Hành trình của học sinh Việt Anh',
   features: [
     { title: 'IELTS từ sớm', body: 'Nhiều học sinh đạt IELTS 6.0-7.0 từ lớp 9 nhờ chương trình tiếng Anh chuyên sâu từ mầm non.' },

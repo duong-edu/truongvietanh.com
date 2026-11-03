@@ -39,10 +39,10 @@ const IMG_LEADERS = 'https://media.truongvietanh.com/images/hoc-bong/leaders-nga
 const IMG_BAN_DO = 'https://media.truongvietanh.com/images/hoc-bong/ban-do-5-hoc-bong.webp';
 
 // ── SỐ HỌC ─────────────────────────────────────────────────────────────────
-// Mốc học phí dùng cho toàn bộ ví dụ trên trang. Doc gốc lấy 124.900.000đ.
-// LƯU Ý: /hoc-phi đang niêm yết lớp 10 = 137.257.000đ. Nếu chốt dùng giá niêm
-// yết thật thì chỉ cần sửa đúng dòng dưới đây, mọi bảng tự tính lại.
-const HOC_PHI_VI_DU = 124_900_000;
+// Mốc học phí dùng cho toàn bộ ví dụ trên trang = học phí lớp 10 niêm yết ở /hoc-phi.
+// 01/11/2026: đổi từ 124.900.000đ (Doc gốc) sang 137.257.000đ theo bảng quyết định B11
+// (anh Dương duyệt: một nguồn số liệu). Đổi 1 dòng này là mọi bảng tự tính lại.
+const HOC_PHI_VI_DU = 137_257_000;
 const TRAN_TANG = 0.10;                              // trần tăng học phí mỗi năm
 const GIAM_TRON_NAM = 0.06;
 const GIAM_TRON_KY = 0.02;
@@ -317,9 +317,9 @@ const structuredData = [
 
       <article class="gi-main" id="main-content" data-no-collapse>
         <p class="gi-lead">
-          Trường Việt Anh tách bạch hai thứ mà phần lớn trường tư gộp chung: <strong>ưu đãi học phí</strong>
-          là quyết định của cha mẹ (đóng theo năm 6%, theo học kỳ 2%, anh chị em ruột 50%, Early Bird tới 46%
-          kèm khoá giá), còn <strong>học bổng</strong> là thứ học sinh phải tự giành (GRIT, CHAMPIONS,
+          Trường Việt Anh tách bạch hai thứ mà phần lớn trường tư gộp chung: ưu đãi học phí
+          là quyết định của cha mẹ (đóng theo năm 6%, theo học kỳ 2%, anh chị em ruột 50%, Early Bird từ 6–46%
+          kèm khoá giá), còn học bổng là thứ học sinh phải tự giành (GRIT, CHAMPIONS,
           LEADERS, TALENTS) — cộng thêm quỹ LOVE dành cho gia đình gặp biến cố. Tổng cộng 9 chính sách,
           áp dụng từ năm học 2026–2027.
         </p>
@@ -362,11 +362,11 @@ const structuredData = [
               <tbody>
                 {chinhSach.map((c) => (
                   <tr class={`hb-row-${c.loai}`}>
-                    <td><strong>{c.stt}</strong></td>
-                    <td><strong set:html={c.ten} /></td>
-                    <td set:html={c.ai} />
-                    <td set:html={c.muc} />
-                    <td set:html={c.quyet} />
+                    <td data-nhan="#" class="hb-dam">{c.stt}</td>
+                    <td data-nhan="Tên"><strong set:html={c.ten} /></td>
+                    <td data-nhan="Ai được" set:html={c.ai} />
+                    <td data-nhan="Mức giảm" set:html={c.muc} />
+                    <td data-nhan="Ai quyết định" set:html={c.quyet} />
                   </tr>
                 ))}
               </tbody>
@@ -389,14 +389,14 @@ const structuredData = [
 
           <p class="hb-note">
             <strong>Và một lưu ý áp dụng cho cả chín dòng:</strong> mọi con số trong bảng này tính trên
-            <strong> học phí</strong>. Phí dịch vụ, tiền ăn, xe đưa đón, đồng phục và các khoản thu hộ — chi hộ
+             học phí. Phí dịch vụ, tiền ăn, xe đưa đón, đồng phục và các khoản thu hộ — chi hộ
             không nằm trong phạm vi ưu đãi. Tôi ghi rõ ngay từ đầu để không ai phải phát hiện điều này lúc
             nhận hoá đơn. Học phí niêm yết từng khối lớp xem tại <a href="/hoc-phi">bảng giá</a>.
           </p>
 
           <p>
             <strong>Ngoài chín chính sách trên còn một khoản nữa:</strong> gia đình được phụ huynh hiện hữu
-            giới thiệu, trước khi liên hệ trường, thì <strong>cả hai bên cùng nhận 3.000.000đ</strong>.
+            giới thiệu, trước khi liên hệ trường, thì cả hai bên cùng nhận 3.000.000đ.
           </p>
 
           <p class="hb-cta-inline">
@@ -416,7 +416,7 @@ const structuredData = [
           </p>
           <p>
             Cách gọi ấy tiện cho phòng tuyển sinh. Nhưng nó dạy đứa trẻ một điều sai: rằng học bổng là thứ
-            <strong> cha mẹ mua được</strong>.
+             cha mẹ mua được.
           </p>
           <p>
             Đứa trẻ nghe cha mẹ nói &ldquo;con được học bổng 50%&rdquo; trong khi nó biết rõ mình chẳng làm gì
@@ -478,13 +478,13 @@ const structuredData = [
               <tbody>
                 <tr>
                   <td>Trọn năm (−6%)</td>
-                  <td><strong>{vnd(traTronNam)}đ</strong></td>
-                  <td class="hb-win"><strong>{vnd(HOC_PHI_VI_DU - traTronNam)}đ</strong></td>
+                  <td class="hb-dam">{vnd(traTronNam)}đ</td>
+                  <td class="hb-win hb-dam">{vnd(HOC_PHI_VI_DU - traTronNam)}đ</td>
                 </tr>
                 <tr>
                   <td>Trọn học kỳ (−2%)</td>
-                  <td><strong>{vnd(traTronKy)}đ</strong></td>
-                  <td class="hb-win"><strong>{vnd(HOC_PHI_VI_DU - traTronKy)}đ</strong></td>
+                  <td class="hb-dam">{vnd(traTronKy)}đ</td>
+                  <td class="hb-win hb-dam">{vnd(HOC_PHI_VI_DU - traTronKy)}đ</td>
                 </tr>
                 <tr><td>Theo tháng</td><td>{vnd(HOC_PHI_VI_DU)}đ</td><td>0đ</td></tr>
               </tbody>
@@ -505,8 +505,8 @@ const structuredData = [
           </p>
           <p class="hb-note">
             <strong>Hạn đóng để được ưu đãi, năm học&nbsp;2026–2027:</strong> đóng trọn năm thì hạn
-            <strong> 15/9/2026</strong>. Đóng hai đợt thì đợt một trước <strong>15/9/2026</strong>, đợt hai
-            trước <strong>14/12/2026</strong>. Gia đình cần chia nhỏ hơn — 4 đến 12 đợt — thì không được
+             15/9/2026. Đóng hai đợt thì đợt một trước 15/9/2026, đợt hai
+            trước 14/12/2026. Gia đình cần chia nhỏ hơn — 4 đến 12 đợt — thì không được
             giảm, nhưng giữ nguyên biểu phí niêm yết, trường không tính lãi trả góp.
           </p>
           <p class="hb-fineprint">
@@ -532,7 +532,7 @@ const structuredData = [
           </div>
 
           <p>
-            <strong>Điều kiện:</strong> hai hoặc ba con là <strong>anh chị em ruột</strong>, và
+            <strong>Điều kiện:</strong> hai hoặc ba con là anh chị em ruột, và
              cùng đang học trong hệ thống Trường Việt Anh tại cùng một thời điểm — không bắt
             buộc cùng cơ sở, không bắt buộc cùng cấp học. Gia đình xuất trình giấy khai sinh của các con để
             đối chiếu.
@@ -554,7 +554,7 @@ const structuredData = [
           </p>
 
           <p class="hb-note">
-            <strong>Lưu ý quan trọng về cộng dồn:</strong> ưu đãi anh chị em ruột <strong>cộng dồn</strong>
+            <strong>Lưu ý quan trọng về cộng dồn:</strong> ưu đãi anh chị em ruột cộng dồn
             với nhóm học bổng con giành được. Con thứ hai vừa được giảm 50% vì có anh chị, vừa nhận đủ
             phần học bổng nó tự giành — không phải chọn một trong hai, không cái nào nuốt mất cái nào.
             Và ưu đãi đóng phí theo năm / học kỳ / Early Bird vẫn được cộng thêm lên trên.
@@ -573,7 +573,7 @@ const structuredData = [
 
           <h3>Nó hoạt động thế nào</h3>
           <p>
-            Bạn đóng trước học phí cho nhiều năm, tối đa 5 năm. Đổi lại bạn nhận <strong>hai</strong> thứ —
+            Bạn đóng trước học phí cho nhiều năm, tối đa 5 năm. Đổi lại bạn nhận hai thứ —
             và phần lớn phụ huynh chỉ nhìn thấy thứ nhất.
           </p>
           <p><strong>Thứ nhất:</strong> mức giảm tăng dần theo từng năm đóng trước.</p>
@@ -602,8 +602,8 @@ const structuredData = [
               năm thứ nhất.
           </p>
           <p>
-            Học phí Trường Việt Anh có quy định tăng <strong>tối đa 10% mỗi năm</strong>. Nghe thì nhỏ.
-            Nhưng 10% cộng dồn qua 4 năm thì học phí năm thứ 5 đã cao hơn năm đầu <strong>46%</strong>.
+            Học phí Trường Việt Anh có quy định tăng tối đa 10% mỗi năm. Nghe thì nhỏ.
+            Nhưng 10% cộng dồn qua 4 năm thì học phí năm thứ 5 đã cao hơn năm đầu 46%.
           </p>
           <p>Hai thứ ấy cộng lại tạo ra khoảng cách mà tôi nghĩ bạn nên nhìn thành bảng.</p>
 
@@ -626,27 +626,30 @@ const structuredData = [
                 </tr>
               </thead>
               <tbody>
+                {/* Đừng đặt <strong> trong dòng sinh bằng .map() của bảng: compiler Astro để thẻ
+                    mở dở, rồi bọc nhầm cả các đoạn văn sau bảng thành chữ đậm (lỗi có trên production
+                    tới 03/11/2026). In đậm bằng class .hb-dam. */}
                 {ebRows.map((r) => (
                   <tr>
                     <td>Năm {r.nam}</td>
                     <td>{vnd(r.niemYet)}đ</td>
                     <td>{vnd(r.tungNam)}đ</td>
-                    <td><strong>{vnd(r.earlyBird)}đ</strong></td>
-                    <td class="hb-win"><strong>{r.chenh === 0 ? '0đ' : `${vnd(r.chenh)}đ`}</strong></td>
+                    <td class="hb-dam">{vnd(r.earlyBird)}đ</td>
+                    <td class="hb-win hb-dam">{r.chenh === 0 ? '0đ' : vnd(r.chenh) + 'đ'}</td>
                   </tr>
                 ))}
                 <tr class="hb-row-total">
                   <td><strong>Tổng 5 năm</strong></td>
-                  <td><strong>{vnd(tongNiemYet)}đ</strong></td>
-                  <td><strong>{vnd(tongTungNam)}đ</strong></td>
-                  <td><strong>{vnd(tongEarlyBird)}đ</strong></td>
-                  <td class="hb-win"><strong>{vnd(tongChenh)}đ</strong></td>
+                  <td class="hb-dam">{vnd(tongNiemYet)}đ</td>
+                  <td class="hb-dam">{vnd(tongTungNam)}đ</td>
+                  <td class="hb-dam">{vnd(tongEarlyBird)}đ</td>
+                  <td class="hb-win hb-dam">{vnd(tongChenh)}đ</td>
                 </tr>
                 <tr class="hb-row-pct">
                   <td>So với giá niêm yết</td>
                   <td>100%</td>
                   <td>{tyLeTungNam}%</td>
-                  <td><strong>{tyLeEarlyBird}%</strong></td>
+                  <td class="hb-dam">{tyLeEarlyBird}%</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -654,7 +657,7 @@ const structuredData = [
           </div>
 
           <p>
-            Hãy chú ý cột cuối. Năm thứ nhất chênh lệch bằng <strong>không</strong> — Early Bird không hơn gì
+            Hãy chú ý cột cuối. Năm thứ nhất chênh lệch bằng không — Early Bird không hơn gì
             phương án thường. Toàn bộ giá trị nằm ở bốn năm sau, và nó lớn dần. Đó là lý do chính sách này
             chỉ có ý nghĩa với gia đình thật sự xác định gắn bó, chứ không phải với gia đình đang thử.
           </p>
@@ -684,7 +687,7 @@ const structuredData = [
                   <tr>
                     <td>{(b.r * 100).toFixed(1).replace('.', ',')}%/năm</td>
                     <td>{vnd(b.mat)}đ</td>
-                    <td class="hb-win"><strong>{vnd(b.loiRong)}đ</strong></td>
+                    <td class="hb-win hb-dam">{vnd(b.loiRong)}đ</td>
                   </tr>
                 ))}
               </tbody>
@@ -729,7 +732,7 @@ const structuredData = [
                   <tr>
                     <td>Năm {r.nam}</td>
                     <td>{vnd(r.giuLai)}đ</td>
-                    <td class="hb-win"><strong>{vnd(r.hoanLai)}đ</strong></td>
+                    <td class="hb-win hb-dam">{vnd(r.hoanLai)}đ</td>
                   </tr>
                 ))}
               </tbody>
@@ -821,13 +824,13 @@ const structuredData = [
           <p>
             Trường hợp 1 — con thứ nhất trong gia đình, lớp 9. Năm nay giữ chuỗi GRIT trọn
             năm, đạt giải cấp tỉnh có vòng loại (CHAMPIONS mức 2), được đề cử bảng CHO ĐI của LEADERS. Gia
-            đình đóng trọn năm. → Nhận <strong>cả ba học bổng cộng lại</strong>, rồi <strong>cộng thêm 6%</strong>
+            đình đóng trọn năm. → Nhận cả ba học bổng cộng lại, rồi cộng thêm 6%
             đóng trọn năm.
           </p>
           <p>
             Trường hợp 2 — con thứ hai trong gia đình, lớp 9, cùng thành tích như trên.
-            → Nhận <strong>ưu đãi anh chị em ruột 50%</strong> cộng
-            <strong>toàn bộ ba học bổng con giành được</strong>. → Rồi <strong>cộng thêm 6%</strong> đóng trọn năm.
+            → Nhận ưu đãi anh chị em ruột 50% cộng
+            toàn bộ ba học bổng con giành được. → Rồi cộng thêm 6% đóng trọn năm.
           </p>
           <p>
             Nghĩa là con bạn không bao giờ phải chọn, và không bao giờ bị thiệt vì không biết hỏi. Phòng tài
@@ -863,23 +866,23 @@ const structuredData = [
           <h2>Việt Anh không phải trường dành cho học sinh có thành tích cao nhất</h2>
           <p>Tôi thừa nhận điều đó thẳng thắn, ngay trên trang tuyển sinh của chính mình.</p>
           <p>
-            Trường dành cho <strong>học sinh khát khao nhất</strong> — những em chưa chắc đứng đầu lớp hôm
+            Trường dành cho học sinh khát khao nhất — những em chưa chắc đứng đầu lớp hôm
             nay, nhưng chịu ngồi vào bàn học mỗi tối, chịu chạy hết vòng sân, chịu làm lại bài dự án lần thứ
             ba để sửa từng chi tiết.
           </p>
           <p>
             Chính sách học bổng cũ của chúng tôi — như phần lớn trường tư tại Việt Nam — chủ yếu xét theo
-            <strong> kết quả đầu vào</strong>. Cách làm ấy có một điểm yếu lớn: nó thưởng cho
-            <strong> quá khứ</strong> của đứa trẻ, thứ mà phần nhiều do gia đình và trường cũ tạo ra. Nó không
-            tác động gì đến <strong>tương lai</strong> của em ở đây.
+             kết quả đầu vào. Cách làm ấy có một điểm yếu lớn: nó thưởng cho
+             quá khứ của đứa trẻ, thứ mà phần nhiều do gia đình và trường cũ tạo ra. Nó không
+            tác động gì đến tương lai của em ở đây.
           </p>
           <p>
-            Năm học 2026–2027, Việt Anh định hướng học sinh phát triển đồng đều <strong>4 lĩnh vực</strong>:
+            Năm học 2026–2027, Việt Anh định hướng học sinh phát triển đồng đều 4 lĩnh vực:
             kiến thức, kỹ năng lãnh đạo, phẩm chất và sức khoẻ. Năm học bổng mới bám sát đúng bốn lĩnh vực ấy
             — mỗi học bổng kéo một lĩnh vực đi lên.
           </p>
           <p>
-            Nói cách khác: học bổng ở Việt Anh là <strong>công cụ giáo dục có gắn tiền</strong>.
+            Nói cách khác: học bổng ở Việt Anh là công cụ giáo dục có gắn tiền.
           </p>
 
           <h3>Bản đồ 5 học bổng Việt Anh 2026–2027</h3>
@@ -947,7 +950,7 @@ const structuredData = [
             <li>
               Không ngoại lệ theo quan hệ. Gia đình có ảnh hưởng, có đóng góp cho trường được
               ghi nhận qua chương trình Đại sứ thuộc ngân sách Marketing — và trường
-              <strong> không gọi đó là học bổng</strong>.
+               không gọi đó là học bổng.
             </li>
           </ol>
           <p>Luật thứ tư khiến một số người khó chịu. Tôi giữ nó.</p>
@@ -983,17 +986,17 @@ const structuredData = [
           <h3>Cách tính chuỗi</h3>
           <ul class="hb-list">
             <li>
-              <strong>1 ngày đạt</strong> = tối thiểu <strong>60 phút</strong> rèn giũa có minh chứng. Làm 3
+              <strong>1 ngày đạt</strong> = tối thiểu 60 phút rèn giũa có minh chứng. Làm 3
               tiếng vẫn chỉ tính 1 ngày — quy tắc này chống &ldquo;cày bù&rdquo; và ép sự đều đặn.
             </li>
             <li>
-              <strong>1 tuần đạt</strong> = <strong>6/7 ngày</strong>. Hụt 1 ngày vẫn được. Hụt 2 ngày là mất
+              <strong>1 tuần đạt</strong> = 6/7 ngày. Hụt 1 ngày vẫn được. Hụt 2 ngày là mất
               tuần.
             </li>
             <li>
               Tiền chốt theo tuần, không chốt theo ngày. Nhịp nền là
-              <strong> 10.000đ cho mỗi ngày</strong> rèn giũa; giữ đủ 6/7 ngày thì tuần đó tính tròn
-              <strong> 100.000đ</strong>. Hụt 2 ngày thì tuần đó bằng 0 — không có nửa tuần.
+               10.000đ cho mỗi ngày rèn giũa; giữ đủ 6/7 ngày thì tuần đó tính tròn
+               100.000đ. Hụt 2 ngày thì tuần đó bằng 0 — không có nửa tuần.
             </li>
             <li>
               <strong>Luật đa dạng:</strong> trong 6 ngày đạt, tối thiểu 3 ngày phải là hoạt động trí
@@ -1024,13 +1027,13 @@ const structuredData = [
             lại.
           </p>
           <p>
-            Học sinh giữ chuỗi trọn học kỳ (18 tuần) và trọn năm được <strong>vinh danh trước toàn
-            trường</strong>, kèm một phần thưởng riêng mà trường không công bố trước.
+            Học sinh giữ chuỗi trọn học kỳ (18 tuần) và trọn năm được vinh danh trước toàn
+            trường, kèm một phần thưởng riêng mà trường không công bố trước.
           </p>
 
           <h3>Ghi nhận bằng giấy, không cần app</h3>
           <p>
-            Học sinh giữ <strong>sổ tay GRIT bằng giấy</strong>, ký từng ngày, chụp nộp vào Chủ nhật. Giáo
+            Học sinh giữ sổ tay GRIT bằng giấy, ký từng ngày, chụp nộp vào Chủ nhật. Giáo
             viên chủ nhiệm tick một bảng duy nhất mỗi tuần cho cả lớp, và đối chiếu ngẫu nhiên 3
             em/tuần. App Viet Anh Class chỉ dùng để phụ huynh xem sao kê.
           </p>
@@ -1044,18 +1047,18 @@ const structuredData = [
             <li>Gian lận = mất toàn bộ quỹ GRIT đã tích luỹ trong năm.</li>
             <li>Định nghĩa gian lận hẹp và bằng văn bản: khai ngày không làm; giả chữ ký; nhờ người làm hộ.</li>
             <li>
-              Làm sơ sài, chất lượng kém <strong>không phải gian lận</strong> — chỉ là &ldquo;tuần không
+              Làm sơ sài, chất lượng kém không phải gian lận — chỉ là &ldquo;tuần không
               đạt&rdquo;. Nhưng lặp lại sau khi đã được nhắc nhở thì là gian lận.
             </li>
             <li>
-              Học sinh được <strong>giải trình một lần trước hội đồng</strong> trước khi mất quỹ. Không phải
+              Học sinh được giải trình một lần trước hội đồng trước khi mất quỹ. Không phải
               để giảm án, mà để em hiểu vì sao mình mất.
             </li>
           </ul>
 
           <h3>Lớp 12 và học sinh chuyển trường</h3>
           <ul class="hb-list">
-            <li><strong>Lớp 12</strong> nhận GRIT <strong>bằng tiền mặt</strong>, trao tại Lễ Tri ân &amp; Trưởng thành.</li>
+            <li><strong>Lớp 12</strong> nhận GRIT bằng tiền mặt, trao tại Lễ Tri ân &amp; Trưởng thành.</li>
             <li>
               <strong>Học sinh chuyển trường giữa chừng</strong> không quy đổi quỹ tích luỹ thành tiền, vì
               bản chất GRIT là ưu đãi học phí.
@@ -1070,7 +1073,7 @@ const structuredData = [
               luận thay đổi cách chúng tôi thiết kế GRIT:
             </p>
             <p>
-              <strong>Thứ nhất</strong>, trung bình cần khoảng <strong>66 ngày</strong> để một hành vi trở
+              <strong>Thứ nhất</strong>, trung bình cần khoảng 66 ngày để một hành vi trở
               thành thói quen tự động — xa hơn nhiều con số &ldquo;21 ngày&rdquo; mà mạng xã hội hay nhắc.
               66 ngày tương đương 10 tuần, đúng bằng độ dài chuỗi chúng tôi kỳ vọng học sinh đạt tới trước khi
               hết học kỳ I.
@@ -1092,15 +1095,15 @@ const structuredData = [
           <h2>6. CHAMPIONS — học bổng cho người dám thi và dám thắng</h2>
           <p class="hb-meta-line">Lĩnh vực: Kiến thức + Sức khoẻ · Học sinh đạt giải</p>
           <p>
-            Học sinh cần <strong>tấm gương cụ thể, ở ngay lớp bên cạnh</strong>, để tin rằng đi thi và thắng
+            Học sinh cần tấm gương cụ thể, ở ngay lớp bên cạnh, để tin rằng đi thi và thắng
             là chuyện có thật với người như mình. Một huy chương trên báo không tạo được niềm tin đó. Một
             người bạn cùng khối thì có.
           </p>
 
           <h3>Phân mức theo độ khó thực tế, không theo tên gọi cấp</h3>
           <p>
-            Trước mỗi năm học, trường <strong>ban hành danh mục kỳ thi được công nhận</strong>. Một kỳ thi vào
-            được danh mục phải đạt <strong>cả ba</strong> tiêu chí:
+            Trước mỗi năm học, trường ban hành danh mục kỳ thi được công nhận. Một kỳ thi vào
+            được danh mục phải đạt cả ba tiêu chí:
           </p>
           <ol class="hb-list hb-list-num">
             <li>Đơn vị tổ chức là cơ quan nhà nước hoặc hiệp hội chuyên môn uy tín;</li>
@@ -1123,14 +1126,14 @@ const structuredData = [
           </div>
 
           <p>
-            Kỳ thi ngoài danh mục được hội đồng xét <strong>từng trường hợp, không tự động quy đổi</strong>.
+            Kỳ thi ngoài danh mục được hội đồng xét từng trường hợp, không tự động quy đổi.
             Tôi nói thẳng lý do: nhiều kỳ thi mang danh &ldquo;quốc tế&rdquo; nhưng thực chất dễ hơn một giải
             cấp quận.
           </p>
           <p>
             <strong>Điều kiện kèm theo:</strong> học lực từ Đạt trở lên, không có án kỷ luật thi đấu. Hồ sơ
             nhận quanh năm, xét theo 4 cửa sổ quý — riêng giải quốc gia xét ngay. Vinh danh thể thao tại
-            <strong> Olympic Day</strong>, vinh danh học thuật tại lễ tổng kết.
+             Olympic Day, vinh danh học thuật tại lễ tổng kết.
           </p>
 
           <figure class="hb-figure">
@@ -1186,7 +1189,7 @@ const structuredData = [
 
           <p>
             Đăng ký và đề cử mở quanh năm, xét theo 4 cửa sổ quý. Toàn bộ dự án được trình bày công khai tại
-            <strong> Leadership Day</strong>.
+             Leadership Day.
           </p>
 
           <figure class="hb-figure">
@@ -1225,8 +1228,8 @@ const structuredData = [
             khác — thứ mà không giáo trình nào dạy được.
           </p>
           <p>
-            Vùng tuyển sinh nội trú của Việt Anh trải từ <strong>Đà Nẵng đến Cà Mau</strong>, khoảng 16
-            tỉnh thành. TALENTS trao <strong>đúng 1 suất cho mỗi tỉnh</strong>.
+            Vùng tuyển sinh nội trú của Việt Anh trải từ Đà Nẵng đến Cà Mau, khoảng 16
+            tỉnh thành. TALENTS trao đúng 1 suất cho mỗi tỉnh.
           </p>
 
           <div class="gi-table-responsive">
@@ -1260,8 +1263,8 @@ const structuredData = [
             <li><strong>Lễ trao tại quê em</strong>, ở chính trường cũ, có mời báo địa phương.</li>
           </ol>
           <p>
-            Thiết kế này giải một bài toán khó: không em nào ra về tay trắng nên <strong>không tạo tổn
-            thương</strong>, nhưng vẫn đủ kịch tính để cả 16 tỉnh cùng dõi theo.
+            Thiết kế này giải một bài toán khó: không em nào ra về tay trắng nên không tạo tổn
+            thương, nhưng vẫn đủ kịch tính để cả 16 tỉnh cùng dõi theo.
           </p>
 
           <h3>Hai điều tôi muốn bạn cân nhắc thật</h3>
@@ -1284,10 +1287,10 @@ const structuredData = [
           <h2>9. LOVE — quỹ đồng hành khi gia đình gặp biến cố</h2>
           <p class="hb-meta-line">Quỹ mở · Kích hoạt trong 7 ngày · Không cần làm đơn</p>
           <p>
-            Không đứa trẻ nào học được sự tử tế nếu <strong>nó đang sợ ngày mai phải nghỉ học</strong>.
+            Không đứa trẻ nào học được sự tử tế nếu nó đang sợ ngày mai phải nghỉ học.
           </p>
           <p>
-            LOVE <strong>không xét theo hoàn cảnh kinh tế</strong>. Nó xét theo <strong>biến cố</strong> —
+            LOVE không xét theo hoàn cảnh kinh tế. Nó xét theo biến cố —
             thứ rõ ràng, xác minh được, và không bắt gia đình phải đi &ldquo;chứng minh nghèo&rdquo;.
           </p>
 
@@ -1353,24 +1356,24 @@ const structuredData = [
           </p>
           <p>
             Nhiều trường để học sinh làm video tự giới thiệu rồi chấm bằng video. Tôi đã cân nhắc và
-            <strong> cố tình không làm vậy</strong>.
+             cố tình không làm vậy.
           </p>
           <p>
-            <strong>Nguyên tắc:</strong> chỉ học sinh <strong>đã qua cổng dữ liệu</strong> — đủ chuỗi tuần, đủ
+            <strong>Nguyên tắc:</strong> chỉ học sinh đã qua cổng dữ liệu — đủ chuỗi tuần, đủ
             điều kiện — mới được nộp video Before–After tự trình bày lý do mình xứng đáng. Hội đồng dùng video
-            để chọn <strong>giữa những em đã đủ chuẩn</strong>.
+            để chọn giữa những em đã đủ chuẩn.
           </p>
           <p>
-            Lý do rất thẳng: nếu video là tiêu chí duy nhất, <strong>em nói giỏi sẽ thắng em làm giỏi</strong>.
+            Lý do rất thẳng: nếu video là tiêu chí duy nhất, em nói giỏi sẽ thắng em làm giỏi.
             Đó là bài học sai cho cả trường.
           </p>
           <p>Hội đồng chấm có học sinh hoa tiêu tham gia, vận hành theo ba luật:</p>
           <ul class="hb-list">
-            <li>Học sinh chấm <strong>40%</strong>, thầy cô chấm <strong>60%</strong>.</li>
-            <li>Hoa tiêu <strong>không chấm lớp mình</strong>.</li>
+            <li>Học sinh chấm 40%, thầy cô chấm 60%.</li>
+            <li>Hoa tiêu không chấm lớp mình.</li>
             <li>
-              Giáo viên có quyền <strong>phủ quyết về tính xác thực</strong>, nhưng
-              <strong> không phủ quyết về gu thẩm mỹ</strong>.
+              Giáo viên có quyền phủ quyết về tính xác thực, nhưng
+               không phủ quyết về gu thẩm mỹ.
             </li>
           </ul>
         </section>
@@ -1427,9 +1430,9 @@ const structuredData = [
           <p>Còn phần của bạn thì đơn giản hơn nhiều: chỉ cần biết đúng con số trước khi ký.</p>
           <p>
             Một gia đình có hai con cùng học, đóng trọn năm, chưa tính bất kỳ học bổng nào của các con, đã
-            tiết kiệm khoảng <strong>{Math.floor(tietKiemHaiCon / 1_000_000)} triệu đồng</strong> mỗi năm so
+            tiết kiệm khoảng {Math.floor(tietKiemHaiCon / 1_000_000)} triệu đồng mỗi năm so
             với đóng theo tháng. Một gia đình chọn Early Bird trọn 5 năm tiết kiệm khoảng
-            <strong> {Math.floor(tongChenh / 1_000_000)} triệu đồng</strong> so với đóng từng năm.
+             {Math.floor(tongChenh / 1_000_000)} triệu đồng so với đóng từng năm.
           </p>
           <p>Số tiền ấy đang nằm sẵn ở đó. Nó chỉ đi vào tài khoản của bạn nếu bạn hỏi.</p>
           <p>
@@ -1441,7 +1444,7 @@ const structuredData = [
               Nhắn Zalo cho phòng tuyển sinh
             </a>
             <p class="hb-cta-hint hb-cta-hint-dark">
-              Bấm <strong>Quan tâm</strong> trang Zalo OA Trường Việt Anh để nhắn được — mất 3 giây.
+              Bấm Quan tâm trang Zalo OA Trường Việt Anh để nhắn được — mất 3 giây.
               Nhắn đúng một câu: <em>&ldquo;Con tôi lớp ___, tôi muốn xem bảng tính ưu đãi.&rdquo;</em>
               Bạn nhận bảng tính riêng cho lớp của con trong ngày làm việc.
             </p>
@@ -1462,8 +1465,8 @@ const structuredData = [
         <section id="ve-tac-gia" class="gi-section hb-author">
           <h2>Về tác giả</h2>
           <p>
-            <strong>Nguyễn Mạnh Dương</strong> là Chủ tịch Hội đồng Trường của Hệ thống Trường Việt Anh — hệ
-            thống K-12 với {schoolFacts.campuses} cơ sở tại TP.HCM, Tây Ninh và An Giang, thành lập năm
+            <strong>Nguyễn Mạnh Dương</strong> là Chủ tịch Hội đồng Trường của Hệ thống Trường Việt Anh — trường
+            K-12 có {schoolFacts.coSoNgan}, thành lập năm
             {' '}{schoolFacts.foundedYear}. Ông trực tiếp phụ trách nghiên cứu và phát triển hệ thống học thuật
             của trường theo các khung HighScope, Responsive Classroom, Leader in Me và PDR. Toàn bộ chính sách
             học bổng trong trang này do ông chủ trì thiết kế và được Hội đồng Trường phê duyệt tháng 8/2026.
@@ -1474,7 +1477,7 @@ const structuredData = [
             <li>
               Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., &amp; Wardle, J. (2010).
               <em> How are habits formed: Modelling habit formation in the real world</em>.
-              <strong> European Journal of Social Psychology</strong>. —
+               European Journal of Social Psychology. —
               <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ejsp.674" target="_blank" rel="noopener nofollow">Wiley Online Library</a>
             </li>
             <li>
@@ -1657,6 +1660,7 @@ const structuredData = [
   .hb-cta-inline .hb-cta { max-width: 100%; }
 
   /* ══════════ BẢNG TỔNG ══════════ */
+  .hb-page :global(td.hb-dam) { font-weight: 700; }
   .hb-page :global(.hb-table-tong td) { vertical-align: top; font-size: 0.97rem; }
   .hb-page :global(.hb-row-uu-dai td:first-child) { border-left: 4px solid #94a3b8; }
   .hb-page :global(.hb-row-hoc-bong td:first-child) { border-left: 4px solid #f9dd0e; }
@@ -2046,11 +2050,16 @@ const structuredData = [
 
   /* ══════════ ĐỘ DÀI DÒNG CHỮ TRÊN MÀN HÌNH RỘNG ══════════ */
   /* Cột chữ 1068px cho ra ~123 ký tự/dòng, quá dài để mắt bắt được đầu dòng sau
-     (chuẩn đọc tốt 45–90). Chỉ giới hạn đoạn văn và danh sách — bảng vẫn full width. */
+     (chuẩn đọc tốt 45–90). 03/11/2026 anh Dương góp ý "canh lề": trước đây chỉ đoạn văn
+     bị giới hạn (dạt trái) còn tiêu đề, khung lưu ý, thẻ tầng trải hết thẻ → mép phải
+     lởm chởm. Nay MỌI khối trong thẻ cùng một cột 46rem căn giữa; riêng bảng được rộng
+     hết thẻ (bảng 5 cột bóp vào 46rem sẽ vỡ dòng). */
   @media (min-width: 1100px) {
-    .gi-main :global(.gi-section > p),
-    .gi-main :global(.gi-section > ul),
-    .gi-main :global(.gi-section > ol),
+    .gi-main :global(.gi-section > *:not(.gi-table-responsive)) {
+      max-width: 46rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .gi-main :global(.gi-faq-a p),
     .gi-main :global(.gi-lead) {
       max-width: 68ch;
@@ -2089,12 +2098,8 @@ const structuredData = [
        "Mọi học sinh" vỡ thành ba dòng một từ — với chúng thì cho sàn chiều rộng rồi để
        cuộn ngang. Còn bảng 2–3 cột toàn câu văn thì để chữ tự xuống dòng vẫn dễ đọc hơn
        là bắt người ta vuốt ngang, nên KHÔNG áp sàn cho chúng. */
-    .hb-page :global(.hb-table-tong th),
-    .hb-page :global(.hb-table-tong td),
     .hb-page :global(.hb-table-eb th),
     .hb-page :global(.hb-table-eb td) { min-width: 124px; }
-    .hb-page :global(.hb-table-tong th:first-child),
-    .hb-page :global(.hb-table-tong td:first-child),
     .hb-page :global(.hb-table-eb th:first-child),
     .hb-page :global(.hb-table-eb td:first-child) { min-width: 62px; }
     /* Cỡ chữ đã được đặt sàn 16px ở khối chung phía trên — đừng khai lại ở đây,
@@ -2107,5 +2112,15 @@ const structuredData = [
     .hb-promise { font-size: 1.15rem !important; }
     .hb-final-lead { font-size: 1.15rem !important; }
     .hb-page :global(.hb-table-eb) { font-size: 0.88rem; }
+    /* Bảng tổng 9 chính sách: 5 cột không vừa 300px — đổi mỗi dòng thành một thẻ,
+       nhãn cột hiện bên trái từng ô (03/11/2026, góp ý "xuống hàng"). */
+    .hb-page :global(.hb-table-tong thead) { display: none; }
+    .hb-page :global(.hb-table-tong),
+    .hb-page :global(.hb-table-tong tbody),
+    .hb-page :global(.hb-table-tong tr) { display: block; width: 100%; }
+    .hb-page :global(.hb-table-tong tr) { border-bottom: 1px solid #e2e8f0; padding: 0.6rem 0.25rem; }
+    .hb-page :global(.hb-table-tong td) { display: block; position: relative; border: 0; padding: 0.2rem 0.5rem 0.2rem 7.5rem; min-width: 0; }
+    .hb-page :global(.hb-table-tong td::before) { content: attr(data-nhan); position: absolute; left: 0.5rem; top: 0.25rem; width: 6.5rem; color: #64748b; font-size: 0.9rem; font-weight: 400; }
+    .hb-page :global(.hb-table-tong td:first-child) { display: none; }
   }
 </style>

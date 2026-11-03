@@ -19,7 +19,7 @@ const structuredData = [
     "url": "https://truongvietanh.com",
     "logo": "https://truongvietanh.com/logo-crest-80.webp",
     "foundingDate": "2011",
-    "description": "Hệ thống giáo dục liên cấp song ngữ 4 cấp từ Mầm non đến THPT tại TP.HCM. Lộ trình 1–18 tuổi, IELTS 6.0–8.0, 99% vào đại học.",
+    "description": "Hệ thống giáo dục liên cấp song ngữ 4 cấp từ Mầm non đến THPT tại TP.HCM. Lộ trình 1–18 tuổi, IELTS 6.0+.",
     "address": { "@type": "PostalAddress", "addressLocality": "Hồ Chí Minh", "addressCountry": "VN" },
   },
   {
@@ -27,7 +27,7 @@ const structuredData = [
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "Trường Việt Anh có những chương trình nào?", "acceptedAnswer": { "@type": "Answer", "text": "4 cấp học liên tục: Mầm non (1–6 tuổi), Tiểu học (lớp 1–5), THCS (lớp 6–9) và THPT (lớp 10–12). Học sinh theo học xuyên suốt từ 1 đến 18 tuổi." } },
-      { "@type": "Question", "name": "Chương trình tiếng Anh liên tục giữa các cấp như thế nào?", "acceptedAnswer": { "@type": "Answer", "text": "Immersion 100% (Mầm non) → UK Oxford (Tiểu học) → Academic English (THCS) → IELTS 6.0–8.0 (THPT). Lộ trình thiết kế xuyên suốt, không bị gián đoạn." } },
+      { "@type": "Question", "name": "Chương trình tiếng Anh liên tục giữa các cấp như thế nào?", "acceptedAnswer": { "@type": "Answer", "text": "Immersion 100% (Mầm non) → UK Oxford (Tiểu học) → Academic English (THCS) → IELTS 6.0+ có bảo hành (THPT). Lộ trình thiết kế xuyên suốt, không bị gián đoạn." } },
       { "@type": "Question", "name": "Học sinh có thể chuyển cấp nội bộ không?", "acceptedAnswer": { "@type": "Answer", "text": "Có. Học sinh chuyển cấp nội bộ được ưu tiên xét tuyển, không thi đầu vào lại. Hồ sơ và kế hoạch phát triển cá nhân được chuyển giao liên tục." } },
       { "@type": "Question", "name": "Học phí các cấp học tại Trường Việt Anh?", "acceptedAnswer": { "@type": "Answer", "text": "Học phí liên cấp lớp 1–12 tại TP.HCM (cơ sở Gò Vấp và Bình Tân) là 109,9–164,8 triệu đồng/năm, tương đương 9,2–13,7 triệu đồng/tháng khi chia đều 12 tháng, chưa gồm tiền ăn và phí dịch vụ. Mầm non Việt Anh Gò Vấp 8,0–12,0 triệu đồng/tháng, đã gồm ăn. Các cơ sở Tây Ninh và An Giang có biểu phí riêng, thấp hơn đáng kể." } }
     ]
@@ -45,7 +45,7 @@ const structuredData = [
 
 <BaseLayout
   title={cmsPage?.title || "Chương Trình Học Trường Việt Anh — 4 Cấp Liên Cấp Mầm Non đến THPT"}
-  description={cmsPage?.description || "4 cấp học liên cấp Trường Việt Anh: Mầm non, Tiểu học, THCS, THPT. Lộ trình song ngữ 1–18 tuổi, IELTS 6.0–8.0, 99% vào đại học. Đăng ký tham quan miễn phí."}
+  description={cmsPage?.description || "4 cấp học liên cấp Trường Việt Anh: Mầm non, Tiểu học, THCS, THPT. Lộ trình song ngữ 1–18 tuổi, IELTS 6.0+. Đăng ký tham quan miễn phí."}
   canonical="https://truongvietanh.com/chuong-trinh"
   ogImage="https://media.truongvietanh.com/images/extra-giao-vien-va-hoc-sinh-2.webp"
   structuredData={structuredData}
@@ -74,8 +74,7 @@ const structuredData = [
 
           <div class="ct-hero__badges">
             <span class="ct-hero__badge">🎓 4 cấp học</span>
-            <span class="ct-hero__badge">🌍 IELTS 6.0–8.0</span>
-            <span class="ct-hero__badge">🏆 99% vào đại học</span>
+            <span class="ct-hero__badge">🏆 IELTS 6.0+ có bảo hành</span>
             <span class="ct-hero__badge">📚 15+ năm</span>
           </div>
 
@@ -116,12 +115,12 @@ const structuredData = [
             <span>Học sinh hiện tại</span>
           </div>
           <div class="ct-stat">
-            <strong>IELTS 6–8</strong>
-            <span>Đầu ra tối thiểu THPT</span>
+            <strong>4 cấp</strong>
+            <span>Mầm non → THPT liên cấp</span>
           </div>
           <div class="ct-stat">
-            <strong>99%</strong>
-            <span>Tỷ lệ vào đại học</span>
+            <strong>6.0+</strong>
+            <span>IELTS có bảo hành</span>
           </div>
         </div>
       </div>
@@ -146,7 +145,7 @@ const structuredData = [
             <h3 class="ct-prog-card__title">Mầm non</h3>
             <ul class="ct-prog-card__list">
               <li>Tiếng Anh Immersion 100% với giáo viên bản ngữ</li>
-              <li>Phương pháp PDR: Plan – Do – Review (mầm non: Plan – Do – Recall)</li>
+              <li>Phương pháp PDR: Plan – Do – Review</li>
               <li>Học qua vui chơi, không bài tập về nhà</li>
               <li>Sĩ số 15–20 bé/lớp, 2 GV + trợ giảng</li>
             </ul>
@@ -193,8 +192,8 @@ const structuredData = [
             </div>
             <h3 class="ct-prog-card__title">Trung học Phổ thông</h3>
             <ul class="ct-prog-card__list">
-              <li>Cam kết IELTS 6.0–8.0 khi tốt nghiệp</li>
-              <li>99% học sinh vào đại học theo nguyện vọng</li>
+              <li>Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt (theo điều kiện trong hợp đồng)</li>
+              <li>Định hướng đại học và du học từ lớp 10</li>
               <li>Hướng nghiệp 1-1, hỗ trợ hồ sơ du học</li>
               <li>Kỹ năng khởi nghiệp, Digital Literacy</li>
             </ul>
@@ -240,9 +239,9 @@ const structuredData = [
             <div class="ct-road__badge ct-road__badge--gold">THPT</div>
             <div class="ct-road__content">
               <strong>THPT</strong>
-              <p>IELTS Prep chuyên sâu — Đầu ra&nbsp;6.0–8.0</p>
+              <p>IELTS Prep chuyên sâu — Bảo hành đầu ra&nbsp;6.0+</p>
             </div>
-            <div class="ct-road__result">🏆 IELTS 6–8</div>
+            <div class="ct-road__result">🏆 IELTS 6.0+</div>
           </div>
         </div>
       </div>
@@ -309,7 +308,7 @@ const structuredData = [
     <!-- ====== TRUST LOGOS ====== -->
     <section class="ct-section ct-trust">
       <div class="ct-container">
-        <p class="ct-trust__label">Được công nhận và hợp tác bởi</p>
+        <p class="ct-trust__label">Chương trình triển khai cùng</p>
         <div class="ct-trust__row">
           <div class="ct-trust__item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#26275D" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
@@ -354,7 +353,7 @@ const structuredData = [
           </details>
           <details class="ct-faq__item">
             <summary>Chương trình tiếng Anh có liên tục giữa các cấp không?</summary>
-            <div class="ct-faq__answer"><p>Có. Lộ trình xuyên suốt: Immersion 100% (Mầm non) → UK Oxford (Tiểu học) → Academic English, mục tiêu IELTS B1–B2 (THCS) → IELTS Prep chuyên sâu, đầu ra 6.0–8.0 (THPT). Không bị đứt gãy hay lặp lại giữa các cấp.</p></div>
+            <div class="ct-faq__answer"><p>Có. Lộ trình xuyên suốt: Immersion 100% (Mầm non) → UK Oxford (Tiểu học) → Academic English, mục tiêu IELTS B1–B2 (THCS) → IELTS Prep chuyên sâu, bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng (THPT). Không bị đứt gãy hay lặp lại giữa các cấp.</p></div>
           </details>
           <details class="ct-faq__item">
             <summary>Học sinh có thể chuyển cấp trong nội bộ không?</summary>
@@ -429,7 +428,7 @@ const structuredData = [
           <a href="/trung-hoc-pho-thong" class="ct-related__card">
             <div class="ct-related__card-top"></div>
             <h3>THPT Trường Việt Anh</h3>
-            <p>IELTS 6.0–8.0, 99% vào đại học, hướng nghiệp cá nhân — đỉnh điểm 16 năm.</p>
+            <p>IELTS 6.0+, hướng nghiệp cá nhân — đỉnh điểm 16 năm.</p>
           </a>
         </div>
         <p class="ct-related__more">

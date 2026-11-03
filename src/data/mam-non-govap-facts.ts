@@ -29,7 +29,7 @@ export const mnFacts = {
   mapUrl: 'https://maps.google.com/?q=573+L%C3%AA+%C4%90%E1%BB%A9c+Th%E1%BB%8D,+G%C3%B2+V%E1%BA%A5p,+TP.HCM',
 
   // ---------- Liên hệ ----------
-  hotlineMamNon: '0774 588 988',        // hotline riêng cơ sở mầm non Gò Vấp, trực 24/7
+  hotlineMamNon: '0774 588 988',        // hotline riêng cơ sở mầm non Gò Vấp, Thứ 2–Thứ 7 07:00–19:00 (bảng quyết định A9: KHÔNG ghi 24/7)
   hotlineChung: '0916 961 409',
   zaloUrl: 'https://zalo.me/1678310120468101523',
   responseTime: '2 giờ',
@@ -177,7 +177,6 @@ export const mnFacts = {
   // ---------- An toàn (nguồn: bài /blog/co-so-vat-chat/) ----------
   safety: [
     'Camera 24/7 toàn khu, gồm cả hành lang',
-    'Phụ huynh lớp Mầm non được cấp tài khoản xem camera trực tuyến trong giờ học',
     'Khách tới trường phải đăng ký và đeo thẻ, có bảo vệ trực',
     'Phòng y tế trực 8h–17h, kèm bảo hiểm tai nạn học sinh',
     'PCCC kiểm tra định kỳ hàng tháng, sprinkler tự động, diễn tập mỗi học kỳ',
@@ -218,9 +217,8 @@ export const mnFacts = {
 
   // ---------- Uy tín ----------
   familiesServed: '1.000+',
-  rating: '4.9',
-  reviewCount: '300+',
-  retention: '98%',
+  // rating / reviewCount / retention: GỠ 31/10/2026 (bảng quyết định B7 — anh Dương chọn Bỏ),
+  // không có nguồn khảo sát. Đừng thêm lại khi chưa có số đo kèm ngày và nguồn.
 
   // ---------- Ô CẦN ĐIỀN ----------
   // Để chuỗi rỗng thì khối tương ứng trên trang TỰ ẨN — không hiện ô trống ra ngoài.
