@@ -72,7 +72,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "Chương trình tiếng Anh khác gì trường quốc tế?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Immersion từ Mầm non, UK curriculum Tiểu học, đầu ra IELTS 6.0-8.0 tại THPT." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Immersion từ Mầm non, UK curriculum Tiểu học, bảo hành đầu ra IELTS 6.0+ tại THPT (theo điều kiện trong hợp đồng)." }
       },
       {
         "@type": "Question",
@@ -82,7 +82,7 @@ const structuredData = [
       {
         "@type": "Question",
         "name": "Có chính sách học bổng không?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Có, gồm 9 chính sách. Bốn ưu đãi học phí do cha mẹ quyết định: đóng trọn năm giảm 6%, trọn học kỳ giảm 2%, anh chị em ruột giảm 50% cho con thứ hai và 25% cho con thứ ba, Early Bird đóng trước nhiều năm giảm tới 46%. Năm học bổng do học sinh tự giành: GRIT, CHAMPIONS, LEADERS, TALENTS và quỹ LOVE miễn 50–100% học phí cho gia đình gặp biến cố. Chi tiết từng mức tại truongvietanh.com/hoc-bong." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Có, gồm 9 chính sách. Bốn ưu đãi học phí do cha mẹ quyết định: đóng trọn năm giảm 6%, trọn học kỳ giảm 2%, anh chị em ruột giảm 50% cho con thứ hai và 25% cho con thứ ba, Early Bird đóng trước nhiều năm giảm từ 6–46%. Năm học bổng do học sinh tự giành: GRIT, CHAMPIONS, LEADERS, TALENTS và quỹ LOVE miễn 50–100% học phí cho gia đình gặp biến cố. Chi tiết từng mức tại truongvietanh.com/hoc-bong." }
       },
       {
         "@type": "Question",
@@ -137,7 +137,7 @@ const structuredData = [
     <HeaderBase />
 
     <!-- ====== LAYER 2: HERO WITH FORM ====== -->
-    <section class="gi-hero">
+    <section class="gi-hero gi-hero--gioi-thieu">
       <div class="gi-container gi-hero-inner">
         <div class="gi-hero-left">
           <nav class="gi-breadcrumb" aria-label="Breadcrumb">
@@ -150,27 +150,12 @@ const structuredData = [
           <p class="gi-subtitle">Tạo ra môi trường học tập vui vẻ và thực dụng kể từ năm 2011</p>
           <p class="gi-last-updated">Cập nhật lần cuối: Tháng 6/2026</p>
 
-          <div class="gi-hero-rating">
-            <span class="gi-stars" aria-label="4.9 trên 5 sao">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <span class="gi-rating-text">4.9/5 (300+ đánh giá)</span>
-          </div>
 
           <div class="gi-trust-badges">
             <div class="gi-badge"><strong>15+</strong> năm</div>
             <div class="gi-badge"><strong>{schoolFacts.campuses}</strong> cơ sở</div>
             <div class="gi-badge"><strong>IELTS</strong> 6.0–8.0</div>
-            <div class="gi-badge"><strong>99%</strong> vào đại học</div>
-          </div>
-        </div>
-
-        <div class="gi-hero-right">
-          <div class="gi-form-card">
-            <p class="gi-form-heading">Đăng ký tham quan trường miễn phí</p>
-            <LeadFormTwoStepEmailFirst
-              formId="gioi-thieu-form"
-              funnelCode="gioi-thieu-pillar"
-              schoolLevel="tieu-hoc"
-            />
+            <div class="gi-badge"><strong>IELTS 6.0+</strong> có bảo hành</div>
           </div>
         </div>
       </div>
@@ -206,7 +191,7 @@ const structuredData = [
         <section id="tam-nhin" class="gi-section">
           <h2><span class="si"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>Tầm nhìn và sứ mệnh của Trường Việt Anh là gì?</h2>
           <p>Trường Việt Anh được thành lập năm 2011 với sứ mệnh <strong>"Tạo ra môi trường học tập vui vẻ và thực dụng"</strong>. Tầm nhìn của trường: tất cả học sinh hạnh phúc, ra trường với 16 kỹ năng thế kỷ 21 và nền tảng tiếng Anh đủ du học.</p>
-          <p>Sau hơn 15 năm hoạt động, Trường Việt Anh đã xây dựng hệ thống 6 cơ sở tại TP.HCM, Tây Ninh (Cần Giuộc) và An Giang (Rạch Giá), phục vụ hơn 3.000 học sinh mỗi năm — từ Mầm non đến THPT.</p>
+          <p>Sau hơn 15 năm hoạt động, Trường Việt Anh đã xây dựng hệ thống 6 cơ sở tại TP.HCM, Tây Ninh (Cần Giuộc) và An Giang (Rạch Giá), phục vụ hơn 1.000 học sinh mỗi năm — từ Mầm non đến THPT.</p>
 
           <div class="gi-values-grid">
             <h3>5 giá trị cốt lõi</h3>
@@ -338,7 +323,7 @@ const structuredData = [
               <div class="gi-roadmap-item">
                 <div class="gi-roadmap-badge">THPT</div>
                 <strong>THPT (15-18 tuổi)</strong>
-                <p>Luyện thi IELTS chuyên sâu — Giáo viên bản ngữ. Đầu ra: IELTS&nbsp;6.0-8.0.</p>
+                <p>Luyện thi IELTS chuyên sâu — Giáo viên bản ngữ. Bảo hành đầu ra IELTS&nbsp;6.0+ (theo điều kiện trong hợp đồng).</p>
               </div>
             </div>
           </div>
@@ -419,9 +404,9 @@ const structuredData = [
                 <tr>
                   <td><strong>THPT</strong></td>
                   <td>15-18 tuổi</td>
-                  <td>IELTS Prep, đầu ra 6.0-8.0</td>
+                  <td>IELTS Prep, bảo hành đầu ra 6.0+</td>
                   <td>Tự học, nghiên cứu, khởi nghiệp</td>
-                  <td>Hướng nghiệp, du học, 99% vào đại học</td>
+                  <td>Hướng nghiệp, du học, xét tuyển đại học</td>
                 </tr>
               </tbody>
             </table>
@@ -490,13 +475,8 @@ const structuredData = [
         <!-- Section 7: Đánh giá -->
         <section id="danh-gia" class="gi-section">
           <h2><span class="si"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>Phụ huynh đánh giá Trường Việt Anh như thế nào?</h2>
-          <p>Trường Việt Anh đạt 4.9/5 sao trên Google với hơn 300 đánh giá từ phụ huynh. Dưới đây là một số ý kiến tiêu biểu.</p>
+          <p>Dưới đây là một số ý kiến của phụ huynh.</p>
 
-          <div class="gi-aggregate-rating">
-            <span class="gi-big-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <span class="gi-big-score">4.9/5</span>
-            <span class="gi-review-count">300+ đánh giá trên Google</span>
-          </div>
 
           <div class="gi-testimonials">
             <blockquote class="gi-testimonial">
@@ -561,7 +541,7 @@ const structuredData = [
             <details class="gi-faq-item">
               <summary>Chương trình tiếng Anh của Trường Việt Anh khác gì trường quốc tế?</summary>
               <div class="gi-faq-answer">
-                <p>Trường Việt Anh sử dụng phương pháp Immersion (đắm chìm) từ Mầm non, chuyển sang UK Curriculum ở Tiểu học, và luyện thi IELTS chuyên sâu từ THCS. Đầu ra IELTS 6.0-8.0 tương đương trường quốc tế, nhưng học phí chỉ bằng 1/3 đến 1/5.</p>
+                <p>Trường Việt Anh sử dụng phương pháp Immersion (đắm chìm) từ Mầm non, chuyển sang UK Curriculum ở Tiểu học, và luyện thi IELTS chuyên sâu từ THCS. Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng; bảng so sánh học phí với các trường quốc tế (có nguồn) xem tại <a href="/hoc-phi">trang Học phí</a>.</p>
               </div>
             </details>
             <details class="gi-faq-item">
@@ -573,7 +553,7 @@ const structuredData = [
             <details class="gi-faq-item">
               <summary>Có chính sách học bổng không?</summary>
               <div class="gi-faq-answer">
-                <p>Có, gồm <strong>9 chính sách</strong>. Bốn <strong>ưu đãi học phí</strong> do cha mẹ quyết định, có ngay khi ghi danh: đóng trọn năm giảm 6%, trọn học kỳ giảm 2%, anh chị em ruột giảm 50% cho con thứ hai và 25% cho con thứ ba, Early Bird đóng trước nhiều năm giảm tới 46% kèm khoá giá học phí năm đầu. Năm <strong>học bổng</strong> thì con phải tự giành: GRIT, CHAMPIONS, LEADERS, TALENTS, cùng quỹ LOVE miễn 50–100% học phí cho gia đình gặp biến cố. Xem đủ số và điều kiện tại <a href="/hoc-bong">trang Học bổng &amp; ưu đãi học phí</a>.</p>
+                <p>Có, gồm <strong>9 chính sách</strong>. Bốn <strong>ưu đãi học phí</strong> do cha mẹ quyết định, có ngay khi ghi danh: đóng trọn năm giảm 6%, trọn học kỳ giảm 2%, anh chị em ruột giảm 50% cho con thứ hai và 25% cho con thứ ba, Early Bird đóng trước nhiều năm giảm từ 6–46% kèm khoá giá học phí năm đầu. Năm <strong>học bổng</strong> thì con phải tự giành: GRIT, CHAMPIONS, LEADERS, TALENTS, cùng quỹ LOVE miễn 50–100% học phí cho gia đình gặp biến cố. Xem đủ số và điều kiện tại <a href="/hoc-bong">trang Học bổng &amp; ưu đãi học phí</a>.</p>
               </div>
             </details>
             <details class="gi-faq-item">
@@ -642,4 +622,25 @@ const structuredData = [
     <FooterBase />
   </div>
 </BaseLayout>
+
+<style>
+  /* Ảnh hero riêng của trang này — banner-chinh.jpg dùng chung bị "contain" nên hở nền, nhìn rời rạc */
+  .gi-hero--gioi-thieu {
+    background-image:
+      linear-gradient(90deg, rgba(16,17,44,0.88) 0%, rgba(24,25,58,0.62) 45%, rgba(24,25,58,0.2) 100%),
+      url('https://media.truongvietanh.com/images/vui-ve-07.webp');
+    background-size: cover, cover;
+    background-position: center, center 35%;
+  }
+  /* Hero không còn form bên phải → giới hạn cột chữ cho dòng khỏi quá dài */
+  .gi-hero--gioi-thieu .gi-hero-left { max-width: 760px; }
+  @media (max-width: 768px) {
+    .gi-hero--gioi-thieu {
+      background-image:
+        linear-gradient(180deg, rgba(16,17,44,0.78) 0%, rgba(24,25,58,0.85) 100%),
+        url('https://media.truongvietanh.com/images/vui-ve-07.webp');
+      background-position: center, center 30%;
+    }
+  }
+</style>
 
