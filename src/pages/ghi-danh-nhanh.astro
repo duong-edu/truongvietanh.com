@@ -1,0 +1,337 @@
+---
+// /ghi-danh-nhanh — trang GHI DANH NHANH "ẩn"
+// Mục đích : form ghi danh tối giản, chỉ 4 ô (tên học sinh · trường cũ · lớp · SĐT phụ huynh)
+//            → POST /api/lead → worker tạo lead Pancake CRM (có SĐT nên vào thẳng Pancake).
+// "Ẩn"     : noindex/nofollow, KHÔNG gắn vào menu/nav — chỉ ai có link mới vào được.
+// Map Pancake : tên học sinh → name · SĐT phụ huynh → phone_number · lớp → khoi_quan_tam (dropdown)
+//               · trường cũ + lớp → ghi vào mo_ta_khach_hang (chỗ sales đọc). funnel_code = ghi-danh-nhanh.
+// UTM : BẮT BUỘC theo CLAUDE.md — nạp /js/va-utm.js, merge window.__vaUTM() vào mọi body POST.
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ghi danh nhanh — Trường Việt Anh</title>
+<meta name="description" content="Ghi danh nhanh vào Trường Việt Anh — chỉ cần tên học sinh, trường cũ, lớp và số điện thoại phụ huynh." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#26275D; --navy2:#1F2050; --orange:#f9dd0e;
+  --text:#0c1b34; --muted:#6b7280; --border:#e5e7eb; --green:#16a34a; --red:#ef4444;
+  --r:12px;
+}
+html{height:100%}
+body{
+  min-height:100%;
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:var(--navy);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 72% 108%,rgba(31,32,80,.6) 0%,transparent 55%),
+    radial-gradient(ellipse 55% 45% at 2% -6%,rgba(24,25,58,.65) 0%,transparent 50%);
+  display:flex;flex-direction:column;align-items:center;
+  padding:24px 16px 48px;
+}
+
+/* logo */
+.lbar{
+  background:#fff;border-radius:14px;padding:8px 26px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+.lbar img{height:58px;display:block}
+.lbar-txt{font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;color:var(--navy);display:none}
+
+/* card */
+.card{
+  background:#fff;border-radius:18px;width:100%;max-width:440px;
+  padding:28px 26px 24px;
+  box-shadow:0 28px 90px rgba(0,0,0,.45);
+  animation:rise .4s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(38,39,93,.08);border:1px solid rgba(38,39,93,.15);
+  border-radius:30px;padding:4px 13px;
+  font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:12px;
+}
+.title{
+  font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:1.5rem;line-height:1.22;color:var(--navy);margin-bottom:6px;
+}
+.subtitle{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.fl .req{color:var(--red)}
+.fi{
+  width:100%;padding:13px 14px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-size:16px;font-family:'Inter',sans-serif;color:var(--text);
+  outline:none;background:#f9fafb;
+  transition:border-color .18s,box-shadow .18s,background .18s;
+}
+select.fi{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;
+}
+.fi:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(38,39,93,.12);background:#fff}
+.fi.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+.fe{font-size:12px;color:var(--red);margin-top:4px;display:none}
+.fe.on{display:block}
+.hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+
+.btn{
+  width:100%;margin-top:6px;
+  background:linear-gradient(135deg,#fae34a,#f9dd0e,#cbb30a);
+  color:var(--navy);
+  font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:900;
+  letter-spacing:.6px;text-transform:uppercase;
+  border:none;border-radius:11px;padding:16px;cursor:pointer;min-height:54px;
+  box-shadow:0 6px 24px rgba(249,221,14,.5);
+  transition:transform .18s,box-shadow .18s;
+  display:flex;align-items:center;justify-content:center;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(249,221,14,.65)}
+.btn:active{transform:scale(.99)}
+.btn:disabled{opacity:.7;cursor:wait}
+.btn .t{display:block}
+.btn .s{display:none;width:19px;height:19px;border:2.5px solid rgba(38,39,93,.3);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite}
+.btn.loading .t{display:none}
+.btn.loading .s{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.sec{font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px;line-height:1.5}
+
+/* success */
+.suc{display:none;text-align:center;padding:12px 0}
+.suc.on{display:block;animation:rise .35s ease both}
+.suc-ico{font-size:54px;margin-bottom:12px}
+.suc-h{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:900;color:var(--green);margin-bottom:10px}
+.suc-p{font-size:14px;color:var(--muted);line-height:1.7}
+.suc-p strong{color:var(--text)}
+
+@media(max-width:480px){
+  .card{padding:24px 18px 20px}
+  .title{font-size:1.3rem}
+  .lbar img{height:48px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGO -->
+<div class="lbar">
+  <a href="https://truongvietanh.com" tabindex="-1">
+    <img src="/logo-th-thcs-thpt.png" alt="Trường Việt Anh"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+    <span class="lbar-txt">Trường Việt Anh</span>
+  </a>
+</div>
+
+<!-- CARD -->
+<div class="card" id="card">
+
+  <!-- FORM -->
+  <div id="formWrap">
+    <span class="eyebrow">📝 Ghi danh nhanh</span>
+    <h1 class="title">Ghi danh vào Trường Việt Anh</h1>
+    <p class="subtitle">Điền 4 thông tin bên dưới — nhà trường sẽ liên hệ phụ huynh để hoàn tất thủ tục ghi danh.</p>
+
+    <form id="gdForm" novalidate>
+      <div class="fg">
+        <label class="fl" for="fStudent">Tên học sinh <span class="req">*</span></label>
+        <input class="fi" type="text" id="fStudent" name="student_name"
+               placeholder="Nguyễn Minh An" autocomplete="off" />
+        <div class="fe" id="eStudent">Vui lòng nhập tên học sinh</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl" for="fOldSchool">Trường cũ <span class="req">*</span></label>
+        <input class="fi" type="text" id="fOldSchool" name="old_school"
+               placeholder="Trường học sinh đang/đã theo học" autocomplete="off" />
+        <div class="fe" id="eOldSchool">Vui lòng nhập tên trường cũ</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl" for="fGrade">Lớp đăng ký <span class="req">*</span></label>
+        <select class="fi" id="fGrade" name="grade">
+          <option value="" disabled selected>— Chọn lớp —</option>
+          <optgroup label="Mầm non">
+            <option value="2-tuoi">2 tuổi</option>
+            <option value="3-tuoi">3 tuổi</option>
+            <option value="4-tuoi">4 tuổi</option>
+            <option value="5-tuoi">5 tuổi</option>
+          </optgroup>
+          <optgroup label="Tiểu học">
+            <option value="lop-1">Lớp 1</option>
+            <option value="lop-2">Lớp 2</option>
+            <option value="lop-3">Lớp 3</option>
+            <option value="lop-4">Lớp 4</option>
+            <option value="lop-5">Lớp 5</option>
+          </optgroup>
+          <optgroup label="THCS">
+            <option value="lop-6">Lớp 6</option>
+            <option value="lop-7">Lớp 7</option>
+            <option value="lop-8">Lớp 8</option>
+            <option value="lop-9">Lớp 9</option>
+          </optgroup>
+          <optgroup label="THPT">
+            <option value="lop-10">Lớp 10</option>
+            <option value="lop-11">Lớp 11</option>
+            <option value="lop-12">Lớp 12</option>
+          </optgroup>
+        </select>
+        <div class="fe" id="eGrade">Vui lòng chọn lớp đăng ký</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl" for="fPhone">Số điện thoại phụ huynh <span class="req">*</span></label>
+        <input class="fi" type="tel" id="fPhone" name="phone"
+               placeholder="0912 345 678" autocomplete="tel" inputmode="tel" />
+        <div class="fe" id="ePhone">Vui lòng nhập số điện thoại hợp lệ</div>
+        <div class="hint">Nhà trường gọi/Zalo vào số này để xác nhận ghi danh.</div>
+      </div>
+
+      <button class="btn" id="btnSubmit" type="submit">
+        <span class="t">GHI DANH NGAY →</span>
+        <span class="s" aria-hidden="true"></span>
+      </button>
+      <p class="sec">🔒 Thông tin chỉ dùng để liên hệ ghi danh · Không chia sẻ bên thứ ba</p>
+    </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="suc" id="suc">
+    <div class="suc-ico">🎉</div>
+    <div class="suc-h">Ghi danh thành công!</div>
+    <p class="suc-p">
+      Cảm ơn quý phụ huynh. Nhà trường đã nhận thông tin ghi danh của
+      <strong id="sucName">học sinh</strong> và sẽ liên hệ số điện thoại bạn vừa nhập
+      trong thời gian sớm nhất để hoàn tất thủ tục.
+    </p>
+  </div>
+
+</div>
+
+<!-- UTM collector dùng chung (BẮT BUỘC) — đặt TRƯỚC script dùng nó -->
+<script src="/js/va-utm.js" is:inline></script>
+<script>
+// @ts-nocheck
+(function(){
+'use strict';
+
+var C = { api:'/api/lead', formId:'ghi-danh-nhanh', funnel:'ghi-danh-nhanh' };
+
+// UTM: đọc từ URL, giữ qua sessionStorage, fallback direct/none, kèm page_url + pke_mkter.
+var UTM = (window.__vaUTM ? window.__vaUTM() : {});
+
+// Nhãn lớp tiếng Việt cho GHI CHÚ — lấy từ value (ASCII), KHÔNG lấy option.text
+// (option.text có thể bị Google Translate đổi sang tiếng nước ngoài).
+var GRADE_LABELS = {
+  '2-tuoi':'2 tuổi (Mầm non)','3-tuoi':'3 tuổi (Mầm non)','4-tuoi':'4 tuổi (Mầm non)','5-tuoi':'5 tuổi (Mầm non)',
+  'lop-1':'Lớp 1','lop-2':'Lớp 2','lop-3':'Lớp 3','lop-4':'Lớp 4','lop-5':'Lớp 5',
+  'lop-6':'Lớp 6','lop-7':'Lớp 7','lop-8':'Lớp 8','lop-9':'Lớp 9',
+  'lop-10':'Lớp 10','lop-11':'Lớp 11','lop-12':'Lớp 12'
+};
+function levelFromGrade(g){
+  if(/^\d-tuoi$/.test(g)) return 'mam-non';
+  if(/^lop-[1-5]$/.test(g)) return 'tieu-hoc';
+  if(/^lop-[6-9]$/.test(g)) return 'thcs';
+  if(/^lop-1[0-2]$/.test(g)) return 'thpt';
+  return '';
+}
+
+var form    = document.getElementById('gdForm');
+var btn     = document.getElementById('btnSubmit');
+var formWrap= document.getElementById('formWrap');
+var suc     = document.getElementById('suc');
+
+function okPhone(v){
+  v = String(v).replace(/[\s\-\.\(\)]/g,'').replace(/^\+?84/,'0');
+  return /^0[35789][0-9]{8}$/.test(v);
+}
+function fieldErr(inpId,errId,show){
+  var i=document.getElementById(inpId), e=document.getElementById(errId);
+  if(i)i.classList.toggle('err',show);
+  if(e)e.classList.toggle('on',show);
+}
+function val(id){ return (document.getElementById(id)||{}).value || ''; }
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  var student = val('fStudent').trim();
+  var school  = val('fOldSchool').trim();
+  var grade   = val('fGrade');
+  var phone   = val('fPhone').trim();
+
+  var ok = true;
+  if(!student){ fieldErr('fStudent','eStudent',true); ok=false; } else fieldErr('fStudent','eStudent',false);
+  if(!school){  fieldErr('fOldSchool','eOldSchool',true); ok=false; } else fieldErr('fOldSchool','eOldSchool',false);
+  if(!grade){   fieldErr('fGrade','eGrade',true); ok=false; } else fieldErr('fGrade','eGrade',false);
+  if(!okPhone(phone)){ fieldErr('fPhone','ePhone',true); ok=false; } else fieldErr('fPhone','ePhone',false);
+  if(!ok) return;
+
+  var gradeLabel = GRADE_LABELS[grade] || grade;
+  var note = 'Ghi danh nhanh · Trường cũ: ' + school + ' · Lớp đăng ký: ' + gradeLabel +
+             ' · (Tên = học sinh, SĐT = phụ huynh)';
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  // Body gửi theo đúng key mà worker normalizeFormData đọc:
+  //  parent_name → Pancake "name" (form này không thu tên phụ huynh nên dùng tên học sinh làm định danh lead)
+  //  phone → phone_number · grade → khoi_quan_tam · note → mo_ta_khach_hang
+  var body = Object.assign({
+    parent_name:  student,
+    child_name:   student,
+    phone:        phone,
+    grade:        grade,
+    school_level: levelFromGrade(grade),
+    note:         note,
+    form_id:      C.formId,
+    funnel_code:  C.funnel
+  }, UTM);
+
+  fetch(C.api, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  })
+  .then(function(r){ return r.json().catch(function(){}); })
+  .catch(function(){})
+  .finally(function(){
+    try{
+      (window.dataLayer = window.dataLayer || []).push(
+        Object.assign({event:'ghi_danh_submitted', form_id:C.formId, funnel_code:C.funnel}, UTM)
+      );
+    }catch(e){}
+    var sn = document.getElementById('sucName');
+    if(sn) sn.textContent = student;
+    formWrap.style.display='none';
+    suc.classList.add('on');
+    try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){}
+  });
+});
+
+// Enter ở ô SĐT = submit
+document.getElementById('fPhone').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){ e.preventDefault(); form.requestSubmit ? form.requestSubmit() : btn.click(); }
+});
+
+})();
+</script>
+
+<script src="/js/phone-vn.js" defer></script>
+</body>
+</html>
