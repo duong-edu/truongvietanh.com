@@ -569,11 +569,8 @@ h2{text-align:center}
 .contact-btn,[class*="btn-"]{white-space:normal;word-wrap:break-word}
 </style>
 <style>/* chống mồ côi chữ — dòng cuối không trơ một từ */body{text-wrap:pretty}h1,h2,h3,h4,h5,h6,div,span,a,button,summary,label,th,caption,figcaption,[class*="label"],[class*="badge"],[class*="chip"],[class*="btn"],[class*="tag"],[class*="pill"]{text-wrap:balance}p,li,dd,dt,td,blockquote{text-wrap:pretty}</style>
-  <!-- Google Tag Manager (container chính GTM-TMPPWX29) -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMPPWX29');</script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMPPWX29" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Header -->
     <header>
         <div class="header-content">
@@ -637,16 +634,16 @@ h2{text-align:center}
                     <div class="trust-label">Năm đào tạo TH</div>
                 </div>
                 <div class="trust-item">
-                    <div class="trust-number">95%</div>
-                    <div class="trust-label">Học sinh lên cấp</div>
+                    <div class="trust-number">2011</div>
+                    <div class="trust-label">Năm thành lập</div>
                 </div>
                 <div class="trust-item">
-                    <div class="trust-number">3000+</div>
-                    <div class="trust-label">Cựu học sinh thành công</div>
+                    <div class="trust-number">3.000+</div>
+                    <div class="trust-label">Gia đình đã đồng hành</div>
                 </div>
                 <div class="trust-item">
-                    <div class="trust-number">98%</div>
-                    <div class="trust-label">Phụ huynh hài lòng</div>
+                    <div class="trust-number">2</div>
+                    <div class="trust-label">Cơ sở chính thức tại TP.HCM</div>
                 </div>
             </div>
         </div>
@@ -751,7 +748,7 @@ h2{text-align:center}
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Trường Việt Anh. Tất cả các quyền được bảo lưu.</p>
-                <p>Địa chỉ: 6 cơ sở tại TP. Hồ Chí Minh | Email: info@truongvietanh.edu.vn</p>
+                <p>Địa chỉ: 2 cơ sở chính thức tại TP. Hồ Chí Minh | Email: info@truongvietanh.com</p>
             </div>
         </div>
     </footer>
@@ -761,6 +758,15 @@ h2{text-align:center}
         // Global dataLayer for Google Tag Manager
         window.dataLayer = window.dataLayer || [];
         window.gtag = function() { window.dataLayer.push(arguments); };
+        gtag('js', new Date());
+
+        // Page view event
+        gtag('event', 'page_view', {
+            'page_path': '/tuyen-sinh/tieu-hoc/xac-nhan-tour',
+            'page_title': 'Lịch tham quan tiểu học xác nhận | Trường Việt Anh',
+            'school_level': 'Tiểu học',
+            'funnel_code': 'FNL-TH-MAIN'
+        });
 
         // FAQ Toggle Function
         function toggleFaq(index) {

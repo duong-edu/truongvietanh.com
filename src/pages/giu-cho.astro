@@ -1,5 +1,4 @@
 ---
-import { stripUrlPiiScript } from '../lib/strip-url-pii';
 /**
  * Đăng ký tư vấn 1:1 + Giữ chỗ Lion Camp
  * Tư vấn viên sẽ chủ động liên hệ để tư vấn và hỗ trợ giữ chỗ
@@ -10,7 +9,6 @@ import { stripUrlPiiScript } from '../lib/strip-url-pii';
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <script is:inline set:html={stripUrlPiiScript(['name'])} />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Đăng Ký Tư Vấn 1:1 Lion Camp 2026 | Trường Việt Anh</title>
   <meta name="description" content="Đăng ký nhận tư vấn cá nhân hóa 1:1 từ chuyên gia giáo dục Trường Việt Anh. Giữ chỗ Lion Camp Hè 2026." />
@@ -86,7 +84,7 @@ import { stripUrlPiiScript } from '../lib/strip-url-pii';
       <div class="countdown">⏰ Nhà trường phản hồi trong 24 giờ làm việc<strong id="timer" hidden></strong></div>
 
       <h2>Chọn cách liên hệ thuận tiện nhất</h2>
-      <p class="cta-desc">Tư vấn viên sẽ chủ động gọi trong 5 phút. Hoặc Ba/Mẹ có thể liên hệ ngay:</p>
+      <p class="cta-desc">Nhà trường sẽ chủ động liên hệ trong 24 giờ làm việc. Hoặc Ba/Mẹ có thể liên hệ ngay:</p>
 
       <a href="https://zalo.me/1678310120468101523" target="_blank" rel="noopener" class="cta-btn cta-btn--zalo" id="ctaZalo">
         💬 Nhắn Zalo để được tư vấn ngay
@@ -113,8 +111,7 @@ import { stripUrlPiiScript } from '../lib/strip-url-pii';
 <script is:inline>
 (function() {
   var p = new URLSearchParams(window.location.search);
-  // Tên đã được gỡ khỏi URL trước khi GTM chạy → đọc từ window.__vaQS (còn lại: điểm/cấp/cơ sở vẫn trên URL)
-  var name = new URLSearchParams(window.__vaQS || '').get('name') || '';
+  var name = p.get('name') || '';
   var loc = p.get('loc') || '';
   var level = p.get('level') || '';
 

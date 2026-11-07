@@ -3,12 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-/* Mã kết quả Bản đồ Khôn Lớn (?id=) là khoá mở báo cáo của gia đình — app BDKL không bao giờ gửi nó cho bên thứ ba.
-   Cất vào window.__bdklId rồi XOÁ khỏi URL TRƯỚC khi GTM chạy, để page_location gửi Google/Meta không chứa mã.
-   Chỉ nhận đúng định dạng BDKL: 8 ký tự base32, bỏ 0/O/1/I. */
-(function(){try{var u=new URL(location.href);if(!u.searchParams.has('id'))return;var v=(u.searchParams.get('id')||'').trim().toUpperCase();window.__bdklId=/^[A-HJ-NP-Z2-9]{8}$/.test(v)?v:'';u.searchParams.delete('id');history.replaceState(history.state,'',u.pathname+u.search+u.hash);}catch(e){}})();
-</script>
 <title>Học thử 1 buổi tại Mầm non Việt Anh — nhận báo cáo 9 lĩnh vực phát triển của con</title>
 <meta name="description" content="Đăng ký cho con học thử miễn phí một buổi tại Mầm non Việt Anh, MGIS, Nhân Lễ, Thái Sơn (Mầm non & Tiền Tiểu học) hoặc Việt Anh Gò Vấp / Bình Tân (Tiền Tiểu học). Sau buổi học, phụ huynh nhận báo cáo quan sát COR Advantage theo 9 lĩnh vực.">
 <link rel="canonical" href="https://truongvietanh.com/mam-non/trai-nghiem/">
@@ -105,7 +99,7 @@
     <p class="sub">Đưa con đến chơi và học cùng cô một buổi, như một học sinh thật. Sau buổi học, bạn cầm về bản quan sát <strong>COR Advantage</strong>: con đang mạnh ở đâu, cần thêm gì ở đâu — và nên làm gì tiếp trong những tháng tới.</p>
     <div class="hero-cta">
       <a href="#dangky" class="cta-btn">Đặt buổi học thử cho con →</a>
-      <p class="cta-note">6 cơ sở TP.HCM · Cần Giuộc · Rạch Giá &nbsp;|&nbsp; Thứ 2 – Thứ 7 &nbsp;|&nbsp; Xếp lịch trong 24 giờ</p>
+      <p class="cta-note">2 cơ sở chính thức tại TP.HCM &nbsp;|&nbsp; Thứ 2 – Thứ 7 &nbsp;|&nbsp; Xếp lịch trong 24 giờ</p>
     </div>
   </div>
 </header>
@@ -236,9 +230,7 @@
     try {
       var q = new URLSearchParams(location.search);
       if (q.get('src') === 'bdkl') {
-        var prev = null; try { prev = JSON.parse(sessionStorage.getItem('va_bdkl') || 'null'); } catch (e2) {}
-        // id: script đầu <head> đã đọc + gỡ khỏi URL (__bdklId chỉ có khi URL mang id); tải lại trang → giữ id đã lưu
-        var o = { id: typeof window.__bdklId === 'string' ? window.__bdklId : ((prev && prev.id) || ''), lop: q.get('lop') || '', ngay: q.get('ngay') || '' };
+        var o = { id: q.get('id') || '', lop: q.get('lop') || '', ngay: q.get('ngay') || '' };
         sessionStorage.setItem('va_bdkl', JSON.stringify(o));
         return o;
       }
@@ -394,7 +386,7 @@ HEADLINE: Một buổi học thử. Một bản báo cáo về con — theo 9 l�
 SUBHEADLINE: Đưa con đến chơi và học cùng cô một buổi, như một học sinh thật. Sau buổi học, bạn cầm về bản quan sát COR Advantage: con đang mạnh ở đâu, cần thêm gì ở đâu — và nên làm gì tiếp trong những tháng tới.
 
 CTA: Đặt buổi học thử cho con → #dangky
-NOTE CTA: 6 cơ sở TP.HCM · Cần Giuộc · Rạch Giá | Thứ 2 – Thứ 7 | Xếp lịch trong 24 giờ
+NOTE CTA: 2 cơ sở chính thức tại TP.HCM | Thứ 2 – Thứ 7 | Xếp lịch trong 24 giờ
 
 [BẠN NHẬN ĐƯỢC GÌ]
 - Bản báo cáo COR Advantage về chính con bạn — không phải bài kiểm tra.

@@ -225,6 +225,18 @@ export default {
       // Mekong Xanh. Hai trang nay hua "tra gop 0%" va "khong tang giua nam", lech /hoc-phi.
       '/hoc-phi-can-giuoc': '/hoc-phi/',
       '/hoc-phi-rach-gia': '/hoc-phi/',
+      // 07/11/2026 — AN 2 cum trang "bia nang" (fork luat su bao, Van duyet an): trang con
+      // bia bang cap Montessori cua giao vien + funnel bia 4.8-5 sao / 98% / "Truong tot nhat" /
+      // SAT-A-Level. An tam bang redirect, cho viet lai; file de nguyen.
+      '/tuyen-sinh/mam-non/chuong-trinh-hoc': '/mam-non/',
+      '/tuyen-sinh/thpt/chuong-trinh-hoc': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/thpt/phu-huynh-noi-gi': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/thpt/xac-nhan-tour': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/thpt/cam-on': '/trung-hoc-pho-thong/',
+      '/tuyen-sinh/thpt/hoc-phi': '/hoc-phi/',
+      '/tuyen-sinh/thcs/phu-huynh-noi-gi': '/trung-hoc-co-so/',
+      '/tuyen-sinh/thcs/cam-on': '/trung-hoc-co-so/',
+      '/tuyen-sinh/thcs/hoc-phi': '/hoc-phi/',
     };
 
     {
@@ -1860,7 +1872,7 @@ async function sendLandingConfirmEmail(data, env, contactId, ghlApiKey) {
   };
   // Default address per location (TH/THCS/THPT)
   const ADDR = {
-    'go-vap':'160/72 Phan Huy Ích, Phường 12, An Hội Tây, Hồ Chí Minh',
+    'go-vap':'160/72 Phan Huy Ích, Phường An Hội Tây, Hồ Chí Minh',
     'binh-tan':'Số 7 Đường 38A, Tân Tạo, Q.Bình Tân, TPHCM',
     'rach-gia':'Lô E7, KĐT Tây Bắc Mekong Xanh, TP. Rạch Giá, An Giang',
     'can-giuoc':'22 Đường D2, KDC Cần Giuộc, H.Cần Giuộc, Tây Ninh',
@@ -2559,7 +2571,7 @@ async function handleKhieuNaiSubmission(request, env) {
       xac_nhan: '3 ngày làm việc',
       phan_hoi: '30 ngày làm việc (tối đa 60 nếu phức tạp)',
       khan_cap: '24 giờ',
-      du_lieu_ca_nhan: '72 giờ',
+      du_lieu_ca_nhan: '05 ngày làm việc',
     },
   });
 }

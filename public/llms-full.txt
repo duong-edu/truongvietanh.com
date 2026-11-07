@@ -9,7 +9,7 @@ Trường Việt Anh là hệ thống giáo dục liên cấp song ngữ Anh-Vi�
 ## Chương Trình Đào Tạo
 
 ### Mầm Non (18 tháng – 6 tuổi)
-- Phương pháp: Montessori kết hợp STEAM
+- Phương pháp: Học tập chủ động (Plan–Do–Review)
 - Ngôn ngữ: 100% tiếng Anh immersion trong lớp, tiếng Việt ngoài giờ học
 - Sĩ số: 15-20 trẻ/lớp, 2 giáo viên (1 bản ngữ + 1 Việt) + 1 trợ giảng
 - Đặc điểm: SAM Math (Singapore Math), Leader in Me, phát triển tự chủ
@@ -112,7 +112,7 @@ URL: https://truongvietanh.com/co-so
 - Ưu đãi Early Bird: giảm 15% (đăng ký trước 31/03)
 - Ưu đãi anh/chị em: giảm 10% cho con thứ 2 trở lên
 - Học bổng: 20-100% học phí cho học sinh xuất sắc/hoàn cảnh khó khăn
-- So với trường quốc tế: chỉ bằng 1/3 đến 1/5 học phí
+- Học phí: xem bảng chi tiết theo từng cấp tại /hoc-phi
 
 URL: https://truongvietanh.com/hoc-phi
 
@@ -149,7 +149,7 @@ URL: https://truongvietanh.com/ngoai-khoa
 Mầm Non (từ 12 tháng), Tiểu Học (lớp 1-5), THCS (lớp 6-9), THPT (lớp 10-12). Tiểu học, THCS, THPT học tại 2 cơ sở chính thức ở TP.HCM (Gò Vấp, Bình Tân).
 
 ### Học phí bao nhiêu?
-5-15 triệu/tháng tùy cấp học. Bằng 1/3 đến 1/5 trường quốc tế nhưng chất lượng tương đương.
+5-15 triệu/tháng tùy cấp học. Học phí minh bạch, công bố theo từng cấp tại /hoc-phi.
 
 ### Trình độ tiếng Anh đầu ra?
 Bảo hành đầu ra IELTS 6.0+ ghi trong hợp đồng — không đạt trường kèm miễn phí cho đến khi đạt (điều kiện: đi học đủ, dự đủ các buổi kèm bổ sung, làm hết bài tập giáo viên giao).

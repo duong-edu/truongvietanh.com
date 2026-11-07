@@ -127,11 +127,9 @@ const headlineLines = splitHeadline(headline);
     }
   </style>
 
-  <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMPPWX29');</script>
   <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KPL2NSR9');</script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMPPWX29" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPL2NSR9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ===== TOP LOGO BAR (compact, top of page) ===== -->
@@ -204,12 +202,13 @@ const headlineLines = splitHeadline(headline);
     <ul>{benefits.map(b => <li>{b}</li>)}</ul>
   </div>
 
-  <!-- Testimonial -->
+  <!-- Testimonial — chỉ hiện khi trang truyền lời chứng thật (A2) -->
+  {testimonialQuote && (
   <div class="testi">
-    <blockquote>{testimonialQuote || 'Trước khi đi trại hè, bé nhà mình rất rụt rè, cả ngày ôm iPad. Chỉ sau 3 tuần đầu, cô giáo gửi video bé tự tin thuyết trình bằng tiếng Anh. Mình không tin vào mắt mình!'}</blockquote>
-    <cite>{testimonialAuthor || '— Phụ huynh bé tại ' + shortLocation}</cite>
-    <div class="stars">★★★★★</div>
+    <blockquote>{testimonialQuote}</blockquote>
+    {testimonialAuthor && <cite>{testimonialAuthor}</cite>}
   </div>
+  )}
 
   <!-- Mid CTA — prominent, urgency -->
   <div class="mcta">
@@ -231,7 +230,7 @@ const headlineLines = splitHeadline(headline);
     <LeadFormTwoStepEmailFirst formId={`vsl-${funnelCode}`} funnelCode={funnelCode} schoolLevel={schoolLevel} submitText="Đăng ký tư vấn cá nhân hóa qua Zalo — 24/7" successMessage="Đang chuyển đến trang xác nhận..." />
     <div class="form-lock">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2V7a5 5 0 00-5-5zm3 7V7a3 3 0 10-6 0v2h6z"/></svg>
-      Thông tin được bảo mật tuyệt đối
+      Thông tin của Ba/Mẹ được bảo mật
     </div>
   </div>
 
@@ -246,37 +245,8 @@ const headlineLines = splitHeadline(headline);
 <!-- Social notif -->
 
 <script is:inline define:vars={{ location: shortLocation }}>
-// Countdown
-(function(){
-  var k='vsl_'+window.location.pathname,d=localStorage.getItem(k);
-  if(!d){d=String(Date.now()+864e5);localStorage.setItem(k,d)}
-  function t(){
-    var df=parseInt(d)-Date.now();if(df<0)df=0;
-    var h=String(Math.floor(df/36e5)).padStart(2,'0'),m=String(Math.floor(df/6e4)%60).padStart(2,'0'),s=String(Math.floor(df/1e3)%60).padStart(2,'0'),v=h+':'+m+':'+s;
-    var a=document.getElementById('cd'),b=document.getElementById('cd2');
-    if(a)a.textContent=v;if(b)b.textContent=v;
-  }
-  t();setInterval(t,1000);
-})();
-
 // Sticky bottom
 (function(){var s=document.getElementById('sBot');if(!s)return;window.addEventListener('scroll',function(){s.style.display=window.scrollY>400?'block':'none'},{passive:true})})();
-
-// Social notif
-(function(){
-  var ns=['Chị Nguyễn T.','Anh Trần V.','Chị Lê H.','Anh Phạm D.','Chị Hoàng M.'],
-      ac=[' vừa đăng ký tư vấn',' vừa nhận báo cáo',' vừa đăng ký tại '+location,' vừa đăng ký'],
-      ts=['1p trước','2p trước','3p trước','5p trước'],
-      av=['👩','👨','👩‍🦰','👨‍🦱','👩‍💼'],
-      el=document.getElementById('sn');if(!el)return;
-  function r(a){return a[Math.floor(Math.random()*a.length)]}
-  function go(){
-    var n=document.getElementById('snN'),a=document.getElementById('snAc'),t=document.getElementById('snT'),v=document.getElementById('snA');
-    if(n)n.textContent=r(ns);if(a)a.textContent=r(ac);if(t)t.textContent=r(ts);if(v)v.textContent=r(av);
-    el.classList.add('show');setTimeout(function(){el.classList.remove('show')},4e3);
-  }
-  setTimeout(go,7e3);setInterval(go,2e4+Math.random()*1e4);
-})();
 
 // Redirect on submit
 document.addEventListener('DOMContentLoaded',function(){

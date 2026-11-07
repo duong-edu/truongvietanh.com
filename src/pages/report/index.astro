@@ -1,5 +1,4 @@
 ---
-import { stripUrlPiiScript } from '../../lib/strip-url-pii';
 /**
  * BÁO CÁO ĐÁNH GIÁ KỸ NĂNG HÈ 2026
  * Wide layout, CTA above-the-fold, benefits on hero.
@@ -10,7 +9,6 @@ import { stripUrlPiiScript } from '../../lib/strip-url-pii';
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <script is:inline set:html={stripUrlPiiScript(['name'])} />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Báo Cáo Đánh Giá Kỹ Năng Hè 2026 | Lion Camp — Trường Việt Anh</title>
   <meta name="robots" content="noindex, nofollow" />
@@ -95,7 +93,7 @@ import { stripUrlPiiScript } from '../../lib/strip-url-pii';
     <a href="https://zalo.me/1678310120468101523" target="_blank" rel="noopener" class="cta-main" id="ctaZalo">
       💬 Nhận tư vấn cá nhân hóa lộ trình học tập qua Zalo
     </a>
-    <div class="cta-note">Hoặc gọi hotline <a href="tel:+84916961409">0916 961 409</a> — phản hồi trong 5 phút</div>
+    <div class="cta-note">Hoặc gọi hotline <a href="tel:+84916961409">0916 961 409</a> — phản hồi trong 24 giờ làm việc</div>
   </div>
 
   <div class="footer">
@@ -107,8 +105,7 @@ import { stripUrlPiiScript } from '../../lib/strip-url-pii';
 <script is:inline>
 (function(){
   var p = new URLSearchParams(window.location.search);
-  // Tên đã được gỡ khỏi URL trước khi GTM chạy → đọc từ window.__vaQS (còn lại: điểm/cấp/cơ sở vẫn trên URL)
-  var name = new URLSearchParams(window.__vaQS || '').get('name') || '';
+  var name = p.get('name') || '';
   var score = parseInt(p.get('score'),10) || 0;
   var school = p.get('school') || 'tieu-hoc';
   var loc = p.get('loc') || '';

@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { getSiteSettings } from '../lib/directus';
 import { GOOGLE_SITE_VERIFICATION } from '../data/school-facts';
 import LeadFormTwoStepEmailFirst from '../components/LeadFormTwoStepEmailFirst.astro';
-import { stripUrlPiiScript } from '../lib/strip-url-pii';
 
 // Fetch site settings from Directus CMS (cached at build time)
 const siteSettings = await getSiteSettings();
@@ -33,10 +32,6 @@ type Props = {
   ogType?: string;
   robots?: string;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
-  /* Trang nhận tên/email/SĐT phụ huynh trên URL (vd. /cam-on?name=…&email=…): true = gỡ khỏi URL
-     TRƯỚC khi GTM chạy, chỉ giữ `name` trong window.__vaQS; hoặc truyền danh sách khoá cần giữ.
-     Mặc định tắt — các trang khác dùng layout này không đổi hành vi. */
-  stripUrlPii?: boolean | string[];
 };
 
 const {
@@ -52,9 +47,7 @@ const {
   ogType = 'website',
   robots = noindex ? 'noindex, nofollow' : 'index, follow',
   structuredData,
-  stripUrlPii = false,
 } = Astro.props;
-const stripUrlPiiJs = stripUrlPii ? stripUrlPiiScript(Array.isArray(stripUrlPii) ? stripUrlPii : ['name']) : null;
 
 const schemaPayload = structuredData
   ? JSON.stringify(Array.isArray(structuredData) ? structuredData : [structuredData])
@@ -64,8 +57,6 @@ const schemaPayload = structuredData
 <!doctype html>
 <html lang="vi">
   <head>
-    <meta charset="UTF-8" />
-    {stripUrlPiiJs && <script is:inline set:html={stripUrlPiiJs} />}
 <!-- Google Tag Manager -->
 <script src="/js/va-utm.js" is:inline></script>
 <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -74,6 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TMPPWX29');</script>
 <!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#26275D" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -166,8 +158,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="exit-popup__overlay"></div>
       <div class="exit-popup__modal">
         <button class="exit-popup__close" id="exitPopupClose" aria-label="Đóng">&times;</button>
-        <h3 class="exit-popup__title">⚠️ Chờ Ba/Mẹ! Con có thể đang bị bỏ lỡ mùa hè quan trọng nhất</h3>
-        <p class="exit-popup__desc">Hơn <strong>200 bé đã đăng ký</strong> Trại hè Lion Camp 2026 — chỉ còn <strong>vài chỗ cuối</strong>.<br/>Để lại thông tin để tư vấn viên gọi trong <strong>5 phút</strong> + nhận ngay <strong>học bổng 15%</strong>.</p>
+        <h3 class="exit-popup__title">Chờ Ba/Mẹ! Đăng ký nhận tư vấn lộ trình học cho con</h3>
+        <p class="exit-popup__desc">Để lại thông tin để nhà trường tư vấn lộ trình học và học phí phù hợp cho con.<br/>Nhà trường phản hồi trong <strong>24 giờ làm việc</strong>.</p>
         <div class="exit-popup__form" data-form-bg="light">
           <LeadFormTwoStepEmailFirst
             formId="exit-popup-form"

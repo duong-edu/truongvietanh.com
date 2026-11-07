@@ -67,7 +67,6 @@ function addTraiHe(text: string | undefined | null): string {
   canonicalUrl={canonicalUrl}
   schoolLevel={page.school_level}
   funnelCode={page.funnel_code}
-  stripUrlPii={['ten_be', 'child']}
 >
   <!-- ===== HERO — compact, CTA above fold ===== -->
   <section slot="hero">
@@ -312,14 +311,7 @@ function addTraiHe(text: string | undefined | null): string {
 
 <!-- Exit-intent popup removed per request: trai-he pages do not show popup -->
 
-<!-- ===== SOCIAL PROOF NOTIFICATION TOAST ===== -->
-<div class="sq-snotif" id="sqSnotif" aria-live="polite" aria-atomic="true">
-  <div class="sq-snotif__avatar" id="sqSnA">👩</div>
-  <div class="sq-snotif__body">
-    <b id="sqSnN">Chị Nguyễn T.</b><span id="sqSnAc"> vừa đăng ký tư vấn</span>
-    <span class="sq-snotif__time" id="sqSnT">2 phút trước</span>
-  </div>
-</div>
+<!-- Social proof toast removed per A1 (bỏ popup giả "vừa đăng ký") -->
 
 <!-- ===== SCRIPTS ===== -->
 <script is:inline define:vars={{ formIdSel: `#${formIdWithFunnel}`, camOnUrl }}>
@@ -399,9 +391,7 @@ function addTraiHe(text: string | undefined | null): string {
     // === 7. Warm traffic dynamic headline (from UTM) ===
     var params = new URLSearchParams(window.location.search);
     var src = params.get('utm_source') || params.get('source') || '';
-    // Tên bé đã được gỡ khỏi URL trước khi GTM chạy (SqueezePageLayout stripUrlPii) → đọc từ window.__vaQS
-    var piiQs = new URLSearchParams(window.__vaQS || '');
-    var childName = piiQs.get('ten_be') || piiQs.get('child') || '';
+    var childName = params.get('ten_be') || params.get('child') || '';
     var hlEl = document.getElementById('heroHeadline');
     var subEl = document.getElementById('heroSub');
     if (hlEl && src) {
@@ -468,28 +458,7 @@ function addTraiHe(text: string | undefined | null): string {
       }
     })();
 
-    // === 10. Sliding social proof notification ===
-    (function () {
-      var names = ['Chị Nguyễn T.', 'Anh Trần V.', 'Chị Lê H.', 'Anh Phạm D.', 'Chị Hoàng M.', 'Anh Vũ Q.', 'Chị Đặng A.'];
-      var actions = [' vừa đăng ký tư vấn', ' vừa nhận học bổng Early Bird', ' vừa đăng ký tư vấn 1:1', ' vừa giữ suất cho bé'];
-      var times = ['vừa xong', '1p trước', '2p trước', '4p trước', '5p trước'];
-      var avatars = ['👩', '👨', '👩‍🦰', '👨‍🦱', '👩‍💼', '👨‍🦳'];
-      var el = document.getElementById('sqSnotif');
-      if (!el) return;
-      function r(a) { return a[Math.floor(Math.random() * a.length)]; }
-      function show() {
-        var n = document.getElementById('sqSnN'), ac = document.getElementById('sqSnAc'),
-            t = document.getElementById('sqSnT'), av = document.getElementById('sqSnA');
-        if (n) n.textContent = r(names);
-        if (ac) ac.textContent = r(actions);
-        if (t) t.textContent = r(times);
-        if (av) av.textContent = r(avatars);
-        el.classList.add('show');
-        setTimeout(function () { el.classList.remove('show'); }, 4500);
-      }
-      setTimeout(show, 8000);
-      setInterval(show, 22000 + Math.random() * 10000);
-    })();
+    // Social proof notification removed per A1
   })();
 </script>
 

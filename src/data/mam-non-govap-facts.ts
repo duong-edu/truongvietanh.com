@@ -32,7 +32,7 @@ export const mnFacts = {
   hotlineMamNon: '0774 588 988',        // hotline riêng cơ sở mầm non Gò Vấp, Thứ 2–Thứ 7 07:00–19:00 (bảng quyết định A9: KHÔNG ghi 24/7)
   hotlineChung: '0916 961 409',
   zaloUrl: 'https://zalo.me/1678310120468101523',
-  responseTime: '2 giờ',
+  responseTime: '24 giờ làm việc',
 
   // ---------- Quy mô lớp ----------
   // Trang cơ sở ghi "10 - 24 học sinh/lớp (tùy độ tuổi)". Tài liệu gốc không nêu sĩ số.

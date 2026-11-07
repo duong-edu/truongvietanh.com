@@ -53,7 +53,7 @@ reg('class-a-fee-capture', {
   ctaPrimaryText: 'Nhận bảng học phí ngay', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Nhắn Zalo tư vấn', ctaSecondaryHref: 'https://zalo.me/1678310120468101523',
   statsEyebrow: 'Trường Việt Anh trong số liệu', statsTitle: 'Hệ thống giáo dục liên cấp song ngữ được phụ huynh tin tưởng',
-  stats: [{ value: '4', label: 'Cấp học liên cấp' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '15+', label: 'Năm kinh nghiệm' }, { value: '2011', label: 'Năm thành lập' }],
+  stats: [{ value: '4', label: 'Cấp học liên cấp' }, { value: '2', label: 'Cơ sở chính thức tại TP.HCM' }, { value: '15+', label: 'Năm kinh nghiệm' }, { value: '2011', label: 'Năm thành lập' }],
   featuresEyebrow: 'Học phí bao gồm', featuresTitle: 'Những gì gia đình nhận được khi đầu tư vào Trường Việt Anh',
   features: [
     { title: 'Chương trình tiếng Anh chuyên sâu', body: 'Học sinh được học tiếng Anh với giáo viên bản ngữ mỗi ngày, rèn 4 kỹ năng và chuẩn bị nền tảng IELTS từ sớm.' },
@@ -202,7 +202,7 @@ reg('class-f-tiktok-ugc', {
   ctaPrimaryText: 'Nhắn Zalo ngay', ctaPrimaryHref: 'https://zalo.me/1678310120468101523',
   ctaSecondaryText: 'Gọi hotline', ctaSecondaryHref: 'tel:0916961409',
   statsEyebrow: 'Trường Việt Anh', statsTitle: 'Được hàng ngàn gia đình tin tưởng',
-  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '2011', label: 'Năm thành lập' }, { value: '4', label: 'Cấp học liên cấp' }],
+  stats: [{ value: '15+', label: 'Năm hoạt động' }, { value: '2', label: 'Cơ sở chính thức tại TP.HCM' }, { value: '2011', label: 'Năm thành lập' }, { value: '4', label: 'Cấp học liên cấp' }],
   featuresEyebrow: 'Tại sao chọn Việt Anh', featuresTitle: 'Điều gia đình nhận được khi đồng hành cùng Trường Việt Anh',
   features: [
     { title: 'Tiếng Anh mỗi ngày', body: 'Giáo viên bản ngữ, chương trình IELTS Foundation từ mầm non.' },
@@ -265,7 +265,7 @@ reg('class-level-pillar', {
   ctaPrimaryText: 'Xem cơ sở phù hợp', ctaPrimaryHref: '/co-so',
   ctaSecondaryText: 'Nhận tư vấn', ctaSecondaryHref: '/tuyen-sinh',
   statsEyebrow: 'Mầm non Việt Anh', statsTitle: 'Nền tảng vững chắc cho hành trình giáo dục',
-  stats: [{ value: '2-6', label: 'Tuổi đầu vào' }, { value: '1:8', label: 'Tỉ lệ GV/HS' }, { value: '100%', label: 'Tiếng Anh bản ngữ' }, { value: '3', label: 'Cơ sở tại TP.HCM' }],
+  stats: [{ value: '2-6', label: 'Tuổi đầu vào' }, { value: '1:8', label: 'Tỉ lệ GV/HS' }, { value: '100%', label: 'Tiếng Anh bản ngữ' }, { value: '2', label: 'Cơ sở chính thức tại TP.HCM' }],
   featuresEyebrow: 'Điểm khác biệt', featuresTitle: 'Tại sao mầm non Việt Anh phù hợp với con bạn',
   features: [
     { title: 'Tiếng Anh ngay từ đầu', body: 'Con được tiếp xúc tiếng Anh tự nhiên mỗi ngày qua hoạt động học tập, vui chơi và giao tiếp với giáo viên bản ngữ.' },
@@ -647,7 +647,7 @@ reg('class-contact-multiple-locations', {
   ctaPrimaryText: 'Liên hệ tuyển sinh', ctaPrimaryHref: '/tuyen-sinh',
   ctaSecondaryText: 'Xem cơ sở', ctaSecondaryHref: '/co-so',
   statsEyebrow: 'Hệ thống', statsTitle: 'Nhiều cơ sở, một tiêu chuẩn',
-  stats: [{ value: '3', label: 'Cơ sở tại TP.HCM' }, { value: '4', label: 'Kênh liên hệ' }, { value: '<5 phút', label: 'Phản hồi Zalo' }, { value: 'T2–T7', label: 'Ngày hoạt động' }],
+  stats: [{ value: '2', label: 'Cơ sở chính thức tại TP.HCM' }, { value: '4', label: 'Kênh liên hệ' }, { value: '<5 phút', label: 'Phản hồi Zalo' }, { value: 'T2–T7', label: 'Ngày hoạt động' }],
   featuresEyebrow: 'Các cơ sở', featuresTitle: 'Tìm cơ sở Trường Việt Anh gần nhất',
   features: [
     { title: 'Gò Vấp – Phan Huy Ích', body: '160/72 Phan Huy Ích, P. An Hội Tây, Q. Gò Vấp. Mầm non & Tiểu học. Hotline: 0916 961 409.' },
