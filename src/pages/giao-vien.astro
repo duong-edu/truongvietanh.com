@@ -4,12 +4,15 @@ import { schoolFacts } from '../data/school-facts';
 import { giaoVienChuNhiem, giaoVienBoMon, giaoVienBanNgu, hienThi } from '../data/doi-ngu-giao-vien';
 import HeaderBase from '../components/HeaderBase.astro';
 import FooterBase from '../components/FooterBase.astro';
+import { banLanhDao, banLanhDaoSchema, phongBan } from '../data/ban-lanh-dao-phong-ban';
 
 const tabs = [
+  { id: 'ban-lanh-dao', label: 'Ban Lãnh Đạo', icon: '🏛️' },
   { id: 'chu-nhiem', label: 'Giáo viên Chủ Nhiệm', icon: '👩‍🏫' },
   { id: 'bo-mon', label: 'Giáo viên Bộ Môn', icon: '📚' },
   { id: 'ban-ngu', label: 'Giáo viên Bản Ngữ', icon: '🌍' },
-  { id: 'tu-van', label: 'Đội Ngũ Tư Vấn', icon: '💬' },
+  { id: 'tu-van', label: 'Đội Ngũ Tư Vấn (SO)', icon: '💬' },
+  ...phongBan.map((p) => ({ id: p.id, label: p.tab, icon: p.icon })),
 ];
 
 const tuVan = [
@@ -69,15 +72,30 @@ const tuVan = [
   },
 ];
 
-const structuredData = {
+const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://truongvietanh.com' },
     { '@type': 'ListItem', position: 2, name: 'Giới thiệu', item: 'https://truongvietanh.com/gioi-thieu' },
-    { '@type': 'ListItem', position: 3, name: 'Giáo viên', item: 'https://truongvietanh.com/giao-vien' },
+    { '@type': 'ListItem', position: 3, name: 'Ban lãnh đạo & đội ngũ', item: 'https://truongvietanh.com/giao-vien' },
   ],
 };
+
+const structuredData = [
+  breadcrumbLd,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'Ban Lãnh Đạo & đội ngũ – Trường Việt Anh',
+    url: 'https://truongvietanh.com/giao-vien',
+    mainEntity: {
+      '@type': 'EducationalOrganization',
+      name: 'Trường Việt Anh',
+      employee: banLanhDaoSchema.map((p) => ({ '@type': 'Person', name: p.name, jobTitle: p.jobTitle })),
+    },
+  },
+];
 
 function initials(name: string): string {
   const parts = name.replace(/^(Cô|Thầy|Mr\.|Ms\.|Mrs\.)\s*/i, '').split(/\s+/);
@@ -86,8 +104,8 @@ function initials(name: string): string {
 ---
 
 <BaseLayout
-  title="Đội ngũ giáo viên – Trường Việt Anh"
-  description="Giáo viên Trường Việt Anh: GV Chủ nhiệm, GV Bộ môn (Toán, Văn, Anh bản ngữ, STEAM, Thể dục, Mỹ thuật), Đội ngũ tư vấn. Đội ngũ 500+ cán bộ giàu kinh nghiệm."
+  title="Ban Lãnh Đạo & Đội Ngũ – Trường Việt Anh"
+  description="Ban lãnh đạo, giáo viên (chủ nhiệm, bộ môn, bản ngữ), đội ngũ tư vấn và các phòng ban của Trường Việt Anh."
   canonical="https://truongvietanh.com/giao-vien"
   ogImage="https://media.truongvietanh.com/images/thuyet-trinh-09.webp"
   structuredData={structuredData}
@@ -103,10 +121,10 @@ function initials(name: string): string {
           <span aria-hidden="true">/</span>
           <a href="/gioi-thieu">Giới thiệu</a>
           <span aria-hidden="true">/</span>
-          <span>Giáo viên</span>
+          <span>Ban lãnh đạo & đội ngũ</span>
         </nav>
-        <h1 class="gv-h1">Đội ngũ giáo viên & tư vấn</h1>
-        <p class="gv-sub">Đội ngũ giáo viên giàu kinh nghiệm, trong đó có giáo viên bản ngữ và thạc sĩ chuyên ngành — đồng hành cùng con suốt hành trình học tập.</p>
+        <h1 class="gv-h1">Ban lãnh đạo & đội ngũ</h1>
+        <p class="gv-sub">Ban lãnh đạo, đội ngũ giáo viên, đội ngũ tư vấn và các phòng ban — đồng hành cùng con suốt hành trình học tập.</p>
         <div class="gv-stats">
           <div class="gv-stat"><strong>{schoolFacts.yearsRunning}</strong><span>Năm kinh nghiệm</span></div>
           <div class="gv-stat"><strong>{schoolFacts.campuses}</strong><span>Cơ sở chính thức</span></div>
@@ -139,8 +157,33 @@ function initials(name: string): string {
 
       <div class="gv-container gv-panels-wrap">
 
+        <!-- Panel 0: Ban Lãnh Đạo (gộp từ trang /ban-lanh-dao cũ, 09/11/2026) -->
+        <div class="gv-panel is-active" id="panel-ban-lanh-dao" role="tabpanel" aria-labelledby="tab-ban-lanh-dao">
+          <p class="gv-panel__intro">Đội ngũ lãnh đạo giàu kinh nghiệm, tâm huyết với sứ mệnh xây dựng nền giáo dục vừa nhân văn vừa hiệu quả cho thế hệ trẻ Việt Nam.</p>
+          <div class="gv-grid gv-grid--tv">
+            {banLanhDao.map(m => (
+              <article class="gv-tvcard">
+                <div class="gv-tvcard__photo">
+                  {m.photo
+                    ? <img src={m.photo} alt={`Ảnh ${m.name}`} loading="lazy" width="600" height="800" />
+                    : <span class="gv-card__initials">{initials(m.name)}</span>
+                  }
+                </div>
+                <div class="gv-tvcard__body">
+                  <h3 class="gv-tvcard__name notranslate" translate="no">{m.name}</h3>
+                  <p class="gv-tvcard__role">{m.title} · {m.org}</p>
+                  <div class="gv-tvcard__text">
+                    {m.description && <p class={m.quote ? 'gv-tvcard__quote' : 'gv-tvcard__desc'}>{m.description}</p>}
+                    {m.mission && <p class="gv-tvcard__quote">“{m.mission}”</p>}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
         <!-- Panel 1: Chủ nhiệm -->
-        <div class="gv-panel is-active" id="panel-chu-nhiem" role="tabpanel" aria-labelledby="tab-chu-nhiem">
+        <div class="gv-panel" id="panel-chu-nhiem" role="tabpanel" aria-labelledby="tab-chu-nhiem" hidden>
           <p class="gv-panel__intro">Giáo viên chủ nhiệm trực tiếp đồng hành cùng lớp — chịu trách nhiệm về kỷ luật, liên lạc phụ huynh và kế hoạch học tập từng học sinh. <strong>Bấm vào thẻ để đọc tuyên ngôn sứ mệnh</strong> của thầy cô.</p>
           <div class="gv-grid gv-grid--tv">
             {hienThi(giaoVienChuNhiem).map(t => (
@@ -242,6 +285,38 @@ function initials(name: string): string {
             ))}
           </div>
         </div>
+
+        <!-- Panels các phòng ban (09/11/2026): khung để sẵn, bổ sung ảnh và thông tin sau — dữ liệu ở src/data/ban-lanh-dao-phong-ban.ts -->
+        {phongBan.map((pb) => (
+          <div class="gv-panel" id={`panel-${pb.id}`} role="tabpanel" aria-labelledby={`tab-${pb.id}`} hidden>
+            <p class="gv-panel__intro">{pb.moTa}</p>
+            <div class="gv-grid gv-grid--tv">
+              {pb.thanhVien.map((m) => (
+                <article class="gv-tvcard">
+                  <div class="gv-tvcard__photo">
+                    {m.photo
+                      ? <img src={m.photo} alt={`Ảnh ${m.name}`} loading="lazy" width="600" height="800" />
+                      : <span class="gv-card__initials">{initials(m.name)}</span>
+                    }
+                  </div>
+                  <div class="gv-tvcard__body">
+                    <h3 class="gv-tvcard__name notranslate" translate="no">{m.name}</h3>
+                    <p class="gv-tvcard__role">{m.title}</p>
+                  </div>
+                </article>
+              ))}
+              {Array.from({ length: pb.choTrong }).map(() => (
+                <article class="gv-tvcard gv-tvcard--trong" aria-label="Đang cập nhật">
+                  <div class="gv-tvcard__photo"><span class="gv-card__initials">+</span></div>
+                  <div class="gv-tvcard__body">
+                    <h3 class="gv-tvcard__name">Đang cập nhật</h3>
+                    <p class="gv-tvcard__role">Sẽ bổ sung thông tin</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
 
       </div>
     </section>
@@ -602,4 +677,11 @@ function initials(name: string): string {
   .gv-btn--primary:hover { background: #f9dd0e; transform: translateY(-2px); }
   .gv-btn--ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.6); }
   .gv-btn--ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+  /* BAN LÃNH ĐẠO + PHÒNG BAN (gộp 09/11/2026) */
+  .gv-tvcard__desc { font-size: .84rem; color: #475569; line-height: 1.6; margin: 0 0 .5rem; }
+  .gv-tvcard--trong { border-style: dashed; background: #f8fafc; }
+  .gv-tvcard--trong:hover { border-color: #e2e8f0; box-shadow: none; transform: none; }
+  .gv-tvcard--trong .gv-tvcard__photo { background: #e2e8f0; color: #64748b; }
+  .gv-tvcard--trong .gv-tvcard__name { color: #475569; }
 </style>

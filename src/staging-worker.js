@@ -237,6 +237,8 @@ export default {
       '/tuyen-sinh/thcs/phu-huynh-noi-gi': '/trung-hoc-co-so/',
       '/tuyen-sinh/thcs/cam-on': '/trung-hoc-co-so/',
       '/tuyen-sinh/thcs/hoc-phi': '/hoc-phi/',
+      // 09/11/2026 — gop /ban-lanh-dao vao /giao-vien (the tab dau tien la Ban Lanh Dao)
+      '/ban-lanh-dao': '/giao-vien/',
     };
 
     // 07/11/2026 — Viec #0 cua Sprint B5: 125 URL /blog/* cu dang 404 THAT tren

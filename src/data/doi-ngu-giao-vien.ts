@@ -9,7 +9,7 @@
 // BHXH, số điện thoại, địa chỉ — TUYỆT ĐỐI không đưa vào repo (GitHub công khai).
 //
 // KHÔNG có 3 lãnh đạo (cô Trần Thị Ngọc Tuyền, cô Nguyễn Thị Ái Hoa,
-// cô Nguyễn Thị Lan) vì họ đã có thẻ riêng ở /ban-lanh-dao.
+// cô Nguyễn Thị Lan) vì họ đã có thẻ riêng ở thẻ "Ban Lãnh Đạo" (/giao-vien).
 //
 // CHỨC DANH (role) — chuẩn hoá 01/10/2026: KHÔNG ghi "GV bộ môn" chung chung,
 // phải ghi đúng môn dạy ("Giáo viên Toán", "GVCN · Giáo viên Ngữ văn"...).

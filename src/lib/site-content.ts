@@ -117,8 +117,7 @@ export const mainNavLeft = [
     href: '/gioi-thieu',
     children: [
       { label: 'Giới thiệu nhà trường', href: '/gioi-thieu' },
-      { label: 'Ban Lãnh Đạo', href: '/ban-lanh-dao' },
-      { label: 'Giáo viên', href: '/giao-vien' },
+      { label: 'Ban lãnh đạo & đội ngũ', href: '/giao-vien' },
       { label: 'Tâm lý học đường', href: '/tamlyhocduong' },
       { label: 'Học bổng', href: '/hoc-bong' },
       { label: 'Học phí', href: '/hoc-phi' },
