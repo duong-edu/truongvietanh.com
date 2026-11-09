@@ -102,9 +102,9 @@ export default {
     // /so-sanh (thay bai FPT vs Viet Anh). 25 URL /thuc-don-tuan-* va 62 URL cong thuc
     // Toan/tu vung KHONG nam trong dot nay — can xu ly rieng (410, khong phai redirect).
     const LEGACY_404_REDIRECTS_2026_09_02 = {
-      '/hoc-phi-truong-tu-thuc-tphcm': '/blog/blog-hoc-phi-truong-tu-thuc-tphcm-2026',
-      '/top-truong-dan-lap': '/blog/top-truong-thpt-tu-thuc-tphcm',
-      '/top-20-truong-thpt-tot-nhat-tphcm-ban-da-biet-chua': '/blog/top-truong-thpt-tu-thuc-tphcm',
+      '/hoc-phi-truong-tu-thuc-tphcm': '/blog/blog-hoc-phi-truong-tu-thuc-tphcm-2026/',
+      '/top-truong-dan-lap': '/blog/top-truong-thpt-tu-thuc-tphcm/',
+      '/top-20-truong-thpt-tot-nhat-tphcm-ban-da-biet-chua': '/blog/top-truong-thpt-tu-thuc-tphcm/',
       '/truong-quoc-te-tphcm': '/blog/top-truong-quoc-te-tphcm-2026-2027/',
       '/top-truong-quoc-te-tai-tphcm': '/blog/top-truong-quoc-te-tphcm-2026-2027/',
       '/top-truong-thpt-quoc-te-tphcm': '/blog/top-truong-quoc-te-tphcm-2026-2027/',
@@ -113,45 +113,45 @@ export default {
       // ca 3 loai hinh gom cong lap) nhung bai do dang draft, hen dang 25/09/2026.
       // Doi ngay do thi chuyen luat nay sang bai tru cot.
       '/nen-cho-con-hoc-truong-quoc-te-hay-cong-lap': '/blog/top-truong-quoc-te-tphcm-2026-2027/',
-      '/muc-hoc-phi-truong-quoc-te': '/blog/hoc-phi-khung-cua-truong-quoc-te-ai-quan-ly',
-      '/muc-hoc-phi-truong-mam-non-quoc-te': '/blog/hoc-phi-khung-cua-truong-quoc-te-ai-quan-ly',
-      '/cach-chon-truong-thpt': '/chon-truong-thpt',
-      '/truong-tieu-hoc-tu-thuc-quan-12': '/blog/tieu-hoc-quan-12',
-      '/truong-tieu-hoc-quoc-te-quan-12': '/blog/tieu-hoc-quan-12',
-      '/truong-tieu-hoc-tu-thuc-go-vap': '/blog/tieu-hoc-go-vap',
-      '/truong-tieu-hoc-quoc-te-quan-go-vap': '/blog/tieu-hoc-go-vap',
-      '/danh-sach-cac-truong-dan-lap-go-vap-noi-bat-trong-nam-nay': '/blog/tieu-hoc-go-vap',
+      '/muc-hoc-phi-truong-quoc-te': '/blog/hoc-phi-khung-cua-truong-quoc-te-ai-quan-ly/',
+      '/muc-hoc-phi-truong-mam-non-quoc-te': '/blog/hoc-phi-khung-cua-truong-quoc-te-ai-quan-ly/',
+      '/cach-chon-truong-thpt': '/chon-truong-thpt/',
+      '/truong-tieu-hoc-tu-thuc-quan-12': '/blog/truong-tieu-hoc-tu-thuc-quan-12/',
+      '/truong-tieu-hoc-quoc-te-quan-12': '/blog/truong-tieu-hoc-tu-thuc-quan-12/',
+      '/truong-tieu-hoc-tu-thuc-go-vap': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
+      '/truong-tieu-hoc-quoc-te-quan-go-vap': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
+      '/danh-sach-cac-truong-dan-lap-go-vap-noi-bat-trong-nam-nay': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
       '/truong-tieu-hoc-tu-thuc-quan-tan-binh': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
       '/truong-tieu-hoc-tu-thuc-quan-tan-phu': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
       '/truong-tieu-hoc-quoc-te-quan-tan-phu': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
-      '/truong-tieu-hoc-quoc-te-quan-binh-tan': '/co-so/lien-cap-binh-tan',
-      '/truong-tieu-hoc-tu-thuc-o-quan-binh-tan': '/co-so/lien-cap-binh-tan',
+      '/truong-tieu-hoc-quoc-te-quan-binh-tan': '/co-so/lien-cap-binh-tan/',
+      '/truong-tieu-hoc-tu-thuc-o-quan-binh-tan': '/co-so/lien-cap-binh-tan/',
       '/truong-tieu-hoc-tu-thuc-quan-binh-thanh': '/blog/truong-tieu-hoc-tu-thuc-tphcm/',
-      '/truong-mam-non-tu-thuc-tot-o-quan-12': '/blog/mam-non-quan-12',
-      '/truong-mam-non-song-ngu-quan-12': '/blog/mam-non-quan-12',
-      '/truong-mam-non-quoc-te-quan-12': '/blog/mam-non-quan-12',
+      '/truong-mam-non-tu-thuc-tot-o-quan-12': '/blog/mam-non-go-vap/',
+      '/truong-mam-non-song-ngu-quan-12': '/blog/mam-non-go-vap/',
+      '/truong-mam-non-quoc-te-quan-12': '/blog/mam-non-go-vap/',
       '/truong-mam-non-tu-thuc-quan-binh-thanh': '/blog/truong-mam-non-tu-thuc-tphcm/',
       '/truong-mam-non-tu-thuc-quan-tan-phu': '/blog/truong-mam-non-tu-thuc-tphcm/',
       '/truong-mam-non-quoc-te-quan-tan-phu': '/blog/truong-mam-non-tu-thuc-tphcm/',
       // Binh Tan KHONG co Mam non (xem src/pages/lop-4-6-tuoi-binh-tan.astro) — ve
       // dung trang "lop 4-6 tuoi", KHONG ve /co-so/lien-cap-binh-tan.
-      '/truong-mam-non-tu-thuc-quan-binh-tan': '/lop-4-6-tuoi-binh-tan',
-      '/truong-mam-non-quoc-te-quan-binh-tan': '/lop-4-6-tuoi-binh-tan',
-      '/truong-mam-non-tu-thuc': '/blog/truong-mam-non-tu-thuc-tphcm',
-      '/truong-mam-non-tu-thuc-quan-8': '/blog/truong-mam-non-tu-thuc-tphcm',
-      '/truong-mam-non-tu-thuc-quan-1': '/blog/truong-mam-non-tu-thuc-tphcm',
-      '/truong-mam-non-tu-thuc-quan-4': '/blog/truong-mam-non-tu-thuc-tphcm',
-      '/truong-mam-non-tu-thuc-tot-o-quan-6': '/blog/truong-mam-non-tu-thuc-tphcm',
-      '/hoc-phi-truong-mam-non-tu-thuc': '/blog/hoc-phi-truong-mam-non-tu-thuc-tphcm',
-      '/hoc-phi-viet-anh-nam-hoc-2026-2027': '/hoc-phi',
+      '/truong-mam-non-tu-thuc-quan-binh-tan': '/lop-4-6-tuoi-binh-tan/',
+      '/truong-mam-non-quoc-te-quan-binh-tan': '/lop-4-6-tuoi-binh-tan/',
+      '/truong-mam-non-tu-thuc': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-tu-thuc-quan-8': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-tu-thuc-quan-1': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-tu-thuc-quan-4': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/truong-mam-non-tu-thuc-tot-o-quan-6': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/hoc-phi-truong-mam-non-tu-thuc': '/blog/hoc-phi-truong-mam-non-tu-thuc-tphcm/',
+      '/hoc-phi-viet-anh-nam-hoc-2026-2027': '/hoc-phi/',
       // Tam: chua co bai "truong song ngu TPHCM" that, dung bai "song ngu la gi" gan nhat.
-      '/hoc-phi-cac-truong-song-ngu': '/blog/blog-truong-mam-non-song-ngu-la-gi',
-      '/truong-song-ngu-tphcm': '/blog/blog-truong-mam-non-song-ngu-la-gi',
-      '/top-truong-song-ngu': '/blog/blog-truong-mam-non-song-ngu-la-gi',
-      '/cach-on-thi-vao-10-hieu-qua': '/blog/bi-quyet-on-thi-lop-10-hieu-qua',
-      '/cach-dat-diem-cao-mon-anh-thi-vao-10': '/blog/bi-quyet-on-thi-lop-10-hieu-qua',
-      '/chuyen-truong-tu-thuc-sang-cong-lap': '/blog/blog-lien-cap-vs-chuyen-truong',
-      '/thoi-gian-nao-la-tot-nhat-de-chuyen-truong-trong-nam-hoc-tu-van': '/blog/blog-lien-cap-vs-chuyen-truong',
+      '/hoc-phi-cac-truong-song-ngu': '/blog/blog-truong-mam-non-song-ngu-la-gi/',
+      '/truong-song-ngu-tphcm': '/blog/blog-truong-mam-non-song-ngu-la-gi/',
+      '/top-truong-song-ngu': '/blog/blog-truong-mam-non-song-ngu-la-gi/',
+      '/cach-on-thi-vao-10-hieu-qua': '/blog/bi-quyet-on-thi-lop-10-hieu-qua/',
+      '/cach-dat-diem-cao-mon-anh-thi-vao-10': '/blog/bi-quyet-on-thi-lop-10-hieu-qua/',
+      '/chuyen-truong-tu-thuc-sang-cong-lap': '/blog/blog-lien-cap-vs-chuyen-truong/',
+      '/thoi-gian-nao-la-tot-nhat-de-chuyen-truong-trong-nam-hoc-tu-van': '/blog/blog-lien-cap-vs-chuyen-truong/',
       '/nen-cho-con-hoc-truong-mam-non-cong-hay-tu': '/blog/checklist-chon-truong-mam-non/',
       '/cach-day-be-viet-chu': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
       '/day-be-hoc-so': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
@@ -160,9 +160,9 @@ export default {
       '/cach-day-con-hoc-lop-1-o-nha': '/blog/day-be-hoc-chu-so-truoc-lop-1/',
       // 08/09/2026: bai rieng "16 ky nang the ky 21" da live, khong con dung tam
       // trang triet ly giao duc nua.
-      '/16-ky-nang-quan-trong-trong-the-ky-21-hoc-sinh-can-co-de-thanh-cong': '/blog/16-ky-nang-the-ky-21-la-gi',
+      '/16-ky-nang-quan-trong-trong-the-ky-21-hoc-sinh-can-co-de-thanh-cong': '/blog/16-ky-nang-the-ky-21-la-gi/',
       // Tam: bai goc "so sanh FPT vs Viet Anh" chua duoc viet lai, dung trang /so-sanh chung.
-      '/blog/so-sanh-truong-fpt-va-truong-viet-anh': '/so-sanh',
+      '/blog/so-sanh-truong-fpt-va-truong-viet-anh': '/so-sanh/',
     };
 
     // 08/09/2026 — MOI REDIRECT MOI TU GIO DAT O DAY, KHONG THEM VAO public/_redirects.
@@ -239,10 +239,193 @@ export default {
       '/tuyen-sinh/thcs/hoc-phi': '/hoc-phi/',
     };
 
+    // 07/11/2026 — Viec #0 cua Sprint B5: 125 URL /blog/* cu dang 404 THAT tren
+    // production (da do tung URL ngay 07/11, khong suy dien tu GSC). Bao cao AEO thang 10
+    // ghi "0/177 URL con 404 — khong xac minh duoc"; ket qua do that: 125 con 404, 10 da
+    // 301, 5 da 307. Ca 125 dich duoi day deu dang song (da kiem tra tra ve 200).
+    // Dich LUON co dau "/" cuoi: khong co thi Astro tra 307 roi moi 200 — thanh 2 chang.
+    const REDIRECTS_2026_11_07 = {
+      // 2 URL → /blog/tuyen-sinh-mam-non-tphcm-2026
+      '/blog/su-kien-tuyen-sinh-mam-non-2026': '/blog/tuyen-sinh-mam-non-tphcm-2026/',
+      '/blog/brochure-tuyen-sinh-khoi-mam-non-nam-hoc-2019-2020': '/blog/tuyen-sinh-mam-non-tphcm-2026/',
+      // 1 URL → /blog/be-cham-noi-co-nen-di-hoc-mam-non-khong
+      '/blog/blog-tre-cham-noi-co-nen-di-mam-non': '/blog/be-cham-noi-co-nen-di-hoc-mam-non-khong/',
+      // 3 URL → /blog/hoc-phi-truong-thpt-tu-thuc-tphcm
+      '/blog/hoc-phi-thpt': '/blog/hoc-phi-truong-thpt-tu-thuc-tphcm/',
+      '/blog/blog-hoc-phi-thpt-tphcm-2026': '/blog/hoc-phi-truong-thpt-tu-thuc-tphcm/',
+      '/blog/hoc-phi-truong-tieu-hoc-thcs-thpt-viet-anh-tphcm': '/blog/hoc-phi-truong-thpt-tu-thuc-tphcm/',
+      // 11 URL → /blog/truong-noi-tru-tphcm
+      '/blog/so-sanh-noi-tru-tphcm': '/blog/truong-noi-tru-tphcm/',
+      '/blog/blog-che-do-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/truong-noi-tru-cho-cac-con': '/blog/truong-noi-tru-tphcm/',
+      '/blog/uu-diem-cua-truong-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/luu-y-khi-cho-con-hoc-truong-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/tai-sao-nen-cho-con-di-hoc-truong-noi-tru-my': '/blog/truong-noi-tru-tphcm/',
+      '/blog/10-ly-do-tai-sao-ban-nen-hoc-truong-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/5-bi-mat-cua-co-thu-khoa-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/loi-ich-cua-viec-hoc-truong-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/noi-long-hung-than-truong-noi-tru': '/blog/truong-noi-tru-tphcm/',
+      '/blog/truong-noi-tru-bac-nhat-o-vuong-quoc-anh': '/blog/truong-noi-tru-tphcm/',
+      // 9 URL → /blog/bi-quyet-thi-do-tuyen-sinh-lop-10
+      '/blog/ha-noi-quyet-chi-8-ty-cho-ky-thi-tuyen-sinh-lop-10': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/de-thi-va-dap-an-thi-tuyen-sinh-lop-10-mon-tieng-anh': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/de-thi-va-dap-an-thi-tuyen-sinh-lop-10-mon-toan': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/tuyen-sinh-lop-10-de-thi-dap-an-mon-toan': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/thi-tuyen-sinh-vao-lop-10-ty-le-choi-tang-cao': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/cong-bo-phuong-an-tuyen-sinh-lop-6-tai-tp-hcm': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/thong-tin-moi-nhat-ve-tuyen-sinh-lop-10-tai-tphcm': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/thong-tin-moi-ve-tuyen-sinh-lop-10-tphcm': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      '/blog/quy-che-thi-tuyen-sinh-2015': '/blog/bi-quyet-thi-do-tuyen-sinh-lop-10/',
+      // 2 URL → /blog/top-truong-mam-non-tu-thuc-tphcm
+      '/blog/blog-top-truong-mam-non-tphcm-2026': '/blog/top-truong-mam-non-tu-thuc-tphcm/',
+      '/blog/top-5-truong-mam-non-o-go-vap-uy-tin-tim-truong-mau-giao': '/blog/top-truong-mam-non-tu-thuc-tphcm/',
+      // 8 URL → /blog/truong-mam-non-tu-thuc-tphcm
+      '/blog/blog-mam-non-cong-lap-vs-tu-thuc': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/hoc-thu-mam-non': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/mam-non-quan-12': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/mam-non-binh-tan': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/mam-non-tan-binh': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/mam-non-thu-duc': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/blog-may-tuoi-di-hoc-mam-non': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      '/blog/blog-con-khoc-khi-di-mam-non': '/blog/truong-mam-non-tu-thuc-tphcm/',
+      // 1 URL → /blog/5-cach-hoc-tren-internet
+      '/blog/28-cach-hoc-tieng-anh-hieu-qua': '/blog/5-cach-hoc-tren-internet/',
+      // 2 URL → /blog/bi-quyet-on-thi-lop-10-hieu-qua
+      '/blog/bi-quyet-on-thi-hieu-qua-mon-tieng-anh': '/blog/bi-quyet-on-thi-lop-10-hieu-qua/',
+      '/blog/10-bi-quyet-hoc-tieng-anh-hieu-qua': '/blog/bi-quyet-on-thi-lop-10-hieu-qua/',
+      // 4 URL → /blog/hoc-sinh-thi-lop-10-duoc-cong-toi-da-5-diem-uu-tien
+      '/blog/diem-moi-trong-ki-tuyen-sinh-vao-lop-10-nam-2014': '/blog/hoc-sinh-thi-lop-10-duoc-cong-toi-da-5-diem-uu-tien/',
+      '/blog/tp-hcm-cong-bo-diem-thi-lop-10': '/blog/hoc-sinh-thi-lop-10-duoc-cong-toi-da-5-diem-uu-tien/',
+      '/blog/diem-chuan-tuyen-sinh-lop-10-nam-hoc-2014-2015': '/blog/hoc-sinh-thi-lop-10-duoc-cong-toi-da-5-diem-uu-tien/',
+      '/blog/tphcm-du-kien-ngay-22-6-se-cong-bo-diem-cac-mon-thi-vao-lop-10': '/blog/hoc-sinh-thi-lop-10-duoc-cong-toi-da-5-diem-uu-tien/',
+      // 3 URL → /blog/hoc-phi-truong-quoc-te-khong-con-la-noi-lo-cua-phu-huynh
+      '/blog/phu-huynh-noi-gi-ve-truong-quoc-te-viet-anh': '/blog/hoc-phi-truong-quoc-te-khong-con-la-noi-lo-cua-phu-huynh/',
+      '/blog/truong-quoc-te-viet-anh-giai-quyet-noi-lo-phat-sinh-hoc-phi': '/blog/hoc-phi-truong-quoc-te-khong-con-la-noi-lo-cua-phu-huynh/',
+      '/blog/xoa-tan-noi-lo-hoc-phi-truong-quoc-te': '/blog/hoc-phi-truong-quoc-te-khong-con-la-noi-lo-cua-phu-huynh/',
+      // 1 URL → /blog/9-phuong-phap-giang-day-hoc-moi-nam-2016
+      '/blog/phuong-phap-giang-day-doi-moi-tai-truong-quoc-te-viet-anh': '/blog/9-phuong-phap-giang-day-hoc-moi-nam-2016/',
+      // 13 URL → /blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua
+      '/blog/tieng-anh-cho-nguoi-moi-bat-dau': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/bi-kip-de-hoc-tieng-anh-hieu-qua-qua-phim-truong-quoc-te': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/hoc-tieng-anh-qua-internet-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/7-cach-hoc-tieng-anh-voi-facebook-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/cach-hoc-tieng-anh-cuc-nhanh-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/dot-pha-trong-tieng-anh-phan-1-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/dot-pha-trong-tieng-anh-phan-2-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/hoc-tieng-anh-qua-mang-xa-hoi-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/hoc-tieng-anh-thong-qua-bai-hat-tai-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/phuong-phap-hoc-tieng-anh-giao-tiep-truong-quoc-te-viet-anh': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/phuong-phap-hoc-tieng-anh-qua-phim-truong-quoc-te': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/blog-phat-am-tieng-anh-chuan': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      '/blog/mat-goc-tieng-anh-nen-bat-dau-tu-dau': '/blog/truong-quoc-te-viet-anh-6-buoc-giup-hoc-tieng-anh-hieu-qua/',
+      // 1 URL → /blog/hoc-phi-truong-tieu-hoc-tu-thuc-tphcm
+      '/blog/hoc-phi-tieu-hoc-go-vap': '/blog/hoc-phi-truong-tieu-hoc-tu-thuc-tphcm/',
+      // 2 URL → /blog/hoc-phi-truong-mam-non-tu-thuc-tphcm
+      '/blog/hoc-phi-mam-non-binh-tan': '/blog/hoc-phi-truong-mam-non-tu-thuc-tphcm/',
+      '/blog/hoc-phi-truong-mam-non-quoc-te-o-go-vap-bao-nhieu': '/blog/hoc-phi-truong-mam-non-tu-thuc-tphcm/',
+      // 1 URL → /blog/checklist-chon-truong-mam-non
+      '/blog/blog-cach-chon-truong-mam-non-cho-con': '/blog/checklist-chon-truong-mam-non/',
+      // 5 URL → /blog/cua-hep-vao-lop-10
+      '/blog/blog-chuan-bi-vao-lop-1': '/blog/cua-hep-vao-lop-10/',
+      '/blog/blog-thi-vao-lop-10-tphcm': '/blog/cua-hep-vao-lop-10/',
+      '/blog/diem-chuan-vao-lop-10-tphcm-nam-2015': '/blog/cua-hep-vao-lop-10/',
+      '/blog/tp-hcm-da-co-diem-chuan-vao-lop-10-thpt': '/blog/cua-hep-vao-lop-10/',
+      '/blog/chi-tieu-tuyen-sinh-vao-lop-10-tai-tp-hcm-nam-2015': '/blog/cua-hep-vao-lop-10/',
+      // 3 URL → /blog/chuong-trinh-tieu-hoc-song-ngu-la-gi
+      '/blog/blog-tieu-hoc-song-ngu-vs-thuong': '/blog/chuong-trinh-tieu-hoc-song-ngu-la-gi/',
+      '/blog/loi-ich-cua-chuong-trinh-song-ngu-truong-quoc-te-2018': '/blog/chuong-trinh-tieu-hoc-song-ngu-la-gi/',
+      '/blog/so-sanh-truong-song-ngu-tphcm': '/blog/chuong-trinh-tieu-hoc-song-ngu-la-gi/',
+      // 2 URL → /blog/truong-viet-anh-dung-ai-nhu-the-nao
+      '/blog/hoc-sinh-truong-quoc-te-viet-anh-hoc-tieng-anh-nhu-the-nao': '/blog/truong-viet-anh-dung-ai-nhu-the-nao/',
+      '/blog/chon-truong-va-nganh-nhu-the-nao-khi-du-hoc-uc': '/blog/truong-viet-anh-dung-ai-nhu-the-nao/',
+      // 1 URL → /blog/cach-tinh-diem-tuyen-sinh-lop-10
+      '/blog/tp-hcm-diem-tuyen-sinh-lop-10-tang-2-4-diem': '/blog/cach-tinh-diem-tuyen-sinh-lop-10/',
+      // 2 URL → /blog/bang-dai-hoc-top-68-du-hoc-ban-phan
+      '/blog/top-10-dai-hoc-tot-nhat-nhat-ban': '/blog/bang-dai-hoc-top-68-du-hoc-ban-phan/',
+      '/blog/nhung-dieu-can-biet-khi-du-hoc-thuy-si': '/blog/bang-dai-hoc-top-68-du-hoc-ban-phan/',
+      // 1 URL → /blog/khong-vao-lop-10-cong-lap-con-nhieu-co-hoi
+      '/blog/rot-ca-ba-nguyen-vong-lop-10-o-tp-hcm-khong-con-cua-cong-lap': '/blog/khong-vao-lop-10-cong-lap-con-nhieu-co-hoi/',
+      // 1 URL → /blog/kinh-nghiem-lam-bai-thi-mon-toan
+      '/blog/meo-lam-bai-thi-trac-nghiem-mon-tieng-anh': '/blog/kinh-nghiem-lam-bai-thi-mon-toan/',
+      // 1 URL → /blog/khong-thi-lop-10-nen-lam-gi
+      '/blog/nhieu-thi-sinh-thi-lop-10-khong-lam-het-de-mon-toan': '/blog/khong-thi-lop-10-nen-lam-gi/',
+      // 2 URL → /blog/nhung-loi-ich-khi-chon-truong-quoc-te-viet-anh
+      '/blog/nhung-luu-y-khi-chon-truong-cap-3-cho-hoc-sinh': '/blog/nhung-loi-ich-khi-chon-truong-quoc-te-viet-anh/',
+      '/blog/nhung-cau-hoi-truoc-khi-du-hoc-han-quoc': '/blog/nhung-loi-ich-khi-chon-truong-quoc-te-viet-anh/',
+      // 2 URL → /blog/con-thi-truot-lop-10-nen-noi-gi
+      '/blog/blog-co-nen-cho-con-hoc-tieng-anh-tu-lop-1': '/blog/con-thi-truot-lop-10-nen-noi-gi/',
+      '/blog/ngay-236-hoc-sinh-ha-noi-thi-vao-lop-10': '/blog/con-thi-truot-lop-10-nen-noi-gi/',
+      // 3 URL → /blog/lam-the-nao-de-do-vao-lop-10
+      '/blog/lam-the-nao-de-hoc-tieng-anh-tot': '/blog/lam-the-nao-de-do-vao-lop-10/',
+      '/blog/lam-the-nao-de-hoc-tot-tieng-anh': '/blog/lam-the-nao-de-do-vao-lop-10/',
+      '/blog/lam-the-nao-de-phat-am-tot-tieng-anh': '/blog/lam-the-nao-de-do-vao-lop-10/',
+      // 2 URL → /blog/phuong-phap-day-hoc-theo-chu-de
+      '/blog/phuong-phap-hoc-tieng-anh-chu-dong': '/blog/phuong-phap-day-hoc-theo-chu-de/',
+      '/blog/blog-montessori-day-tieng-anh': '/blog/phuong-phap-day-hoc-theo-chu-de/',
+      // 4 URL → /blog/vi-sao-16-000-hoc-sinh-lop-9-khong-chon-thi-vao-truong-lop-10-cong-lap-tai-tp-hcm
+      '/blog/se-co-hon-15-000-thi-sinh-bi-loai-khoi-cuoc-dua-vao-lop-10-cong-lap': '/blog/vi-sao-16-000-hoc-sinh-lop-9-khong-chon-thi-vao-truong-lop-10-cong-lap-tai-tp-hcm/',
+      '/blog/tp-hcm-cong-bo-die-cc-89m-thi-vao-lop-10': '/blog/vi-sao-16-000-hoc-sinh-lop-9-khong-chon-thi-vao-truong-lop-10-cong-lap-tai-tp-hcm/',
+      '/blog/cai-kho-cua-thi-sinh-thi-lop-10-truong-cong-lap-nam-2018': '/blog/vi-sao-16-000-hoc-sinh-lop-9-khong-chon-thi-vao-truong-lop-10-cong-lap-tai-tp-hcm/',
+      '/blog/chi-tieu-tang-20-000-hoc-sinh-van-rot-lop-10-truong-cong-lap': '/blog/vi-sao-16-000-hoc-sinh-lop-9-khong-chon-thi-vao-truong-lop-10-cong-lap-tai-tp-hcm/',
+      // 2 URL → /blog/hoc-phi-truong-noi-tru-tphcm
+      '/blog/top-20-truong-noi-tru-chi-phi-thap-nhat-canada': '/blog/hoc-phi-truong-noi-tru-tphcm/',
+      '/blog/truong-viet-anh-xu-li-noi-lo-hoc-phi-truong-quoc-te-ra-sao': '/blog/hoc-phi-truong-noi-tru-tphcm/',
+      // 2 URL → /blog/thi-tuyen-sinh-lop-10-bi-kip-rinh-diem-cao-toan-van-anh
+      '/blog/tp-hcm-de-thi-va-dap-an-thi-mon-toan-lop-10-nam-2014-2': '/blog/thi-tuyen-sinh-lop-10-bi-kip-rinh-diem-cao-toan-van-anh/',
+      '/blog/de-thi-vao-lop-10-mon-toan-khu-vuc-ha-noi-nam-2015': '/blog/thi-tuyen-sinh-lop-10-bi-kip-rinh-diem-cao-toan-van-anh/',
+      // 3 URL → /blog/bi-quyet-lam-bai-thi-tuyen-sinh-lop-10-dat-ket-qua-cao
+      '/blog/tphcm-cong-bo-ket-qua-tuyen-sinh-lop-10': '/blog/bi-quyet-lam-bai-thi-tuyen-sinh-lop-10-dat-ket-qua-cao/',
+      '/blog/ket-qua-thi-lop-10-tai-tp-hcm-co-den-300-bai-thi-0-diem-co-hoi-vao-truong-cong-lap-bang-0': '/blog/bi-quyet-lam-bai-thi-tuyen-sinh-lop-10-dat-ket-qua-cao/',
+      '/blog/hang-chuc-ngan-thi-sinh-se-rot-lop-10': '/blog/bi-quyet-lam-bai-thi-tuyen-sinh-lop-10-dat-ket-qua-cao/',
+      // 2 URL → /blog/rot-lop-10-cong-lap-truong-dan-lap-hay-nghe-la-lua-chon-tot-nhat
+      '/blog/nen-chon-truong-dh-cao-dang-cong-lap-hay-dan-lap': '/blog/rot-lop-10-cong-lap-truong-dan-lap-hay-nghe-la-lua-chon-tot-nhat/',
+      '/blog/rot-lop-10-cong-lap-hoc-sinh-di-dau': '/blog/rot-lop-10-cong-lap-truong-dan-lap-hay-nghe-la-lua-chon-tot-nhat/',
+      // 1 URL → /blog/5-cach-de-cai-thien-ky-nang-viet-cua-ban
+      '/blog/cai-thien-tieng-anh-cua-ban-qua-reading': '/blog/5-cach-de-cai-thien-ky-nang-viet-cua-ban/',
+      // 1 URL → /blog/top-truong-quoc-te-tphcm-2026-2027
+      '/blog/truong-quoc-te-o-tp-hcm-lua-chon-ngay-cang-tang-2018': '/blog/top-truong-quoc-te-tphcm-2026-2027/',
+      // 1 URL → /blog/chuan-bi-tam-ly-truoc-khi-biet-diem-thi-lop-10
+      '/blog/tp-hcm-diem-chuan-lop-10-cao-hon-nam-truoc-khoang-3-diem': '/blog/chuan-bi-tam-ly-truoc-khi-biet-diem-thi-lop-10/',
+      // 1 URL → /blog/kinh-nghiem-tim-truong-mam-non-tot-phu-huynh-can-biet
+      '/blog/3-luu-y-danh-cho-phu-huynh-khi-tim-truong-mam-non-quoc-te-o-go-vap': '/blog/kinh-nghiem-tim-truong-mam-non-tot-phu-huynh-can-biet/',
+      // 1 URL → /blog/sau-ky-thi-thpt-cha-me-nen-lam-gi
+      '/blog/blog-du-hoc-sau-thpt': '/blog/sau-ky-thi-thpt-cha-me-nen-lam-gi/',
+      // 2 URL → /blog/tuyen-sinh-lop-10-truong-tu-thuc-tphcm-2026
+      '/blog/blog-tin-tuc-tuyen-sinh-2026': '/blog/tuyen-sinh-lop-10-truong-tu-thuc-tphcm-2026/',
+      '/blog/bai-tap-thuc-hanh-nau-an-lop-6a': '/blog/tuyen-sinh-lop-10-truong-tu-thuc-tphcm-2026/',
+      // 2 URL → /blog/phuong-phap-hoc-tap-vui-ve
+      '/blog/101-phuong-phap-hoc-tieng-anh': '/blog/phuong-phap-hoc-tap-vui-ve/',
+      '/blog/phuong-phap-on-thi-mon-tieng-anh': '/blog/phuong-phap-hoc-tap-vui-ve/',
+      // 1 URL → /blog/tuyen-sinh-lop-10-khong-de-dat-diem-cao
+      '/blog/diem-chuan-lop-10-nam-2014-tang-cao': '/blog/tuyen-sinh-lop-10-khong-de-dat-diem-cao/',
+      // 3 URL → /blog/10-bi-mat-cua-nguoi-noi-tieng-anh-thanh-cong
+      '/blog/hoc-tieng-anh-cho-nguoi-di-lam': '/blog/10-bi-mat-cua-nguoi-noi-tieng-anh-thanh-cong/',
+      '/blog/nam-loi-khuyen-cho-viec-noi-tieng-anh-nhu-nguoi-my': '/blog/10-bi-mat-cua-nguoi-noi-tieng-anh-thanh-cong/',
+      '/blog/tieng-anh-cho-nguoi-di-du-lich': '/blog/10-bi-mat-cua-nguoi-noi-tieng-anh-thanh-cong/',
+      // 2 URL → /blog/cach-hoc-hieu-qua-cho-hoc-sinh-thcs-thpt
+      '/blog/ky-tuc-xa-truong-thcs-va-thpt-viet-anh': '/blog/cach-hoc-hieu-qua-cho-hoc-sinh-thcs-thpt/',
+      '/blog/4-hoc-sinh-truong-thcs-va-thpt-viet-anh-xuat-sac-dat-giai-olympic': '/blog/cach-hoc-hieu-qua-cho-hoc-sinh-thcs-thpt/',
+      // 1 URL → /blog/gioi-thieu-cac-truong-noi-tru-nuoc-ngoai
+      '/blog/gioi-thieu-du-hoc-uc-my-canada': '/blog/gioi-thieu-cac-truong-noi-tru-nuoc-ngoai/',
+      // 2 URL → /blog/nhung-uu-diem-cua-giao-duc-truong-noi-tru
+      '/blog/nhung-dieu-can-luu-y-khi-cho-tre-hoc-truong-noi-tru': '/blog/nhung-uu-diem-cua-giao-duc-truong-noi-tru/',
+      '/blog/nhung-dieu-can-luu-y-ve-truong-noi-tru-o-anh': '/blog/nhung-uu-diem-cua-giao-duc-truong-noi-tru/',
+      // 1 URL → /blog/7-dieu-phu-huynh-can-biet-sgk-thong-nhat-2026
+      '/blog/10-dieu-can-biet-khi-du-hoc-nga': '/blog/7-dieu-phu-huynh-can-biet-sgk-thong-nhat-2026/',
+      // 2 URL → /blog/chuong-trinh-dao-tao
+      '/blog/chuong-trinh-giang-day-tai-truong-quoc-te-viet-anh': '/blog/chuong-trinh-dao-tao/',
+      '/blog/chuong-trinh-ngoai-khoa-tai-truong-quoc-te-viet-anh': '/blog/chuong-trinh-dao-tao/',
+      // 1 URL → /blog/chuyen-tu-truong-cong-sang-truong-tu-o-tieu-hoc
+      '/blog/ngan-truong-cong-sang-truong-quoc-te-2018': '/blog/chuyen-tu-truong-cong-sang-truong-tu-o-tieu-hoc/',
+      // 1 URL → /blog/bi-quyet-thi-ielts
+      '/blog/vinh-du-dat-chuan-to-chuc-thi-ielts': '/blog/bi-quyet-thi-ielts/',
+    };
+
     {
       const normalizedPath = url.pathname.replace(/\/$/, '') || '/';
       const legacyTarget =
-        LEGACY_404_REDIRECTS_2026_09_02[normalizedPath] || REDIRECTS_2026_09_09[normalizedPath];
+        LEGACY_404_REDIRECTS_2026_09_02[normalizedPath] || REDIRECTS_2026_09_09[normalizedPath] ||
+        REDIRECTS_2026_11_07[normalizedPath];
       if (legacyTarget) {
         return Response.redirect('https://truongvietanh.com' + legacyTarget, 301);
       }
