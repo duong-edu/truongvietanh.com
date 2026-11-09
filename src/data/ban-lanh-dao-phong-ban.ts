@@ -123,10 +123,10 @@ export const phongBan: PhongBan[] = [
     id: 'marketing',
     tab: 'Marketing (MA)',
     icon: '📣',
-    moTa: 'Phòng Marketing gồm hai nhóm: Media và Content.',
+    moTa: 'Phòng Marketing gồm hai nhóm: Media và Social Media.',
     thanhVien: [
       { name: 'Phạm Đức Nghĩa', title: 'Trưởng nhóm Media', photo: '' },
-      { name: 'Võ Song Hương', title: 'Trưởng nhóm Content', photo: '' },
+      { name: 'Võ Song Hương', title: 'Trưởng nhóm Social Media', photo: '' },
       { name: 'Lương Văn Hùng', title: 'Nhân viên Media', photo: '' },
       { name: 'Nguyễn Hiếu Thịnh', title: 'Nhân viên Media', photo: '' },
     ],
