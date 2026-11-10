@@ -108,7 +108,7 @@
   <div class="topbar">
     <div class="logo"><span class="mark">VA</span><span>TRƯỜNG VIỆT ANH</span></div>
     <div class="spacer"></div>
-    <div class="proofpill">12.000+ phụ huynh đã làm</div>
+    
   </div>
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-meta"><span id="pmLabel">Bắt đầu</span><span id="pmPct">0%</span></div>
@@ -677,7 +677,7 @@ function renderQuestion(){
   const q=CUR(), list=q.questions, i=state.idx, item=list[i], total=list.length, remain=total-i;
   state.picked=null;
   const cw=q.childWord;
-  const proofBanner = (i===q.proofAfter) ? `
+  const proofBanner = (false /* ẩn */) ? `
      <div class="proofbar"><span class="stars">★★★★★</span>
        <span class="pq">“${q.proof.q}”</span>
        <span class="pw">${q.proof.w} · cùng <b>12.000+</b> phụ huynh đã làm trắc nghiệm</span></div>` : '';
