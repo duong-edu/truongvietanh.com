@@ -47,7 +47,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên Vật lí',
     trinhDo: 'Thạc sĩ · Vật lí nguyên tử hạt nhân và năng lượng cao',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/le-thi-hoai-my.jpg',
     mission: 'Sống vui vẻ, trung thực, trách nhiệm, yêu thương, mang lại nhiều giá trị cho học sinh thân yêu',
   },
   {
@@ -55,7 +55,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên Toán',
     trinhDo: 'Đại học · Sư phạm Toán học',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/duong-thi-thach-thao.jpg',
     mission: 'Thước đo của cuộc sống không phải là thời gian mà là sự cống hiến, vì thế sứ mệnh của tôi là luôn đóng góp và xây dựng những giá trị tốt đẹp cho xã hội.',
   },
   {
@@ -135,7 +135,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên Tiếng Anh tiểu học',
     trinhDo: 'Đại học · Ngôn ngữ Anh',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/pham-thi-xuan-ngoc.jpg',
     mission: 'Mình muốn trở thành người có ích và luôn tràn đầy năng lượng. Truyền năng lượng tích cực và kiến thức cho học sinh. Giúp các con tiến bộ trong môn học Tiếng Anh.',
   },
   {
@@ -143,7 +143,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên tiểu học dạy nhiều môn',
     trinhDo: 'Đại học · Giáo dục tiểu học',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/nguyen-thi-kieu-trang.jpg',
     mission: 'Tôi mong muốn xây dựng một lớp học đầy yêu thương, nơi học sinh được tôn trọng, khích lệ và phát triển theo đúng nhịp độ của bản thân. Là một cô giáo: gieo tri thức bằng tất cả tình yêu nghề.',
   },
   {
@@ -151,7 +151,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên tiểu học dạy nhiều môn',
     trinhDo: 'Đại học · Giáo dục tiểu học',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/duong-quynh-nhu.jpg',
     mission: 'Dạy học bằng cả trái tim – truyền cảm hứng bằng sự tử tế – đồng hành để mỗi học sinh tự tin trở thành phiên bản tốt nhất của chính mình.',
   },
   {
@@ -307,7 +307,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Vật lí',
     trinhDo: 'Thạc sĩ · Lí luận và phương pháp dạy học bộ môn Vật lí',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/nguyen-thi-ngoc-tuyen.jpg',
     mission: 'Sứ mệnh của tôi là đồng hành cùng học sinh, truyền cảm hứng học tập và giúp các em phát triển bản thân.',
   },
   {
@@ -323,7 +323,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Toán',
     trinhDo: 'Thạc sĩ · Toán giải tích',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/pham-nguyen-phuong-duy-2026.jpg',
     mission: 'Tôi là một người giáo viên tận tâm với giáo dục, luôn không ngừng học hỏi và đổi mới. Sứ mệnh của tôi là giúp học sinh phát triển tư duy, khám phá tiềm năng và hình thành sự tự tin thông qua việc học Toán và trải nghiệm thực tế. Tôi mong muốn mỗi học sinh khi rời khỏi lớp học không chỉ biết thêm một kiến thức mới, mà còn biết cách tư duy, giải quyết vấn đề và chủ động làm chủ tương lai của mình.',
   },
   {
@@ -363,7 +363,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Sinh học',
     trinhDo: 'Đại học · Sư phạm Sinh học',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/phan-thi-tuyet-nhung.jpg',
     mission: 'Sống tử tế, làm việc trách nhiệm cao.',
   },
   {
@@ -371,7 +371,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh',
     trinhDo: 'Thạc sĩ · Ngôn ngữ học ứng dụng & TESOL',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/vo-hoang-lam.jpg',
     mission: 'Tôi muốn lan tỏa những giá trị về kiến thức và đạo đức cho học sinh, giúp các em lĩnh hội tiếng Anh như chiếc chìa khóa vạn năng mở ra nhiều cánh cửa cuộc đời trong thế kỷ 21.',
   },
   {
@@ -467,7 +467,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Tổ trưởng chuyên môn · Giáo viên Tiếng Anh',
     trinhDo: 'Đại học · Ngôn ngữ Anh',
     coSo: 'Cả hai CS',
-    photo: '',
+    photo: '/nguyen-vu-uyen-chi.jpg',
     mission: 'Sứ mệnh của tôi là nâng tầm người giáo viên để cùng kiến tạo một nền giáo dục hạnh phúc.',
   },
   {
@@ -475,7 +475,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh',
     trinhDo: 'Đại học · Ngôn ngữ Anh (chuyên ngành giảng dạy)',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/tran-nguyen-thien-phuc.jpg',
     mission: 'Sứ mệnh của tôi là trở thành một người giáo viên không ngừng học hỏi, đổi mới và truyền cảm hứng, giúp học sinh phát triển năng lực tiếng Anh một cách toàn diện và tự tin hội nhập với thế giới. Tôi cam kết đồng hành cùng mỗi học sinh bằng sự tận tâm, chuyên môn và thấu hiểu; không chỉ giúp các em chinh phục kiến thức, các kỳ thi và các chứng chỉ quốc tế, mà còn khơi dậy tinh thần tự học, ý chí vượt qua giới hạn và niềm tin vào chính mình. Tôi tin rằng giáo dục không chỉ là truyền đạt kiến thức, mà là trao cho người học năng lực để tự mở ra những cơ hội và kiến tạo tương lai của chính mình.',
   },
   {
@@ -507,7 +507,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Lịch sử',
     trinhDo: 'Đại học · Sư phạm Lịch sử',
     coSo: 'Cả hai CS',
-    photo: '',
+    photo: '/nguyen-thanh-ngan.jpg',
     mission: 'Tôi muốn biến lớp học Lịch sử thành một môi trường vừa vui vẻ, thu hút, vừa đảm bảo hiệu quả thành tích cho học sinh. Tôi lấy cảm xúc và sự tò mò làm điểm bắt đầu, lấy sự tương tác và niềm vui làm phương pháp, và lấy tư duy chủ động và lấy thành tích cao làm kết quả tự nhiên.',
   },
   {
@@ -523,7 +523,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh tiểu học',
     trinhDo: 'Đại học · Ngôn ngữ Anh',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/pham-le-nhu-y.jpg',
     mission: 'Tôi mong mỗi tiết học Tiếng Anh không chỉ giúp học sinh học thêm một ngôn ngữ mà còn nuôi dưỡng sự tự tin và niềm yêu thích khám phá thế giới. Tôi luôn hướng đến một lớp học tích cực, nơi mỗi học sinh được lắng nghe, tôn trọng và phát triển theo cách riêng của mình.',
   },
   {
@@ -539,7 +539,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh',
     trinhDo: 'Đại học · Tiếng Anh thương mại',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/nguyen-vu-tram-anh.jpg',
     mission: 'Tôi chọn cách dạy bằng trái tim, giúp học sinh cảm nhận ngôn ngữ như một cây cầu nối thế giới. Tôi tạo môi trường hoạt động tích cực, nơi trẻ em được nói, được sai, được sửa và được tin tưởng',
   },
   {
@@ -547,7 +547,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên tiểu học dạy nhiều môn',
     trinhDo: 'Đại học · Giáo dục tiểu học',
     coSo: 'Bình Tân',
-    photo: '',
+    photo: '/dinh-thi-trieu-vy.jpg',
     mission: 'Tôi sống và phát triển, làm việc để học sinh được học trong yêu thương và tiếp cận kiến thức một cách vui vẻ, sáng tạo.',
   },
   {
@@ -579,7 +579,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên quản nhiệm',
     trinhDo: 'Đại học · Giáo dục chính trị',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/nguyen-thi-thuy-hai.jpg',
     mission: 'Suy nghĩ, hành động vì hạnh phúc của mình và của mọi người.',
   },
   {
@@ -587,7 +587,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Vật lí',
     trinhDo: 'Thạc sĩ · Lí luận và phương pháp dạy học bộ môn Vật lí',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/vo-van-thi.jpg',
     mission: 'Tôi sống để truyền cảm hứng, lan tỏa yêu thương và tạo giá trị. Tôi không chỉ dạy kiến thức, mà dạy bằng trái tim. Tôi không chỉ sống cho mình, mà sống để khi nhìn lại, tôi thấy mình đã làm nên điều tốt đẹp cho người khác. Để hoàn thành sứ mệnh này, tôi sẽ không ngừng học hỏi, trau dồi và hoàn thiện bản thân, để mỗi ngày sống đều là một ngày có ý nghĩa. Để thực hiện tốt sứ mệnh của mình, tôi sẽ hoàn thành tốt các vai trò: - Là giáo viên: Tôi tin rằng mỗi đứa trẻ đều mang trong mình một ngọn lửa, và nhiệm vụ của tôi là truyền lửa, để các em không chỉ học để biết, mà còn học để lớn lên và tỏa sáng. - Là tổ trưởng: người kết nối, lắng nghe, và dẫn dắt. Tôi chọn làm gương và đồng hành với tổ viên. - Là người bạn, người đồng nghiệp: chân thành, sẻ chia, cùng nhau xây dựng môi trường làm việc nhân văn, đầy cảm hứng. - Là người vợ: người bạn đời thấu hiểu và sẻ chia, vun đắp hạnh phúc gia đình bằng những điều giản dị: một bữa cơm nhà, một nụ cười, một cái nắm tay. Tôi tin rằng hôn nhân không phải là tìm người hoàn hảo, mà là cùng nhau hoàn thiện mỗi ngày. - Là người mẹ: người bạn đồng hành trong tuổi thơ của con. Tôi chọn chơi cùng con, học cùng con, lớn cùng con, để tuổi thơ con không chỉ có tiếng cười, mà còn có tình yêu và ký ức ấm áp. - Là người con: luôn biết ơn, hiếu kính và trân trọng nguồn cội. Tôi dành thời gian để hỏi han, chăm sóc và báo đáp công sinh thành, bởi cha mẹ chính là điểm tựa đầu tiên và mãi mãi trong cuộc đời.',
   },
   {
@@ -603,7 +603,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Tổ trưởng chuyên môn · Giáo viên Giáo dục thể chất',
     trinhDo: 'Đại học · Y sinh học',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/le-dinh-van.jpg',
     mission: 'Sứ mệnh của tôi là cống hiến toàn bộ năng lực và nhiệt huyết để mang lại những giá trị thực chất nhất cho học sinh, xóa bỏ mọi tư duy lối mòn trong giảng dạy học đường. Xuất phát từ tinh thần của một người hành động, tôi cam kết thiết lập những tiêu chuẩn mới: biến mỗi giờ học thành bệ phóng toàn diện, nơi học sinh được rèn luyện tinh thần và thể chất như những nhà vô địch. Tôi lựa chọn hành động thay vì lý thuyết suông, đặt lợi ích và sự phát triển của học sinh làm trọng tâm duy nhất, đồng thời không ngừng tự nâng cấp, hoàn thiện bản thân để sẵn sàng đáp ứng xuất sắc mọi nhiệm vụ được giao và chuẩn bị cho những bước tiến xa hơn trong sự nghiệp.',
   },
   {
