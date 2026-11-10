@@ -197,6 +197,7 @@ function initials(name: string): string {
                 <div class="gv-card__body">
                   <h3 class="gv-card__name notranslate" translate="no">{t.name}</h3>
                   <p class="gv-card__role">{t.role}{t.coSo ? ` · ${t.coSo}` : ''}</p>
+                  {t.trinhDo && <p class="gv-card__trinhdo">{t.trinhDo}</p>}
                 </div>
                 {t.mission && (
                   <>
@@ -227,6 +228,7 @@ function initials(name: string): string {
                 <div class="gv-card__body">
                   <h3 class="gv-card__name notranslate" translate="no">{t.name}</h3>
                   <p class="gv-card__role">{t.role}{t.coSo ? ` · ${t.coSo}` : ''}</p>
+                  {t.trinhDo && <p class="gv-card__trinhdo">{t.trinhDo}</p>}
                 </div>
                 {t.mission && (
                   <>
@@ -342,6 +344,7 @@ function initials(name: string): string {
         <div class="gv-pop__anh" id="gvPopAnh" aria-hidden="true"></div>
         <h3 class="gv-pop__ten notranslate" translate="no" id="gvPopTen"></h3>
         <p class="gv-pop__role" id="gvPopRole"></p>
+        <p class="gv-pop__td" id="gvPopTD"></p>
         <p class="gv-pop__tn" id="gvPopTN"></p>
       </div>
     </div>
@@ -413,6 +416,7 @@ function initials(name: string): string {
       var popAnh = document.getElementById('gvPopAnh');
       var popTen = document.getElementById('gvPopTen');
       var popRole = document.getElementById('gvPopRole');
+      var popTD = document.getElementById('gvPopTD');
       var popTN = document.getElementById('gvPopTN');
       var nutMo = null;
 
@@ -429,6 +433,7 @@ function initials(name: string): string {
         } else if (tat) { popAnh.textContent = tat.textContent; }
         popTen.textContent = (the.querySelector('.gv-card__name') || {}).textContent || '';
         popRole.textContent = (the.querySelector('.gv-card__role') || {}).textContent || '';
+        if (popTD) popTD.textContent = (the.querySelector('.gv-card__trinhdo') || {}).textContent || '';
         popTN.textContent = (the.querySelector('.gv-card__mission') || {}).textContent || '';
         pop.removeAttribute('hidden');
         document.body.style.overflow = 'hidden';
@@ -684,4 +689,9 @@ function initials(name: string): string {
   .gv-tvcard--trong:hover { border-color: #e2e8f0; box-shadow: none; transform: none; }
   .gv-tvcard--trong .gv-tvcard__photo { background: #e2e8f0; color: #64748b; }
   .gv-tvcard--trong .gv-tvcard__name { color: #475569; }
+
+  /* TRÌNH ĐỘ giáo viên (10/11/2026) */
+  .gv-card__trinhdo { font-size: .78rem; color: #26275D; font-weight: 600; line-height: 1.35; margin: .3rem 0 0; }
+  .gv-pop__td { font-size: .86rem; color: #26275D; font-weight: 600; margin: -.6rem 0 1rem; }
+  .gv-pop__td:empty { display: none; }
 </style>
