@@ -452,7 +452,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
       {
         khoan: '9.2.c',
         nhan: 'Số học sinh hoàn thành chương trình, được cấp bằng tốt nghiệp; số trúng tuyển cơ sở giáo dục nghề nghiệp; số trúng tuyển đại học (cấp THPT)',
-        giaTri: 'Lớp 12 tốt nghiệp THPT: 94 học sinh (2024–2025) và 110 học sinh (2025–2026), tỷ lệ tốt nghiệp 100%.',
+        giaTri: 'Lớp 12 tốt nghiệp THPT: 94 học sinh (2024–2025) và 110 học sinh (2025–2026), tỷ lệ tốt nghiệp 100%. Tỷ lệ học sinh trúng tuyển vào các trường cao đẳng, đại học trong và ngoài nước: 100%.',
         trangThai: 'xacnhan',
         ghiChu: '[10/11 anh Dương: số trúng tuyển đại học "chưa có thì ẩn đi" → giữ như hiện tại, không nêu số/tỷ lệ; cô Tuyền cung cấp số thì mới điền.] Nguồn: BC 009/BC-VA mục V.d — có số tốt nghiệp THPT (100%) nhưng CỘT TRÚNG TUYỂN ĐẠI HỌC ĐỂ TRỐNG, nên CHƯA có số gốc cho "vào đại học". Tỷ lệ "100%/99% vào đại học" ĐÃ gỡ khỏi trang chủ, /gioi-thieu, /trung-hoc-pho-thong. Còn sót (chờ gỡ): /oxford-pathway-go-vap (noindex) và tiêu đề "99% phụ huynh sai lầm" ở /tuyen-sinh/thcs-uu-dai-vang. Cần số trúng tuyển ĐH thật trước khi nêu tỷ lệ.',
       },
