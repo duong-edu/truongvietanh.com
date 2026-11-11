@@ -207,7 +207,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên Địa lí',
     trinhDo: 'Đại học · Sư phạm Địa lí',
     coSo: 'Cả hai CS',
-    photo: '',
+    photo: '/cao-van-hieu.jpg',
     mission: 'Hãy sống trọn vẹn với sứ mệnh của cuộc đời mình và hãy yêu thương khi bạn còn có thể.',
   },
   {
@@ -231,7 +231,7 @@ export const giaoVienChuNhiem: GiaoVien[] = [
     role: 'GVCN · Giáo viên Tin học',
     trinhDo: 'Đại học · Công nghệ thông tin',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/ngo-thi-ha.jpg',
     mission: 'Tôi khơi dậy đam mê công nghệ, tư duy sáng tạo và khát vọng học hỏi trong mỗi học sinh. Tôi truyền cảm hứng để các em làm chủ công nghệ và AI, tự tin giải quyết những vấn đề của tương lai. Tôi đồng hành cùng học sinh kiến tạo tương lai bằng tri thức, công nghệ và trách nhiệm.',
   },
 ];
@@ -315,7 +315,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Tổ trưởng chuyên môn · Giáo viên Ngữ văn',
     trinhDo: 'Đại học · Ngữ văn',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/huynh-thi-thu-loan.jpg',
     mission: 'Sứ mệnh của tôi là lan tỏa những giá trị tích cực qua giáo dục, truyền cảm hứng và đồng hành cùng học sinh để các em trưởng thành, hạnh phúc và trở thành những người có ích cho cộng đồng.',
   },
   {
@@ -339,7 +339,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Hoá học – KHTN',
     trinhDo: 'Đại học · Sư phạm Hoá',
     coSo: 'Cả hai CS',
-    photo: '',
+    photo: '/nguyen-hoang-vu.jpg',
     mission: 'Tạo ra con người có đủ phẩm chất năng lực cần thiết cho xã hội.',
   },
   {
@@ -395,7 +395,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh',
     trinhDo: 'Đại học · Ngôn ngữ Anh',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/ngo-phuong-thao.jpg',
     mission: 'Tận tâm truyền đạt tri thức – Chân thành nuôi dưỡng tiềm năng – Khơi dậy tình yêu ngôn ngữ nơi mỗi học trò. Với tư cách là một nhà giáo dục, tôi cam kết mang đến những giờ học chất lượng cao bằng việc kết hợp các phương pháp giảng dạy chuẩn quốc tế cùng sự tận tâm. Sứ mệnh của tôi là trang bị cho học sinh nền tảng kiến thức vững chắc để chinh phục mọi mục tiêu học thuật',
   },
   {
@@ -451,7 +451,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Tổ trưởng quản nhiệm',
     trinhDo: 'Đại học · Lịch sử',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/nguyen-thi-y.jpg',
     mission: 'Đồng hành, nâng đỡ những người bị tổn thương vượt qua những nỗi đau, hướng tới cuộc sống hạnh phúc, bình an.',
   },
   {
@@ -491,7 +491,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Tiếng Anh',
     trinhDo: 'Đại học · Ngôn ngữ Anh',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/do-tran-phuong-nam.jpg',
     mission: 'Tôi mong muốn trở thành một người giáo viên luôn truyền cảm hứng học tập, đồng hành và tạo điều kiện để mỗi học sinh phát triển theo cách riêng của mình. Trong vai trò một người đồng nghiệp, tôi hướng đến việc xây dựng những mối quan hệ dựa trên sự tôn trọng, tin tưởng, hợp tác và sẵn sàng hỗ trợ nhau cùng tiến bộ. Trong vai trò một người con, tôi muốn sống có trách nhiệm, biết yêu thương và trân trọng gia đình, đồng thời không ngừng hoàn thiện bản thân để trở thành một người mà gia đình có thể tự hào. Dù ở bất kỳ vai trò nào, tôi muốn sống tử tế, chủ động và có giá trị, luôn học hỏi để trở thành phiên bản tốt hơn của chính mình và tạo ra những ảnh hưởng tích cực đến những người xung quanh.',
   },
   {
@@ -499,7 +499,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Chuyên viên Tâm lý học đường',
     trinhDo: 'Đại học · Tâm lý học',
     coSo: 'Cả hai CS',
-    photo: '',
+    photo: '/nguyen-thi-ngoc.jpg',
     mission: 'Tôi mong muốn trở thành người đồng hành tin cậy; lắng nghe và thấu hiểu học sinh bằng sự chân thành. Tôi cam kết góp phần xây dựng một môi trường giáo dục an toàn, tích cực, nơi mỗi học sinh được tôn trọng, phát triển và tự tin trở thành phiên bản tốt nhất của chính mình.',
   },
   {
@@ -515,7 +515,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Giáo viên Giáo dục quốc phòng và an ninh',
     trinhDo: 'Đại học · Sư phạm Lịch sử – GDQP-AN',
     coSo: 'Gò Vấp',
-    photo: '',
+    photo: '/dinh-thi-ngoc-chau.jpg',
     mission: 'Yêu thương - trách nhiệm',
   },
   {
