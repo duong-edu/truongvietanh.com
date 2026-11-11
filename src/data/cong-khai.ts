@@ -20,7 +20,7 @@ export const BAN_NHAP = false;
 // Khoản không có trong tập này KHÔNG hiện ra trang (mục chưa có dữ liệu: 4.7.e, 5.1, 5.4, 6.x, 7.x, 9.1).
 // Thêm khoản mới = thêm số khoản vào đây SAU KHI điền giaTri/cacDong. Ghi chú nội bộ (ghiChu) không bao giờ hiện.
 export const CONG_BO = new Set<string>([
-  '4.1', '4.2', '4.3', '4.4', '4.5', '4.6', '4.7.a', '4.7.b', '4.7.c', '4.7.d', '4.8',
+  '4.1', '4.2', '4.3', '4.4', '4.5', '4.6', '4.7.a', '4.7.b', '4.7.c', '4.7.d', '4.7.e', '4.8',
   '5.2', '5.3',
   '8.1', '8.2', '8.3', '8.4',
   '9.2.a–b', '9.2.c', '9.3',
@@ -260,7 +260,19 @@ export const nhomCongKhai: NhomCongKhai[] = [
       {
         khoan: '4.7.e',
         nhan: 'Họ tên, chức vụ, điện thoại, email, nơi làm việc của lãnh đạo nhà trường và các đơn vị',
-        trangThai: 'thieu',
+        giaTri: 'Lãnh đạo nhà trường và các đơn vị. Nhà trường không công bố số điện thoại và email cá nhân của người lao động; mọi liên hệ với lãnh đạo xin gửi qua hotline 0916 961 409 hoặc hoc@truongvietanh.com (trụ sở chính: 160/72 Phan Huy Ích, Phường An Hội Tây, TP. Hồ Chí Minh).',
+        danhSach: [
+          'Nguyễn Mạnh Dương — Chủ tịch Hội đồng trường, Hệ thống Trường Việt Anh.',
+          'Phạm Thị Cẩm Tú — Phó Chủ tịch Hội đồng trường Việt Anh.',
+          'Trần Thị Ngọc Tuyền — Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
+          'Nguyễn Thị Ái Hoa — Phó Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
+          'Nguyễn Thị Lan — Phó Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
+          'Nguyễn Thùy Anh — Viện trưởng, Viện Nghiên cứu và Phát triển MERDI.',
+          'Nguyễn Duy Khải — Regional Manager, khu vực Cần Giuộc.',
+          'Nguyễn Kim Hùng Tiến — HR&OP Manager, Phòng Nhân sự & Vận hành (HR&OP), Major Education.',
+        ],
+        lien: { text: 'Ban lãnh đạo và đội ngũ', href: '/giao-vien' },
+        trangThai: 'xacnhan',
         ghiChu: 'Thông tư bắt buộc nêu cả điện thoại và email. Đây là dữ liệu cá nhân của người lao động — luật sư phải quyết dùng liên hệ chung của trường hay liên hệ riêng.',
       },
       {
