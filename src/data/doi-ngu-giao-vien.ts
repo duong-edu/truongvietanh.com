@@ -603,7 +603,7 @@ export const giaoVienBoMon: GiaoVien[] = [
     role: 'Tổ trưởng chuyên môn · Giáo viên Giáo dục thể chất',
     trinhDo: 'Đại học · Y sinh học',
     coSo: 'Gò Vấp',
-    photo: '/le-dinh-van.jpg',
+    photo: '',
     mission: 'Sứ mệnh của tôi là cống hiến toàn bộ năng lực và nhiệt huyết để mang lại những giá trị thực chất nhất cho học sinh, xóa bỏ mọi tư duy lối mòn trong giảng dạy học đường. Xuất phát từ tinh thần của một người hành động, tôi cam kết thiết lập những tiêu chuẩn mới: biến mỗi giờ học thành bệ phóng toàn diện, nơi học sinh được rèn luyện tinh thần và thể chất như những nhà vô địch. Tôi lựa chọn hành động thay vì lý thuyết suông, đặt lợi ích và sự phát triển của học sinh làm trọng tâm duy nhất, đồng thời không ngừng tự nâng cấp, hoàn thiện bản thân để sẵn sàng đáp ứng xuất sắc mọi nhiệm vụ được giao và chuẩn bị cho những bước tiến xa hơn trong sự nghiệp.',
   },
   {
