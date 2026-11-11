@@ -23,7 +23,7 @@ export const CONG_BO = new Set<string>([
   '4.1', '4.2', '4.3', '4.4', '4.5', '4.6', '4.7.a', '4.7.b', '4.7.c', '4.7.d', '4.7.e', '4.8',
   '5.2', '5.3',
   '8.1', '8.2', '8.3', '8.4',
-  '9.2.a–b', '9.2.c', '9.3',
+  '9.2.a–b', '9.2.b (thống kê)', '9.2.c', '9.3',
 ]);
 
 export type TrangThai = 'co' | 'xacnhan' | 'thieu';
@@ -467,6 +467,24 @@ export const nhomCongKhai: NhomCongKhai[] = [
         giaTri: 'Lớp 12 tốt nghiệp THPT: 94 học sinh (2024–2025) và 110 học sinh (2025–2026), tỷ lệ tốt nghiệp 100%. Tỷ lệ học sinh trúng tuyển vào các trường cao đẳng, đại học trong và ngoài nước: 100%.',
         trangThai: 'xacnhan',
         ghiChu: '[10/11 anh Dương: số trúng tuyển đại học "chưa có thì ẩn đi" → giữ như hiện tại, không nêu số/tỷ lệ; cô Tuyền cung cấp số thì mới điền.] Nguồn: BC 009/BC-VA mục V.d — có số tốt nghiệp THPT (100%) nhưng CỘT TRÚNG TUYỂN ĐẠI HỌC ĐỂ TRỐNG, nên CHƯA có số gốc cho "vào đại học". Tỷ lệ "100%/99% vào đại học" ĐÃ gỡ khỏi trang chủ, /gioi-thieu, /trung-hoc-pho-thong. Còn sót (chờ gỡ): /oxford-pathway-go-vap (noindex) và tiêu đề "99% phụ huynh sai lầm" ở /tuyen-sinh/thcs-uu-dai-vang. Cần số trúng tuyển ĐH thật trước khi nêu tỷ lệ.',
+      },
+      {
+        khoan: '9.2.b (thống kê)',
+        nhan: 'Thống kê số học sinh, kết quả rèn luyện và học tập năm học 2025–2026 theo khối (cấp THCS và THPT)',
+        cacDong: [
+          { nhan: 'Khối 6', noiDung: '55 học sinh (24 nữ, 31 nam, 5 dân tộc thiểu số); rèn luyện: Tốt 55, Khá 0, Đạt 0; học tập: Tốt 42, Khá 10, Đạt 3, Chưa đạt 0.' },
+          { nhan: 'Khối 7', noiDung: '56 học sinh (22 nữ, 34 nam); rèn luyện: Tốt 56, Khá 0, Đạt 0; học tập: Tốt 34, Khá 16, Đạt 6, Chưa đạt 0.' },
+          { nhan: 'Khối 8', noiDung: '65 học sinh (28 nữ, 37 nam); rèn luyện: Tốt 65, Khá 0, Đạt 0; học tập: Tốt 43, Khá 20, Đạt 2, Chưa đạt 0.' },
+          { nhan: 'Khối 9', noiDung: '65 học sinh (26 nữ, 39 nam, 1 dân tộc thiểu số); rèn luyện: Tốt 65, Khá 0, Đạt 0; học tập: Tốt 41, Khá 18, Đạt 6, Chưa đạt 0.' },
+          { nhan: 'Tổng THCS', noiDung: '241 học sinh (100 nữ, 141 nam, 6 dân tộc thiểu số); rèn luyện: Tốt 241, Khá 0, Đạt 0; học tập: Tốt 160, Khá 64, Đạt 17, Chưa đạt 0.' },
+          { nhan: 'Khối 10', noiDung: '29 học sinh (9 nữ, 20 nam); rèn luyện: Tốt 27, Khá 2, Đạt 0; học tập: Tốt 18, Khá 9, Đạt 2, Chưa đạt 0.' },
+          { nhan: 'Khối 11', noiDung: '116 học sinh (52 nữ, 64 nam, 3 dân tộc thiểu số); rèn luyện: Tốt 110, Khá 3, Đạt 3; học tập: Tốt 71, Khá 38, Đạt 7, Chưa đạt 0.' },
+          { nhan: 'Khối 12', noiDung: '110 học sinh (49 nữ, 61 nam, 7 dân tộc thiểu số); rèn luyện: Tốt 107, Khá 3, Đạt 0; học tập: Tốt 66, Khá 41, Đạt 3, Chưa đạt 0.' },
+          { nhan: 'Tổng THPT', noiDung: '255 học sinh (110 nữ, 145 nam, 10 dân tộc thiểu số); rèn luyện: Tốt 244, Khá 8, Đạt 3; học tập: Tốt 155, Khá 88, Đạt 12, Chưa đạt 0.' },
+        ],
+        giaTri: 'Số liệu cuối năm học 2025–2026 theo biểu mẫu thống kê của nhà trường. Cấp tiểu học đang cập nhật.',
+        trangThai: 'xacnhan',
+        ghiChu: 'Nguồn: mau-thong-ke-2025-2026.xlsx (Văn bỏ vào Desktop\Giấy phép hoạt động 11/11). KHÔNG đăng cột "được lên lớp" vì Khối 9/10/12 mỗi khối có 1 em bỏ học nhưng số lên lớp = sĩ số. Chưa rõ phạm vi (Gò Vấp hay cả Bình Tân).',
       },
       {
         khoan: '9.3',
