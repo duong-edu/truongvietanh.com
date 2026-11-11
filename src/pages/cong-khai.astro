@@ -1,0 +1,254 @@
+---
+// Trang Công khai theo Thông tư 09/2024/TT-BGDĐT.
+// ĐÃ ĐĂNG ĐỢT 1 (11/11/2026): chỉ hiện các khoản có trong CONG_BO (src/data/cong-khai.ts).
+// Khoản chưa có dữ liệu không hiện; ghi chú nội bộ không bao giờ hiện.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeaderBase from '../components/HeaderBase.astro';
+import FooterBase from '../components/FooterBase.astro';
+import {
+  BAN_NHAP,
+  CONG_BO,
+  nhomCoSo,
+  nhomCongKhai as nhomTatCa,
+} from '../data/cong-khai';
+
+// Chỉ giữ khoản đã đủ nguồn để công khai; nhóm không còn khoản nào thì bỏ cả nhóm.
+const nhomCongKhai = nhomTatCa
+  .map((n) => ({ ...n, muc: n.muc.filter((m) => CONG_BO.has(m.khoan)) }))
+  .filter((n) => n.muc.length > 0);
+
+const canonical = 'https://truongvietanh.com/cong-khai';
+
+const nhanTrangThai = {
+  co: 'Đã có',
+  xacnhan: 'Chờ xác nhận',
+  thieu: 'Chưa có dữ liệu',
+} as const;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://truongvietanh.com' },
+      { '@type': 'ListItem', position: 2, name: 'Công khai', item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Công khai thông tin — Hệ thống Trường Việt Anh"
+  description="Thông tin công khai của Hệ thống Trường Việt Anh theo Thông tư 09/2024/TT-BGDĐT: thông tin chung, học phí và học bổng, điều kiện bảo đảm chất lượng, kết quả giáo dục phổ thông."
+  canonical={canonical}
+  structuredData={structuredData}
+>
+  <div class="gi-page">
+    <HeaderBase currentPath="/cong-khai" />
+
+    <section class="gi-hero">
+      <div class="gi-container gi-hero-inner">
+        <div class="gi-hero-left" style="flex:1">
+          <nav class="gi-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Trang chủ</a>
+            <span aria-hidden="true">›</span>
+            <span>Công khai</span>
+          </nav>
+          <h1 class="gi-h1">Công khai thông tin</h1>
+          <p class="gi-subtitle">Hệ thống Trường Việt Anh — theo Thông tư 09/2024/TT-BGDĐT</p>
+          <p class="gi-last-updated ck-updated">Năm học 2026–2027 · cập nhật khi có thay đổi</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="gi-container gi-body" data-no-collapse>
+      <nav class="gi-toc" aria-label="Mục lục">
+        <p class="gi-toc-title">Nội dung công khai</p>
+        <ol class="gi-toc-list">
+          <li><a href="#co-so">Cơ sở chính thức và các trường liên quan</a></li>
+          {nhomCongKhai.map((n) => (
+            <li><a href={`#${n.id}`}>{n.dieu} · {n.tieuDe}</a></li>
+          ))}
+        </ol>
+      </nav>
+
+      <article class="gi-main">
+        <p class="gi-lead">
+          Trang này đăng các thông tin mà Thông tư 09/2024/TT-BGDĐT của Bộ Giáo dục và Đào tạo
+          yêu cầu mọi cơ sở giáo dục công khai, để phụ huynh, giáo viên và xã hội theo dõi hoạt động
+          của nhà trường. Số liệu được cập nhật theo năm học và khi có thay đổi.
+        </p>
+
+        <section id="co-so" class="gi-section">
+          <h2>Cơ sở chính thức và các trường liên quan</h2>
+          {nhomCoSo.map((n, i) => (
+            <div id={n.id} class="ck-nhomcs">
+              <h3>{i + 1}. {n.tieuDe}</h3>
+              <p class="ck-mota">{n.moTa}</p>
+              {BAN_NHAP && n.ghiChu && <p class="ck-noibo-cs">Nội bộ: {n.ghiChu}</p>}
+              <div class="ck-coso">
+                {n.coSo.map((c) => (
+                  <div class="ck-coso-the">
+                    <h4>{c.ten}</h4>
+                    <p class="ck-coso-cap">{c.cap} · {c.tinh}</p>
+                    <p>{c.diaChi}</p>
+                    <p><a href={`tel:${c.dienThoai.replace(/\s/g, '')}`}>{c.dienThoai}</a></p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {nhomCongKhai.map((n) => (
+          <section id={n.id} class="gi-section">
+            <h2><span class="ck-dieu">{n.dieu}</span> {n.tieuDe}</h2>
+            {n.moTa && <p class="ck-mota">{n.moTa}</p>}
+            <dl class="ck-ds">
+              {n.muc.map((m) => (
+                <div class={`ck-muc ck-${m.trangThai}`}>
+                  <dt>
+                    <span class="ck-khoan">{m.khoan}</span>
+                    {m.nhan}
+                  </dt>
+                  <dd>
+                    {m.giaTri && <p>{m.giaTri}</p>}
+                    {m.cacDong && m.cacDong.map((d) => <p class="ck-dong"><strong>{d.nhan}:</strong> {d.noiDung}</p>)}
+                    {!m.giaTri && !m.cacDong && <p class="ck-cho">Đang cập nhật.</p>}
+                    {m.danhSach && <ol class="ck-ol">{m.danhSach.map((d) => <li>{d}</li>)}</ol>}
+                    {m.lien && <p><a href={m.lien.href}>{m.lien.text} →</a></p>}
+                    {BAN_NHAP && (
+                      <p class="ck-noibo">
+                        <span class={`ck-nhan ck-nhan-${m.trangThai}`}>{nhanTrangThai[m.trangThai]}</span>
+                        {m.ghiChu && <span class="ck-ghichu">{m.ghiChu}</span>}
+                      </p>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+
+        <section id="dang-cap-nhat" class="gi-section">
+          <h2>Nội dung đang cập nhật</h2>
+          <p>
+            Các nội dung sau đang được nhà trường tổng hợp và sẽ đăng khi hoàn tất: giáo dục mầm non
+            (điều kiện bảo đảm chất lượng, kế hoạch và kết quả hoạt động), tình hình tài chính, báo cáo thường niên,
+            danh mục sách giáo khoa và xuất bản phẩm tham khảo năm học 2026–2027.
+          </p>
+          <p class="ck-nguon">
+            Căn cứ: Thông tư 09/2024/TT-BGDĐT của Bộ trưởng Bộ Giáo dục và Đào tạo, hiệu lực từ 19/7/2024.
+            Xem thêm <a href="/van-ban">các văn bản đã ban hành</a> của nhà trường.
+          </p>
+        </section>
+      </article>
+    </div>
+
+    <FooterBase />
+  </div>
+</BaseLayout>
+
+<style>
+  .ck-nhap {
+    background: #fff7d6;
+    border-bottom: 2px solid #f9dd0e;
+    color: #4a3b00;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding: 0.7rem 0;
+  }
+
+  .ck-updated {
+    display: inline-block;
+    background: rgba(15, 23, 42, 0.72);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  .ck-mota { color: #475569; margin: -0.3rem 0 1rem; }
+  .ck-dieu {
+    display: inline-block;
+    font-size: 0.78em;
+    background: #26275D;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.35rem;
+    vertical-align: 0.12em;
+  }
+
+  .ck-coso {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.9rem;
+  }
+  .ck-coso-the {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    background: #fff;
+  }
+  .ck-nhomcs + .ck-nhomcs { margin-top: 1.5rem; }
+  .ck-nhomcs h3 { margin: 0 0 0.2rem; font-size: 1.08rem; color: #26275D; }
+  .ck-noibo-cs { font-size: 0.85rem; color: #92400e; background: #fef3c7; border-radius: 6px; padding: 0.4rem 0.6rem; }
+  .ck-coso-the h4 { margin: 0 0 0.25rem; font-size: 1rem; color: #26275D; }
+  .ck-coso-the p { margin: 0.15rem 0; font-size: 0.93rem; }
+  .ck-coso-cap { color: #64748b; }
+
+  .ck-ds { margin: 0; }
+  .ck-muc {
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.7rem;
+  }
+  .ck-muc dt { font-weight: 600; color: #1e293b; line-height: 1.45; }
+  .ck-muc dd { margin: 0.45rem 0 0; }
+  .ck-muc dd p { margin: 0.25rem 0; }
+  .ck-dong { margin: 0.25rem 0; }
+  .ck-ol { margin: 0.35rem 0 0.5rem; padding-left: 1.25rem; }
+  .ck-ol li { margin: 0.3rem 0; line-height: 1.55; }
+  .ck-khoan {
+    display: inline-block;
+    min-width: 2.6rem;
+    margin-right: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #26275D;
+  }
+  .ck-cho { color: #94a3b8; font-style: italic; }
+
+  .ck-noibo { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; align-items: baseline; }
+  .ck-nhan {
+    font-size: 0.74rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+    white-space: nowrap;
+  }
+  .ck-nhan-co { background: #dcfce7; color: #166534; }
+  .ck-nhan-xacnhan { background: #fef3c7; color: #92400e; }
+  .ck-nhan-thieu { background: #fee2e2; color: #991b1b; }
+  .ck-ghichu {
+    flex: 1 1 14rem;
+    font-size: 0.86rem;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  .ck-co { border-left-color: #22c55e; }
+  .ck-xacnhan { border-left-color: #f59e0b; }
+  .ck-thieu { border-left-color: #ef4444; }
+
+  .ck-lich { padding-left: 1.2rem; }
+  .ck-lich li { margin: 0.4rem 0; }
+  .ck-nguon { color: #64748b; font-size: 0.92rem; margin-top: 1.2rem; }
+
+  @media (max-width: 600px) {
+    .ck-muc { padding: 0.75rem 0.9rem; }
+    .ck-khoan { display: block; margin: 0 0 0.15rem; }
+  }
+</style>

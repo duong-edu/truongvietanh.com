@@ -104,8 +104,6 @@ export default defineConfig({
         // tiện ích quét QR, noindex — không vào sitemap
         // /theo-doi (mời theo dõi Facebook + YouTube) cùng loại trang tiện ích
         if (/\/(ketnoi(-mam-non)?|theo-doi)\/?$/.test(page)) return false;
-        // /cong-khai đang là khung nháp noindex, chờ luật sư audit — mở lại khi công bố
-        if (/\/cong-khai\/?$/.test(page)) return false;
         // 4 trang "Ưu đãi vàng" hết hạn 30/08/2026, worker redirect đi (31/10/2026)
         if (/\/tuyen-sinh\/(lop-1|tieu-hoc|thcs|lop-10)-uu-dai-vang\/?$/.test(page)) return false;
         // 2 trang học bổng tỉnh redirect về /hoc-bong (bảng quyết định B11, 01/11/2026)
