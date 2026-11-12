@@ -252,7 +252,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
       {
         khoan: '4.7.c',
         nhan: 'Quyết định bổ nhiệm, công nhận hiệu trưởng, phó hiệu trưởng',
-        giaTri: 'Hiệu trưởng Trường TH - THCS - THPT Việt Anh: Trần Thị Ngọc Tuyền. Phó Hiệu trưởng: Nguyễn Thị Ái Hoa và Nguyễn Thị Lan.',
+        giaTri: 'Hiệu trưởng Trường TH - THCS - THPT Việt Anh: Phạm Nguyễn Phương Duy (bổ nhiệm theo Quyết định số 2259 ngày 24/11/2025). Phó Hiệu trưởng: Nguyễn Thị Ái Hoa và Nguyễn Thị Lan.',
         lien: { text: 'Ban lãnh đạo', href: '/giao-vien' },
         trangThai: 'xacnhan',
         ghiChu: '[10/11 anh Dương: anh Trường (Châu Thanh Trường) cung cấp QĐ bổ nhiệm Hiệu trưởng; "Tuyền chưa có thì cung cấp người cũ, và để tên họ lên tạm" — CÂU NÀY CÒN MƠ HỒ (tên người cũ Phạm Nguyễn Phương Duy, QĐ 2259, hay tên cô Tuyền?). Em đang hỏi lại anh Dương; trong lúc chờ KHÔNG ghi tên người cũ làm Hiệu trưởng hiện tại.] Hiệu trưởng HIỆN TẠI cô Trần Thị Ngọc Tuyền (lên từ đầu năm học 2026–2027; Văn xác nhận 07/11, khớp /ban-lanh-dao); Phó HT Nguyễn Thị Ái Hoa & Nguyễn Thị Lan. BC 009/BC-VA ghi Hiệu trưởng là Phạm Nguyễn Phương Duy (QĐ 2259 24/11/2025) — ĐÚNG cho năm học 2025–2026 của báo cáo, KHÔNG phải lỗi. THIẾU: số QĐ bổ nhiệm cô Tuyền, và hiệu trưởng các trường mầm non/Thái Sơn/Mekong Xanh.',
@@ -271,7 +271,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
         danhSach: [
           'Nguyễn Mạnh Dương — Chủ tịch Hội đồng trường, Hệ thống Trường Việt Anh.',
           'Phạm Thị Cẩm Tú — Phó Chủ tịch Hội đồng trường Việt Anh.',
-          'Trần Thị Ngọc Tuyền — Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
+          'Phạm Nguyễn Phương Duy — Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
           'Nguyễn Thị Ái Hoa — Phó Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
           'Nguyễn Thị Lan — Phó Hiệu trưởng, Trường TH - THCS - THPT Việt Anh.',
           'Nguyễn Thùy Anh — Viện trưởng, Viện Nghiên cứu và Phát triển MERDI.',
