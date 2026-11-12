@@ -243,7 +243,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
           'Nguyễn Tiến Dũng — Thành viên Hội đồng trường (đại diện nhà đầu tư)',
           'Nguyễn Thị Mỹ Linh — Thành viên Hội đồng trường (đại diện nhà đầu tư)',
           'Nguyễn Thị Xuân Hương — Ủy viên Hội đồng trường',
-          'Phạm Thị Cẩm Tú — Ủy viên Hội đồng trường',
+          'Phạm Thị Cẩm Tú — Phó Chủ tịch Hội đồng trường',
         ],
         lien: { text: 'Ban lãnh đạo', href: '/giao-vien' },
         trangThai: 'xacnhan',
