@@ -431,7 +431,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
         // 'TKB CLB Thể thao VAGV 2026-2027.xlsx' (tab Hướng dẫn — số sân/phòng anh Dương cung cấp 9/2026)
         // và 'CLB_The_Thao_Binh_Tan_va_Go_Vap.xlsx'; danh sách CLB Gò Vấp khớp bài chiêu sinh 6 CLB.
         cacDong: [
-          { nhan: 'Địa điểm hoạt động', noiDung: 'Trụ sở chính: 160/72 Phan Huy Ích, phường An Hội Tây, TP. Hồ Chí Minh — là địa điểm duy nhất nhà trường hoạt động.' },
+          { nhan: 'Cơ sở Gò Vấp (trụ sở chính)', noiDung: '160/72 Phan Huy Ích, phường An Hội Tây, TP. Hồ Chí Minh. Các số liệu dưới đây là của cơ sở này.' },
           { nhan: 'Diện tích', noiDung: 'Đất 2.150 m²; sàn xây dựng 10.000 m²; bình quân khoảng 18 m² sàn/học sinh (550 học sinh năm học 2026–2027).' },
           { nhan: 'Phòng học', noiDung: '22 phòng.' },
           { nhan: 'Phòng bộ môn', noiDung: '7 phòng (Lý, Hóa, Sinh, Công nghệ, Tin học, Ngoại ngữ, Âm nhạc, Mỹ thuật, STEM).' },
@@ -441,7 +441,7 @@ export const nhomCongKhai: NhomCongKhai[] = [
           { nhan: 'Khối phục vụ bán trú, nội trú', noiDung: '7 hạng mục (bếp, nhà ăn, phòng ở).' },
           { nhan: 'Giáo viên có chỗ làm việc riêng', noiDung: '100%.' },
           { nhan: 'Thiết bị dạy học', noiDung: 'Thiết bị dạy học tối thiểu các khối lớp được trang bị theo danh mục của Bộ Giáo dục và Đào tạo.' },
-          { nhan: 'Câu lạc bộ thể thao ngoài giờ năm học 2026–2027', noiDung: 'Thứ Hai đến Thứ Sáu, sau giờ học (từ 16:15): bóng đá, bóng rổ, bóng chuyền, cầu lông, Brazilian Jiu-Jitsu (BJJ), yoga.' },
+          { nhan: 'Câu lạc bộ thể thao ngoài giờ năm học 2026–2027', noiDung: 'Thứ Hai đến Thứ Sáu, sau giờ học (từ 16:15). Cơ sở Gò Vấp: bóng đá, bóng rổ, bóng chuyền, cầu lông, Brazilian Jiu-Jitsu (BJJ), yoga. Cơ sở Bình Tân: bóng đá, bơi, bóng bàn.' },
         ],
         giaTri: 'Nhà trường sử dụng bộ sách giáo khoa "Kết nối tri thức với cuộc sống"; danh mục sách giáo khoa và xuất bản phẩm tham khảo sẽ được công bố riêng.',
         trangThai: 'xacnhan',
