@@ -122,6 +122,7 @@ export const mainNavLeft = [
       { label: 'Học bổng', href: '/hoc-bong' },
       { label: 'Học phí', href: '/hoc-phi' },
       { label: 'Văn bản', href: '/van-ban' },
+      { label: 'Công khai thông tin', href: '/cong-khai' },
       { label: 'Âm nhạc Việt Anh', href: '/am-nhac' },
     ]
   },
